@@ -1,0 +1,63 @@
+.uploaded-image {
+    width: 100px;
+    height: auto;
+}
+
+.placeholder-image {
+    width: 100px;
+    height: auto;
+}
+
+img[src=""] {
+    display: none;
+}
+
+/* multiple images */
+.image-item {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-image {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: #f44336;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.delete-image i {
+    font-size: 14px;
+}
+
+.form-group .select2-container {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+    display: table;
+    table-layout: fixed;
+}
+
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link i {
+    font-size: 12px;
+}
+
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link {
+    color: #c2c7d0;
+    padding-left: 25px;
+    font-size: 14px;
+}
