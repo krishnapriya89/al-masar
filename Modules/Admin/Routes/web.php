@@ -4,6 +4,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AuthController;
 use Modules\Admin\Http\Controllers\AdminController;
+use Modules\Admin\Http\Controllers\StateController;
+use Modules\Admin\Http\Controllers\CountryController;
 use Modules\Admin\Http\Controllers\DashboardController;
 use Modules\Admin\Http\Controllers\HomeBannerController;
 use Modules\Admin\Http\Controllers\AdminConfigController;
@@ -37,6 +39,17 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::get('config/{id}/edit', [AdminConfigController::class, 'edit'])->name('config.edit');
         Route::post('config/{id}/update', [AdminConfigController::class, 'update'])->name('config.update');
 
+        //master data's
+        //country
+        Route::resource('country', CountryController::class);
+        //state
+        Route::get('state/{country_id}', [StateController::class, 'index'])->name('state.index');
+        Route::get('state/create/{country_id}', [StateController::class, 'create'])->name('state.create');
+        Route::post('state/store', [StateController::class, 'store'])->name('state.store');
+        Route::get('state/{id}/edit', [StateController::class, 'edit'])->name('state.edit');
+        Route::put('state/{state}/update', [StateController::class, 'update'])->name('state.update');
+        Route::delete('state/{state}', [StateController::class, 'destroy'])->name('state.destroy');
+        
         //product and related data routes
         //main category
         Route::resource('product-main-category', ProductMainCategoryController::class);

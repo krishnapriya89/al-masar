@@ -243,15 +243,35 @@
 {{--                    </ul>--}}
 {{--                </li>--}}
                 <li class="nav-header">General Settings</li>
-                <li class="nav-header">CONFIGURATION</li>
                 <li class="nav-item">
-                    <a href="{{ route('config.index') }}"
-                       class="nav-link {{ Nav::isRoute('config.index') }} {{ Nav::isRoute('config.edit') }}">
-                        <i class="nav-icon fas fa-cog"></i>
+                    <a href="#"
+                       class="nav-link  {{ Nav::isRoute('config.index') }} {{ Nav::isRoute('config.edit') }} {{ Nav::isResource('country') }}">
+                        <i class="nav-icon fab fa-product-hunt"></i>
                         <p>
-                            Admin Config
+                            General Settings
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('config.index') }}"
+                            class="nav-link {{ Nav::isRoute('config.index') }} {{ Nav::isRoute('config.edit') }}">
+                                <i class="nav-icon fa-circle far"></i>
+                                <p>
+                                    Admin Config
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('country.index') }}"
+                            class="nav-link {{ Nav::isResource('country') }}">
+                                <i class="nav-icon fa-circle far"></i>
+                                <p>
+                                    Country
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 {{-- <li class="nav-item">
                     <a href="{{ route('provider.index') }}"
