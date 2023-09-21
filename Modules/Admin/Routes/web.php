@@ -1,12 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AuthController;
 use Modules\Admin\Http\Controllers\AdminController;
-use Modules\Admin\Http\Controllers\AdminConfigController;
 use Modules\Admin\Http\Controllers\DashboardController;
 use Modules\Admin\Http\Controllers\HomeBannerController;
+use Modules\Admin\Http\Controllers\AdminConfigController;
+use Modules\Admin\Http\Controllers\ProductSubCategoryController;
+use Modules\Admin\Http\Controllers\ProductMainCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,16 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::get('config', [AdminConfigController::class, 'index'])->name('config.index');
         Route::get('config/{id}/edit', [AdminConfigController::class, 'edit'])->name('config.edit');
         Route::post('config/{id}/update', [AdminConfigController::class, 'update'])->name('config.update');
+
+        //product and related data routes
+        //main category
+        Route::resource('product-main-category', ProductMainCategoryController::class);
+        Route::resource('product-sub-category', ProductSubCategoryController::class);
+
+        Route::get('get-not-last-child-sub-categories/{category}', [ProductMainCategoryController::class, 'getNotLastChildSubCategories'])->name('get-not-last-child-sub-categories');
+        Route::get('get-sub-categories/{category}', [ProductMainCategoryController::class, 'getSubCategories'])->name('get-sub-categories');
+        Route::get('get-sub-categories-products/{subcategories}', [ProductMainCategoryController::class, 'getSubCategoriesProducts'])->name('get-sub-categories-products');
+
         //Home Banner
         Route::resource('home-banner',HomeBannerController::class);
     });

@@ -24,30 +24,30 @@
                     </a>
                 </li>
                 <li class="nav-header">PRODUCT MANAGEMENT</li>
-                {{-- <li class="nav-item {{ Nav::isResource('product-main-category', '', 'menu-open') }} {{ Nav::isResource('product-sub-category', '', 'menu-open') }} {{ Nav::isResource('flower-type', '', 'menu-open') }} {{ Nav::isResource('delivery-location', '', 'menu-open') }}"> --}}
-                    {{-- <a href="#"
+                <li class="nav-item {{ Nav::isResource('product-main-category', '', 'menu-open') }} {{ Nav::isResource('product-sub-category', '', 'menu-open') }} {{ Nav::isResource('flower-type', '', 'menu-open') }} {{ Nav::isResource('delivery-location', '', 'menu-open') }}">
+                    <a href="#"
                        class="nav-link {{ Nav::isResource('product-main-category') }} {{ Nav::isResource('product-sub-category') }} {{ Nav::isResource('flower-type') }} {{ Nav::isResource('delivery-location') }}">
                         <i class="nav-icon fab fa-product-hunt"></i>
                         <p>
                             Products
                             <i class="right fas fa-angle-left"></i>
                         </p>
-                    </a> --}}
-                    {{-- <ul class="nav nav-treeview"> --}}
+                    </a>
+                    <ul class="nav nav-treeview">
                         {{-- <li class="nav-item">
                             <a href="{{ route('product.index') }}"
                                class="nav-link {{ Nav::isResource('product') }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Product</p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="{{ route('product-main-category.index') }}"
                                class="nav-link {{ Nav::isResource('product-main-category') }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Main Category</p>
-                            </a> --}}
-                        {{-- </li>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('product-sub-category.index') }}"
                                class="nav-link {{ Nav::isResource('product-sub-category') }}">
@@ -55,7 +55,7 @@
                                 <p>Sub Category</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('flower-type.index') }}"
                                class="nav-link {{ Nav::isResource('flower-type') }}">
                                 <i class="far fa-circle nav-icon"></i>
@@ -151,9 +151,9 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Returns</p>
                             </a>
-                        </li>
-                    </ul> --}}
-                {{-- </li> --}}
+                        </li> --}}
+                    </ul>
+                </li>
                 <li class="nav-header">CMS</li>
                 <li class="nav-item {{ Nav::isRoute(['home-banner.index','home-banner.create','home-banner.edit'],'menu-open') }}">
                     <a href="#"
