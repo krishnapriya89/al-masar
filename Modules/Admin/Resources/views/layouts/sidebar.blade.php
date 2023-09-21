@@ -23,7 +23,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-header">PRODUCT MANAGEMENT</li>
+                {{-- <li class="nav-header">PRODUCT MANAGEMENT</li> --}}
                 {{-- <li class="nav-item {{ Nav::isResource('product-main-category', '', 'menu-open') }} {{ Nav::isResource('product-sub-category', '', 'menu-open') }} {{ Nav::isResource('flower-type', '', 'menu-open') }} {{ Nav::isResource('delivery-location', '', 'menu-open') }}"> --}}
                     {{-- <a href="#"
                        class="nav-link {{ Nav::isResource('product-main-category') }} {{ Nav::isResource('product-sub-category') }} {{ Nav::isResource('flower-type') }} {{ Nav::isResource('delivery-location') }}">
@@ -155,9 +155,9 @@
                     </ul> --}}
                 {{-- </li> --}}
                 <li class="nav-header">CMS</li>
-                <li class="nav-item {{ Nav::isRoute(['home-banner.index','home-banner.create','home-banner.edit'],'menu-open') }}">
+                <li class="nav-item {{ Nav::isRoute(['home-banner.index','home-banner.create','home-banner.edit','about-us.edit'],'menu-open') }}">
                     <a href="#"
-                       class="nav-link {{ Nav::isRoute(['']) }}   {{ Nav::isResource('home-banner') }} ">
+                       class="nav-link {{ Nav::isRoute(['about-us.edit']) }}  {{ Nav::isResource('home-banner') }} ">
                         <i class="nav-icon fa fa-info"></i>
                         <p>
                        Cms
@@ -165,18 +165,18 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        {{-- <li class="nav-item">
+                        <li class="nav-item">
                             <a href="{{route('about-us.edit')}}"
                                class="nav-link {{ Nav::isRoute('about-us.edit') }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>About Us</p>
                             </a>
-                        </li> --}}
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('home-banner.index')  }}"
                                class="nav-link {{ Nav::isResource('home-banner') }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Home Banner Slider</p>
+                                <p>Home Banner</p>
                             </a>
                         </li>
 

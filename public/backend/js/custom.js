@@ -216,7 +216,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: base_path + '/dfd-admin-auth/delete-image',
+                    url: base_path + '/al-masar-admin-auth/delete-image',
                     type: "post",
                     data: {
                         id: id,
