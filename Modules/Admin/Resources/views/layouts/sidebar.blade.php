@@ -155,9 +155,9 @@
                     </ul> --}}
                 {{-- </li> --}}
                 <li class="nav-header">CMS</li>
-                <li class="nav-item {{ Nav::isRoute(['home-banner.index','home-banner.create','home-banner.edit','about-us.edit'],'menu-open') }}">
+                <li class="nav-item {{ Nav::isRoute(['home-banner.index','home-banner.create','home-banner.edit','about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit'],'menu-open') }}">
                     <a href="#"
-                       class="nav-link {{ Nav::isRoute(['about-us.edit']) }}  {{ Nav::isResource('home-banner') }} ">
+                       class="nav-link {{ Nav::isRoute(['about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit']) }}  {{ Nav::isResource('home-banner') }} ">
                         <i class="nav-icon fa fa-info"></i>
                         <p>
                        Cms
@@ -179,8 +179,27 @@
                                 <p>Home Banner</p>
                             </a>
                         </li>
-
-
+                        <li class="nav-item">
+                            <a href="{{ route('why-choose.edit')  }}"
+                               class="nav-link {{ Nav::isRoute('why-choose.edit') }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Why Choose Cms</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('how-to-buy.edit')  }}"
+                               class="nav-link {{ Nav::isRoute('how-to-buy.edit') }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>How To Buy Cms</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('contact.edit')  }}"
+                               class="nav-link {{ Nav::isRoute('contact.edit') }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Contact</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 {{-- <li class="nav-item">
