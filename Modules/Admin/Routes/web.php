@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\AboutUsController;
 use Modules\Admin\Http\Controllers\AuthController;
 use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Admin\Http\Controllers\StateController;
@@ -34,6 +35,9 @@ Route::prefix('al-masar-admin-auth')->group(function () {
          Route::get('/', [DashboardController::class, 'index']);
          Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+          //delete-image
+        Route::post('delete-image', [AdminController::class, 'deleteImage'])->name('delete-image');
+
          // config
         Route::get('config', [AdminConfigController::class, 'index'])->name('config.index');
         Route::get('config/{id}/edit', [AdminConfigController::class, 'edit'])->name('config.edit');
@@ -61,6 +65,9 @@ Route::prefix('al-masar-admin-auth')->group(function () {
 
         //Home Banner
         Route::resource('home-banner',HomeBannerController::class);
+        //about us
+        Route::get('about-us/edit',[AboutUsController::class,'edit'])->name('about-us.edit');
+        Route::post('about-us/update/{id}',[AboutUsController::class,'update'])->name('about-us.update');
     });
 });
 
