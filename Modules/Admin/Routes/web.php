@@ -12,6 +12,7 @@ use Modules\Admin\Http\Controllers\HomeBannerController;
 use Modules\Admin\Http\Controllers\AdminConfigController;
 use Modules\Admin\Http\Controllers\ProductSubCategoryController;
 use Modules\Admin\Http\Controllers\ProductMainCategoryController;
+use Modules\Admin\Http\Controllers\VendorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,8 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::get('state/{id}/edit', [StateController::class, 'edit'])->name('state.edit');
         Route::put('state/{state}/update', [StateController::class, 'update'])->name('state.update');
         Route::delete('state/{state}', [StateController::class, 'destroy'])->name('state.destroy');
+        //vendor
+        Route::resource('vendor', VendorController::class);
         
         //product and related data routes
         //main category

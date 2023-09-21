@@ -76,11 +76,6 @@ class CountryController extends Controller
      */
     public function update(CountryRequest $request, Country $country)
     {
-        $request->validate([
-            'title' => 'required|unique:countries,title,'.$country->id,
-            'code' => 'required|unique:countries,code,'.$country->id,
-        ]);
-
         $country->title = $request->title;
         $country->code = $request->code;
         $country->status = $request->status;

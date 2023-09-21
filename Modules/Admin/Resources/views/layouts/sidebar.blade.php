@@ -271,6 +271,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('vendor.index') }}"
+                            class="nav-link {{ Nav::isResource('vendor') }}">
+                                <i class="nav-icon fa-circle far"></i>
+                                <p>
+                                    Vendor
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 {{-- <li class="nav-item">
