@@ -10,6 +10,7 @@ use Modules\Admin\Http\Controllers\CountryController;
 use Modules\Admin\Http\Controllers\DashboardController;
 use Modules\Admin\Http\Controllers\HomeBannerController;
 use Modules\Admin\Http\Controllers\AdminConfigController;
+use Modules\Admin\Http\Controllers\ProductController;
 use Modules\Admin\Http\Controllers\ProductSubCategoryController;
 use Modules\Admin\Http\Controllers\ProductMainCategoryController;
 use Modules\Admin\Http\Controllers\VendorController;
@@ -62,9 +63,11 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::resource('product-main-category', ProductMainCategoryController::class);
         Route::resource('product-sub-category', ProductSubCategoryController::class);
 
-        Route::get('get-not-last-child-sub-categories/{category}', [ProductMainCategoryController::class, 'getNotLastChildSubCategories'])->name('get-not-last-child-sub-categories');
-        Route::get('get-sub-categories/{category}', [ProductMainCategoryController::class, 'getSubCategories'])->name('get-sub-categories');
-        Route::get('get-sub-categories-products/{subcategories}', [ProductMainCategoryController::class, 'getSubCategoriesProducts'])->name('get-sub-categories-products');
+        Route::get('get-parent-sub-categories/{category}', [ProductMainCategoryController::class, 'getParentSubCategories'])->name('get-parent-sub-categories');
+        Route::get('get-child-sub-categories/{sub_category}', [ProductMainCategoryController::class, 'getChildSubCategories'])->name('get-child-sub-categories');
+
+        //product
+        Route::resource('product', ProductController::class);
 
         //Home Banner
         Route::resource('home-banner',HomeBannerController::class);

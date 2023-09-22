@@ -163,7 +163,7 @@
                 sub_category_id = '{{ old('sub_category') }}';
             @endif
             $.ajax({
-                url: "{{ route('get-not-last-child-sub-categories', '') }}" + "/" + category_id,
+                url: "{{ route('get-parent-sub-categories', '') }}" + "/" + category_id,
                 dataType: 'json',
                 success: function (result) {
                     $('#sub_category').append('<option selected value=""> Select sub category </option>');

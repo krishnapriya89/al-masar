@@ -21,32 +21,8 @@ $(function () {
     if ($('.select2').length > 0) {
         $('.select2').select2({});
     }
-
-    //select2 with image
-    if ($('.select2-with-image').length > 0) {
-        $(".select2-with-image").select2({
-            templateResult: formatImage,
-        });
-    }
-
-    function formatImage(opt) {
-        if (!opt.id) {
-            return opt.text.toUpperCase();
-        }
-
-        let image = $(opt.element).attr('data-img');
-
-        if (!image) {
-            return opt.text.toUpperCase();
-        } else {
-            let image_path = fc_path + image;
-            var img_span = $(
-                '<span><img src="' + image_path + '" width="80px" /> ' + opt.text.toUpperCase() + '</span>'
-            );
-            return img_span;
-        }
-    }
 });
+
 // Disable submit button during form submission
 $("#submitBtn").on("click", function () {
     var button = $(this);
@@ -75,6 +51,7 @@ $("#submitBtn").on("click", function () {
     button.prop("disabled", true);
     button.closest("form").submit();
 });
+
 // Delete using SweetAlert2
 $('body').on("click", ".delete-btn", function (event) {
     event.preventDefault();
@@ -112,39 +89,6 @@ function initializeDataTable(options) {
         .buttons()
         .container()
         .appendTo("#dataTable_wrapper .col-md-6:eq(0)");
-}
-
-// delete function of multiple images
-function removeMultipleImages(instance, url) {
-    var deleteButton = $(instance);
-    var imageItem = deleteButton.closest(".image-item");
-    var imagePath = deleteButton.data("image");
-    var id = deleteButton.data("id");
-
-    $.ajax({
-        url: url,
-        method: "POST",
-        data: {
-            image: imagePath,
-            id: id,
-        },
-        success: function (response) {
-            var success = response.success;
-            var message = response.message;
-
-            if (success) {
-                if (message) {
-                    imageItem.remove();
-                    toastr.success(message);
-                }
-            } else {
-                toastr.error(message);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.log(error);
-        },
-    });
 }
 
 //image,video preview
@@ -192,6 +136,10 @@ $(".file-preview").on('change', function (event) {
 
         file_holder.show();
         reader.readAsDataURL($(this)[0].files[0]);
+        //removing the already inserted previewing image
+        console.log($(this).parent('div').parent('div'));
+        if($(this).parent('div').parent('div').parent('div').find('.image-container-div').length > 0)
+            $(this).parent('div').parent('div').parent('div').find('.image-container-div').empty();
     } else {
         alert("This browser does not support file preview.");
     }
@@ -237,79 +185,4 @@ $(document).ready(function () {
         });
 
     });
-});
-
-$(".uniqueCheck").on('keypress keyup paste', function (e) {
-    var _this = $(this);
-    var model = _this.data('model');
-    var column = _this.data('column');
-    var id = _this.data('id');
-    var parent_id = _this.data('parent-id');
-    var value = _this.val();
-
-    if (_this.val() != null && _this.val() != '' && _this.val() != undefined) {
-        $.ajax({
-            url: base_path + '/vt-admin-auth/unique-validation',
-            type: "post",
-            data: {
-                column: column,
-                model: model,
-                id: id,
-                parent_id: parent_id,
-                value: value,
-            },
-            success: function (response) {
-                _this.parent('div').find('.error-span').remove();
-                _this.parent('div').find('.unique-error-span').remove();
-                if (response) {
-                    _this.parent('div').append('<span class="text-danger unique-error-span">This value already exist</span>');
-                }
-            }
-        });
-    } else {
-        _this.parent('div').find('.error-span').remove();
-        _this.parent('div').find('.unique-error-span').remove();
-    }
-});
-
-//image extension and dimension validation
-var _URL = window.URL || window.webkitURL;
-$('.file-input-change').change(function () {
-    var ext = $(this).val().split('.').pop().toLowerCase();
-    if ($.inArray(ext, ['jpg', 'jpeg', 'png', 'webp']) == -1) {
-        $(this).parent('div').find('.error-span').remove();
-        $(this).parent('div').find('.image-error-span').remove();
-        $(this).parent('div').find('.image-dimension-error-span').remove();
-        $(this).parent('div').append('<span class="text-danger image-error-span">The image field must be a file of type: jpg, jpeg, png, webp</span>');
-    } else {
-        var _this = $(this);
-        var file = $(this)[0].files[0];
-
-        var img = new Image();
-        var img_width = img_height = 0;
-        var maxwidth = $(this).data('width');
-        var maxheight = $(this).data('height');
-
-        img.src = _URL.createObjectURL(file);
-        img.onload = function () {
-            img_width = this.width;
-            img_height = this.height;
-
-            if (img_width != maxwidth || img_height != maxheight) {
-                _this.parent('div').find('.image-error-span').remove();
-                _this.parent('div').find('.image-dimension-error-span').remove();
-                _this.parent('div').append('<span class="text-danger image-dimension-error-span">The image field has invalid image dimensions.</span>');
-                _this.parent('div').find('.image-error-input').val('');
-            } else {
-                _this.parent('div').find('.image-error-span').remove();
-                _this.parent('div').find('.image-dimension-error-span').remove();
-                _this.parent('div').find('.image-error-input').val(1);
-            }
-        }
-    }
-});
-
-$('.file-input').change(function () {
-    var file = $('#data_sheet')[0].files[0].name;
-    $(this).next('label').text(file);
 });

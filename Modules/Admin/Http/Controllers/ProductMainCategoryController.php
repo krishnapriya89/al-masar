@@ -90,24 +90,20 @@ class ProductMainCategoryController extends Controller
         }
     }
 
-    //return sub categories who are likely to have a child
-    public function getNotLastChildSubCategories(ProductMainCategory $category){
-        return response()->json($category->sub_categories->where('status', 1)->where('is_last_child', 0));
-    }
-
     //return all subcategories under the category
     public function getSubCategories(ProductMainCategory $category){
        
         return response()->json($category->sub_categories->where('status', 1));
     }
 
-    //return all subcategories under the categories
-    public function getMultipleSubCategories($categories){
-        return response()->json(ProductSubCategory::whereIn('product_main_category_id', explode(',',$categories))->where('status', 1)->get());
+    //return sub categories who are likely to have a child
+    public function getParentSubCategories(ProductMainCategory $category){
+        return response()->json($category->sub_categories->where('status', 1)->where('is_last_child', 0));
     }
 
-    // //return all products under the subcategories
-    // public function getSubCategoriesProducts($sub_categories){
-    //     return response()->json(Product::whereIn('product_sub_category_id', explode(',',$sub_categories))->where([['status', 1], ['has_variant',0]])->get());
-    // }
+    //return all sub category children under the sub category
+    public function getChildSubCategories(ProductSubCategory $sub_category){
+       
+        return response()->json($sub_category->children->where('status', 1));
+    }
 }

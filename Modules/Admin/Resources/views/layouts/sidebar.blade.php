@@ -34,13 +34,13 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        {{-- <li class="nav-item">
+                        <li class="nav-item">
                             <a href="{{ route('product.index') }}"
-                               class="nav-link {{ Nav::isResource('product') }}">
+                               class="nav-link {{ Nav::isRoute(['product.index', 'product.create', 'product.edit']) }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Product</p>
                             </a>
-                        </li> --}}
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('product-main-category.index') }}"
                                class="nav-link {{ Nav::isResource('product-main-category') }}">
