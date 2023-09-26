@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #e7151f;
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        fill: #e7151f;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+
+      .cls-4 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_21508" data-name="Group 21508" transform="translate(-624 -261)">
+    <g id="Group_769" data-name="Group 769" transform="translate(-269.318 -118.319)">
+      <g id="Ellipse_124" data-name="Ellipse 124" class="cls-1" transform="translate(893.319 379.319)">
+        <circle class="cls-3" cx="35" cy="35" r="35"/>
+        <circle class="cls-4" cx="35" cy="35" r="34"/>
+      </g>
+    </g>
+    <path id="Union_3" data-name="Union 3" class="cls-2" d="M-15372.665,6026.164l-9.546-9.547-9.545,9.547a2,2,0,0,1-2.828,0,2,2,0,0,1,0-2.828l9.545-9.547-9.545-9.547a1.994,1.994,0,0,1,0-2.828,2,2,0,0,1,2.828,0l9.545,9.547,9.546-9.547a2,2,0,0,1,2.828,0,2,2,0,0,1,0,2.828l-9.546,9.547,9.546,9.547a2,2,0,0,1,0,2.828,2,2,0,0,1-1.414.585A1.993,1.993,0,0,1-15372.665,6026.164Z" transform="translate(16041.211 -5717.789)"/>
+  </g>
+</svg>

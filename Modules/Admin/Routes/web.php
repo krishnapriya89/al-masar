@@ -1,14 +1,21 @@
 <?php
 
+use Database\Seeders\PrivacyPolicySeeder;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AboutUsController;
 use Modules\Admin\Http\Controllers\AuthController;
 use Modules\Admin\Http\Controllers\AdminController;
+use Modules\Admin\Http\Controllers\AdminConfigController;
+use Modules\Admin\Http\Controllers\ContactController;
 use Modules\Admin\Http\Controllers\StateController;
 use Modules\Admin\Http\Controllers\CountryController;
 use Modules\Admin\Http\Controllers\DashboardController;
 use Modules\Admin\Http\Controllers\HomeBannerController;
+use Modules\Admin\Http\Controllers\HowToBuyController;
+use Modules\Admin\Http\Controllers\PrivacyPolicyController;
+use Modules\Admin\Http\Controllers\TermsAndConditionsController;
+use Modules\Admin\Http\Controllers\WhyChooseController;
 use Modules\Admin\Http\Controllers\AdminConfigController;
 use Modules\Admin\Http\Controllers\ProductController;
 use Modules\Admin\Http\Controllers\ProductSubCategoryController;
@@ -74,6 +81,20 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         //about us
         Route::get('about-us/edit',[AboutUsController::class,'edit'])->name('about-us.edit');
         Route::post('about-us/update/{id}',[AboutUsController::class,'update'])->name('about-us.update');
+        //why choose
+        Route::get('why-choose/edit',[WhyChooseController::class,'edit'])->name('why-choose.edit');
+        Route::post('why-choose/update/{id}',[WhyChooseController::class,'update'])->name('why-choose.update');
+        //How To Buy
+        Route::get('how-to-buy/edit',[HowToBuyController::class,'edit'])->name('how-to-buy.edit');
+        Route::post('how-to-buy/update/{id}',[HowToBuyController::class,'update'])->name('how-to-buy.update');
+        //Contact
+        Route::get('contact/edit',[ContactController::class,'edit'])->name('contact.edit');
+        Route::post('contact/update/{id}',[ContactController::class,'update'])->name('contact.update');
+        //privacy policy
+        Route::get('privacy-policy/edit',[PrivacyPolicyController::class,'edit'])->name('privacy-policy.edit');
+        Route::post('privacy-policy/update/{id}',[PrivacyPolicyController::class,'update'])->name('privacy-policy.update');
+        //terms & conditions
+        Route::get('terms-and-conditions/edit',[TermsAndConditionsController::class,'edit'])->name('terms-and-conditions.edit');
+        Route::post('terms-and-conditions/update/{id}',[TermsAndConditionsController::class,'update'])->name('terms-and-conditions.update');
     });
 });
-

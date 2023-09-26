@@ -1,0 +1,208 @@
+// layout
+#viewport
+    &.Blur
+        filter: blur(2px)
+        -webkit-filter: blur(2px)
+#pageWrapper
+    overflow: hidden
+    padding-top: 62px
+    @media only screen and (min-width: 576px)
+        padding-top: 68px
+    @media only screen and (min-width: 768px)
+        padding-top: 76px
+    @media only screen and (min-width: 992px)
+        padding-top: 108px
+    @media only screen and (min-width: 1200px)
+        padding-top: 110px
+    @media only screen and (min-width: 1551px)
+        padding-top: 130px
+
+// HEADING STYLE
+.MainHead
+    width: 100%
+    margin-bottom: 20px
+    @media only screen and (min-width: 468px)
+        margin-bottom: 35px
+    @media only screen and (min-width: 1551px)
+        margin-bottom: 45px
+    .Tagline
+        color: $basecolor
+        line-height: normal
+        font-weight: 700
+        font-size: 14px
+        @media only screen and ( min-width: 768px )
+            font-size: 16px
+        @media only screen and ( min-width: 992px )
+            font-size: 18px
+        @media only screen and ( min-width: 1441px )
+            font-size: 20px
+    .Head
+        color: #000000
+        margin: 0
+        font: 600 20px/32px $fontstack1
+        br
+            display: none
+        @media only screen and (min-width: 576px)
+            font: 600 24px/34px $fontstack1
+        @media only screen and (min-width: 768px)
+            font: 600 26px/36px $fontstack1
+        @media only screen and (min-width: 992px)
+            font: 600 28px/38px $fontstack1
+            br
+                display: block
+        @media only screen and (min-width: 1200px)
+            font: 600 30px/40px $fontstack1
+        @media only screen and (min-width: 1551px)
+            font: 600 35px/45px $fontstack1
+    p
+        margin: 0
+    &.center
+        text-align: center
+        margin-left: auto
+        margin-right: auto
+    &.FlxHead
+        @media only screen and (min-width: 768px)
+            display: flex
+            align-items: center
+            justify-content: space-between
+
+// BUTTON STYLE
+.hoveranim
+    display: flex
+    align-items: center
+    justify-content: center
+    position: relative
+    overflow: hidden
+    &::before
+        content: ''
+        position: absolute
+        z-index: 0
+        top: 0
+        bottom: 0
+        width: 100%
+        background: $basecolor
+        -webkit-transform: scaleX(0)
+        -ms-transform: scaleX(0)
+        transform: scaleX(0)
+        -webkit-transition: -webkit-transform 0.3s ease
+        transition: -webkit-transform 0.3s ease
+        transition: transform 0.3s ease
+        transition: transform 0.3s ease, -webkit-transform 0.3s ease
+        left: 0
+        -webkit-transform-origin: right
+        -ms-transform-origin: right
+        transform-origin: right
+    span
+        position: relative
+        z-index: 1
+    &:hover
+        color: #fff
+        &::before
+            -webkit-transform-origin: left
+            -ms-transform-origin: left
+            transform-origin: left
+            -webkit-transform: scaleX(1)
+            -ms-transform: scaleX(1)
+            transform: scaleX(1)
+
+// CUSTOME CONTAINER
+.CustomeContainer
+    padding: 0 15px
+    width: 100%
+    @media only screen and (min-width: 1050px)
+        width: calc(100% - ((100% - 1050px)/ 2))
+
+    @media only screen and (min-width: 1200px)
+        width: calc(100% - ((100% - 1180px)/ 2))
+
+    @media only screen and (min-width: 1441px)
+        width: calc(100% - ((100% - 1360px)/ 2))
+
+    @media only screen and (min-width: 1551px)
+        width: calc(100% - ((100% - 1440px)/ 2))
+
+.breadCrumb
+    padding: 20px 0 0
+    ul
+        display: flex
+        align-items: center
+        flex-wrap: wrap
+        li
+            position: relative
+            color: #929292
+            font-weight: 500
+            font-size: 12px
+            a
+                color: #929292
+                font-weight: 500
+                font-size: 12px
+
+            &:not(:last-of-type)
+                &::after
+                    content: ">"
+                    color: #929292
+                    font-weight: 500
+                    display: inline
+                    margin: 0 5px
+                    font-size: 12px
+                a
+                    &:hover
+                        color: $basecolor
+#cmnBanner
+    position: relative
+    .bannerImg
+        picture
+            width: 100%
+            height: 100%
+            display: block
+            position: relative
+        img
+            @include imgFit
+        .bannerCnt
+            position: absolute
+            width: 100%
+            top: 50%
+            left: 50%
+            transform: translate( -50% , -50% )
+            padding-right: 15px
+            padding-left: 15px
+            margin-right: auto
+            margin-left: auto
+            z-index: 2
+            .Title
+                font-weight: 800
+                color: #000
+                font-size: 20px
+                line-height: 28px
+                @media only screen and (min-width: 576px)
+                    font-size: 22px
+                    line-height: 30px
+                @media only screen and (min-width: 768px)
+                    font-size: 24px
+                    line-height: 35px
+                @media only screen and (min-width: 992px)
+                    font-size: 28px
+                    line-height: 39px
+                @media only screen and (min-width: 1200px)
+                    font-size: 32px
+                    line-height: 42px
+                @media only screen and (min-width: 1441px)
+                    font-size: 36px
+                    line-height: 48px
+                @media only screen and (min-width: 1560px)
+                    font-size: 45px
+                    line-height: 60px
+            .subT
+                color: #000
+                font-weight: 500
+                font-size: 14px
+                line-height: 18px
+                @media only screen and (min-width: 576px)
+                    font-size: 16px
+                    line-height: 19px
+                @media only screen and (min-width: 768px)
+                    font-size: 18px
+                    line-height: 21px
+                @media only screen and (min-width: 992px)
+                    font-size: 20px
+                    line-height: 23px

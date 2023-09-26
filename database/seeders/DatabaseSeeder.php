@@ -15,5 +15,10 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminConfigSeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(AboutUsSeeder::class);
+        $this->call(WhyChooseSeeder::class);
+        $this->call(HowToBuySeeder::class);
+        $this->call(ContactSeeder::class);
+        $this->call(PrivacyPolicySeeder::class);
+        $this->call(TermsAndConditionSeeder::class);
     }
 }

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="5.833" height="4.25" viewBox="0 0 5.833 4.25">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path id="check" class="cls-1" d="M10.708,7.025a.4.4,0,0,0-.583,0L7,10.15,5.708,8.858a.412.412,0,0,0-.583.583l1.583,1.583a.4.4,0,0,0,.583,0l3.417-3.417A.4.4,0,0,0,10.708,7.025Z" transform="translate(-5 -6.9)"/>
+</svg>
