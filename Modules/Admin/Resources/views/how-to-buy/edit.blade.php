@@ -135,7 +135,7 @@
                                             <input type="file" class="custom-file-input file-preview" id="image"
                                                    name="image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        804 × 493
+                                       1008 x 1072
                                         <div class="pt-3 file-holder"> </div>
                                     </div>
                                     @error('image')
@@ -151,14 +151,14 @@
 
                                         </div>
                                     </div>
-                                    <div style="display:inline-block;">
+                                    {{-- <div style="display:inline-block;">
                                         <a href="javascript:void(0)"><i class="fa fa-times text-red deleteImg" data-model="HowToBuy" data-column="image" data-id="{{$common_content->id}}"></i></a>
-                                    </div>
+                                    </div> --}}
                                 @endif
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="section_one_image">Section One Image</label>
@@ -166,7 +166,7 @@
                                             <input type="file" class="custom-file-input file-preview" id="section_one_image"
                                                    name="section_one_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        804 × 493
+
                                         <div class="pt-3 file-holder"> </div>
                                     </div>
                                     @error('section_one_image')
@@ -188,8 +188,8 @@
                                 @endif
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+                        </div> --}}
+                        {{-- <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="section_two_image">Section Two Image </label>
@@ -197,7 +197,7 @@
                                             <input type="file" class="custom-file-input file-preview" id="banner_image"
                                                    name="section_two_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        1575 × 379
+
                                         <div class="pt-3 file-holder"> </div>
                                     </div>
                                     @error('section_two_image')
@@ -219,8 +219,8 @@
                                 @endif
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+                        </div> --}}
+                        {{-- <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="section_three_image">Section Three Image </label>
@@ -228,7 +228,7 @@
                                             <input type="file" class="custom-file-input file-preview" id="section_three_image"
                                                    name="section_three_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        1575 × 379
+
                                         <div class="pt-3 file-holder"> </div>
                                     </div>
                                     @error('section_three_image')
@@ -250,7 +250,7 @@
                                 @endif
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

@@ -15,13 +15,15 @@ class HomeBannerRequest extends FormRequest
     {
         $rules = [
 
-            'image' => 'required|image|mimes:png,jpg,jpeg,webp',
+            'image' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048|
+                        dimensions:min_width=768,min_height=350,max_width=768,max_height=850',
             'sort_order' => 'nullable|integer|min:0'
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
-            $rules['image'] = 'nullable|image|mimes:png,jpg,jpeg,webp';
+            $rules['image'] = 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048|
+                    dimensions:min_width=768,min_height=350,max_width=768,max_height=850';
         }
 
         return $rules;

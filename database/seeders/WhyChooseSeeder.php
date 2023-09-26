@@ -16,13 +16,13 @@ class WhyChooseSeeder extends Seeder
         WhyChoose::insert([
             'title'=>'Why Choose Al Masar Al Saree',
             'sub_title' => 'lorem ipsum',
-            'section_one_image'=>'frontend/images/image.jpg',
+            'section_one_image'=>'frontend/images/w1.svg',
             'section_one_title'=>'Best Prices In The Market',
             'section_one_description'=>'lorem ipsum',
-            'section_two_image'=>'frontend/images/image.jpg',
+            'section_two_image'=>'frontend/images/w2.svg',
             'section_two_title'=>'Best Prices In The Market',
             'section_two_description'=>'lorem ipsum',
-            'section_three_image'=>'frontend/images/image.jpg',
+            'section_three_image'=>'frontend/images/w3.svg',
             'section_three_title'=>'Best Prices In The Market',
             'section_three_description'=>'lorem ipsum',
         ]);

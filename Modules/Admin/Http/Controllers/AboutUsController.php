@@ -33,11 +33,16 @@ class AboutUsController extends Controller
         $request->validate([
             'banner_title' => 'required',
             'title'        => 'required',
-            'image'        => 'nullable|image|mimes:png,jpg,jpeg,webp',
-            'banner_image' => 'nullable|image|mimes:png,jpg,jpeg,webp',
-            'mission_bg_image'=> 'nullable|image|mimes:png,jpg,jpeg,webp',
-            'vision_bg_image'=> 'nullable|image|mimes:png,jpg,jpeg,webp',
-            'values_bg_image' => 'nullable|image|mimes:png,jpg,jpeg,webp',
+            'image'        => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048|
+                             dimensions:min_width=468,min_height=372,max_width=468,max_height=372',
+            'banner_image' => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048|
+                            dimensions:min_width=1920,min_height=435,max_width=1920,max_height=435',
+            'mission_bg_image'=> 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048|
+                            dimensions:min_width=800,min_height=450,max_width=800,max_height=450',
+            'vision_bg_image'=> 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048|
+                            dimensions:min_width=800,min_height=450,max_width=800,max_height=450',
+            'values_bg_image' => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048|
+                            dimensions:min_width=549,min_height=549,max_width=549,max_height=549',
             'section_one_value_one'=> 'nullable|min:0',
             'section_one_value_two'=> 'nullable|min:0',
             'section_one_value_three'=> 'nullable|min:0',

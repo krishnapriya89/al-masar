@@ -325,7 +325,7 @@
                                             <input type="file" class="custom-file-input file-preview" id="image"
                                                    name="image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        804 × 493
+                                        468 x 372
                                         <div class="pt-3 file-holder"> </div>
                                     </div>
                                     @error('image')
@@ -341,9 +341,9 @@
 
                                         </div>
                                     </div>
-                                    <div style="display:inline-block;">
+                                    {{-- <div style="display:inline-block;">
                                         <a href="javascript:void(0)"><i class="fa fa-times text-red deleteImg" data-model="AboutUs" data-column="image" data-id="{{$common_content->id}}"></i></a>
-                                    </div>
+                                    </div> --}}
                                 @endif
                                 </div>
                             </div>
@@ -363,7 +363,7 @@
                                             <input type="file" class="custom-file-input file-preview" id="banner_image"
                                                    name="banner_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        1575 × 379
+                                       1920 x 435
                                         <div class="pt-3 file-holder"> </div>
                                     </div>
                                     @error('banner_image')
@@ -379,9 +379,9 @@
 
                                         </div>
                                     </div>
-                                    <div style="display:inline-block;">
+                                    {{-- <div style="display:inline-block;">
                                         <a href="javascript:void(0)"><i class="fa fa-times text-red deleteImg" data-model="AboutUs" data-column="banner_image" data-id="{{$common_content->id}}"></i></a>
-                                    </div>
+                                    </div> --}}
                                 @endif
                                 </div>
                             </div>
@@ -401,7 +401,7 @@
                                             <input type="file" class="custom-file-input file-preview" id="mission_bg_image"
                                                    name="mission_bg_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        1575 × 379
+                                        800 x 450
                                         <div class="pt-3 file-holder"> </div>
                                     </div>
                                     @error('mission_bg_image')
@@ -417,9 +417,9 @@
 
                                         </div>
                                     </div>
-                                    <div style="display:inline-block;">
+                                    {{-- <div style="display:inline-block;">
                                         <a href="javascript:void(0)"><i class="fa fa-times text-red deleteImg" data-model="AboutUs" data-column="mission_bg_image" data-id="{{$common_content->id}}"></i></a>
-                                    </div>
+                                    </div> --}}
                                 @endif
                                 </div>
                             </div>
@@ -439,7 +439,7 @@
                                             <input type="file" class="custom-file-input file-preview" id="vision_bg_image"
                                                    name="vision_bg_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        1575 × 379
+                                        800 x 450
                                         <div class="pt-3 file-holder"> </div>
                                     </div>
                                     @error('vision_bg_image')
@@ -455,9 +455,9 @@
 
                                         </div>
                                     </div>
-                                    <div style="display:inline-block;">
+                                    {{-- <div style="display:inline-block;">
                                         <a href="javascript:void(0)"><i class="fa fa-times text-red deleteImg" data-model="AboutUs" data-column="vision_bg_image" data-id="{{$common_content->id}}"></i></a>
-                                    </div>
+                                    </div> --}}
                                 @endif
                                 </div>
                             </div>
@@ -477,7 +477,7 @@
                                             <input type="file" class="custom-file-input file-preview" id="values_bg_image"
                                                    name="values_bg_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        1575 × 379
+                                       549 x549
                                         <div class="pt-3 file-holder"> </div>
                                     </div>
                                     @error('values_bg_image')
@@ -493,9 +493,9 @@
 
                                         </div>
                                     </div>
-                                    <div style="display:inline-block;">
+                                    {{-- <div style="display:inline-block;">
                                         <a href="javascript:void(0)"><i class="fa fa-times text-red deleteImg" data-model="AboutUs" data-column="values_bg_image" data-id="{{$common_content->id}}"></i></a>
-                                    </div>
+                                    </div> --}}
                                 @endif
                                 </div>
                             </div>

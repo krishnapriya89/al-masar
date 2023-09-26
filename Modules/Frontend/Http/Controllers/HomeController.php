@@ -5,75 +5,62 @@ namespace Modules\Frontend\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Models\HomeBanner;
+use App\Models\AboutUs;
+use App\Models\Contact;
+use App\Models\HowToBuy;
+use App\Models\PrivacyPolicy;
+use App\Models\TermsAndCondition;
+use App\Models\WhyChoose;
 
 class HomeController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * @return Renderable
+     * home page
+     *
      */
     public function index()
     {
-        return view('frontend::index');
+        $home_banners = HomeBanner::active()->orderBy('sort_order')->get();
+        $about_us_common = AboutUs::first();
+        $why_choose = WhyChoose::first();
+        $how_to_buy = HowToBuy::first();
+        $contact = Contact::first();
+        return view('frontend::index',compact('home_banners','about_us_common','why_choose','how_to_buy','contact'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @return Renderable
+     * about us page
+     *
      */
-    public function create()
+    public function about()
     {
-        return view('frontend::create');
+        $about = AboutUs::first();
+        return view('frontend::about',compact('about'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
+     * Privacy Policy
+     *
      */
-    public function store(Request $request)
+    public function privacyPolicy()
     {
-        //
+        $privacy_policy = PrivacyPolicy::first();
+        return view('frontend::privacy-policy',compact('privacy_policy'));
     }
 
     /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
+     * Terms and conditions
+     *
      */
-    public function show($id)
+    public function termsAndConditions()
     {
-        return view('frontend::show');
+        $terms_conditions = TermsAndCondition::first();
+        return view('frontend::terms-and-conditions',compact('terms_conditions'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('frontend::edit');
-    }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
+
 }

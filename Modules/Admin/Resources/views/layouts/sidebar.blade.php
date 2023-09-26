@@ -155,9 +155,9 @@
                     </ul>
                 </li>
                 <li class="nav-header">CMS</li>
-                <li class="nav-item {{ Nav::isRoute(['home-banner.index','home-banner.create','home-banner.edit','about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit','privacy-policy.edit','terms-and-conditions.edit'],'menu-open') }}">
+                <li class="nav-item {{ Nav::isRoute(['home-banner.index','home-banner.create','home-banner.edit','about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit','privacy-policy.edit','terms-and-conditions.edit','site-common-cms.edit'],'menu-open') }}">
                     <a href="#"
-                       class="nav-link {{ Nav::isRoute(['about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit','privacy-policy.edit','terms-and-conditions.edit']) }}  {{ Nav::isResource('home-banner') }} ">
+                       class="nav-link {{ Nav::isRoute(['about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit','privacy-policy.edit','terms-and-conditions.edit','site-common-cms.edit']) }}  {{ Nav::isResource('home-banner') }} ">
                         <i class="nav-icon fa fa-info"></i>
                         <p>
                        Cms
@@ -212,6 +212,13 @@
                                class="nav-link {{ Nav::isRoute('terms-and-conditions.edit') }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Terms & Conditions</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('site-common-cms.edit')  }}"
+                               class="nav-link {{ Nav::isRoute('site-common-cms.edit') }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Site Common Cms</p>
                             </a>
                         </li>
                     </ul>

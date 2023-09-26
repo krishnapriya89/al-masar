@@ -2,7 +2,7 @@
     <div class="Background"></div>
     <div class="topHead">
         <div class="container">
-            <a href="tel:+971 50475320" class="call">
+            <a href="tel:{{@$site_common_content->header_phone_number}}" class="call">
                 <svg viewBox="0 0 12 12">
                     <g id="Group_21150" data-name="Group 21150" transform="translate(-1105 -48.101)">
                         <g id="telephone-call" transform="translate(1105 48.101)">
@@ -18,7 +18,7 @@
                         </g>
                     </g>
                 </svg>
-                +971 50475320
+               {{@$site_common_content->header_phone_number}}
             </a>
         </div>
     </div>
@@ -32,7 +32,7 @@
                         <span class="line3"></span>
                     </div>
                 </button>
-                <a href="index1.php" class="logo">
+                <a href="{{ route('home')}}" class="logo">
                     <svg viewBox="0 0 275.731 78">
                         <g id="Group_438" data-name="Group 438" transform="translate(-109.238 315)">
                             <g id="Group_435" data-name="Group 435" transform="translate(109.238 -315)">
@@ -245,6 +245,10 @@
                     </svg>
                 </a>
             </div>
+            @auth
+
+            @endauth
+            @guest
             <div class="RSide">
                 <ul class="QckMenu">
                     <li>
@@ -287,6 +291,8 @@
                 </ul>
                 <a href="#!" class="login hoveranim"><span>Login</span></a>
             </div>
+            @endguest
+
         </div>
     </div>
     <div id="MainMenu">

@@ -118,7 +118,7 @@
                                             <input type="file" class="custom-file-input file-preview" id="image"
                                                    name="image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        775 × 379
+                                        768 x 350
                                         <div class="pt-3 file-holder"> </div>
                                     </div>
                                     @error('image')
