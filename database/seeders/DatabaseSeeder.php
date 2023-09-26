@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(WhyChooseSeeder::class);
         $this->call(HowToBuySeeder::class);
         $this->call(ContactSeeder::class);
+        $this->call(PrivacyPolicySeeder::class);
+        $this->call(TermsAndConditionSeeder::class);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Database\Seeders\PrivacyPolicySeeder;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
 use Modules\Admin\Http\Controllers\AboutUsController;
@@ -10,6 +11,8 @@ use Modules\Admin\Http\Controllers\ContactController;
 use Modules\Admin\Http\Controllers\DashboardController;
 use Modules\Admin\Http\Controllers\HomeBannerController;
 use Modules\Admin\Http\Controllers\HowToBuyController;
+use Modules\Admin\Http\Controllers\PrivacyPolicyController;
+use Modules\Admin\Http\Controllers\TermsAndConditionsController;
 use Modules\Admin\Http\Controllers\WhyChooseController;
 
 /*
@@ -55,6 +58,11 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         //Contact
         Route::get('contact/edit',[ContactController::class,'edit'])->name('contact.edit');
         Route::post('contact/update/{id}',[ContactController::class,'update'])->name('contact.update');
+        //privacy policy
+        Route::get('privacy-policy/edit',[PrivacyPolicyController::class,'edit'])->name('privacy-policy.edit');
+        Route::post('privacy-policy/update/{id}',[PrivacyPolicyController::class,'update'])->name('privacy-policy.update');
+        //terms & conditions
+        Route::get('terms-and-conditions/edit',[TermsAndConditionsController::class,'edit'])->name('terms-and-conditions.edit');
+        Route::post('terms-and-conditions/update/{id}',[TermsAndConditionsController::class,'update'])->name('terms-and-conditions.update');
     });
 });
-

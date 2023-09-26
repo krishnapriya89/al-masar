@@ -155,9 +155,9 @@
                     </ul> --}}
                 {{-- </li> --}}
                 <li class="nav-header">CMS</li>
-                <li class="nav-item {{ Nav::isRoute(['home-banner.index','home-banner.create','home-banner.edit','about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit'],'menu-open') }}">
+                <li class="nav-item {{ Nav::isRoute(['home-banner.index','home-banner.create','home-banner.edit','about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit','privacy-policy.edit','terms-and-conditions.edit'],'menu-open') }}">
                     <a href="#"
-                       class="nav-link {{ Nav::isRoute(['about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit']) }}  {{ Nav::isResource('home-banner') }} ">
+                       class="nav-link {{ Nav::isRoute(['about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit','privacy-policy.edit','terms-and-conditions.edit']) }}  {{ Nav::isResource('home-banner') }} ">
                         <i class="nav-icon fa fa-info"></i>
                         <p>
                        Cms
@@ -198,6 +198,20 @@
                                class="nav-link {{ Nav::isRoute('contact.edit') }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Contact</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('privacy-policy.edit')  }}"
+                               class="nav-link {{ Nav::isRoute('privacy-policy.edit') }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Privacy Policy</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('terms-and-conditions.edit')  }}"
+                               class="nav-link {{ Nav::isRoute('terms-and-conditions.edit') }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Terms & Conditions</p>
                             </a>
                         </li>
                     </ul>
