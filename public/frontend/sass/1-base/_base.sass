@@ -1,0 +1,428 @@
+// BASE STYLES
+*
+  margin: 0
+  padding: 0
+  border: none
+  outline: none
+  list-style: none
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+  border-collapse: inherit
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
+  -webkit-tap-highlight-color: transparent
+  -webkit-text-rendering: optimizeSpeed
+  text-rendering: optimizeSpeed
+
+html, body
+  font-family: $fontstack1
+  line-height: normal
+  font-weight: 400
+  background: #F5F5F7
+
+h1, h2, h3, h4, h5, h6
+  margin: 0
+  font-family: inherit
+  font-weight: 500
+  line-height: 1.2
+  color: inherit
+  margin-bottom: 10px
+  @media only screen and (min-width: 768px)
+    margin-bottom: 15px
+  @media only screen and (min-width: 1550px)
+    margin-bottom: 25px
+
+h1
+  font-size: 28px
+  line-height: 33.6px
+  @media only screen and (min-width: 468px)
+    font-size: 32px
+    line-height: 38.4px
+  @media only screen and (min-width: 1441px)
+    font-size: 40px
+    line-height: 48px
+
+h2
+  font-size: 24px
+  line-height: 28.8px
+  @media only screen and (min-width: 468px)
+    font-size: 28px
+    line-height: 33.6px
+  @media only screen and (min-width: 1550px)
+    font-size: 32px
+    line-height: 38.4px
+
+h3
+  font-size: 20px
+  line-height: 24px
+  @media only screen and (min-width: 468px)
+    font-size: 24px
+    line-height: 28.8px
+  @media only screen and (min-width: 1200px)
+    font-size: 28px
+    line-height: 33.6px
+
+h4
+  font-size: 16px
+  line-height: 20.5px
+  @media only screen and (min-width: 468px)
+    font-size: 20px
+    line-height: 24px
+  @media only screen and (min-width: 1200px)
+    font-size: 24px
+    line-height: 28.8px
+
+h5
+  font-size: 14px
+  line-height: 18px
+  @media only screen and (min-width: 468px)
+    font-size: 16px
+    line-height: 20.5px
+  @media only screen and (min-width: 1200px)
+    font-size: 20px
+    line-height: 24px
+
+h6
+  font-size: 13px
+  line-height: 16px
+  @media only screen and (min-width: 468px)
+    font-size: 14px
+    line-height: 18px
+  @media only screen and (min-width: 1200px)
+    font-size: 16px
+    line-height: 19.2px
+
+p
+  color: $text
+  margin-bottom: 15px
+  font-size: 12px
+  line-height: 20px
+  font-weight: 400
+  @media only screen and (min-width: 768px)
+    font-size: 14px
+    line-height: 22px
+    margin-bottom: 25px
+  @media only screen and (min-width: 1651px)
+    font-size: 16px
+    line-height: 24px
+    margin-bottom: 35px
+  strong
+    font-weight: 600
+
+  a
+    color: $basecolor
+    display: inline
+    text-decoration: underline
+    text-underline-position: under
+    &:hover
+      color: $basecolor
+
+a
+  text-decoration: none
+  transition: all .3s
+  color: inherit
+  &:hover
+    color: inherit
+
+ul
+  margin: 0
+  padding: 0
+  list-style: none
+
+img
+  vertical-align: middle
+  border: 0
+  -ms-interpolation-mode: bicubic
+  max-width: 100%
+  height: auto
+
+.form-group
+  position: relative
+  margin-bottom: 35px
+  .form-group
+    margin: 0
+  .iti
+    width: 100%
+label
+  display: block
+  color: #373737
+  margin-bottom: 10px
+  font-size: 13px
+  @media only screen and (min-width: 468px)
+    font-size: 14px
+  @media only screen and (min-width: 992px)
+    margin-bottom: 15px
+  @media only screen and (min-width: 1551px)
+    font-size: 16px
+  span
+    font-weight: 400
+    color: $basecolor
+.label
+  font-weight: 400
+  color: $basecolor
+  font-size: 11px
+  @media only screen and (min-width: 468px)
+    font-size: 12px
+  @media only screen and (min-width: 1551px)
+    font-size: 13px
+
+  .showPass
+    position: absolute
+    right: 22px
+    top: 0px
+    margin: auto
+    z-index: 1
+    cursor: pointer
+    user-select: none
+    -webkit-user-select: none
+    transition: all .3s
+    opacity: 0
+    display: flex
+    align-items: center
+    justify-content: center
+    pointer-events: none
+    height: 43px
+    @media only screen and (min-width: 468px)
+      height: 45px
+    @media only screen and (min-width: 1551px)
+      height: 50px
+    svg
+      width: 19px
+      height: 19px
+      fill: #a0a8bc
+      transition: all .3s
+      &#show
+        display: none
+    &.show
+      svg
+        &#hide
+          display: none
+        &#show
+          display: block
+    &:hover
+      svg
+        fill: $basecolor
+
+.form-control, [type="file"], .CustomeSelect .SelectSelected
+  font-family: $fontstack1
+  background-color: transparent
+  background-clip: padding-box
+  outline: none
+  box-shadow: none !important
+  display: block
+  width: 100%
+  border-radius: 0px
+  transition: all .3s
+  font-size: 13px
+  padding: 0px
+  color: #414040
+  font-weight: 500
+  border: none
+  border-bottom: 1px solid rgba(112, 112, 112, .20)
+  height: 43px
+  @media only screen and (min-width: 576px)
+    font-size: 14px
+    height: 45px
+  &::placeholder
+    font-weight: 500
+    color: #414040
+    font-size: 13px
+    @media only screen and (min-width: 576px)
+      font-size: 14px
+  &:focus
+    background-color: transparent
+    color: inherit
+    border-color: inherit
+  &:focus~label, &:not(:placeholder-shown)~label
+    transform: translateY(-32px)
+    color: #414040
+  &:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, :-webkit-autofill:active
+    -webkit-text-fill-color: rgb(0, 0, 0)
+    -webkit-box-shadow: 0 0 0px 30px $white inset
+    transition: background-color 5000s ease-in-out 0s
+  &:-internal-autofill-selected
+    background-color: -internal-light-dark(rgb(2, 142, 212), rgba(70, 90, 126, 0.4)) !important
+    -webkit-box-shadow: 0 0 0px 30px rgb(2, 142, 212) inset
+  &::-ms-expand
+    background-color: transparent
+    border: 0
+  @media (prefers-reduced-motion: reduce)
+    transition: none
+
+  &[type=file]
+    padding: 11px 15px
+    font-size: 11px
+    @media only screen and (min-width: 468px)
+      padding: 10px 16px
+      font-size: 12px
+    @media only screen and (min-width: 1551px)
+      padding: 15px 20px
+
+textarea.form-control
+  min-width: 100%
+  max-width: 100%
+  min-height: 95px
+  @media only screen and (min-width: 576px)
+    min-height: 100px
+input[type="date"].form-control,
+input[type="datetime-local"].form-control,
+input[type="month"].form-control,
+input[type="time"].form-control
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+input[type="date"]
+  position: relative
+input[type="date"]::-webkit-calendar-picker-indicator
+  color: rgba(0, 0, 0, 0)
+  opacity: 1
+  display: block
+  background: url( "data:image/svg+xml,%3Csvg fill='%23000000' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M104,0C90.6,0,80,10.8,80,24v8H40c-22,0-40,17.6-40,40v400c0,22.2,17.9,40,40,40h368c22,0,40-17.8,40-40V72c0-22-17.8-40-40-40h-40v-8c0-13.2-10.6-24-24-24c-13.4,0-24,10.8-24,24v8H128v-8C128,10.8,117.4,0,104,0L104,0z M104,16c4.4,0,8,3.4,8,8v32c0,4.6-3.7,8-8,8c-4.3,0-8-3.5-8-8V24C96,19.4,99.6,16,104,16L104,16z M344,16c4.4,0,8,3.4,8,8v32c0,4.6-3.6,8-8,8s-8-3.5-8-8V24C336,19.4,339.6,16,344,16z M40,48h40v8c0,13.2,10.5,24,24,24s24-10.9,24-24v-8H320v8c0,13.2,10.7,24,24,24c13.3,0,24-10.9,24-24v-8h40c13.2,0,24,10.5,24,24v40H16V72C16,58.7,26.5,48,40,48L40,48z M168,72c-10.9,0-10.9,16,0,16h112c10.9,0,10.9-16,0-16H168z M16,128h416V352h-56c-22.2,0-40,17.7-40,40v56H40c-13.1,0-24-10.5-24-24L16,128z M64,160c-8.9,0-16,7.3-16,16v32c0,9,7.3,16,16,16H96c9,0,16-7.3,16-16v-32c0-8.7-7.1-16-16-16H64z M160,160c-8.9,0-16,7.3-16,16v32c0,8.9,7.3,16,16,16h32c9,0,16-7.3,16-16v-32c0-8.7-7.1-16-16-16H160z M256,160c-8.9,0-16,7.3-16,16v32c0,9,7.3,16,16,16h32c9,0,16-7.3,16-16v-32c0-8.7-7.1-16-16-16H256z M352,160c-8.9,0-16,7.3-16,16v32c0,8.7,7.1,16,16,16h32c9,0,16-7.3,16-16v-32c0-8.7-7.1-16-16-16H352z M64,176H96v32H64V176z M160,176h32v32h-32V176z M256,176h32v32h-32L256,176zM352,176h32v32h-32V176z M64,256c-9.1,0-16,7.3-16,16v32c0,8.7,7.1,16,16,16H96c9,0,16-7.3,16-16v-32c0-8.7-7-16-16-16H64zM160,256c-8.9,0-16,7.3-16,16v32c0,8.7,7.1,16,16,16h32c8.9,0,16-7.3,16-16v-32c0-8.7-7-16-16-16H160z M256,256c-8.7,0-16,7-16,16v32c0,8.9,7.3,16,16,16h32c8.7,0,16-7.1,16-16v-32c0-8.7-7.1-16-16-16H256z M352,256c-8.9,0-16,7.3-16,16v32c0,8.8,7.3,16,16,16h32c8.7,0,16-7.1,16-16v-32c0-8.7-7-16-16-16H352z M64,272H96v32H64V272z M160,272h32v32h-32V272z M256,272h32v32h-32L256,272zM352,272h32v32h-32V272z M64,352c-8.7,0-16,7.2-16,15.9v32c0,9,7.3,16,16,16H96c8.7,0,16-7.1,16-16v-32c0-8.7-7.3-15.9-16-15.9H64z M160,352c-8.9,0-16,7.2-16,15.9v32c0,8.9,7.3,16,16,16h32c9,0,16-7.3,16-16v-32c0-8.7-7.1-15.9-16-15.9H160z M256,352c-8.9,0-16,7.2-16,15.9v32c0,8.7,6.9,16,16,16h32c8.9,0,16-7.3,16-16v-32c0-8.6-7-15.9-16-15.9H256z M64,368H96v32H64V368zM160,368h32v32h-32V368z M256,368h32v32h-32L256,368z M376,368h44.7L352,436.7V392C352,378.8,362.6,368,376,368L376,368zM432,379.3V472c0,13.1-10.6,24-24,24H40c-13.1,0-24-10.5-24-24v-16.2c6.7,5.1,14.9,8.2,24,8.2h304c2.1,0,4.2-0.8,5.7-2.4L432,379.3z'/%3E%3C/svg%3E" ) no-repeat center !important
+  width: 18px
+  height: 18px
+  border-width: thin
+  position: absolute
+  right: 22px
+.datepicker
+  background: #ffffff url( "data:image/svg+xml,%3Csvg fill='%23000000' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M104,0C90.6,0,80,10.8,80,24v8H40c-22,0-40,17.6-40,40v400c0,22.2,17.9,40,40,40h368c22,0,40-17.8,40-40V72c0-22-17.8-40-40-40h-40v-8c0-13.2-10.6-24-24-24c-13.4,0-24,10.8-24,24v8H128v-8C128,10.8,117.4,0,104,0L104,0z M104,16c4.4,0,8,3.4,8,8v32c0,4.6-3.7,8-8,8c-4.3,0-8-3.5-8-8V24C96,19.4,99.6,16,104,16L104,16z M344,16c4.4,0,8,3.4,8,8v32c0,4.6-3.6,8-8,8s-8-3.5-8-8V24C336,19.4,339.6,16,344,16z M40,48h40v8c0,13.2,10.5,24,24,24s24-10.9,24-24v-8H320v8c0,13.2,10.7,24,24,24c13.3,0,24-10.9,24-24v-8h40c13.2,0,24,10.5,24,24v40H16V72C16,58.7,26.5,48,40,48L40,48z M168,72c-10.9,0-10.9,16,0,16h112c10.9,0,10.9-16,0-16H168z M16,128h416V352h-56c-22.2,0-40,17.7-40,40v56H40c-13.1,0-24-10.5-24-24L16,128z M64,160c-8.9,0-16,7.3-16,16v32c0,9,7.3,16,16,16H96c9,0,16-7.3,16-16v-32c0-8.7-7.1-16-16-16H64z M160,160c-8.9,0-16,7.3-16,16v32c0,8.9,7.3,16,16,16h32c9,0,16-7.3,16-16v-32c0-8.7-7.1-16-16-16H160z M256,160c-8.9,0-16,7.3-16,16v32c0,9,7.3,16,16,16h32c9,0,16-7.3,16-16v-32c0-8.7-7.1-16-16-16H256z M352,160c-8.9,0-16,7.3-16,16v32c0,8.7,7.1,16,16,16h32c9,0,16-7.3,16-16v-32c0-8.7-7.1-16-16-16H352z M64,176H96v32H64V176z M160,176h32v32h-32V176z M256,176h32v32h-32L256,176zM352,176h32v32h-32V176z M64,256c-9.1,0-16,7.3-16,16v32c0,8.7,7.1,16,16,16H96c9,0,16-7.3,16-16v-32c0-8.7-7-16-16-16H64zM160,256c-8.9,0-16,7.3-16,16v32c0,8.7,7.1,16,16,16h32c8.9,0,16-7.3,16-16v-32c0-8.7-7-16-16-16H160z M256,256c-8.7,0-16,7-16,16v32c0,8.9,7.3,16,16,16h32c8.7,0,16-7.1,16-16v-32c0-8.7-7.1-16-16-16H256z M352,256c-8.9,0-16,7.3-16,16v32c0,8.8,7.3,16,16,16h32c8.7,0,16-7.1,16-16v-32c0-8.7-7-16-16-16H352z M64,272H96v32H64V272z M160,272h32v32h-32V272z M256,272h32v32h-32L256,272zM352,272h32v32h-32V272z M64,352c-8.7,0-16,7.2-16,15.9v32c0,9,7.3,16,16,16H96c8.7,0,16-7.1,16-16v-32c0-8.7-7.3-15.9-16-15.9H64z M160,352c-8.9,0-16,7.2-16,15.9v32c0,8.9,7.3,16,16,16h32c9,0,16-7.3,16-16v-32c0-8.7-7.1-15.9-16-15.9H160z M256,352c-8.9,0-16,7.2-16,15.9v32c0,8.7,6.9,16,16,16h32c8.9,0,16-7.3,16-16v-32c0-8.6-7-15.9-16-15.9H256z M64,368H96v32H64V368zM160,368h32v32h-32V368z M256,368h32v32h-32L256,368z M376,368h44.7L352,436.7V392C352,378.8,362.6,368,376,368L376,368zM432,379.3V472c0,13.1-10.6,24-24,24H40c-13.1,0-24-10.5-24-24v-16.2c6.7,5.1,14.9,8.2,24,8.2h304c2.1,0,4.2-0.8,5.7-2.4L432,379.3z'/%3E%3C/svg%3E" ) no-repeat center !important
+  background-position: center right 22px !important
+  background-repeat: no-repeat !important
+  background-size: 18px !important
+button[type="submit"], .btn
+  cursor: pointer
+  margin: 0
+  outline: none
+  box-shadow: none
+  overflow: hidden
+  color: $basecolor
+  transition: all .3s
+  display: flex
+  align-items: center
+  justify-content: center
+  border: 1px solid $basecolor
+  background-color: #fff
+  font-size: 13px
+  font-family: $fontstack1
+  width: fit-content
+  width: -moz-fit-content
+  min-width: 205px
+  text-transform: uppercase
+  padding: 9px 10px
+  height: 43px
+  font-weight: 500
+  will-change: transform
+  border-radius: 30px
+  @media only screen and (min-width: 468px)
+    font-size: 14px
+    height: 45px
+  @media only screen and (min-width: 768px)
+    min-width: 220px
+  @media only screen and (min-width: 992px)
+    padding: 9px 20px
+    height: 56px
+  @media only screen and (min-width: 1441px)
+    min-width: 244px
+    font-size: 16px
+  @media only screen and (min-width: 1551px)
+    height: 63px
+  &:hover, &:focus, &:active, &.active, &.show, &:first-child:active
+    border-color: inherit
+    background-color: inherit
+    // color: inherit
+  &.btn2
+    background: transparent
+    &:not(:hover)
+      border-color: rgba(0, 0, 0, 0.24)
+      color: #000
+
+.help-desk, .help-block
+  font-size: 13px
+  color: #D20000
+  position: absolute
+  left: 0
+  bottom: -25px
+  &.success
+    color: #000
+::selection
+  color: #000000
+  background: rgba(251, 202, 0, 0.56)
+::-moz-selection
+  color: #000000
+  background: rgba(251, 202, 0, 0.56)
+::-webkit-scrollbar
+  width: 5px
+::-webkit-scrollbar-thumb
+  background: $basecolor
+  border-radius: 30px
+::-webkit-scrollbar-track
+  box-shadow: inset 0 0 0 grey
+  border-radius: 0px
+  background: rgb(168, 180, 198)
+
+svg
+  display: inline-block
+  position: relative
+  width: 100%
+  vertical-align: middle
+  overflow: hidden
+
+.btn-check:focus+.btn, .btn:focus
+  outline: 0
+  box-shadow: none
+
+// RADIO BUTTON
+.RadioBtnWrp
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  [role="radiogroup"]
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  .CheckBox
+    display: flex
+    align-items: center
+    position: relative
+    overflow: hidden
+    padding: 0
+    &:not(:last-of-type)
+      margin-right: 30px
+    label
+      margin: 0
+      color: #202020
+  input
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    opacity: 0
+    z-index: 1
+    cursor: pointer
+    margin: 0
+  span
+    display: block
+    border-radius: 50%
+    border: 1px solid #DDDFE1
+    position: relative
+    width: 24px
+    height: 24px
+    margin-right: 8px
+    @media only screen and (min-width: 468px)
+      margin-right: 14px
+    &::before
+      content: ""
+      border-radius: 50%
+      background-color: $basecolor
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)
+      opacity: 0
+      transition: all .2s
+      width: 13px
+      height: 13px
+  input
+    &:checked~span
+      &::before
+        opacity: 1

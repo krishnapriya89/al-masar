@@ -1,0 +1,239 @@
+// DASHBOARD_PAGE
+/************** *********** **************/
+/************* DASHBOARD_PAGE *************/
+/************** *********** **************/
+
+.DashBoard
+    #proListing
+        padding: 0 0 40px
+        @media only screen and ( min-width: 576px )
+            padding: 0 0 50px
+        @media only screen and ( min-width: 600px )
+            padding: 0 0 70px
+        .all_products
+            padding: 20px 0
+            @media only screen and ( min-width: 600px )
+                display: flex
+                align-items: center
+                justify-content: space-between
+            .Stitle
+                color: #000
+                font-weight: 600
+                font-size: 16px
+                margin-bottom: 15px
+                @media only screen and ( min-width: 600px )
+                    margin-bottom: 0
+                @media only screen and ( min-width: 992px )
+                    font-size: 18px
+                @media only screen and ( min-width: 1200px )
+                    font-size: 20px
+            .bdfgRtBx
+                @media only screen and ( min-width: 600px )
+                    display: flex
+                    align-items: center
+                .ltb
+                    display: flex
+                    align-items: center
+                    margin-bottom: 15px
+                    @media only screen and ( min-width: 600px )
+                        margin-bottom: 0
+                .SortBy, .display
+                    position: relative
+                    z-index: 2
+                    .label
+                        color: #272525
+                        font-weight: 400
+                        margin-right: 24px
+                        font-size: 14px
+                        @media only screen and ( min-width: 1200px )
+                            font-size: 16px
+                        @media only screen and ( min-width: 1441px )
+                            font-size: 18px
+                    .select2
+                        border: none
+                        width: 100% !important
+                        background: #FCFCFC
+                        height: 38px
+                        border-radius: 0
+                        @media only screen and ( min-width: 992px )
+                            height: 43px
+                    &.SortBy
+                        width: 40%
+                        @media only screen and ( min-width: 600px )
+                            width: 105px
+                        .select2
+                            background: #E9E9E9
+                            border-radius: 7px
+                            &.select2-container--open
+                                background: #E7151F
+                                .select2-selection__rendered
+                                    color: #fff !important
+                                .select2-selection
+                                    &::after
+                                        filter: grayscale(1) brightness(23) invert(15)
+                    &.display
+                        margin-left: 11px
+                        width: calc( 100% - 40% )
+                        @media only screen and ( min-width: 600px )
+                            width: 190px
+                        @media only screen and ( min-width: 992px )
+                            width: 252px
+                        .select2
+                            .select2-selection
+                                &::after
+                                    display: none
+                .clear
+                    border-radius: 22px
+                    background: #000
+                    color: #fff
+                    font-weight: 600
+                    text-transform: uppercase
+                    height: 35px
+                    font-size: 12px
+                    width: 100%
+                    @media only screen and ( min-width: 600px )
+                        width: 88px
+                        margin-left: 11px
+                        font-size: 13px
+                    @media only screen and ( min-width: 992px )
+                        height: 43px
+                        font-size: 14px
+
+        .TableBx
+            overflow: visible
+            &::-webkit-scrollbar
+                height: 2px
+            @media only screen and ( max-width: 1200px )
+                overflow-x: auto
+                -webkit-overflow-scrolling: touch
+            .ctr
+                text-align: center
+            .txt
+                font-size: 12px
+                font-weight: 500
+                line-height: 15px
+                color: #000
+                .tmns
+                    font-size: 10px
+                    color: #07D97E
+                    font-weight: 500
+                    line-height: 13px
+                    display: inline
+            .pcode
+                display: flex
+                align-items: center
+                position: relative
+                input[type=checkbox], input[type=radio]
+                    width: 14px !important
+                    height: 14px !important
+                    position: relative
+                    z-index: 1
+                    outline: none
+                    visibility: hidden
+                    border-radius: 1px
+                    padding: 0
+                    height: initial
+                    width: initial
+                    margin-bottom: 0
+                    display: none
+                    cursor: pointer
+                    &:checked
+                        &::after
+                            opacity: 1
+                            visibility: visible
+                        & + label:after
+                            content: ''
+                            display: block
+                            position: absolute
+                            background: url(../images/check.svg) no-repeat
+                            width: 6px
+                            height: 5px
+                            background-size: contain
+                            left: 4px
+                            top: 6px
+                        & + label::before
+                            background-color: #E7151F
+                label
+                    margin: 0
+                    display: flex
+                    align-items: center
+                    cursor: pointer
+                    position: relative
+                    cursor: pointer
+                    padding-left: 20px
+                    font-size: 12px
+                    line-height: 15px
+                    color: #000
+                    font-weight: 500
+                    &:before
+                        content: ""
+                        -webkit-appearance: none
+                        cursor: pointer
+                        position: absolute
+                        left: 0px
+                        vertical-align: middle
+                        display: inline-block
+                        background-color: white
+                        visibility: visible
+                        border: solid 2px #CDCDCD
+                        border-radius: 2px
+                        background: #F9F9F9
+                        width: 14px
+                        height: 14px
+                        top: 1px
+            .proFlx
+                display: flex
+                align-items: center
+                .PimgB
+                    width: 18px
+                .name
+                    width: calc( 100% - 18px )
+                    padding-left: 14px
+                    white-space: nowrap
+                    font-size: 12px
+                    font-weight: 400
+                    color: #000
+            .vMore
+                font-size: 10px
+                color: #000
+                font-weight: 500
+                text-transform: uppercase
+                text-decoration: underline
+                text-underline-position: under
+                white-space: nowrap
+            .notification
+                position: relative
+                width: fit-content
+                width: -moz-fit-content
+                &::after
+                    content: ""
+                    position: absolute
+                    width: 6px
+                    height: 6px
+                    border-radius: 50%
+                    background: #E7151F
+                    cursor: pointer
+                    box-shadow: 0 0 0 rgba(231, 21, 31, .4)
+                    animation: pulse 2s infinite
+            table
+                background: #fff
+                width: 100vw
+                @media only screen and ( min-width: 1200px )
+                    width: 100%
+                thead
+                    background: #000
+                    th
+                        color: #fff
+                        font-weight: 400
+                        font-size: 13px
+                        padding: 10px 15px
+                        white-space: nowrap
+                        @media only screen and (min-width: 468px)
+                            padding: 12px 23px
+                            font-size: 14px
+                tbody
+                    td
+                        padding: 10px 15px
+                        border-bottom: solid 2px #F5F5F7
+                        @media only screen and (min-width: 468px)
+                            padding: 15px 23px

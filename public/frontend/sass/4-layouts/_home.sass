@@ -1,0 +1,753 @@
+//HOME_PAGE
+/************** ******* **************/
+/************* HOME_PAGE *************/
+/************** ******* **************/
+.homePage
+    #MainSlider
+        position: relative
+        z-index: 1
+        #bannerCarousel
+            height: 100%
+            overflow: hidden
+            .carousel-inner
+                .carousel-item
+                    position: relative
+                    z-index: 1
+                    .bnrSld
+                        width: 100%
+                        height: 100%
+                        overflow: hidden
+                        position: relative
+                        z-index: 1
+                        align-items: center
+                        @include display
+                        picture
+                            height: 100%
+                            width: 100%
+                        .bnrBg
+                            @include imgFit
+                        .cntBx
+                            position: absolute
+                            left: 0
+                            width: 100%
+                            margin: auto
+                            &>*
+                                opacity: 0
+                                visibility: hidden
+                                transition: all 0.6s
+                                transform: translateY(100px)
+                            .tleWrp
+                                @media only screen and (min-width: 992px)
+                                    max-width: 640px
+                                @media only screen and (min-width: 1200px)
+                                    max-width: 900px
+                                @media only screen and (min-width: 1560px)
+                                    max-width: 1100px
+                                .subT
+                                    font-weight: 700
+                                    color: #000
+                                    line-height: normal
+                                    font-size: 14px
+                                    @media only screen and ( min-width: 768px )
+                                        font-size: 16px
+                                    @media only screen and ( min-width: 992px )
+                                        font-size: 20px
+
+                                .mTle
+                                    font-weight: 800
+                                    color: #000
+                                    font-size: 18px
+                                    line-height: 22px
+                                    @media only screen and ( min-width: 576px )
+                                        font-size: 20px
+                                        line-height: 24px
+                                    @media only screen and ( min-width: 768px )
+                                        font-size: 28px
+                                        line-height: 35px
+                                    @media only screen and ( min-width: 992px )
+                                        font-size: 38px
+                                        line-height: 53px
+                                    @media only screen and ( min-width: 1200px )
+                                        font-size: 45px
+                                        line-height: 60px
+
+                                .about
+                                    display: flex
+                                    align-items: center
+                                    justify-content: center
+                                    width: fit-content
+                                    width: -moz-fit-content
+                                    border-radius: 21px
+                                    padding: 3px 15px
+                                    background: $basecolor
+                                    font-weight: 600
+                                    text-transform: uppercase
+                                    color: #fff
+                                    min-width: 129px
+                                    font-size: 9px
+                                    height: 27px
+                                    @media only screen and ( min-width: 468px )
+                                        font-size: 10px
+                                        min-width: 140px
+                                        height: 30px
+                                    @media only screen and ( min-width: 768px )
+                                        min-width: 170px
+                                        height: 35px
+                                        font-size: 12px
+                                    @media only screen and ( min-width: 992px )
+                                        font-size: 14px
+                                        min-width: 200px
+                                        height: 38px
+                                    @media only screen and ( min-width: 1200px )
+                                        min-width: 227px
+                                        height: 42px
+                                    &::before
+                                        background: $basecolor2
+                    &.active
+                        .bnrSld
+                            .cntBx
+                                &>*
+                                    transform: translateY(0)
+                                    opacity: 1
+                                    visibility: visible
+            .carousel-indicators
+                margin: 0
+                position: absolute
+                bottom: 10px
+                left: 0
+                right: auto
+                width: 100%
+                @media only screen and ( min-width: 576px )
+                    bottom: 20px
+                @media only screen and ( min-width: 1200px )
+                    bottom: 25px
+                @media only screen and ( min-width: 1441px )
+                    bottom: 30px
+                @media only screen and ( min-width: 1551px )
+                    bottom: 34px
+                button
+                    width: 6px
+                    height: 6px
+                    border-radius: 50%
+                    background-color: rgba(0, 0, 0, 0.19)
+                    border: 0
+                    margin-left: 6px
+                    margin-right: 6px
+                    position: relative
+                    @media only screen and ( min-width: 576px )
+                        width: 7px
+                        height: 7px
+                    @media only screen and ( min-width: 1200px )
+                        width: 8px
+                        height: 8px
+                    @media only screen and ( min-width: 1441px )
+                        margin-left: 12.5px
+                        margin-right: 12.5px
+                        width: 9px
+                        height: 9px
+                    @media only screen and ( min-width: 1551px )
+                        width: 11px
+                        height: 11px
+                    &.active
+                        background-color: $white
+                        width: 13px
+                        height: 13px
+                        background: #fff
+                        &::after
+                            content: ""
+                            position: absolute
+                            left: 0
+                            top: 0
+                            right: 0
+                            bottom: 0
+                            margin: auto
+                            width: 13px
+                            height: 13px
+                            border-radius: 50%
+                            border: solid 2px $basecolor
+
+    #WhyChooseSec
+        background: #D6D6D6
+        position: relative
+        overflow: hidden
+        padding: 40px 0
+        @media only screen and ( min-width: 768px )
+            padding: 60px 0
+        @media only screen and ( min-width: 992px )
+            padding: 80px 0
+        @media only screen and ( min-width: 1200px )
+            padding: 110px 0 140px
+        .bgLog
+            position: absolute
+            left: -190px
+            top: 0
+            bottom: 0
+            margin: auto
+            width: 380px
+            opacity: 0.07
+            pointer-events: none
+        .MainHead
+            margin-bottom: 40px
+            @media only screen and ( min-width: 1441px )
+                margin-bottom: 70px
+        .flxBx
+            display: flex
+            flex-wrap: wrap
+            justify-content: center
+            .item
+                text-align: center
+                position: relative
+                width: 100%
+                margin-bottom: 15px
+                @media only screen and ( min-width: 468px )
+                    width: calc( 100% / 2 )
+                @media only screen and ( min-width: 670px )
+                    margin-bottom: 0
+                    width: calc( 100% / 3 )
+                .serviceBox
+                    overflow: hidden
+                    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)
+                    background: $white
+                    position: relative
+                    box-shadow: 4px -19px 224px #fff
+                    transform: rotate(90deg)
+                    margin: auto
+                    width: 100px
+                    height: 92px
+                    margin-bottom: 15px
+                    @media only screen and ( min-width: 768px )
+                        width: 132px
+                        height: 112px
+                        margin-bottom: 20px
+                    @media only screen and ( min-width: 992px )
+                        margin-bottom: 27px
+                        width: 152px
+                        height: 132px
+                    .hxLine
+                        width: 100%
+                        overflow: hidden
+                        position: relative
+                        padding: 15px
+                        background: #000
+                        background-size: contain
+                        background-position: center
+                        padding: 1px
+                        height: 100%
+                        @include center
+
+                        .contenBx
+                            width: 100%
+                            height: 100%
+                            margin: auto
+                            overflow: hidden
+                            background: #D6D6D6
+                            display: flex
+                            align-items: center
+                            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)
+                            padding: 4px
+                            @media only screen and ( min-width: 768px )
+                                padding: 7px
+                            @media only screen and ( min-width: 992px )
+                                padding: 10px
+                            .content
+                                width: 100%
+                                height: 100%
+                                background: #000
+                                padding: 10px
+                                clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                @media only screen and (min-width:470px)
+                                    padding: 15px
+                                .icon
+                                    transform: rotate(-90deg)
+                                    img
+                                        @media only screen and ( max-width: 992px )
+                                            height: 35px
+                                            width: 35px
+                .txtBx
+                    max-width: 325px
+                    margin: auto
+                    padding: 0 15px
+                    .title
+                        color: #000
+                        font-weight: 500
+                        margin-bottom: 10px
+                        font-size: 16px
+                        @media only screen and ( min-width: 576px )
+                            font-size: 18px
+                        @media only screen and ( min-width: 768px )
+                            font-size: 20px
+                            margin-bottom: 15px
+                        @media only screen and ( min-width: 992px )
+                            margin-bottom: 17px
+                            font-size: 22px
+                        @media only screen and ( min-width: 1200px )
+                            font-size: 24px
+                    p
+                        margin: 0
+                &.active
+                    .serviceBox
+                        .hxLine
+                            background: $basecolor
+                            .contenBx
+                                .content
+                                    background: $basecolor
+                &:not(:last-of-type)
+                    &::after
+                        content: ""
+                        position: absolute
+                        height: 1px
+                        background: #A4A4A4
+                        margin: auto
+                        @media only screen and ( min-width: 768px )
+                            width: 100px
+                            right: -20%
+                            top: 55px
+                        @media only screen and ( min-width: 1200px )
+                            width: 127px
+                            top: 69px
+                            right: -15%
+
+    #HowToBuy
+        overflow: hidden
+        padding: 40px 0 20px
+        @media only screen and ( min-width: 768px )
+            padding: 60px 0 30px
+        @media only screen and ( min-width: 992px )
+            padding: 80px 0 40px
+        @media only screen and ( min-width: 1200px )
+            padding: 117px 0 58px
+        .row
+            align-items: center
+            @media only screen and ( max-width: 992px )
+                flex-direction: column-reverse
+        .lftBx
+            @media only screen and ( min-width: 992px )
+                padding-right: 20px
+            @media only screen and ( min-width: 1200px )
+                padding-right: 80px
+            .imgBx
+                @media only screen and ( max-width: 992px )
+                    max-width: 450px
+                    margin: auto
+                @media only screen and ( max-width: 576px )
+                    max-width: 100%
+                img
+                    width: 100%
+        .ritBx
+            margin-bottom: 20px
+            @media only screen and ( min-width: 992px )
+                margin-bottom: 0
+                padding-left: 15px
+            .MainHead
+                margin-bottom: 30px
+            .blck_bx
+                .cmn_bx
+                    position: relative
+                    &:not(:last-of-type)
+                        .inner_bx
+                            &::after
+                                content: ""
+                                position: absolute
+                                border: dashed 1px #B4B4B4
+                                transition: .5s all
+                                width: 1px
+                                height: 100%
+                                top: 43px
+                                left: 59px
+                                @media only screen and ( min-width: 992px )
+                                    left: 63px
+                                @media only screen and ( min-width: 1200px )
+                                    left: 97px
+                                    top: 34px
+
+                    &.active
+                        .inner_bx
+                            .icon
+                                svg
+                                    fill: $basecolor
+                            .txt_bx
+                                .title
+                                    color: $basecolor
+                            .prgrs
+                                &::before
+                                    width: 100%
+                                    height: 100%
+
+                    .prgrs
+                        border-radius: 50%
+                        min-width: 9px
+                        height: 9px
+                        width: 9px
+                        position: relative
+                        background: $basecolor
+                        z-index: 10
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        margin-left: 20px
+                        margin-right: 20px
+                        margin-top: 40px
+                        @media only screen and ( min-width: 1200px )
+                            margin-left: 45px
+                            margin-right: 37px
+                            margin-top: 30px
+                    .inner_bx
+                        position: relative
+                        display: flex
+                        transition: .6s all
+                        padding-bottom: 20px
+                        @media only screen and ( min-width: 992px )
+                            padding-bottom: 30px
+                        @media only screen and ( min-width: 1441px )
+                            padding-bottom: 45px
+                        .icon
+                            margin-top: 30px
+                            svg
+                                fill: #000
+                                transition: .4s all
+                                width: 35px
+                                @media only screen and ( min-width: 992px )
+                                    width: 40px
+                                @media only screen and ( min-width: 1200px )
+                                    width: 48px
+                                .cls-2
+                                    clip-path: url(#clip-path)
+
+                        .txt_bx
+                            .tag
+                                border-radius: 5px
+                                background: #000
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                color: #fff
+                                font-weight: 600
+                                margin-bottom: 8px
+                                width: 60px
+                                height: 20px
+                                font-size: 12px
+                                @media only screen and ( min-width: 992px )
+                                    width: 65px
+                                    height: 23px
+                                    font-size: 14px
+                            .title
+                                color: #0E0E27
+                                font-weight: 600
+                                font-size: 16px
+                                line-height: 25px
+                                margin-bottom: 10px
+                                text-transform: initial
+                                transition: .4s all
+                                @media only screen and ( min-width: 992px )
+                                    font-size: 17px
+                                    line-height: 26px
+                                @media only screen and ( min-width: 1441px )
+                                    font-size: 20px
+                                    line-height: 29px
+                            P
+                                    color: #606071
+                                    margin-bottom: 0
+
+    #contactSec
+        padding: 20px 0 40px
+        @media only screen and ( min-width: 768px )
+            padding: 30px 0 60px
+        @media only screen and ( min-width: 992px )
+            padding: 40px 0 80px
+        @media only screen and ( min-width: 1200px )
+            padding: 58px 0 128px
+        .flxBx
+            display: flex
+            flex-wrap: wrap
+            @media only screen and ( max-width: 992px )
+                flex-direction: column-reverse
+            .lftB
+                padding: 0 15px
+                @media only screen and ( min-width: 992px )
+                    padding-right: 40px
+                    width: calc( 100% - 400px )
+                @media only screen and ( min-width: 1200px )
+                    padding-right: 80px
+                    width: calc( 100% - 495px )
+                .form-group
+                    margin-bottom: 10px
+                    @media only screen and ( min-width: 576px )
+                        margin-bottom: 20px
+                .sendBtn
+                    width: 177px
+                    height: 42px
+                    border-radius: 21px
+                    background: $basecolor
+                    font-size: 14px
+                    color: #fff
+                    font-weight: 600
+                    text-transform: uppercase
+                    margin-top: 15px
+                    @media only screen and ( max-width: 576px )
+                        width: 100%
+                    @media only screen and ( min-width: 768px )
+                        margin-top: 25px
+                    @media only screen and ( min-width: 992px )
+                        margin-top: 35px
+                    &::before
+                        background: $basecolor2
+            .ritB
+                position: relative
+                width: 100%
+                padding: 15px
+                @media only screen and ( min-width: 992px )
+                    padding: 0
+                    width: 400px
+                @media only screen and ( min-width: 1200px )
+                    width: 495px
+                &::before
+                    content: ""
+                    position: absolute
+                    background: url(../images/crown.svg) no-repeat
+                    background-size: contain
+                    z-index: 0
+                    transform: rotate(-7deg)
+                    width: 75px
+                    height: 60px
+                    left: -19px
+                    top: -23px
+                    @media only screen and ( min-width: 992px )
+                        width: 82px
+                        height: 78px
+                        left: -52px
+                        top: -47px
+                .inFbx
+                    position: relative
+                    z-index: 5
+                    background: #000
+                    border-radius: 24px 0 0 0
+                    padding: 35px 30px
+                    @media only screen and ( min-width: 768px )
+                        padding: 47px 31px 60px 50px
+                    .bglogo
+                        position: absolute
+                        width: 182px
+                        height: fit-content
+                        height: -moz-fit-content
+                        opacity: 0.07
+                        top: 0
+                        bottom: 0
+                        margin: auto
+                        right: -91px
+                        pointer-events: none
+                    .title
+                        color: #fff
+                        margin-bottom: 8px
+                        font: 600 22px/32px $fontstack1
+                        @media only screen and (min-width: 576px)
+                            font: 600 24px/34px $fontstack1
+                        @media only screen and (min-width: 768px)
+                            font: 600 26px/36px $fontstack1
+                        @media only screen and (min-width: 992px)
+                            font: 600 28px/38px $fontstack1
+                        @media only screen and (min-width: 1200px)
+                            font: 600 30px/40px $fontstack1
+                        @media only screen and (min-width: 1551px)
+                            font: 600 35px/45px $fontstack1
+                    p
+                        color: #fff
+                    .cBx
+                        &:not(:last-of-type)
+                            margin-bottom: 25px
+                        .label
+                            font-size: 14px
+                            color: #E7151F
+                            font-weight: 500
+                            margin-bottom: 4px
+                        a
+                            display: block
+                            line-height: normal
+                            color: #fff
+                            font-weight: 600
+                            font-size: 18px
+                            transition: .4s all
+                            @media only screen and ( min-width: 992px )
+                                font-size: 20px
+                            @media only screen and ( min-width: 1200px )
+                                font-size: 24px
+                            &:hover
+                                color: $basecolor
+
+#AboutSec
+    padding: 40px 0
+    @media only screen and ( min-width: 992px )
+        padding: 60px 0
+    @media only screen and ( min-width: 1441px )
+        padding: 100px 0
+
+    .row
+        align-items: center
+        @media only screen and ( max-width: 992px )
+            flex-direction: column-reverse
+    .lftB
+        @media only screen and ( min-width: 576px )
+            padding-right: 15px
+        .imgBx
+            @media only screen and ( max-width: 992px )
+                max-width: 400px
+                margin: auto
+            @media only screen and ( max-width: 576px )
+                max-width: 100%
+            img
+                width: 100%
+    .ritBx
+        @media only screen and ( max-width: 992px )
+            margin-bottom: 20px
+        .flxBx
+            @media only screen and ( min-width: 992px )
+                display: flex
+                align-items: center
+            .ltB
+                @media only screen and ( max-width: 992px )
+                    text-align: center
+                @media only screen and ( min-width: 992px )
+                    width: calc( 100% - 152px )
+                    padding-right: 35px
+                @media only screen and ( min-width: 1200px )
+                    padding-right: 63px
+                p
+                    margin-bottom: 20px
+                .vmore
+                    display: flex
+                    align-items: center
+                    font-size: 14px
+                    text-transform: uppercase
+                    font-weight: 500
+                    margin-top: 30px
+                    transition: .4s all
+                    @media only screen and ( max-width: 992px )
+                        justify-content: center
+                    .icon
+                        margin-left: 10px
+                        display: flex
+                    &:hover
+                        color: $basecolor
+            .rtB
+                margin-top: 20px
+                @media only screen and ( min-width: 992px )
+                    margin-top: 0
+                    width: 152px
+                .flxGrid
+                    @media only screen and ( max-width: 992px )
+                        display: flex
+                        flex-wrap: wrap
+                    .item
+                        transition: .4s all
+                        width: calc( 100% / 4 )
+                        @media only screen and ( max-width: 576px )
+                            width: calc( 100% / 2 )
+                            margin-bottom: 15px
+                        @media only screen and ( max-width: 992px )
+                            padding: 0 15px
+                            text-align: center
+                        @media only screen and ( min-width: 992px )
+                            border-bottom: solid 1px #EEEEEE
+                            padding: 15px 10px 15px 20px
+                        &:hover
+                            background: #000
+                            .flb
+                                .count
+                                    color: #fff
+                                .pls
+                                    color: $basecolor
+                            .txt
+                                color: #fff
+
+                        .flb
+                            display: flex
+                            align-items: center
+                            @media only screen and ( max-width: 992px )
+                                justify-content: center
+                            &>*
+                                font-weight: 600
+                                font-size: 22px
+                                @media only screen and ( min-width: 576px )
+                                    font-size: 24px
+                                @media only screen and ( min-width: 768px )
+                                    font-size: 28px
+                                @media only screen and ( min-width: 992px )
+                                    font-size: 32px
+                                @media only screen and ( min-width: 1441px )
+                                    font-size: 40px
+                            .count
+                                color: #000
+                            .pls
+                                color: $basecolor
+                        .txt
+                            font-size: 14px
+                            color: #383838
+                            font-weight: 500
+
+    .flxWrap
+        margin-top: 20px
+        @media only screen and ( min-width: 576px )
+            display: flex
+            flex-wrap: wrap
+            margin: 0 -10px
+            margin-top: 20px
+        @media only screen and ( min-width: 768px )
+            margin-top: 40px
+        @media only screen and ( min-width: 992px )
+            margin-top: 60px
+            margin: 0 -15px
+        @media only screen and ( min-width: 1200px )
+            margin: 0 -21px
+            margin-top: 80px
+        .itemBx
+            width: 100%
+            margin-bottom: 15px
+            @media only screen and ( min-width: 576px )
+                margin-bottom: 0
+                width: calc( 100% / 2 )
+                padding: 0 10px
+            @media only screen and ( min-width: 992px )
+                padding: 0 15px
+            @media only screen and ( min-width: 1200px )
+                padding: 0 21px
+        .item
+            position: relative
+            min-height: 288px
+            display: flex
+            align-items: center
+            justify-content: center
+            &>*
+                position: relative
+                z-index: 5
+            .bgImg
+                position: absolute
+                left: 0
+                top: 0
+                height: 100%
+                width: 100%
+                z-index: 1
+                img
+                    width: 100%
+                    height: 100%
+                    object-fit: cover
+            .txtBx
+                padding: 10px 20px
+                @media only screen and ( min-width: 992px )
+                    padding: 10px 40px
+                @media only screen and ( min-width: 1200px )
+                    padding: 10px 70px
+                .title
+                    font-weight: 500
+                    color: #fff
+                    margin-bottom: 15px
+                    font-size: 18px
+                    @media only screen and ( min-width: 768px )
+                        font-size: 20px
+                    @media only screen and ( min-width: 992px )
+                        font-size: 22px
+                    @media only screen and ( min-width: 1200px )
+                        font-size: 24px
+                p
+                    color: #fff

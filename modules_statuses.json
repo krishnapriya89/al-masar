@@ -1,4 +1,5 @@
 {
     "Admin": true,
-    "HomeBannerRequest": true
+    "HomeBannerRequest": true,
+    "Frontend": true
 }

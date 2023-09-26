@@ -1,0 +1,128 @@
+// PRODUCTS_PAGE
+/************** *********** **************/
+/************* PRODUCTS_PAGE *************/
+/************** *********** **************/
+
+.ProPage
+    #proListing
+        padding: 0 0 40px
+        @media only screen and ( min-width: 576px )
+            padding: 0 0 50px
+        @media only screen and ( min-width: 600px )
+            padding: 0 0 70px
+        .all_products
+            padding: 20px 0
+            @media only screen and ( min-width: 600px )
+                display: flex
+                align-items: center
+                justify-content: space-between
+            .Stitle
+                color: #000
+                font-weight: 600
+                font-size: 16px
+                margin-bottom: 15px
+                @media only screen and ( min-width: 600px )
+                    margin-bottom: 0
+                @media only screen and ( min-width: 992px )
+                    font-size: 18px
+                @media only screen and ( min-width: 1200px )
+                    font-size: 20px
+            .bdfgRtBx
+                @media only screen and ( min-width: 600px )
+                    display: flex
+                    align-items: center
+                .ltb
+                    display: flex
+                    align-items: center
+                    margin-bottom: 15px
+                    @media only screen and ( min-width: 600px )
+                        margin-bottom: 0
+                .SortBy, .display
+                    position: relative
+                    z-index: 2
+                    .label
+                        color: #272525
+                        font-weight: 400
+                        margin-right: 24px
+                        font-size: 14px
+                        @media only screen and ( min-width: 1200px )
+                            font-size: 16px
+                        @media only screen and ( min-width: 1441px )
+                            font-size: 18px
+                    .select2
+                        border: none
+                        width: 100% !important
+                        background: #FCFCFC
+                        height: 38px
+                        border-radius: 0
+                        @media only screen and ( min-width: 992px )
+                            height: 43px
+                    &.SortBy
+                        width: 40%
+                        @media only screen and ( min-width: 600px )
+                            width: 105px
+                        .select2
+                            background: #E9E9E9
+                            border-radius: 7px
+                            &.select2-container--open
+                                background: #E7151F
+                                .select2-selection__rendered
+                                    color: #fff !important
+                                .select2-selection
+                                    &::after
+                                        filter: grayscale(1) brightness(23) invert(15)
+                    &.display
+                        margin-left: 11px
+                        width: calc( 100% - 40% )
+                        @media only screen and ( min-width: 600px )
+                            width: 190px
+                        @media only screen and ( min-width: 992px )
+                            width: 252px
+                        .select2
+                            .select2-selection
+                                &::after
+                                    display: none
+                .clear
+                    border-radius: 22px
+                    background: #000
+                    color: #fff
+                    font-weight: 600
+                    text-transform: uppercase
+                    height: 35px
+                    font-size: 12px
+                    width: 100%
+                    @media only screen and ( min-width: 600px )
+                        width: 88px
+                        margin-left: 11px
+                        font-size: 13px
+                    @media only screen and ( min-width: 992px )
+                        height: 43px
+                        font-size: 14px
+
+        .ProGrid
+            @include display
+            margin: 0 -5px
+            @media only screen and ( min-width: 768px )
+                margin: 0 -6px
+            @media only screen and ( min-width: 992px )
+            @media only screen and ( min-width: 1200px )
+                margin: 0 -14px
+            .item
+                width: 100%
+                padding: 0 5px
+                margin-bottom: 10px
+                @media only screen and ( min-width: 468px )
+                    width: calc(100% / 2)
+                @media only screen and ( min-width: 700px )
+                    width: calc(100% / 3)
+                    padding: 0 6px
+                @media only screen and ( min-width: 992px )
+                    width: calc(100% / 3)
+                @media only screen and ( min-width: 1200px )
+                    padding: 0 14px
+                    margin-bottom: 24px
+                    width: calc(100% / 4)
+            .proBx
+                &:hover
+                    box-shadow: 0 25px 25px -20px rgba(0, 0, 0, 0.6)
+
