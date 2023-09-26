@@ -16,7 +16,6 @@ use Modules\Admin\Http\Controllers\HowToBuyController;
 use Modules\Admin\Http\Controllers\PrivacyPolicyController;
 use Modules\Admin\Http\Controllers\TermsAndConditionsController;
 use Modules\Admin\Http\Controllers\WhyChooseController;
-use Modules\Admin\Http\Controllers\AdminConfigController;
 use Modules\Admin\Http\Controllers\ProductController;
 use Modules\Admin\Http\Controllers\ProductSubCategoryController;
 use Modules\Admin\Http\Controllers\ProductMainCategoryController;
