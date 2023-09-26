@@ -8,69 +8,30 @@
     <section id="MainSlider">
         <div id="bannerCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-slide="1">
+                @if($home_banners->isNotEmpty())
+                @foreach ($home_banners as $banner)
+                <div class="carousel-item {{$loop->first ? 'active' :''}}" data-bs-slide="{{$loop->iteration}}">
                     <div class="bnrSld">
                         <picture>
-                            <source media="(min-width: 576px)" srcset="assets/images/slider1.png"
-                                data-srcset="assets/images/slider1.png 2x" />
-                            <img alt="A lazy image" class="lazy bnrBg" src="assets/images/slider1mob.png"
-                                data-src="assets/images/slider1mob.png" />
+                            <source media="(min-width: 576px)" srcset="{{$banner->image_value}}"
+                                data-srcset="{{$banner->image_value}}" />
+                            <img alt="A lazy image" class="lazy bnrBg" src="{{$banner->image_value}}"
+                                data-src="{{$banner->image_value}}" />
                         </picture>
                         <div class="cntBx">
                             <div class="container">
                                 <div class="tleWrp">
-                                    <div class="subT">Tech Waves, Retail Solutions</div>
-                                    <h1 class="mTle">Ride with<br>
-                                        Al Masar Al Saree</h1>
-                                    <a href="javascript:void(0);" class="about hoveranim"><span>Become a
-                                            Retailer</span></a>
+                                    <div class="subT">{{@$banner->sub_title}}</div>
+                                    <h1 class="mTle">{!!@$banner->title!!}</h1>
+                                    <a href="javascript:void(0);" class="about hoveranim"><span>{{ @$banner->button_name}}</span></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item " data-bs-slide="2">
-                    <div class="bnrSld">
-                        <picture>
-                            <source media="(min-width: 576px)" srcset="assets/images/slider1.png"
-                                data-srcset="assets/images/slider1.png 2x" />
-                            <img alt="A lazy image" class="lazy bnrBg" src="assets/images/slider1mob.png"
-                                data-src="assets/images/slider1mob.png" />
-                        </picture>
-                        <div class="cntBx">
-                            <div class="container">
-                                <div class="tleWrp">
-                                    <div class="subT">Tech Waves, Retail Solutions</div>
-                                    <h1 class="mTle">Ride with<br>
-                                        Al Masar Al Saree</h1>
-                                    <a href="javascript:void(0);" class="about hoveranim"><span>Become a
-                                            Retailer</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item " data-bs-slide="3">
-                    <div class="bnrSld">
-                        <picture>
-                            <source media="(min-width: 576px)" srcset="assets/images/slider1.png"
-                                data-srcset="assets/images/slider1.png 2x" />
-                            <img alt="A lazy image" class="lazy bnrBg" src="assets/images/slider1mob.png"
-                                data-src="assets/images/slider1mob.png" />
-                        </picture>
-                        <div class="cntBx">
-                            <div class="container">
-                                <div class="tleWrp">
-                                    <div class="subT">Tech Waves, Retail Solutions</div>
-                                    <h1 class="mTle">Ride with<br>
-                                        Al Masar Al Saree</h1>
-                                    <a href="javascript:void(0);" class="about hoveranim"><span>Become a
-                                            Retailer</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
+                @endif
             </div>
             <div class="carousel-indicators">
                 <div class="container">
@@ -88,35 +49,28 @@
     <section id="AboutSec">
         <div class="container">
             <div class="MainHead center">
-                <div class="Tagline">About Us</div>
-                <div class="Head">A Wholesale Distributor of Electronic<br>
-                    Gadgets in the UAE.</div>
+                <div class="Tagline">{{@$about_us_common->sub_title}}</div>
+                <div class="Head">{!!@$about_us_common->title!!}</div>
             </div>
             <div class="row">
                 <div class="col-lg-5">
                     <div class="lftB">
+
+                        @if(@$about_us_common->image)
                         <div class="imgBx">
-                            <img src="assets/images/a1.jpg" alt="">
+                            <img src="{{ Storage::disk('public')->exists($about_us_common->image) ? Storage::url($about_us_common->image):asset($about_us_common->image)}}" alt="">
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="ritBx">
                         <div class="flxBx">
                             <div class="ltB">
-                                <p>Welcome to Al Masar Al Saree, your trusted partner in wholesale distribution of
-                                    cutting-edge electronic gadgets in the United Arab Emirates. With a relentless
-                                    commitment to quality and innovation, we are dedicated to fueling the success of
-                                    retailers by providing them with a diverse range of high-demand products.</p>
-                                <p>At Al Masar Al Saree, we understand the dynamic nature of the retail industry and the
-                                    pivotal role technology plays in shaping its future. Our mission is to bridge the
-                                    gap between manufacturers and retailers, offering a wide array of smartphones,
-                                    laptops, smartwatches, and more, all available in substantial quantities to meet
-                                    your business needs.</p>
-
-                                <a href="#!" class="vmore">LEARN MORE
+                                <p>{!!@$about_us_common->description!!}</p>
+                                <a href="#!" class="vmore">{{@$about_us_common->home_page_button_name}}
                                     <div class="icon">
-                                        <img src="assets/images/arwR.svg" alt="">
+                                        <img src="{{asset('frontend/images/arwR.svg')}}" alt="">
                                     </div>
                                 </a>
                             </div>
@@ -124,31 +78,31 @@
                                 <div class="flxGrid">
                                     <div class="item active">
                                         <div class="flb">
-                                            <div class="count" data-count="13">0</div>
+                                            <div class="count" data-count="{{@$about_us_common->section_one_value_one}}">0</div>
                                             <div class="pls">+</div>
                                         </div>
-                                        <div class="txt">Years Experience</div>
+                                        <div class="txt">{{@$about_us_common->section_one_title_one}}</div>
                                     </div>
                                     <div class="item">
                                         <div class="flb">
-                                            <div class="count" data-count="1000">0</div>
+                                            <div class="count" data-count="{{@$about_us_common->section_one_value_two}}">0</div>
                                             <div class="pls">+</div>
                                         </div>
-                                        <div class="txt">Clients</div>
+                                        <div class="txt">{{@$about_us_common->section_one_title_two}}</div>
                                     </div>
                                     <div class="item">
                                         <div class="flb">
-                                            <div class="count" data-count="50">0</div>
+                                            <div class="count" data-count="{{@$about_us_common->section_one_value_three}}">0</div>
                                             <div class="pls">+</div>
                                         </div>
-                                        <div class="txt">Products</div>
+                                        <div class="txt">{{@$about_us_common->section_one_title_three}}</div>
                                     </div>
                                     <div class="item">
                                         <div class="flb">
-                                            <div class="count" data-count="14">0</div>
+                                            <div class="count" data-count="{{@$about_us_common->section_one_value_four}}">0</div>
                                             <div class="pls">+</div>
                                         </div>
-                                        <div class="txt">Countries</div>
+                                        <div class="txt">{{@$about_us_common->section_one_title_four}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -160,27 +114,26 @@
                 <div class="itemBx">
                     <div class="item">
                         <div class="bgImg">
-                            <img src="assets/images/v.jpg" alt="">
+                            @if(@$about_us_common->vision_bg_image)
+                            <img src="{{Storage::disk('public')->exists($about_us_common->vision_bg_image) ? Storage::url($about_us_common->vision_bg_image):asset($about_us_common->vision_bg_image)}}" alt="">
+                            @endif
                         </div>
                         <div class="txtBx">
-                            <div class="title">Vision</div>
-                            <p>Our vision is to be the premier wholesale distributor of electronic gadgets, recognized
-                                for
-                                our
-                                unwavering commitment to excellence, reliability, and innovation.</p>
+                            <div class="title">{{@$about_us_common->vision_title}}</div>
+                            <p>{!!@$about_us_common->vision_description!!}</p>
                         </div>
                     </div>
                 </div>
                 <div class="itemBx">
                     <div class="item">
                         <div class="bgImg">
-                            <img src="assets/images/m.jpg" alt="">
+                            @if(@$about_us_common->mission_bg_image)
+                            <img src="{{Storage::disk('public')->exists($about_us_common->mission_bg_image) ? Storage::url($about_us_common->mission_bg_image):asset($about_us_common->mission_bg_image)}}" alt="">
+                            @endif
                         </div>
                         <div class="txtBx">
-                            <div class="title">Mission</div>
-                            <p>At Al Masar Al Sarie, our mission is to empower retailers with the latest and most
-                                innovative
-                                electronic gadgets, providing them with a competitive edge in the market. </p>
+                            <div class="title">{{@$about_us_common->mission_title}}</div>
+                            <p>{!!@$about_us_common->mission_description!!}</p>
                         </div>
                     </div>
                 </div>
@@ -190,12 +143,12 @@
 
     <section id="WhyChooseSec">
         <div class="bgLog">
-            <img src="assets/images/log.svg" alt="">
+            <img src="{{asset('frontend/images/log.svg')}}" alt="">
         </div>
         <div class="container">
             <div class="MainHead center">
-                <div class="Head">Why Choose Al Masar Al Saree</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Qua ex cognitione facilior facta est</p>
+                <div class="Head">{{@$why_choose->title}}</div>
+                <p>{!!@$why_choose->sub_title!!}</p>
             </div>
             <div class="flxBx">
                 <div class="item active">
@@ -204,17 +157,17 @@
                             <div class="contenBx">
                                 <div class="content">
                                     <div class="icon">
-                                        <img src="assets/images/w1.svg" alt="">
+                                        @if(@$why_choose->section_one_image)
+                                        <img src="{{Storage::disk('public')->exists($why_choose->section_one_image) ? Storage::url($why_choose->section_one_image):asset($why_choose->section_one_image)}}" alt="">
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="txtBx">
-                        <div class="title">Best Prices In the Market</div>
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                            invidunt
-                            ut labore </p>
+                        <div class="title">{{@$why_choose->section_one_title}}</div>
+                        <p>{!!@$why_choose->section_one_description!!}</p>
                     </div>
                 </div>
                 <div class="item">
@@ -223,17 +176,17 @@
                             <div class="contenBx">
                                 <div class="content">
                                     <div class="icon">
-                                        <img src="assets/images/w2.svg" alt="">
+                                        @if(@$why_choose->section_two_image)
+                                        <img src="{{Storage::disk('public')->exists($why_choose->section_two_image) ? Storage::url($why_choose->section_two_image):asset($why_choose->section_one_image)}}" alt="">
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="txtBx">
-                        <div class="title">Secured Transactions</div>
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                            invidunt
-                            ut labore
+                        <div class="title">{{@$why_choose->section_two_title}}</div>
+                        <p>{!!@$why_choose->section_two_description!!}
                         </p>
                     </div>
                 </div>
@@ -243,17 +196,17 @@
                             <div class="contenBx">
                                 <div class="content">
                                     <div class="icon">
-                                        <img src="assets/images/w3.svg" alt="">
+                                        @if(@$why_choose->section_three_image)
+                                        <img src="{{Storage::disk('public')->exists($why_choose->section_three_image) ? Storage::url($why_choose->section_three_image):asset($why_choose->section_three_image)}}" alt="">
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="txtBx">
-                        <div class="title">Fastest Delivery</div>
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                            invidunt
-                            ut labore </p>
+                        <div class="title">{{@$why_choose->section_three_title}}</div>
+                        <p>{!!@$why_choose->section_three_description!!}</p>
                     </div>
                 </div>
             </div>
@@ -266,15 +219,17 @@
                 <div class="col-lg-6">
                     <div class="lftBx">
                         <div class="imgBx">
-                            <img src="assets/images/h1.jpg" alt="">
+                            @if(@$how_to_buy->image)
+                            <img src="{{Storage::disk('public')->exists($how_to_buy->image) ? Storage::url($how_to_buy->image):asset($how_to_buy->image)}}" alt="">
+                            @endif
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="ritBx">
                         <div class="MainHead">
-                            <div class="Head">How to Buy From Us</div>
-                            <p>It's an easy process to purchase products from us.</p>
+                            <div class="Head">{{@$how_to_buy->title}}</div>
+                            <p>{!!@$how_to_buy->sub_title!!}</p>
                         </div>
                         <div class="blck_bx">
                             <div class="cmn_bx active">
@@ -310,9 +265,8 @@
                                     <div class="prgrs"></div>
                                     <div class="txt_bx">
                                         <div class="tag">Step 01</div>
-                                        <div class="title">Get Registered</div>
-                                        <p>Quisque Lorem Tortor Fringilla Sed, Vestibulum Id, Eleifend Justo Bibendum
-                                            Sapien Massaurpis Faucibus.</p>
+                                        <div class="title">{{@$how_to_buy->section_one_title}}</div>
+                                        <p>{!!@$how_to_buy->section_one_description!!}</p>
                                     </div>
                                 </div>
                             </div>
@@ -432,9 +386,8 @@
                                     <div class="prgrs"></div>
                                     <div class="txt_bx">
                                         <div class="tag">Step 02</div>
-                                        <div class="title">Get Your Quote</div>
-                                        <p>Quisque Lorem Tortor Fringilla Sed, Vestibulum Id, Eleifend Justo Bibendum
-                                            Sapien Massaurpis Faucibus.
+                                        <div class="title">{{@$how_to_buy->section_two_title}}</div>
+                                        <p>{!!@$how_to_buy->section_two_description!!}
                                         </p>
                                     </div>
                                 </div>
@@ -471,9 +424,8 @@
                                     <div class="prgrs"></div>
                                     <div class="txt_bx">
                                         <div class="tag">Step 03</div>
-                                        <div class="title">Get Your Products</div>
-                                        <p>Quisque Lorem Tortor Fringilla Sed, Vestibulum Id, Eleifend Justo Bibendum
-                                            Sapien Massaurpis Faucibus.
+                                        <div class="title">{{@$how_to_buy->section_three_title}}</div>
+                                        <p>{!!@$how_to_buy->section_three_description!!}
                                         </p>
                                     </div>
                                 </div>
@@ -490,7 +442,7 @@
             <div class="flxBx">
                 <div class="lftB">
                     <div class="MainHead">
-                        <div class="Head">Request More Info</div>
+                        <div class="Head">{{@$contact->application_form_title}}</div>
                     </div>
                     <div class="formGrp">
                         <div class="row">
@@ -531,17 +483,17 @@
                 <div class="ritB">
                     <div class="inFbx">
                         <div class="bglogo">
-                            <img src="assets/images/wlogo.svg" alt="">
+                            <img src="{{asset('frontend/images/wlogo.svg')}}" alt="">
                         </div>
-                        <div class="title">Get In Touch with Us</div>
-                        <p>You can either fill this form to contact us or contact directly through the details below</p>
+                        <div class="title">{{@$contact->title}}</div>
+                        <p>{!!@$contact->description!!}</p>
                         <div class="cBx">
                             <div class="label">Call Now</div>
-                            <a href="tel:+971 50475320" class="call">+971 50475320</a>
+                            <a href="tel:{{@$contact->phone}}" class="call">{{@$contact->phone}}</a>
                         </div>
                         <div class="cBx">
                             <div class="label">Mail Us</div>
-                            <a href="mailto:sales@almasaralsaree.com" class="mail">sales@almasaralsaree.com</a>
+                            <a href="mailto:{{@$contact->email}}" class="mail">{{@$contact->email}}</a>
                         </div>
                     </div>
                 </div>

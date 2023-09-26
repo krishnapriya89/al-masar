@@ -32,6 +32,8 @@ class HowToBuyController extends Controller
     {
         $request->validate([
             'title'=>'required',
+            'image'        => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048|
+                    dimensions:min_width=1008,min_height=1072,max_width=1008,max_height=1072',
         ]);
         $common_content = HowToBuy::find($id);
         $common_content->title = $request->title;

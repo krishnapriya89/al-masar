@@ -31,6 +31,7 @@ class WhyChooseController extends Controller
     {
         $request->validate([
             'title'=>'required',
+           
         ]);
         $common_content = WhyChoose::find($id);
         $common_content->title = $request->title;

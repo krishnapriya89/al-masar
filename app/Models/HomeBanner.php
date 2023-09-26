@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\ImageTrait;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class HomeBanner extends Model
 {
@@ -20,5 +21,13 @@ class HomeBanner extends Model
 
     public function scopeActive($query){
         return $query->where('status', 1);
+    }
+
+    public function getImageValueAttribute()
+    {
+        if($this->image && Storage::disk('public')->exists($this->image))
+            return Storage::url($this->image);
+        else
+            return asset('frontend/images/default-img.png');
     }
 }

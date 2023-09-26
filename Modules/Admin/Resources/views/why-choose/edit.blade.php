@@ -135,8 +135,8 @@
                                             <input type="file" class="custom-file-input file-preview" id="section_one_image"
                                                    name="section_one_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        804 × 493
-                                        <div class="pt-3 file-holder"> </div>
+
+                                        <div class="pt-3 file-holder" style="background-color: #8080801d;"> </div>
                                     </div>
                                     @error('section_one_image')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -145,15 +145,15 @@
                                 <div class="col-md-12 image-container-div">
                                     @if($common_content->section_one_image != '' || $common_content->section_one_image != NULL)
                                     <div class="form-group" style="display:inline-block;margin-right:10px;">
-                                        <div class="image-container">
+                                        <div class="image-container" style="background-color: #8080801d;">
                                             <img src="{{ Storage::disk('public')->exists($common_content->section_one_image) ? Storage::url($common_content->section_one_image) : asset($common_content->section_one_image) }}"
                                                  alt="Uploaded Image" id="uploadedImage" class="uploaded-image">
 
                                         </div>
                                     </div>
-                                    <div style="display:inline-block;">
+                                    {{-- <div style="display:inline-block;">
                                         <a href="javascript:void(0)"><i class="fa fa-times text-red deleteImg" data-model="WhyChoose" data-column="section_one_image" data-id="{{$common_content->id}}"></i></a>
-                                    </div>
+                                    </div> --}}
                                 @endif
                                 </div>
                             </div>
@@ -166,8 +166,8 @@
                                             <input type="file" class="custom-file-input file-preview" id="banner_image"
                                                    name="section_two_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        1575 × 379
-                                        <div class="pt-3 file-holder"> </div>
+
+                                        <div class="pt-3 file-holder" style="background-color: #8080801d;"> </div>
                                     </div>
                                     @error('section_two_image')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -176,15 +176,15 @@
                                 <div class="col-md-12 image-container-div">
                                     @if($common_content->section_two_image != '' || $common_content->section_two_image != NULL)
                                     <div class="form-group" style="display:inline-block;margin-right:10px;">
-                                        <div class="image-container">
-                                            <img src="{{ Storage::disk('public')->exists($common_content->section_two_image) ? Storage::url($common_content->section_two_image) : asset($common_content->banner_image) }}"
+                                        <div class="image-container"  style="background-color: #8080801d;">
+                                            <img src="{{ Storage::disk('public')->exists($common_content->section_two_image) ? Storage::url($common_content->section_two_image) : asset($common_content->section_two_image) }}"
                                                  alt="Uploaded Image" id="uploadedImage" class="uploaded-image">
 
                                         </div>
                                     </div>
-                                    <div style="display:inline-block;">
+                                    {{-- <div style="display:inline-block;">
                                         <a href="javascript:void(0)"><i class="fa fa-times text-red deleteImg" data-model="WhyChoose" data-column="section_two_image" data-id="{{$common_content->id}}"></i></a>
-                                    </div>
+                                    </div> --}}
                                 @endif
                                 </div>
                             </div>
@@ -197,8 +197,8 @@
                                             <input type="file" class="custom-file-input file-preview" id="section_three_image"
                                                    name="section_three_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        1575 × 379
-                                        <div class="pt-3 file-holder"> </div>
+
+                                        <div class="pt-3 file-holder" style="background-color: #8080801d;"> </div>
                                     </div>
                                     @error('section_three_image')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -207,15 +207,15 @@
                                 <div class="col-md-12 image-container-div">
                                     @if($common_content->section_three_image != '' || $common_content->section_three_image != NULL)
                                     <div class="form-group" style="display:inline-block;margin-right:10px;">
-                                        <div class="image-container">
+                                        <div class="image-container" style="background-color: #8080801d;">
                                             <img src="{{ Storage::disk('public')->exists($common_content->section_three_image) ? Storage::url($common_content->section_three_image) : asset($common_content->section_three_image) }}"
                                                  alt="Uploaded Image" id="uploadedImage" class="uploaded-image">
 
                                         </div>
                                     </div>
-                                    <div style="display:inline-block;">
+                                    {{-- <div style="display:inline-block;">
                                         <a href="javascript:void(0)"><i class="fa fa-times text-red deleteImg" data-model="WhyChoose" data-column="section_three_image" data-id="{{$common_content->id}}"></i></a>
-                                    </div>
+                                    </div> --}}
                                 @endif
                                 </div>
                             </div>

@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ContactSeeder::class);
         $this->call(PrivacyPolicySeeder::class);
         $this->call(TermsAndConditionSeeder::class);
+        $this->call(SiteCommonContentSeeder::class);
     }
 }

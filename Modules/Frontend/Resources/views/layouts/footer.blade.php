@@ -5,7 +5,7 @@
                 <div class="Row">
                     <div class="col-lg-4">
                         <div class="cmnBx pr-58">
-                            <a href="index1.php" class="logo">
+                            <a href="{{ route('home')}}" class="logo">
                                 <svg viewBox="0 0 275.731 78">
                                     <g id="Group_438" data-name="Group 438" transform="translate(-109.238 315)">
                                         <g id="Group_435" data-name="Group 435" transform="translate(109.238 -315)">
@@ -217,8 +217,9 @@
                                     </g>
                                 </svg>
                             </a>
-                            <p>Welcome to Al Masar Al Saree, your trusted partner in wholesale distribution of
-                                cutting-edge electronic gadgets in the United Arab Emirates.</p>
+                            @if(@$site_common_content->footer_description)
+                            <p>{!!@$site_common_content->footer_description!!}</p>
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-6">
@@ -234,20 +235,25 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="cmnBx pr-30">
+                            @if(@$site_common_content->address)
                             <div class="fTitle">Address</div>
-                            <p>P114 Sheikha Maryam Building - 9b - OFFICE 107 Al Maktoum Rd - Dubai - United Arab
-                                Emirates</p>
+                            <p>{!!@$site_common_content->address!!}</p>
+                            @endif
                             <div class="social">
+                                @if(@$site_common_content->facebook_link|| @$site_common_content->twitter_link||@$site_common_content->instagram_link||@$site_common_content->linkedIn_link)
                                 <div class="ttle">Follow Us</div>
                                 <div class="socialFlx">
-                                    <a href="#!">
+                                    @if(@$site_common_content->facebook_link)
+                                    <a href="{{@$site_common_content->facebook_link}}">
                                         <svg viewBox="0 0 9.91 17.46">
                                             <path id="facebook"
                                                 d="M7.554,4.321c.024-.027.135-.115.573-.115H9.563a.848.848,0,0,0,.847-.847V.85A.848.848,0,0,0,9.564,0L7.432,0A4.388,4.388,0,0,0,4.2,1.255a4.608,4.608,0,0,0-1.218,3.3V5.91H1.347A.848.848,0,0,0,.5,6.757v2.7a.848.848,0,0,0,.847.847H2.978v6.307a.848.848,0,0,0,.847.847h2.8a.848.848,0,0,0,.847-.847V10.306H9.462a.848.848,0,0,0,.847-.847v-2.7a.85.85,0,0,0-.436-.741.861.861,0,0,0-.419-.106H7.468V4.841c0-.348.047-.475.086-.519Zm0,0"
                                                 transform="translate(-0.5 0)" />
                                         </svg>
                                     </a>
-                                    <a href="#!">
+                                    @endif
+                                    @if(@$site_common_content->instagram_link)
+                                    <a href="{{ @$site_common_content->instagram_link }}">
                                         <svg viewBox="0 0 17.745 17.745">
                                             <g id="Group_183" data-name="Group 183" transform="translate(0)">
                                                 <g id="Group_182" data-name="Group 182" transform="translate(0)">
@@ -271,7 +277,9 @@
                                             </g>
                                         </svg>
                                     </a>
-                                    <a href="#!">
+                                    @endif
+                                    @if(@$site_common_content->twitter_link)
+                                    <a href="{{ @$site_common_content->twitter_link }}">
                                         <svg viewBox="0 0 15.704 16.034">
                                             <defs>
                                                 <clipPath id="clip-path">
@@ -285,7 +293,9 @@
                                             </g>
                                         </svg>
                                     </a>
-                                    <a href="#!">
+                                    @endif
+                                    @if(@$site_common_content->linkedIn_link)
+                                    <a href="{{ @$site_common_content->linkedIn_link}}">
                                         <svg viewBox="0 0 16.564 16.564">
                                             <path id="Path_101855" data-name="Path 101855"
                                                 d="M49,46.626V40.559c0-2.982-.642-5.259-4.12-5.259a3.6,3.6,0,0,0-3.251,1.781h-.041V35.569H38.3V46.626h3.437V41.139c0-1.449.269-2.837,2.05-2.837,1.76,0,1.781,1.636,1.781,2.919V46.6H49Z"
@@ -298,16 +308,23 @@
                                                 transform="translate(-10 -10)" />
                                         </svg>
                                     </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                     <div class="col-lg-3 col-12">
                         <div class="cmnBx pl-45">
+                            @if(@$site_common_content->email|| @$site_common_content->phone)
                             <div class="fTitle">CONTACT US</div>
-                            <a href="tel:+971 50475320" class="call"> +971 50475320</a>
+                            @if(@$site_common_content->phone)
+                            <a href="tel:{{@$site_common_content->phone}}" class="call"> {{@$site_common_content->phone}}</a>
+                            @endif
+                            @if(@$site_common_content->email)
                             <a href="mailto:sales@almasaralsaree.com" class="mail">sales@almasaralsaree.com</a>
-
+                            @endif
+                            @endif
                             <div class="newsLtr">
                                 <div class="ttle">Subscribe News LEtter</div>
                                 <div class="flB">
@@ -352,9 +369,11 @@
                     © <?= date('Y') ?> All Rights Reserved Al Masar Al Saree 2023
                 </div>
                 <div class="RSide">
+                    @if(@$site_common_content->payment_image)
                     <div class="pay">
-                        <img src="{{asset('frontend/images/pay.png')}}" alt="">
+                        <img src="{{Storage::disk('public')->exists($site_common_content->payment_image)? Storage::url($site_common_content->payment_image):asset($site_common_content->payment_image)}}" alt="">
                     </div>
+                    @endif
                     <div class="design">
                         Designed By: Inter Smart
                     </div>

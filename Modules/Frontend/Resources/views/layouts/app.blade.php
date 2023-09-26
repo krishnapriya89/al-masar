@@ -15,6 +15,12 @@
         content="width=device-width, initial-scale=1.0, shrink-to-fit=no, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@yield('meta_title', \App\Helpers\AdminHelper::getValueByKey('website_name'))</title>
+    {{-- <meta name="title" content="@yield('title', \App\Helpers\AdminHelper::getValueByKey('website_name'))" /> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="@yield('meta_description')">
+    <meta name="keywords" content="@yield('meta_keywords')">
+    @yield('other_meta_tags')
     <meta name="description" content="Your website description goes here">
     <meta name="keywords" content="your, keywords, go, here">
     <link rel="icon" href="{{ asset('frontend/images/favicon.ico') }}" type="image/x-icon">
@@ -39,6 +45,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
     <!-- BOOTSTRAP --->
 
@@ -91,6 +98,7 @@
         @include('frontend::layouts.footer')
         <!-- CUSTOME --->
         <script type="text/javascript" src="{{ asset('frontend/js/app.min.js') }}"></script>
+
         @stack('js')
         <script>
             function wcqib_refresh_quantity_increments() {

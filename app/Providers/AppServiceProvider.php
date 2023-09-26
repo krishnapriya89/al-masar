@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\SiteCommonContent;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        View::composer('frontend::*', function ($view) {
+            $site_common_content = SiteCommonContent::first();
+            $view->with(compact('site_common_content'));
+        });
     }
 
     /**

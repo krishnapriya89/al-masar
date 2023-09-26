@@ -12,6 +12,7 @@ use Modules\Admin\Http\Controllers\DashboardController;
 use Modules\Admin\Http\Controllers\HomeBannerController;
 use Modules\Admin\Http\Controllers\HowToBuyController;
 use Modules\Admin\Http\Controllers\PrivacyPolicyController;
+use Modules\Admin\Http\Controllers\SiteSettingsController;
 use Modules\Admin\Http\Controllers\TermsAndConditionsController;
 use Modules\Admin\Http\Controllers\WhyChooseController;
 
@@ -64,5 +65,8 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         //terms & conditions
         Route::get('terms-and-conditions/edit',[TermsAndConditionsController::class,'edit'])->name('terms-and-conditions.edit');
         Route::post('terms-and-conditions/update/{id}',[TermsAndConditionsController::class,'update'])->name('terms-and-conditions.update');
+        // site common cms
+        Route::get('site-common-cms/edit',[SiteSettingsController::class,'edit'])->name('site-common-cms.edit');
+        Route::post('site-common-cms/update/{id}',[SiteSettingsController::class,'update'])->name('site-common-cms.update');
     });
 });

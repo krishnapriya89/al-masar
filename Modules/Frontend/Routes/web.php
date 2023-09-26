@@ -21,3 +21,9 @@ use Modules\Frontend\Http\Controllers\HomeController;
 
 //home
 Route::get('/',[HomeController::class,'index'])->name('home');
+//about
+Route::get('about',[HomeController::class,'about'])->name('about');
+//privacy policy
+Route::get('privacy-policy',[HomeController::class,'privacyPolicy'])->name('privacy-policy');
+//Terms And conditions
+Route::get('terms-and-conditions',[HomeController::class,'termsAndConditions'])->name('terms-and-conditions');

@@ -19,7 +19,7 @@
         @csrf
     <!-- /.row -->
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Edit Details</h3>
@@ -87,7 +87,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Upload File</h3>
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-footer">
