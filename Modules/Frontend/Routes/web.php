@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
+use Modules\Frontend\Http\Controllers\AuthController;
 use Modules\Frontend\Http\Controllers\HomeController;
 
 /*
@@ -18,6 +19,11 @@ use Modules\Frontend\Http\Controllers\HomeController;
 // Route::prefix('frontend')->group(function() {
 //     Route::get('/', 'FrontendController@index');
 // });
+
+//user
+Route::get('/register', [AuthController::class,'showRegisterForm'])->name('user.register.form');
+Route::get('/register-store', [AuthController::class,'register'])->name('user.register.store');
+Route::get('/login', [AuthController::class,'showLoginForm'])->name('user.login.form');
 
 //home
 Route::get('/',[HomeController::class,'index'])->name('home');

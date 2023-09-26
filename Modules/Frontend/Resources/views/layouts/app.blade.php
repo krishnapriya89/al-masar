@@ -36,10 +36,9 @@
         @stack('css')
 
     <!-- JQUERY --->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script type="text/javascript" src="{{asset('frontend/js/jquery-3.7.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/jquery-validate-1.19.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/jquery-additional-methods-1.19.5.min.js') }}"></script>
     <!-- BOOTSTRAP --->
 
     <script src="//cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
@@ -92,6 +91,7 @@
         <!-- CUSTOME --->
         <script type="text/javascript" src="{{ asset('frontend/js/app.min.js') }}"></script>
         @stack('js')
+        <script type="text/javascript" src="{{asset('frontend/js/custom.js')}}"></script>
         <script>
             function wcqib_refresh_quantity_increments() {
                 jQuery("div.quantity:not(.buttons_added), td.quantity:not(.buttons_added)").each(function(a, b) {

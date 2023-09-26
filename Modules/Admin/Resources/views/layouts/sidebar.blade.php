@@ -24,9 +24,9 @@
                     </a>
                 </li>
                 <li class="nav-header">PRODUCT MANAGEMENT</li>
-                <li class="nav-item {{ Nav::isResource('product-main-category', '', 'menu-open') }} {{ Nav::isResource('product-sub-category', '', 'menu-open') }} {{ Nav::isResource('flower-type', '', 'menu-open') }} {{ Nav::isResource('delivery-location', '', 'menu-open') }}">
+                <li class="nav-item {{ Nav::isResource('product-main-category', '', 'menu-open') }} {{ Nav::isResource('product-sub-category', '', 'menu-open') }} {{ Nav::isRoute(['product.index', 'product.create', 'product.edit'], 'menu-open') }}">
                     <a href="#"
-                       class="nav-link {{ Nav::isResource('product-main-category') }} {{ Nav::isResource('product-sub-category') }} {{ Nav::isResource('flower-type') }} {{ Nav::isResource('delivery-location') }}">
+                       class="nav-link {{ Nav::isResource('product-main-category') }} {{ Nav::isResource('product-sub-category') }} {{ Nav::isResource('flower-type') }} {{ Nav::isResource('delivery-location') }} {{ Nav::isRoute(['product.index', 'product.create', 'product.edit'], '', 'menu-open') }}">
                         <i class="nav-icon fab fa-product-hunt"></i>
                         <p>
                             Products
