@@ -33,3 +33,5 @@ Route::get('about',[HomeController::class,'about'])->name('about');
 Route::get('privacy-policy',[HomeController::class,'privacyPolicy'])->name('privacy-policy');
 //Terms And conditions
 Route::get('terms-and-conditions',[HomeController::class,'termsAndConditions'])->name('terms-and-conditions');
+//store contact enquiry
+Route::post('contact-enquiry',[HomeController::class,'storeContact'])->name('contact-enquiry');

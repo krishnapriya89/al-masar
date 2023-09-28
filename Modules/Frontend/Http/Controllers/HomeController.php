@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use App\Models\HomeBanner;
 use App\Models\AboutUs;
 use App\Models\Contact;
+use App\Models\ContactEnquiry;
 use App\Models\HowToBuy;
 use App\Models\PrivacyPolicy;
 use App\Models\TermsAndCondition;
@@ -57,6 +58,24 @@ class HomeController extends Controller
     {
         $terms_conditions = TermsAndCondition::first();
         return view('frontend::terms-and-conditions',compact('terms_conditions'));
+    }
+
+    /**
+     * Store Contact Enquiry
+     *
+     */
+    public function storeContact(Request $request,ContactEnquiry $contact_enquiry)
+    {
+        $contact_enquiry->name = $request->name;
+        $contact_enquiry->email = $request->email;
+        $contact_enquiry->phone = $request->phone;
+        $contact_enquiry->subject = $request->subject;
+        $contact_enquiry->message = $request->message;
+        if($contact_enquiry->save())
+        {
+            return redirect()->back()->with('success','Contact Form Application Submitted Successfully!');
+        }
+        return redirect()->back()->with('error','Failed to Submit Contact Form Application');
     }
 
 

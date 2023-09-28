@@ -1,5 +1,13 @@
 @extends('frontend::layouts.app')
 @section('title', 'Home')
+@push('css')
+<style>
+    label.error {
+         color: #dc3545;
+         font-size: 14px;
+    }
+</style>
+@endpush
 
 @section('content')
 
@@ -444,41 +452,45 @@
                     <div class="MainHead">
                         <div class="Head">{{@$contact->application_form_title}}</div>
                     </div>
-                    <div class="formGrp">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Name">
-                                    <div class="help-block d-none">Invalid Input</div>
+                    <form action="{{ route('contact-enquiry')}}" method="post" id="contactForm">
+                        @csrf
+                        <div class="formGrp">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Name" name="name">
+                                        <div class="help-block d-none">Invalid Input</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email" name="email">
+                                        <div class="help-block d-none">Invalid Input</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Phone" name="phone">
+                                        <div class="help-block d-none">Invalid Input</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="mobile_code" placeholder="Subject" name="subject">
+                                        <div class="help-block d-none">Invalid Input</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" placeholder="Message" name="message"></textarea>
+                                        <div class="help-block d-none">Invalid Input</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Email">
-                                    <div class="help-block d-none">Invalid Input</div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Phone">
-                                    <div class="help-block d-none">Invalid Input</div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="mobile_code" placeholder="Subject">
-                                    <div class="help-block d-none">Invalid Input</div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <textarea class="form-control" placeholder="Message"></textarea>
-                                    <div class="help-block d-none">Invalid Input</div>
-                                </div>
-                            </div>
+                            <button class="sendBtn hoveranim" type="submit"><span>SEND MESSAGE</span></button>
                         </div>
-                        <button class="sendBtn hoveranim"><span>SEND MESSAGE</span></button>
-                    </div>
+                    </form>
+
                 </div>
                 <div class="ritB">
                     <div class="inFbx">

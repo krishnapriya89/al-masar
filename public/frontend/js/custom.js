@@ -15,5 +15,24 @@ $(document).ready(function () {
     jQuery.validator.addMethod("notEqual", function(value, element, param) {
         return this.optional(element) || value != $(param).val();
        }, "This has to be different from the phone number");
-       
+
+});
+$(document).ready(function(){
+
+    $("#contactForm").validate({
+            rules: {
+                name: "required",
+                phone:{
+                    required: true,
+                    phoneDigitsOnly: true
+                },
+                email: {
+                    required:true,
+                    email:true
+                },
+                message:"required",
+                subject: "required",
+            }
+        });
+
 });
