@@ -602,13 +602,13 @@
         @media only screen and ( max-width: 992px )
             margin-bottom: 20px
         .flxBx
-            @media only screen and ( min-width: 992px )
+            @media only screen and ( min-width: 993px )
                 display: flex
                 align-items: center
             .ltB
-                @media only screen and ( max-width: 992px )
+                @media only screen and ( max-width: 993px )
                     text-align: center
-                @media only screen and ( min-width: 992px )
+                @media only screen and ( min-width: 993px )
                     width: calc( 100% - 152px )
                     padding-right: 35px
                 @media only screen and ( min-width: 1200px )
@@ -632,16 +632,17 @@
                         color: $basecolor
             .rtB
                 margin-top: 20px
-                @media only screen and ( min-width: 992px )
+                @media only screen and ( min-width: 993px )
                     margin-top: 0
                     width: 152px
                 .flxGrid
-                    @media only screen and ( max-width: 992px )
+                    @media only screen and ( max-width: 993px )
                         display: flex
                         flex-wrap: wrap
                     .item
                         transition: .4s all
-                        width: calc( 100% / 4 )
+                        @media only screen and ( max-width: 992px )
+                            width: calc( 100% / 4 )
                         @media only screen and ( max-width: 576px )
                             width: calc( 100% / 2 )
                             margin-bottom: 15px
@@ -695,9 +696,9 @@
             margin-top: 20px
         @media only screen and ( min-width: 768px )
             margin-top: 40px
-        @media only screen and ( min-width: 992px )
-            margin-top: 60px
+        @media only screen and ( min-width: 993px )
             margin: 0 -15px
+            margin-top: 60px
         @media only screen and ( min-width: 1200px )
             margin: 0 -21px
             margin-top: 80px

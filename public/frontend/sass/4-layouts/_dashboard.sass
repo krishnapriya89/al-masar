@@ -11,8 +11,8 @@
         @media only screen and ( min-width: 600px )
             padding: 0 0 70px
         .all_products
-            padding: 20px 0
-            @media only screen and ( min-width: 600px )
+            padding: 24px 0
+            @media only screen and ( min-width: 768px )
                 display: flex
                 align-items: center
                 justify-content: space-between
@@ -21,67 +21,74 @@
                 font-weight: 600
                 font-size: 16px
                 margin-bottom: 15px
-                @media only screen and ( min-width: 600px )
+                @media only screen and ( min-width: 768px )
                     margin-bottom: 0
                 @media only screen and ( min-width: 992px )
                     font-size: 18px
                 @media only screen and ( min-width: 1200px )
                     font-size: 20px
+                span
+                    font-size: 14px
+                    color: #000
+                    font-weight: 400
             .bdfgRtBx
-                @media only screen and ( min-width: 600px )
+                @media only screen and ( min-width: 768px )
                     display: flex
                     align-items: center
                 .ltb
                     display: flex
                     align-items: center
                     margin-bottom: 15px
-                    @media only screen and ( min-width: 600px )
+                    justify-content: space-between
+                    @media only screen and ( min-width: 768px )
+                        margin-left: 20px
                         margin-bottom: 0
-                .SortBy, .display
+                    .label
+                        color: #000
+                        font-weight: 500
+                        margin-right: 9px
+                        font-size: 10px
+                .display
                     position: relative
                     z-index: 2
-                    .label
-                        color: #272525
-                        font-weight: 400
-                        margin-right: 24px
-                        font-size: 14px
-                        @media only screen and ( min-width: 1200px )
-                            font-size: 16px
-                        @media only screen and ( min-width: 1441px )
-                            font-size: 18px
+                    display: flex
+                    align-items: center
+                    width: 201px
+                    background: #fff
+                    border-radius: 7px
+                    .txt
+                        width: 63px
+                        height: 31px
+                        border-radius: 7px
+                        background: $basecolor
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        font-size: 12px
+                        font-weight: 500
+                        color: #fff
+                        border-radius: 7px 0 0 7px
+                        position: absolute
+                        left: 0
+                        top: 0
+                        bottom: 0
+                        margin: auto
                     .select2
                         border: none
-                        width: 100% !important
-                        background: #FCFCFC
-                        height: 38px
+                        width: 201px !important
+                        height: 31px
                         border-radius: 0
-                        @media only screen and ( min-width: 992px )
-                            height: 43px
-                    &.SortBy
-                        width: 40%
-                        @media only screen and ( min-width: 600px )
-                            width: 105px
-                        .select2
-                            background: #E9E9E9
-                            border-radius: 7px
-                            &.select2-container--open
-                                background: #E7151F
-                                .select2-selection__rendered
-                                    color: #fff !important
-                                .select2-selection
-                                    &::after
-                                        filter: grayscale(1) brightness(23) invert(15)
-                    &.display
-                        margin-left: 11px
-                        width: calc( 100% - 40% )
-                        @media only screen and ( min-width: 600px )
-                            width: 190px
-                        @media only screen and ( min-width: 992px )
-                            width: 252px
-                        .select2
-                            .select2-selection
-                                &::after
-                                    display: none
+                        padding-left: 63px
+                        .select2-selection
+                            padding: 1px 15px !important
+                            &::after
+                                width: 6px
+                                background-size: contain
+                                right: 8.5px
+                        .select2-selection__rendered
+                            font-size: 12px
+                            color: #000
+                            font-weight: 400
                 .clear
                     border-radius: 22px
                     background: #000
@@ -108,11 +115,17 @@
                 -webkit-overflow-scrolling: touch
             .ctr
                 text-align: center
+            .tmns
+                font-size: 12px
+                color: #07D97E
+                text-align: center
+                font-weight: 500
             .txt
                 font-size: 12px
                 font-weight: 500
                 line-height: 15px
                 color: #000
+                text-align: center
                 .tmns
                     font-size: 10px
                     color: #07D97E
@@ -120,9 +133,11 @@
                     line-height: 13px
                     display: inline
             .pcode
-                display: flex
-                align-items: center
                 position: relative
+                font-size: 12px
+                line-height: 15px
+                color: #000
+                font-weight: 500
                 input[type=checkbox], input[type=radio]
                     width: 14px !important
                     height: 14px !important
@@ -181,6 +196,20 @@
                         width: 14px
                         height: 14px
                         top: 1px
+            .quantity
+                justify-content: center
+                input[type=number]
+                    border: solid 1px #D5D5D5
+                    width: 72px
+                    border-radius: 5px
+                    font-size: 12px
+                    height: 22px
+                input[type=button]
+                    width: 16px
+                    &.minus
+                        text-align: left
+                    &.plus
+                        text-align: right
             .proFlx
                 display: flex
                 align-items: center
@@ -220,6 +249,12 @@
                 width: 100vw
                 @media only screen and ( min-width: 1200px )
                     width: 100%
+                &.listTable
+                    tbody
+                        tr
+                            &:first-child
+                                td
+                                    background: #ECECF1
                 thead
                     background: #000
                     th
@@ -228,6 +263,7 @@
                         font-size: 13px
                         padding: 10px 15px
                         white-space: nowrap
+                        text-align: center
                         @media only screen and (min-width: 468px)
                             padding: 12px 23px
                             font-size: 14px
@@ -235,5 +271,256 @@
                     td
                         padding: 10px 15px
                         border-bottom: solid 2px #F5F5F7
+                        text-align: center
                         @media only screen and (min-width: 468px)
                             padding: 15px 23px
+                        .form-control
+                            width: 108px
+                            height: 27px
+                            background: #fff
+                            border-radius: 5px
+                            border: solid 1px #D5D5D5
+                            padding: 2px 5px
+                            font-size: 12px
+                            color: #000
+                            font-weight: 400
+                            &::placeholder
+                                font-size: 12px
+                                color: #000
+                                font-weight: 400
+                        .bid
+                            border-radius: 5px
+                            border: solid 1px #D5D5D5
+                            padding: 2px 5px
+                            font-size: 12px
+                            height: 22px
+                            width: 72px
+                            text-align: center
+                            color: #000
+                            font-weight: 400
+                            margin-bottom: 4px
+                            &::placeholder
+                                font-size: 12px
+                                color: #000
+                                font-weight: 400
+                        .cart
+                            height: 32px
+                            width: 32px
+                            border-radius: 50%
+                            display: flex
+                            align-items: center
+                            justify-content: center
+                            background: #F2F2F2
+                            margin: auto
+                            svg
+                                width: 14px
+                                fill: #000
+                        .notify
+                            width: 102px
+                            height: 21px
+                            display: flex
+                            align-items: center
+                            justify-content: center
+                            background: #E7151F
+                            font-size: 12px
+                            font-weight: 400
+                            color: #fff
+                        .notfy
+                            opacity: .21
+                        .delete
+                            display: block
+                            text-align: center
+        .tableAccordionBx
+            .headBxFlx
+                display: flex
+                flex-wrap: wrap
+                background: #000
+                padding: 12px 23px
+                &>*
+                    width: calc( 100% / 6 )
+                    font-size: 14px
+                    font-weight: 500
+                    color: #fff
+                    text-align: center
+                &.flx8
+                    &>*
+                        width: calc( 100% / 8 )
+
+            .detailFlx
+                &.flx8
+                    .accordion
+                        .accordion-item
+                            .accordion-header
+                                .accordion-button
+                                    &>*
+                                        width: calc( 100% / 8 )
+
+                .accordion
+                    .accordion-item
+                        .status
+                            padding: 3px 6px
+                            min-height: 19px
+                            width: fit-content
+                            width: -moz-fit-content
+                            margin: auto
+                            display: flex
+                            line-height: normal
+                            font-size: 12px
+                            font-weight: 500
+                            color: #000
+                            &.clr1
+                                background: #FFD5D7
+                            &.clr2
+                                background: #CEDDFF
+                            &.clr3
+                                background: rgba(104, 255, 195, .38)
+                            &.clr4
+                                background: #FFE7D6
+                            &.clr5
+                                background: #FCFFCE
+                        .flxB
+                            display: flex
+                            align-items: center
+                            a
+                                font-size: 10px
+                                font-weight: 500
+                                color: #fff
+                                text-transform: uppercase
+                                width: 55px
+                                height: 19px
+                                border-radius: 10px
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                &.agree
+                                    background: #07D97E
+                                    margin-right: 10px
+                                &.reject
+                                    background: #E7151F
+                        .notification
+                            position: relative
+                            width: fit-content
+                            width: -moz-fit-content
+                            display: flex
+                            margin: auto
+                            &::after
+                                content: ""
+                                position: absolute
+                                top: -5px
+                                right: -5px
+                                width: 6px
+                                height: 6px
+                                border-radius: 50%
+                                background: #E7151F
+                                cursor: pointer
+                                box-shadow: 0 0 0 rgba(231, 21, 31, .4)
+                                animation: pulse 2s infinite
+                            abbr[data-title]
+                                position: absolute
+                                left: 0
+                                top: 0
+                                height: 100%
+                                width: 100%
+                            abbr[data-title]:hover::after,
+                            abbr[data-title]:focus::after
+                                content: attr(data-title)
+                                position: absolute
+                                left: 50%
+                                top: 100%
+                                width: 132px
+                                height: 89px
+                                border-radius: 7px
+                                box-shadow: 0 3px 6px rgba(0, 0, 0, .16)
+                                transform: translateX(-50%)
+                                background: #fff
+                                color: #000
+                                font-size: 12px
+                                line-height: 15px
+                                font-weight: 400
+                                padding: 12px 11px
+                                z-index: 10
+
+                        .accordion-header
+                            .accordion-button
+                                display: flex
+                                flex-wrap: wrap
+                                background: #fff
+                                border: none
+                                outline: none
+                                box-shadow: none
+                                &>*
+                                    width: calc( 100% / 6 )
+                                    text-align: center
+                                    font-size: 12px
+                                    color: #000
+                                    font-weight: 500
+                                &::after
+                                    position: absolute
+                                    right: 13px
+
+                        .accordion-body
+                            background: #ECECF1
+                            padding: 11px 22px
+                            .title
+                                font-size: 14px
+                                font-weight: 500
+                                color: #000
+                                margin-bottom: 12px
+                            .notfy
+                                opacity: .21
+                                &::after
+                                    display: none
+                            .table-responsive
+                                overflow: visible
+                                &::-webkit-scrollbar
+                                    height: 2px
+                                @media only screen and ( max-width: 1200px )
+                                    overflow-x: auto
+                                    -webkit-overflow-scrolling: touch
+                            table
+                                width: 100vw
+                                @media only screen and ( min-width: 1200px )
+                                    width: 100%
+                                thead
+                                    th
+                                        background: #8B8B9C
+                                        padding: 4px 5px
+                                        font-size: 13px
+                                        color: #fff
+                                        font-weight: 500
+                                        text-align: center
+                                tbody
+                                    td
+                                        border-bottom: solid 1px #ECECF1
+                                        background: #fff
+                                        padding: 10px 10px
+                                        text-align: center
+                                        font-size: 12px
+                                        color: #000
+                                        font-weight: 500
+
+                            .continue
+                                height: 30px
+                                width: 184px
+                                border-radius: 21px
+                                background: #000
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                font-size: 12px
+                                color: #fff
+                                font-weight: 600
+                                margin: 9px 0 0 auto
+        .sbmt
+            width: 182px
+            height: 43px
+            border-radius: 22px
+            background: #000
+            display: flex
+            align-items: center
+            justify-content: center
+            margin: 27px 0 0 auto
+            font-size: 14px
+            color: #fff
+            font-weight: 600
+            text-transform: uppercase

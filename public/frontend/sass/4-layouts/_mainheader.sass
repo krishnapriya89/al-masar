@@ -1,0 +1,999 @@
+//Header
+.modal-backdrop
+    background: transparent
+    z-index: 3
+    &.show
+        opacity: 1
+body
+    &.modal-open
+        #Header
+            .select2-container
+                z-index: 0 !important
+
+#Header
+    width: 100%
+    z-index: 3000
+    top: 0px
+    transition: .4s all
+    left: 0px
+    animation-duration: 0.5s
+    position: absolute
+    background: $basecolor
+    box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.08)
+    border-top: solid 4px #000
+    .HrMpx
+        position: relative
+        background-color: #fff
+        padding: 3px 0
+        border-bottom: solid 1px #F9F9F9
+        @media only screen and ( min-width: 992px )
+            padding: 0
+        .HrMfLx
+            display: flex
+            align-items: center
+            justify-content: space-between
+            @media only screen and ( max-width: 1100px )
+                padding-left: 75px
+            @media only screen and ( max-width: 768px )
+                padding-left: 55px
+            @media only screen and ( max-width: 576px )
+                padding-left: 35px
+        .WsMLgo
+            display: flex
+            align-items: center
+            justify-content: space-between
+            .LoGo
+                display: block
+                width: 150px
+                @media only screen and (min-width: 576px)
+                    width: 170px
+                @media only screen and (min-width: 768px)
+                    width: 200px
+                @media only screen and (min-width: 992px)
+                    width: 220px
+                @media only screen and (min-width: 1200px)
+                    width: 250px
+                @media only screen and (min-width: 1551px)
+                    width: 275px
+                svg
+                    transition: all .3s
+                    .cls-1
+                        fill: #e7151f
+
+                    .cls-2
+                        fill: #fff
+        .ritWERTbx
+            width: calc( 100% - 150px )
+            @media only screen and ( min-width: 576px )
+                width: calc( 100% - 170px )
+            @media only screen and ( min-width: 768px )
+                width: calc( 100% - 200px )
+                padding-left: 30px
+            @media only screen and ( min-width: 992px )
+                width: calc( 100% - 220px )
+                padding-left: 45px
+            @media only screen and ( min-width: 1200px )
+                width: calc( 100% - 250px )
+                padding-left: 65px
+            @media only screen and ( min-width: 1551px )
+                width: calc( 100% - 275px )
+                padding-left: 88px
+
+        
+        .HrMfLxRt
+            display: flex
+            align-items: center
+            justify-content: flex-end
+            width: 100%
+            .WtSrCh
+                @media only screen and ( max-width: 768px )
+                    display: none
+                @media only screen and ( min-width: 768px )
+                    margin-right: 19px
+                    width: 100%
+                    max-width: 300px
+                @media only screen and ( min-width: 992px )
+                    max-width: 340px
+                
+                .flxB
+                    width: 100%
+                    border: solid 1px #7A7A7A
+                    border-radius: 3px
+                    position: relative
+                    margin-bottom: 0
+                    display: flex
+                    align-items: center
+                    will-change: transform
+                    overflow: hidden
+                    .form-control
+                        padding: 5px 18px
+                        padding-right: 30px
+                        border: none
+                        background-color: #fff
+                        height: 40px
+                        font-size: 14px
+                        font-weight: 400
+                        color: #A2A2A2
+                        &::placeholder
+                            font-size: 14px
+                            font-weight: 400
+                            color: #A2A2A2
+
+                    input[type="search"]
+                        &::-webkit-search-cancel-button
+                            -webkit-appearance: none
+                            height: 17px
+                            width: 17px
+                            border-radius: 50em
+                            background: url(../images/close.svg) no-repeat 50% 50%
+                            background-size: contain
+                            position: relative
+                            right: 0
+                            z-index: 100
+                            cursor: pointer
+
+                    button
+                        position: absolute
+                        border: none
+                        background: transparent
+                        padding: 0
+                        box-shadow: none
+                        outline: none
+                        top: 0
+                        bottom: 0
+                        right: 15px
+                        width: 20px
+                        transition: .4s all
+                        svg
+                            max-width: 20px
+                            min-height: 20px
+                            .cls-1
+                                fill: #000
+
+            .TBFLXBX
+                display: flex
+                align-items: center
+                .mobSearch
+                    font-size: 0
+                    margin-right: 20px
+                    @media only screen and ( min-width: 768px )
+                        display: none
+                    // @media only screen and ( max-width: 676px )
+                    //     display: none
+                    svg
+                        height: 15px
+                        @media only screen and ( min-width: 992px )
+                            height: 17px
+
+                .MyaccountDrop
+                    position: relative
+                    margin-right: 18px
+                    // @media only screen and (max-width: 676px)
+                    //     display: none
+                    .DRoPBTn
+                        cursor: pointer
+                        display: flex
+                        align-items: center
+                        padding: 20px 0
+                        @media only screen and ( min-width: 768px )
+                            padding: 25px 0
+                        @media only screen and ( min-width: 1441px )
+                            padding: 42px 0
+                        svg
+                            width: 17px
+                            fill: #000
+                    .LoGbTn
+                        display: flex
+                        align-items: center
+                        cursor: pointer
+                        position: relative
+                        padding: 19px 0
+                        @media only screen and ( min-width: 650px )
+                            font-size: 14px
+                        @media only screen and ( min-width: 768px )
+                            padding: 24px 0
+                        @media only screen and ( min-width: 992px )
+                            padding: 27px 0
+                        .ImgBx
+                            min-width: 41px
+                            width: 41px
+                            height: 41px
+                            border-radius: 50%
+                            overflow: hidden
+                            background: $basecolor
+                            display: flex
+                            align-items: center
+                            justify-content: center
+                            margin-right: 15px
+                            .name
+                                color: #fff
+                                font-weight: 500
+                                text-transform: uppercase
+                            img
+                                @include imgFit
+                            .NaMe
+                                color: #fff
+                        .txtBx
+                            .name
+                                font-size: 14px
+                                color: #232323
+                                font-weight: 500
+                                line-height: 16px
+                            .txt
+                                font-size: 12px
+                                text-transform: uppercase
+                                color: #7a7a7c
+                                font-weight: 400
+
+                    &:hover
+                        #MyaccountDropMenu
+                            opacity: 1
+                            visibility: visible
+                            transform: translate(0, 0) !important
+                    #MyaccountDropMenu
+                        position: absolute
+                        min-width: 250px
+                        display: block
+                        background: rgb(255, 255, 255)
+                        top: 100% !important
+                        z-index: 1000
+                        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2)
+                        border: 1px solid rgb(227, 233, 237)
+                        border-radius: 3px
+                        overflow: hidden
+                        opacity: 0
+                        visibility: hidden
+                        transform: translate(0, 25px) !important
+                        transition: .5s all
+                        padding: 0px
+                        left: 0px !important
+                        @media only screen and (min-width: 576px)
+                            left: -100px !important
+                        @media only screen and (min-width: 992px)
+                            left: 0px !important
+
+                        .boxHead
+                            display: flex
+                            align-items: center
+                            padding: 15px
+                            border-bottom: 1px solid rgb(207, 217, 224)
+                            .iconBox
+                                width: 65px
+                                height: 65px
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                color: $black
+                                border-radius: 50%
+                                font-size: 20px
+                                background-color: $basecolor
+                                overflow: hidden
+                            .ritDiv
+                                padding-left: 15px
+                                .name
+                                    font-size: 19px
+                                a
+                                    font-size: 12px
+                                    margin-top: 7px
+                                    display: block
+                                    color: #000
+                                    text-decoration: underline
+                        .boxCntnt
+                            padding: 3px 0
+                            @media only screen and ( min-width: 576px )
+                                padding: 10px 0
+
+                            a
+                                text-align: left
+                                display: flex
+                                align-items: center
+                                border: none
+                                height: 36px
+                                padding: 0 20px
+                                color: rgb(11, 34, 57)
+                                cursor: pointer
+                                text-decoration: none
+                                text-transform: uppercase
+                                font-size: 13px
+                                @media only screen and ( min-width: 1441px )
+                                    font-size: 14px
+                                svg
+                                    width: 20px
+                                    height: 20px
+                                    fill: #000
+                                    margin-right: 10px
+                                    -webkit-transition: all 300ms
+                                    -moz-transition: all 300ms
+                                    -o-transition: all 300ms
+                                    transition: all 300ms
+                                &:hover
+                                    color: $basecolor
+                                    svg
+                                        fill: $basecolor
+                        .boxFoot
+                            border-top: 1px solid rgb(207, 217, 224)
+                            button
+                                text-align: left
+                                display: flex
+                                align-items: center
+                                border: none
+                                padding: 15px 20px
+                                color: rgb(11, 34, 57)
+                                cursor: pointer
+                                text-decoration: none
+                                text-transform: uppercase
+                                width: 100%
+                                background: transparent
+                                border: none
+                                outline: none
+                                box-shadow: none
+                                font-size: 13px
+                                @media only screen and ( min-width: 1441px )
+                                    font-size: 14px
+                                svg
+                                    width: 17px
+                                    height: 17px
+                                    margin-right: 10px
+                                    fill: #000
+                                    -webkit-transition: all 300ms
+                                    -moz-transition: all 300ms
+                                    -o-transition: all 300ms
+                                    transition: all 300ms
+                                &:hover
+                                    color: $basecolor
+                                    svg
+                                        fill: $basecolor
+                    &.isLoged
+                        .LoGbTn
+                            display: flex
+                            @media only screen and (max-width: 576px)
+                                &::after
+                                    display: none
+                            .txtBx
+                                @media only screen and (max-width: 576px)
+                                    display: none
+
+                        .DRoPBTn
+                            display: none
+                    &:not(.isLoged)
+                        .LoGbTn
+                            display: none
+                        .DRoPBTn
+                            display: flex
+
+                .cartBtn
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    width: 39px
+                    height: 39px
+                    border-radius: 50%
+                    background: #F2F2F2
+                    position: relative
+                    // @media only screen and ( max-width: 676px )
+                    //     display: none
+                    .icon
+                        svg
+                            width: 19px
+                    .count
+                        position: absolute
+                        top: 0
+                        right: 0
+                        width: 12px
+                        height: 12px
+                        border-radius: 50%
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        background: $basecolor
+                        font-size: 7px
+                        font-weight: 600
+                        color: #fff
+
+                .moneyDrop
+                    width: auto
+                    height: 38px
+                    width: 99px
+                    display: flex
+                    align-items: center
+                    border-radius: 19px
+                    border: solid 1px #707070
+                    padding: 4px 5px
+                    margin-right: 12px
+                    select
+                        opacity: 0
+                        visibility: hidden
+                    .icon
+                        height: 30px
+                        width: 30px
+                        border-radius: 50%
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        background: #FFE3E5
+                        svg
+                            width: 19px
+                            fill: #000
+                    .dropdown
+                        width: calc( 100% - 30px )
+                    button
+                        width: 100%
+                        background: transparent
+                        outline: none !important
+                        box-shadow: none !important
+                        border: none !important
+                        padding: 0 10px
+                        color: #2E2E2E
+                        font-family: $fontstack1
+                        font-weight: 500
+                        font-size: 12px
+                        @media only screen and ( min-width: 768px )
+                            font-size: 14px
+                        @media only screen and ( min-width: 1600px )
+                            font-size: 16px
+                        &::after
+                            border: none
+                            background: url(../images/dwn.svg) no-repeat
+                            width: 10px
+                            height: 6px
+                            background-size: contain
+                        .filter-option
+                            .filter-option-inner
+                                // text-align: center
+                                .filter-option-inner-inner
+                                    img
+                                        width: 20px
+                                        @media only screen and ( min-width: 576px )
+                                            width: 26px
+                                            height: 18px
+                                            margin-right: 10px
+                                            margin-top: -5px
+                                        @media only screen and ( min-width: 992px )
+                                            margin-right: 15px
+                    .dropdown-menu
+                        padding: 0
+                        min-width: 99px
+                        left: -36px !important
+                        top: 4px !important
+                        ul
+                            li
+                                a
+                                    color: #2E2E2E
+                                    font-weight: 500
+                                    padding: 5px 5px
+                                    font-size: 10px
+                                    text-align: center
+                                    @media only screen and ( min-width: 576px )
+                                        font-size: 12px
+                                        padding: 5px 10px
+                                    @media only screen and ( min-width: 992px )
+                                        font-size: 14px
+                                    &:active, &.active
+                                        background-color: $basecolor !important
+                                        color: #fff
+
+    .HrBpx
+        background: #fff
+        position: relative
+        z-index: 0
+        .BtMFlX
+            display: flex
+            align-items: center
+            justify-content: space-between
+            position: unset
+            .FlTrBX
+                display: flex
+                align-items: center
+                width: 100%
+                .mgaAccord
+                    background-color: transparent
+                    border-radius: 0px
+                    padding: 0px
+                    margin: 0px
+                    border: none
+
+                    @media only screen and (min-width: 993px)
+                        background: #fff
+                        position: absolute
+                        left: 0 !important
+                        min-width: 100%
+                        width: 100%
+                        opacity: 0
+                        top: 0
+                        transform: translate3d(0, 42px, 0px) !important
+                        -webkit-animation: Grow .4s ease-in-out
+                        -moz-animation: Grow .8s ease-in-out
+                        -o-animation: Grow .4s ease-in-out
+                        animation: Grow .4s ease-in-out
+                        display: block
+                        visibility: hidden
+                        z-index: 200
+                        background-clip: unset
+                        min-height: 450px
+                    @media only screen and ( min-width: 992px )
+                        max-height: calc( 100vh - 115px )
+                    @media only screen and ( min-width: 1100px )
+                        max-height: calc( 100vh - 157px )
+                    @media only screen and ( min-width: 1360px )
+                        max-height: 450px
+                    @media only screen and ( min-width: 1441px )
+                        max-height: 598px
+                        min-height: 598px
+                    &::-webkit-scrollbar
+                        width: 0
+
+                    .accordion-body
+                        padding: 0
+                        display: flex
+                        height: 100%
+                        .accordion
+                            width: 260px
+                            background: #fff
+                            padding-top: 35px
+                            // overflow-y: scroll
+                            // max-height: calc(100vh - 150px)
+                            // @media only screen and (min-width: 1441px)
+                            //     max-height: calc(100vh - 182px)
+                            // @media only screen and (min-width: 1600px)
+                            //     max-height: calc(100vh - 260px)
+                            &::-webkit-scrollbar
+                                width: 0
+                            .accordion-item
+                                .accordion-body
+                                    padding: 0
+                                    background: #fff
+
+                                    ul
+                                        width: 100%
+                                        li
+                                            position: relative
+                                            width: 100%
+                                            &:first-child
+                                                a
+                                                    padding-top: 0
+                                            a
+                                                display: block
+                                                padding: 0
+                                                color: #676767
+                                                font-weight: 500
+                                                transition: .4s all
+                                                position: relative
+                                                font-size: 14px
+                                                padding: 10px 0
+                                                @media only screen and ( min-width: 1441px )
+                                                    padding: 12px 0
+                                                    font-size: 16px
+                                                &:hover
+                                                    color: $basecolor2
+                                                    // transform: translate(5px, 0)
+                                            &.active
+                                                &::after
+                                                    content: ""
+                                                    position: absolute
+                                                    right: -16px
+                                                    top: 0
+                                                    bottom: 0
+                                                    margin: auto
+                                                    background: url(../images/crcle.svg) no-repeat
+                                                    width: 32px
+                                                    height: 32px
+                                                    transition: .4s all
+                                                    z-index: 10
+                        .ritAccBx
+                            width: calc( 100% - 260px )
+                            padding: 25px 25px
+                            padding-left: 45px
+                            border-left: solid 1px #DEDEDE
+                            overflow-y: scroll
+                            // height: calc( 100% - 50px )
+                            @media only screen and ( min-width: 1441px )
+                                padding: 35px 25px
+                                padding-left: 95px
+                                // height: calc( 100% - 70px )
+                            &::-webkit-scrollbar
+                                width: 0
+                            .cmn_bx
+                                &.hide
+                                    visibility: hidden
+                                    display: none
+                            .dFlX
+                                display: flex
+                                flex-wrap: wrap
+                                .flBx
+                                    width: calc( 100% / 3 )
+                                    margin-bottom: 15px
+                                    @media only screen and ( min-width: 1200px )
+                                        margin-bottom: 30px
+                                    @media only screen and ( min-width: 1441px )
+                                        margin-bottom: 45px
+                                    .suBT
+                                        color: #31378E
+                                        font-weight: 700
+                                        font-size: 16px
+                                        margin-bottom: 13px
+                                        @media only screen and ( min-width: 1441px )
+                                            font-size: 18px
+                                            margin-bottom: 17px
+                                    .proB
+                                        display: block
+                                        text-align: center
+                                        .imgBx
+                                            max-width: 150px
+                                            margin: auto
+                                        .txt
+                                            font-size: 13px
+                                            color: #484848
+                                            font-weight: 600
+                                            line-height: 15px
+                                            margin-bottom: 12px
+                                        .price
+                                            font-size: 15px
+                                            color: #31378E
+                                            font-weight: 600
+
+                            ul, .Mlist
+                                li
+                                    &:not(:last-of-type)
+                                        margin-bottom: 7px
+                                        @media only screen and ( min-width: 1441px )
+                                            margin-bottom: 10px
+                                    a
+                                        display: block
+                                        color: #2A2A2A
+                                        font-weight: 400
+                                        transition: .4s all
+                                        font-size: 13px
+                                        @media only screen and ( min-width: 1441px )
+                                            font-size: 14px
+                                        &:hover
+                                            color: $basecolor2
+
+                    .dskDrp
+                        @media only screen and ( max-width: 992px )
+                            display: none
+
+        #HeaderPOP
+            min-height: 100vh
+            background: rgba(31, 33, 33, .78)
+            z-index: 99999
+            &::-webkit-scrollbar
+                width: 0
+            @media only screen and (min-width: 1101px)
+                background: none
+                position: unset
+                display: block
+                opacity: 1
+                padding: 0px
+                overflow: visible
+                height: 100%
+                min-height: auto
+                width: 100%
+            .modal-dialog
+                margin: 0
+                max-width: 100%
+                -webkit-transform: none
+                transform: none
+                background: $basecolor
+                height: 100%
+                left: -100%
+                transition: ease-in-out all .3s
+                @media (max-width: 992px) and (min-width: 468px)
+                    // max-width: 350px
+                @media only screen and (min-width: 1101px)
+                    background: transparent
+                    left: auto
+                    position: unset
+            .modal-content
+                padding: 0px
+                width: 100%
+                height: 100%
+                background: transparent
+                border: none
+                height: 100%
+                position: unset
+            .modal-body
+                padding: 0px
+                background: #303030
+                @media only screen and (min-width: 1101px)
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    background: transparent
+                    position: unset
+                @media only screen and (max-width: 1101px)
+                    padding-top: 55px
+                .btnClose
+                    position: fixed
+                    opacity: 1
+                    border: none
+                    outline: none
+                    box-shadow: none
+                    width: 40px
+                    height: 40px
+                    z-index: 1
+                    right: 19px
+                    top: 32px
+                    background: transparent
+                    @media only screen and (min-width: 468px)
+                        width: 45px
+                        height: 45px
+                        top: 30px
+                        right: 15px
+                    @media only screen and (min-width: 576px)
+                        right: 45px
+                    span
+                        width: 100%
+                        height: 2px
+                        display: block
+                        background: $basecolor
+                        -webkit-transition: all 0.3s ease
+                        -moz-transition: all 0.3s ease
+                        -ms-transition: all 0.3s ease
+                        -o-transition: all 0.3s ease
+                        transition: all 0.3s ease
+                        position: relative
+                        &:nth-child(1)
+                            transform: rotate(45deg) translate(0px, 0px)
+                        &:nth-child(2)
+                            transform: rotate(-45deg) translate(2px, -2px)
+
+                    @media only screen and (min-width: 1101px)
+                        display: none
+            &.show
+                .modal-dialog
+                    left: 0px
+            .accordion
+                position: unset
+                width: 100%
+                @media only screen and (min-width: 1100px)
+                    padding: 0
+                    display: flex
+                    align-items: center
+                    justify-content: space-between
+                .accordion-item
+                    border-radius: 0px
+                    border: none
+                    background: none
+                    position: unset
+                    &:first-child
+                        .accordion-header
+                            a, button
+                                @media only screen and (min-width: 1100px)
+                                    padding-left: 0
+                    .accordion-header
+                        @media only screen and (min-width: 1260px)
+                            .accordion-button
+                                display: none
+                        @media only screen and (max-width: 1260px)
+                            .dskLnk
+                                display: none
+                        a, button
+                            color: $white
+                            border: none
+                            background: none
+                            outline: none
+                            box-shadow: none
+                            outline: none
+                            padding: 0
+                            position: relative
+                            padding: 15px 25px
+                            font-size: 16px
+                            line-height: normal
+                            font-weight: 500
+                            display: block
+                            @media only screen and (min-width: 992px)
+                                padding: 10px 15px
+                                color: #000
+                                font-size: 14px
+                            &::after
+                                display: none
+                            @media only screen and (min-width: 1441px)
+                                font-size: 16px
+                                padding: 11px 20px
+                            &[aria-expanded="true"], &.active, &:hover
+                                color: $basecolor !important
+                    .collapsing
+                        @media only screen and (min-width: 1100px)
+                            transition: none !important
+                            opacity: 1 !important
+                    .accordion-collapse
+                        height: 100%
+                        border-radius: 0px
+                        padding: 0px
+                        margin: 0px
+                        border: none
+                        .accordion-body
+                            padding: 0
+                            .dskDrp
+                                @media only screen and ( max-width: 1100px )
+                                    display: none
+                            .accordion
+                                @media only screen and ( min-width: 1100px )
+                                    display: none
+                                .accordion-item
+                                    .accordion-header
+                                        .accordion-button
+                                            padding: 7px 10px
+                                            font-size: 15px
+                                    .accordion-body
+                                        ul
+                                            li
+                                                margin-bottom: 10px
+                                                a
+                                                    font-size: 14px
+                                                    color: #fff
+                                                    font-weight: 400
+                                                    transition: .4s all
+                                                    display: block
+                                                    &:hover
+                                                        color: $basecolor2
+                                                        transform: translate(5px, 0)
+                            .lftBccBx
+                                width: 260px
+                                background: #fff
+                                padding-top: 35px
+                                height: 100%
+                                ul
+                                    width: 100%
+                                    li
+                                        position: relative
+                                        width: 100%
+                                        &:first-child
+                                            a
+                                                padding-top: 0
+                                        a
+                                            display: block
+                                            padding: 0
+                                            color: #676767
+                                            font-weight: 500
+                                            transition: .4s all
+                                            position: relative
+                                            font-size: 14px
+                                            padding: 10px 0
+                                            @media only screen and ( min-width: 1441px )
+                                                padding: 12px 0
+                                                font-size: 16px
+                                            &:hover
+                                                color: $basecolor2
+                                                // transform: translate(5px, 0)
+                                        &.active
+                                            &::after
+                                                content: ""
+                                                position: absolute
+                                                right: -16px
+                                                top: 0
+                                                bottom: 0
+                                                margin: auto
+                                                background: url(../images/crcle.svg) no-repeat
+                                                width: 32px
+                                                height: 32px
+                                                transition: .4s all
+                                                z-index: 10
+                    &.dropdown
+                        &:last-child
+                            .accordion-collapse
+                                right: 0
+                                left: auto
+                        &:hover
+                            .accordion-collapse
+                                opacity: 2
+                                visibility: visible
+                                @media only screen and (min-width: 1100px)
+                                    display: flex !important
+                                    transform: translate3d(0, 52px, 0px) !important
+    .MenuIcon
+        display: flex
+        justify-content: center
+        align-items: center
+        position: absolute
+        top: 0px
+        left: 0
+        bottom: 0px
+        height: 100%
+        padding: 0px
+        z-index: 2000
+        background: $basecolor
+        width: 40px
+        @media only screen and (min-width: 576px)
+            width: 50px
+        @media only screen and (min-width: 768px)
+            width: 70px
+        @media only screen and (min-width: 1100px)
+            display: none
+        button
+            display: block
+            border: none
+            height: 50px
+            font-size: 0
+            outline: none
+            margin-right: 0
+            margin-top: 0
+            box-shadow: none
+            border-radius: 0
+            background: none
+            height: 100%
+            width: 50px
+            padding: 10px 10px
+            @media only screen and (min-width: 576px)
+                padding: 10px 15px
+                width: 50px
+
+            span
+                width: 100%
+                height: 2px
+                display: block
+                background: #fff
+                -webkit-transition: all 0.3s ease
+                -moz-transition: all 0.3s ease
+                -ms-transition: all 0.3s ease
+                -o-transition: all 0.3s ease
+                transition: all 0.3s ease
+                position: relative
+                &:nth-child(2)
+                    width: 90%
+
+                &:nth-child(3)
+                    width: 66%
+
+                ~ span
+                    margin-top: 4px
+            &:hover, &:focus
+                span
+                    &:nth-child(2)
+                        width: 100%
+
+                    &:nth-child(3)
+                        width: 100%
+
+        &.open
+            z-index: 9999999
+            top: 10px
+            left: auto
+            height: fit-content
+            height: -moz-fit-content
+            background: transparent
+            right: 10px
+            button
+                height: fit-content
+                height: -moz-fit-content
+                span
+                    margin: 0
+                    width: 100%
+                    background: #fff
+                    &:nth-child(1)
+                        transform: rotate(45deg) translate(0px, 0px)
+                    &:nth-child(2)
+                        transform: rotate(-45deg) translate(2px, -2px)
+                    &:nth-child(3)
+                        display: none
+        &.close
+            opacity: 0
+            visibility: hidden
+
+    &.sticky
+        position: fixed
+        width: 100%
+        animation-name: fadeInDown
+        animation-duration: 0.5s
+        animation-fill-mode: both
+        z-index: 9000
+        top: 0px
+        box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1)
+        .HrMpx, .topHdBx
+            @media only screen and ( min-width: 1100px )
+                height: 0
+                padding: 0
+                opacity: 0
+                visibility: hidden
+                transition: .4s all
+        .HrBpx
+            .BtMFlX
+                .FlTrBX
+                    .mgaAccord
+                        .accordion-body
+                            .accordion
+                                max-height: calc(100vh - 46px)
+                                @media only screen and (min-width: 1441px)
+                                    max-height: calc(100vh - 48px)
+                                @media only screen and (min-width: 1600px)
+                                    max-height: calc(100vh - 71px)
