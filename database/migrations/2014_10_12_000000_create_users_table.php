@@ -27,6 +27,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->tinyInteger('status')->default(1)->comment('1:active,0:inactive');
+            $table->tinyInteger('register_status')->default(0)->comment('0:not registered,1:register completed,2-phone verification,3-office phone verification');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

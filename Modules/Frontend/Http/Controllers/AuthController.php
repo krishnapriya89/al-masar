@@ -77,7 +77,6 @@ class AuthController extends Controller
 
     public function register(UserRegisterRequest $request)
     {
-        dd($request);
         $user = new User();
         $user->name = $request->name;
         $user->company = $request->company;
@@ -94,25 +93,27 @@ class AuthController extends Controller
 
         if($user->save())
         {
-            $email_verification_code = mt_rand(100000, 999999);
-            if($user->email) {
+            if($user->email) { 
+                $email_verification_code = mt_rand(100000, 999999);
+                $user->emailOtps()->create([
+                    'code' => $email_verification_code,
+                ]);
                 // $site_settings = SiteCommonSetting::first();
                 Mail::send('frontend::emails.registration', compact('user', 'site_settings'), function($message) use($request){
                     $message->to($request->email);
                     $message->subject(AdminHelper::getValueByKey('website_name'). ' - Registration Successfully Done');
                 });
             }
-            $remember = $request->remember;
-            if (Auth::guard('web')->attempt(['email' => $user->email, 'password' => $request->password, 'status' => 1], $remember) || Auth::guard('web')->attempt(['username' => $user->username, 'password' => $request->password, 'status' => 1], $remember)) {
-                if ($remember) {
-                    $this->setRememberMeCookie($request->email, $request->password);
-                } else {
-                    $this->clearRememberMeCookie();
-                }
+            if($user->phone) {
+                $phone_verification_code = mt_rand(100000, 999999);
+                $user->phoneOtps()->create([
+                    'code' => $phone_verification_code,
+                    'phone_number' => $user->phone,
+                ]);
 
-                return to_route('home')->with('success', 'Registration completed successfully');
+                return view('frontend::auth.phone-verification', compact('user'));
             } else {
-                return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
+                return redirect()->back()->withErrors(['email' => 'Some error occurred while creating account']);
             }
         } else {
             return redirect()->back()->withErrors(['email' => 'Some error occurred while creating account']);

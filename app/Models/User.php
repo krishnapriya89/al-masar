@@ -51,4 +51,14 @@ class User extends Authenticatable
     {
         return $this->imageDirectory;
     }
+
+    public function emailOtps()
+    {
+        return $this->hasMany(EmailOtp::class);
+    }
+
+    public function phoneOtps()
+    {
+        return $this->hasMany(PhoneOtp::class);
+    }
 }
