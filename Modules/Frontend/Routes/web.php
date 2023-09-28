@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
 use Modules\Frontend\Http\Controllers\AuthController;
 use Modules\Frontend\Http\Controllers\HomeController;
 
@@ -22,9 +23,10 @@ use Modules\Frontend\Http\Controllers\HomeController;
 
 //user
 Route::get('/register', [AuthController::class,'showRegisterForm'])->name('user.register.form');
-Route::get('/register-store', [AuthController::class,'register'])->name('user.register.store');
+Route::post('/register-store', [AuthController::class,'register'])->name('user.register.store');
 Route::get('/login', [AuthController::class,'showLoginForm'])->name('user.login.form');
 
+Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('user.email.verify'); 
 //home
 Route::get('/',[HomeController::class,'index'])->name('home');
 //about

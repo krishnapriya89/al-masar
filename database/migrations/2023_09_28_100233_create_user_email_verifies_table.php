@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('email_otps', function (Blueprint $table) {
+        Schema::create('user_email_verifies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('code');
-            $table->boolean('used')->default(false);
+            $table->string('token');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('email_otps');
+        Schema::dropIfExists('user_email_verifies');
     }
 };

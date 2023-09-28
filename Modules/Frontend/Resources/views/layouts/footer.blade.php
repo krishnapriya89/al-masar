@@ -5,7 +5,7 @@
                 <div class="Row">
                     <div class="col-lg-4">
                         <div class="cmnBx pr-58">
-                            <a href="{{ route('home')}}" class="logo">
+                            <a href="{{ route('home') }}" class="logo">
                                 <svg viewBox="0 0 275.731 78">
                                     <g id="Group_438" data-name="Group 438" transform="translate(-109.238 315)">
                                         <g id="Group_435" data-name="Group 435" transform="translate(109.238 -315)">
@@ -24,7 +24,8 @@
                                                     transform="translate(-161.187 -115.083)" />
                                             </g>
                                         </g>
-                                        <g id="Group_437" data-name="Group 437" transform="translate(177.402 -283.325)">
+                                        <g id="Group_437" data-name="Group 437"
+                                            transform="translate(177.402 -283.325)">
                                             <path id="Path_297" data-name="Path 297" class="cls-1"
                                                 d="M8.977,574.682a3.09,3.09,0,0,1,2.244.822,3.106,3.106,0,0,1,.85,2.341,3.32,3.32,0,0,1-.787,2.257,3.053,3.053,0,0,1-2.432.906,3.3,3.3,0,0,1-1.937-.536,2.589,2.589,0,0,1-1.018-1.6q-.71,0-.71.808v3.608H2.958V579.74q0-3.121,2.8-3.121h.209a2.787,2.787,0,0,1,3.01-1.937m-.083,4.236q.975,0,.975-1.031,0-1.016-.962-1.017a.909.909,0,0,0-.731.286,1.086,1.086,0,0,0-.244.731q0,1.031.962,1.031"
                                                 transform="translate(-1.267 -570.083)" />
@@ -65,7 +66,8 @@
                                                 d="M163.333,576.56h-.7a2.609,2.609,0,0,1-2.466-1.2,5.152,5.152,0,0,1-.488-2.494v-6.229h2.229v6.089a2.282,2.282,0,0,0,.223,1.226,1.04,1.04,0,0,0,.934.377h.265Z"
                                                 transform="translate(-68.383 -566.639)" />
                                             <rect id="Rectangle_192" data-name="Rectangle 192" class="cls-1"
-                                                width="4.668" height="2.229" transform="translate(94.393 7.692)" />
+                                                width="4.668" height="2.229"
+                                                transform="translate(94.393 7.692)" />
                                             <path id="Path_308" data-name="Path 308" class="cls-1"
                                                 d="M180.016,576.878h1.156v2.229h-1.282a1.485,1.485,0,0,1-1.644-1.365l-.739.585a4.007,4.007,0,0,1-2.577.78h-2.647v-2.229h2.662a2.276,2.276,0,0,0,1.323-.348l.181-.125a2.565,2.565,0,0,1,1.031-.446,2.453,2.453,0,0,1-1.031-.445l-.376-.293a1.68,1.68,0,0,0-1.045-.376,1.8,1.8,0,0,0-1.185.516l-.947-1.617a2.91,2.91,0,0,1,2.41-1.156,3.475,3.475,0,0,1,2.09.753l.919.682a2.242,2.242,0,0,0,1.38.46h.321Zm-5.393,3.065h2.229v1.965h-2.229Z"
                                                 transform="translate(-73.779 -569.186)" />
@@ -88,7 +90,8 @@
                                                 d="M245.489,577.723h.306v2.229h-.557a1.466,1.466,0,0,1-.878-.292,3.812,3.812,0,0,1-1,2.292,5.371,5.371,0,0,1-2.4,1.275l-.711-2.132a2.685,2.685,0,0,0,1.533-.752,2.964,2.964,0,0,0,.4-1.8V574.56h2.229v1.8a1.747,1.747,0,0,0,.244,1.045.977.977,0,0,0,.829.321"
                                                 transform="translate(-102.886 -570.031)" />
                                             <rect id="Rectangle_193" data-name="Rectangle 193" class="cls-1"
-                                                width="4.668" height="2.229" transform="translate(142.352 7.692)" />
+                                                width="4.668" height="2.229"
+                                                transform="translate(142.352 7.692)" />
                                             <path id="Path_315" data-name="Path 315" class="cls-1"
                                                 d="M267.8,577.723h.278v2.229h-.5a3.17,3.17,0,0,1-1.38-.237,1.546,1.546,0,0,1-.71-.711,1.876,1.876,0,0,1-1.839,1.032,1.816,1.816,0,0,1-1.77-.934,1.842,1.842,0,0,1-1.8.934,1.785,1.785,0,0,1-1.741-.906,1.829,1.829,0,0,1-1.589.821h-.585v-2.229h.335a.978.978,0,0,0,.8-.285,1.433,1.433,0,0,0,.229-.9v-.906h2.229v1.477c0,.492.21.739.627.739s.613-.246.613-.739v-2.034h2.23v2.02q0,.753.613.753t.613-.753V574.56h2.23v1.866a1.548,1.548,0,0,0,.25,1.018,1.12,1.12,0,0,0,.864.279"
                                                 transform="translate(-109.701 -570.031)" />
@@ -96,7 +99,8 @@
                                                 d="M276.025,576.56v-2.229h.4a.937.937,0,0,0,.808-.307,2.611,2.611,0,0,0,.209-1.3v-6.089h2.23v6.229a5.061,5.061,0,0,1-.473,2.48,2.521,2.521,0,0,1-2.341,1.212Z"
                                                 transform="translate(-118.207 -566.639)" />
                                             <rect id="Rectangle_194" data-name="Rectangle 194" class="cls-1"
-                                                width="2.229" height="9.921" transform="translate(162.793 0.001)" />
+                                                width="2.229" height="9.921"
+                                                transform="translate(162.793 0.001)" />
                                             <path id="Path_317" data-name="Path 317" class="cls-1"
                                                 d="M298.323,574.56v4.1a4.806,4.806,0,0,1-.822,3.023,4.89,4.89,0,0,1-2.633,1.547l-.711-2.131a2.687,2.687,0,0,0,1.533-.752,2.965,2.965,0,0,0,.4-1.8V574.56Z"
                                                 transform="translate(-125.972 -570.031)" />
@@ -104,7 +108,8 @@
                                                 d="M307.677,576.56h-.7a2.608,2.608,0,0,1-2.466-1.2,5.145,5.145,0,0,1-.488-2.494v-6.229h2.23v6.089a2.29,2.29,0,0,0,.222,1.226,1.041,1.041,0,0,0,.934.377h.265Z"
                                                 transform="translate(-130.198 -566.639)" />
                                             <rect id="Rectangle_195" data-name="Rectangle 195" class="cls-1"
-                                                width="4.668" height="2.229" transform="translate(176.922 7.692)" />
+                                                width="4.668" height="2.229"
+                                                transform="translate(176.922 7.692)" />
                                             <path id="Path_319" data-name="Path 319" class="cls-1"
                                                 d="M328.26,577.723h.279v2.229h-.5a3.169,3.169,0,0,1-1.38-.237,1.546,1.546,0,0,1-.71-.711,1.876,1.876,0,0,1-1.839,1.032,1.816,1.816,0,0,1-1.77-.934,1.842,1.842,0,0,1-1.8.934,1.785,1.785,0,0,1-1.741-.906,1.829,1.829,0,0,1-1.588.821h-.586v-2.229h.335a.977.977,0,0,0,.8-.285,1.433,1.433,0,0,0,.229-.9v-.906h2.229v1.477c0,.492.21.739.627.739s.613-.246.613-.739v-2.034h2.23v2.02q0,.753.613.753t.613-.753V574.56h2.23v1.866a1.548,1.548,0,0,0,.25,1.018,1.12,1.12,0,0,0,.864.279"
                                                 transform="translate(-135.594 -570.031)" />
@@ -115,7 +120,8 @@
                                                 d="M349.428,576.56v-2.229h.4a.937.937,0,0,0,.808-.307,2.612,2.612,0,0,0,.209-1.3v-6.089h2.23v6.229a5.059,5.059,0,0,1-.474,2.48,2.521,2.521,0,0,1-2.341,1.212Z"
                                                 transform="translate(-149.641 -566.639)" />
                                             <rect id="Rectangle_196" data-name="Rectangle 196" class="cls-1"
-                                                width="2.229" height="9.921" transform="translate(204.761 0.001)" />
+                                                width="2.229" height="9.921"
+                                                transform="translate(204.761 0.001)" />
                                             <path id="Path_322" data-name="Path 322" class="cls-1"
                                                 d="M5.221,595.59l1.527,10.267H4.019l-.143-1.845H2.921l-.161,1.845H0L1.362,595.59Zm-1.415,6.6q-.2-1.744-.407-4.312-.408,2.948-.512,4.312Z"
                                                 transform="translate(0 -579.037)" />
@@ -141,7 +147,8 @@
                                                 d="M91.4,595.59l1.527,10.267H90.2l-.143-1.845H89.1l-.161,1.845h-2.76l1.362-10.267Zm-1.415,6.6q-.2-1.744-.407-4.312-.408,2.948-.512,4.312Z"
                                                 transform="translate(-36.907 -579.037)" />
                                             <rect id="Rectangle_197" data-name="Rectangle 197" class="cls-1"
-                                                width="2.638" height="10.267" transform="translate(56.4 16.553)" />
+                                                width="2.638" height="10.267"
+                                                transform="translate(56.4 16.553)" />
                                             <path id="Path_330" data-name="Path 330" class="cls-1"
                                                 d="M114.494,598.535h-2.48v-.761a1.5,1.5,0,0,0-.095-.679.35.35,0,0,0-.317-.146.4.4,0,0,0-.365.2,1.142,1.142,0,0,0-.124.6,1.7,1.7,0,0,0,.139.775,2.019,2.019,0,0,0,.755.627,7.61,7.61,0,0,1,2.245,1.737,3.982,3.982,0,0,1,.463,2.188,3.843,3.843,0,0,1-.257,1.617,2.011,2.011,0,0,1-.993.872,3.926,3.926,0,0,1-1.712.352,3.824,3.824,0,0,1-1.83-.406,1.989,1.989,0,0,1-.993-1.033,5.311,5.311,0,0,1-.234-1.782v-.672h2.48v1.249a1.643,1.643,0,0,0,.1.742.4.4,0,0,0,.371.165.435.435,0,0,0,.4-.209,1.2,1.2,0,0,0,.13-.621,1.929,1.929,0,0,0-.247-1.186,7.9,7.9,0,0,0-1.25-.932,12.209,12.209,0,0,1-1.318-.958,2.233,2.233,0,0,1-.536-.824,3.626,3.626,0,0,1-.212-1.345,3.731,3.731,0,0,1,.3-1.724,2.032,2.032,0,0,1,.973-.853,3.885,3.885,0,0,1,1.624-.308,4.238,4.238,0,0,1,1.772.336,1.858,1.858,0,0,1,.97.847,4.482,4.482,0,0,1,.238,1.734Z"
                                                 transform="translate(-46.514 -578.875)" />
@@ -176,7 +183,8 @@
                                                 d="M225.384,601.974h-2.4v-.565a3.969,3.969,0,0,1,.226-1.506,2.085,2.085,0,0,1,.9-.935,4.224,4.224,0,0,1,3.722.054,1.788,1.788,0,0,1,.793,1.129,17.635,17.635,0,0,1,.133,2.755v4.224h-2.492v-.75a1.565,1.565,0,0,1-1.491.9,2.165,2.165,0,0,1-1.234-.378q-.562-.378-.561-1.652v-.691a2.029,2.029,0,0,1,.3-1.288,4.225,4.225,0,0,1,1.479-.8,4.211,4.211,0,0,0,1.35-.666,1.764,1.764,0,0,0,.089-.7,2.356,2.356,0,0,0-.1-.859.337.337,0,0,0-.326-.2c-.174,0-.281.056-.323.168a3.36,3.36,0,0,0-.064.871Zm.812,1.154a1.894,1.894,0,0,0-.714.755,2.99,2.99,0,0,0-.1.875,2.566,2.566,0,0,0,.085.843.336.336,0,0,0,.34.19.314.314,0,0,0,.314-.148,2.417,2.417,0,0,0,.073-.783Z"
                                                 transform="translate(-95.49 -580.31)" />
                                             <rect id="Rectangle_198" data-name="Rectangle 198" class="cls-1"
-                                                width="2.638" height="10.267" transform="translate(134.149 16.553)" />
+                                                width="2.638" height="10.267"
+                                                transform="translate(134.149 16.553)" />
                                             <path id="Path_341" data-name="Path 341" class="cls-1"
                                                 d="M250.022,595.59v2.055h-1.586v8.212h-2.67v-8.212h-1.579V595.59Z"
                                                 transform="translate(-104.572 -579.037)" />
@@ -202,23 +210,26 @@
                                                 d="M323.391,595.59V603.8h1.623v2.055h-4.293V595.59Z"
                                                 transform="translate(-137.347 -579.037)" />
                                             <rect id="Rectangle_199" data-name="Rectangle 199" class="cls-1"
-                                                width="1.934" height="2.093" transform="translate(188.358 24.727)" />
+                                                width="1.934" height="2.093"
+                                                transform="translate(188.358 24.727)" />
                                             <path id="Path_349" data-name="Path 349" class="cls-1"
                                                 d="M336.833,595.59V603.8h1.623v2.055h-4.293V595.59Z"
                                                 transform="translate(-143.104 -579.037)" />
                                             <rect id="Rectangle_200" data-name="Rectangle 200" class="cls-1"
-                                                width="1.934" height="2.093" transform="translate(196.044 24.727)" />
+                                                width="1.934" height="2.093"
+                                                transform="translate(196.044 24.727)" />
                                             <path id="Path_350" data-name="Path 350" class="cls-1"
                                                 d="M353.784,599.9h-2.67v-1.784a3.223,3.223,0,0,0-.085-.972.368.368,0,0,0-.377-.193.4.4,0,0,0-.419.235,3.578,3.578,0,0,0-.089,1.014v4.769a3.337,3.337,0,0,0,.089.977.38.38,0,0,0,.4.229.374.374,0,0,0,.39-.229,3.725,3.725,0,0,0,.092-1.074v-1.29h2.67v.4a7.906,7.906,0,0,1-.225,2.261,2.309,2.309,0,0,1-1,1.169,3.407,3.407,0,0,1-1.9.5,3.931,3.931,0,0,1-1.934-.425,2.064,2.064,0,0,1-1.009-1.176,7.711,7.711,0,0,1-.247-2.261v-3a13.313,13.313,0,0,1,.076-1.665,2.336,2.336,0,0,1,.453-1.069,2.524,2.524,0,0,1,1.046-.808,4.277,4.277,0,0,1,3.484.161,2.187,2.187,0,0,1,1.009,1.137,6.833,6.833,0,0,1,.241,2.118Z"
                                                 transform="translate(-148.804 -578.875)" />
                                             <rect id="Rectangle_201" data-name="Rectangle 201" class="cls-1"
-                                                width="1.934" height="2.093" transform="translate(205.632 24.727)" />
+                                                width="1.934" height="2.093"
+                                                transform="translate(205.632 24.727)" />
                                         </g>
                                     </g>
                                 </svg>
                             </a>
-                            @if(@$site_common_content->footer_description)
-                            <p>{!!@$site_common_content->footer_description!!}</p>
+                            @if (@$site_common_content->footer_description)
+                                <p>{!! @$site_common_content->footer_description !!}</p>
                             @endif
                         </div>
                     </div>
@@ -235,105 +246,118 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="cmnBx pr-30">
-                            @if(@$site_common_content->address)
-                            <div class="fTitle">Address</div>
-                            <p>{!!@$site_common_content->address!!}</p>
+                            @if (@$site_common_content->address)
+                                <div class="fTitle">Address</div>
+                                <p>{!! @$site_common_content->address !!}</p>
                             @endif
                             <div class="social">
-                                @if(@$site_common_content->facebook_link|| @$site_common_content->twitter_link||@$site_common_content->instagram_link||@$site_common_content->linkedIn_link)
-                                <div class="ttle">Follow Us</div>
-                                <div class="socialFlx">
-                                    @if(@$site_common_content->facebook_link)
-                                    <a href="{{@$site_common_content->facebook_link}}">
-                                        <svg viewBox="0 0 9.91 17.46">
-                                            <path id="facebook"
-                                                d="M7.554,4.321c.024-.027.135-.115.573-.115H9.563a.848.848,0,0,0,.847-.847V.85A.848.848,0,0,0,9.564,0L7.432,0A4.388,4.388,0,0,0,4.2,1.255a4.608,4.608,0,0,0-1.218,3.3V5.91H1.347A.848.848,0,0,0,.5,6.757v2.7a.848.848,0,0,0,.847.847H2.978v6.307a.848.848,0,0,0,.847.847h2.8a.848.848,0,0,0,.847-.847V10.306H9.462a.848.848,0,0,0,.847-.847v-2.7a.85.85,0,0,0-.436-.741.861.861,0,0,0-.419-.106H7.468V4.841c0-.348.047-.475.086-.519Zm0,0"
-                                                transform="translate(-0.5 0)" />
-                                        </svg>
-                                    </a>
-                                    @endif
-                                    @if(@$site_common_content->instagram_link)
-                                    <a href="{{ @$site_common_content->instagram_link }}">
-                                        <svg viewBox="0 0 17.745 17.745">
-                                            <g id="Group_183" data-name="Group 183" transform="translate(0)">
-                                                <g id="Group_182" data-name="Group 182" transform="translate(0)">
-                                                    <path id="Path_143" data-name="Path 143"
-                                                        d="M13.313,0H4.441A4.449,4.449,0,0,0,0,4.436v8.873a4.45,4.45,0,0,0,4.436,4.436h8.872a4.45,4.45,0,0,0,4.436-4.436V4.436A4.449,4.449,0,0,0,13.313,0Zm2.957,13.309a2.961,2.961,0,0,1-2.957,2.957H4.441a2.961,2.961,0,0,1-2.957-2.957V4.436A2.961,2.961,0,0,1,4.441,1.479h8.872a2.96,2.96,0,0,1,2.957,2.957v8.873Z"
-                                                        transform="translate(-0.005)" />
-                                                </g>
-                                            </g>
-                                            <g id="Group_185" data-name="Group 185" transform="translate(12.57 2.957)">
-                                                <g id="Group_184" data-name="Group 184">
-                                                    <circle id="Ellipse_14" data-name="Ellipse 14" cx="1.109" cy="1.109"
-                                                        r="1.109" />
-                                                </g>
-                                            </g>
-                                            <g id="Group_187" data-name="Group 187" transform="translate(4.436 4.436)">
-                                                <g id="Group_186" data-name="Group 186">
-                                                    <path id="Path_144" data-name="Path 144"
-                                                        d="M106.841,102.4a4.436,4.436,0,1,0,4.436,4.436A4.436,4.436,0,0,0,106.841,102.4Zm0,7.394a2.958,2.958,0,1,1,2.957-2.958A2.958,2.958,0,0,1,106.841,109.794Z"
-                                                        transform="translate(-102.405 -102.4)" />
-                                                </g>
-                                            </g>
-                                        </svg>
-                                    </a>
-                                    @endif
-                                    @if(@$site_common_content->twitter_link)
-                                    <a href="{{ @$site_common_content->twitter_link }}">
-                                        <svg viewBox="0 0 15.704 16.034">
-                                            <defs>
-                                                <clipPath id="clip-path">
-                                                    <rect id="Rectangle_915" data-name="Rectangle 915" width="15.704"
-                                                        height="16.034" />
-                                                </clipPath>
-                                            </defs>
-                                            <g id="Group_20806" data-name="Group 20806" clip-path="url(#clip-path)">
-                                                <path id="Path_101724" data-name="Path 101724"
-                                                    d="M15.594,15.855,12.807,11.8Q11.246,9.522,9.682,7.251h0L9.405,6.8l.168-.2h0c.277-.311.543-.631.815-.947L14.961.332h0l.3-.33L14.93,0c-.238,0-.477,0-.716,0h-.349l-.125.144h0Q11.42,2.848,9.1,5.551h0l-.331.368-.254-.368h0c-.266-.392-.534-.782-.8-1.172Q6.357,2.4,5,.42L4.738,0,3.931.007c-.148,0-.3,0-.443,0H0l.392.51L.521.7,4.327,6.244Q5.136,7.423,5.944,8.6l.235.352-.164.189Q3.278,12.306.553,15.479c-.147.171-.289.347-.458.552.426,0,.813,0,1.2,0v0h.183l.207-.251.4-.465q2.129-2.479,4.257-4.959h0l.454-.527.2.278h0q1.794,2.623,3.592,5.243l.452.681h.431l3.8,0H15.7c-.052-.083-.08-.131-.111-.176m-2.346-.779-.131,0h-1.36l-.834-1.114h0C8.671,10.705,6.4,7.467,4.13,4.222q-.837-1.2-1.67-2.4h0L2.444,1.8l-.515-.75h.328l0,0h.169c.475,0,.949,0,1.424,0h.2l.3.42h0Q5.281,2.8,6.214,4.133l3.8,5.445,3.455,4.949.361.547-.586,0Z" />
-                                            </g>
-                                        </svg>
-                                    </a>
-                                    @endif
-                                    @if(@$site_common_content->linkedIn_link)
-                                    <a href="{{ @$site_common_content->linkedIn_link}}">
-                                        <svg viewBox="0 0 16.564 16.564">
-                                            <path id="Path_101855" data-name="Path 101855"
-                                                d="M49,46.626V40.559c0-2.982-.642-5.259-4.12-5.259a3.6,3.6,0,0,0-3.251,1.781h-.041V35.569H38.3V46.626h3.437V41.139c0-1.449.269-2.837,2.05-2.837,1.76,0,1.781,1.636,1.781,2.919V46.6H49Z"
-                                                transform="translate(-32.44 -30.062)" />
-                                            <path id="Path_101856" data-name="Path 101856"
-                                                d="M11.3,36.6h3.437V47.656H11.3Z"
-                                                transform="translate(-11.031 -31.092)" />
-                                            <path id="Path_101857" data-name="Path 101857"
-                                                d="M11.988,10a2,2,0,1,0,1.988,1.988A1.988,1.988,0,0,0,11.988,10Z"
-                                                transform="translate(-10 -10)" />
-                                        </svg>
-                                    </a>
-                                    @endif
-                                </div>
+                                @if (
+                                    @$site_common_content->facebook_link ||
+                                        @$site_common_content->twitter_link ||
+                                        @$site_common_content->instagram_link ||
+                                        @$site_common_content->linkedIn_link)
+                                    <div class="ttle">Follow Us</div>
+                                    <div class="socialFlx">
+                                        @if (@$site_common_content->facebook_link)
+                                            <a href="{{ @$site_common_content->facebook_link }}">
+                                                <svg viewBox="0 0 9.91 17.46">
+                                                    <path id="facebook"
+                                                        d="M7.554,4.321c.024-.027.135-.115.573-.115H9.563a.848.848,0,0,0,.847-.847V.85A.848.848,0,0,0,9.564,0L7.432,0A4.388,4.388,0,0,0,4.2,1.255a4.608,4.608,0,0,0-1.218,3.3V5.91H1.347A.848.848,0,0,0,.5,6.757v2.7a.848.848,0,0,0,.847.847H2.978v6.307a.848.848,0,0,0,.847.847h2.8a.848.848,0,0,0,.847-.847V10.306H9.462a.848.848,0,0,0,.847-.847v-2.7a.85.85,0,0,0-.436-.741.861.861,0,0,0-.419-.106H7.468V4.841c0-.348.047-.475.086-.519Zm0,0"
+                                                        transform="translate(-0.5 0)" />
+                                                </svg>
+                                            </a>
+                                        @endif
+                                        @if (@$site_common_content->instagram_link)
+                                            <a href="{{ @$site_common_content->instagram_link }}">
+                                                <svg viewBox="0 0 17.745 17.745">
+                                                    <g id="Group_183" data-name="Group 183"
+                                                        transform="translate(0)">
+                                                        <g id="Group_182" data-name="Group 182"
+                                                            transform="translate(0)">
+                                                            <path id="Path_143" data-name="Path 143"
+                                                                d="M13.313,0H4.441A4.449,4.449,0,0,0,0,4.436v8.873a4.45,4.45,0,0,0,4.436,4.436h8.872a4.45,4.45,0,0,0,4.436-4.436V4.436A4.449,4.449,0,0,0,13.313,0Zm2.957,13.309a2.961,2.961,0,0,1-2.957,2.957H4.441a2.961,2.961,0,0,1-2.957-2.957V4.436A2.961,2.961,0,0,1,4.441,1.479h8.872a2.96,2.96,0,0,1,2.957,2.957v8.873Z"
+                                                                transform="translate(-0.005)" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="Group_185" data-name="Group 185"
+                                                        transform="translate(12.57 2.957)">
+                                                        <g id="Group_184" data-name="Group 184">
+                                                            <circle id="Ellipse_14" data-name="Ellipse 14"
+                                                                cx="1.109" cy="1.109" r="1.109" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="Group_187" data-name="Group 187"
+                                                        transform="translate(4.436 4.436)">
+                                                        <g id="Group_186" data-name="Group 186">
+                                                            <path id="Path_144" data-name="Path 144"
+                                                                d="M106.841,102.4a4.436,4.436,0,1,0,4.436,4.436A4.436,4.436,0,0,0,106.841,102.4Zm0,7.394a2.958,2.958,0,1,1,2.957-2.958A2.958,2.958,0,0,1,106.841,109.794Z"
+                                                                transform="translate(-102.405 -102.4)" />
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </a>
+                                        @endif
+                                        @if (@$site_common_content->twitter_link)
+                                            <a href="{{ @$site_common_content->twitter_link }}">
+                                                <svg viewBox="0 0 15.704 16.034">
+                                                    <defs>
+                                                        <clipPath id="clip-path">
+                                                            <rect id="Rectangle_915" data-name="Rectangle 915"
+                                                                width="15.704" height="16.034" />
+                                                        </clipPath>
+                                                    </defs>
+                                                    <g id="Group_20806" data-name="Group 20806"
+                                                        clip-path="url(#clip-path)">
+                                                        <path id="Path_101724" data-name="Path 101724"
+                                                            d="M15.594,15.855,12.807,11.8Q11.246,9.522,9.682,7.251h0L9.405,6.8l.168-.2h0c.277-.311.543-.631.815-.947L14.961.332h0l.3-.33L14.93,0c-.238,0-.477,0-.716,0h-.349l-.125.144h0Q11.42,2.848,9.1,5.551h0l-.331.368-.254-.368h0c-.266-.392-.534-.782-.8-1.172Q6.357,2.4,5,.42L4.738,0,3.931.007c-.148,0-.3,0-.443,0H0l.392.51L.521.7,4.327,6.244Q5.136,7.423,5.944,8.6l.235.352-.164.189Q3.278,12.306.553,15.479c-.147.171-.289.347-.458.552.426,0,.813,0,1.2,0v0h.183l.207-.251.4-.465q2.129-2.479,4.257-4.959h0l.454-.527.2.278h0q1.794,2.623,3.592,5.243l.452.681h.431l3.8,0H15.7c-.052-.083-.08-.131-.111-.176m-2.346-.779-.131,0h-1.36l-.834-1.114h0C8.671,10.705,6.4,7.467,4.13,4.222q-.837-1.2-1.67-2.4h0L2.444,1.8l-.515-.75h.328l0,0h.169c.475,0,.949,0,1.424,0h.2l.3.42h0Q5.281,2.8,6.214,4.133l3.8,5.445,3.455,4.949.361.547-.586,0Z" />
+                                                    </g>
+                                                </svg>
+                                            </a>
+                                        @endif
+                                        @if (@$site_common_content->linkedIn_link)
+                                            <a href="{{ @$site_common_content->linkedIn_link }}">
+                                                <svg viewBox="0 0 16.564 16.564">
+                                                    <path id="Path_101855" data-name="Path 101855"
+                                                        d="M49,46.626V40.559c0-2.982-.642-5.259-4.12-5.259a3.6,3.6,0,0,0-3.251,1.781h-.041V35.569H38.3V46.626h3.437V41.139c0-1.449.269-2.837,2.05-2.837,1.76,0,1.781,1.636,1.781,2.919V46.6H49Z"
+                                                        transform="translate(-32.44 -30.062)" />
+                                                    <path id="Path_101856" data-name="Path 101856"
+                                                        d="M11.3,36.6h3.437V47.656H11.3Z"
+                                                        transform="translate(-11.031 -31.092)" />
+                                                    <path id="Path_101857" data-name="Path 101857"
+                                                        d="M11.988,10a2,2,0,1,0,1.988,1.988A1.988,1.988,0,0,0,11.988,10Z"
+                                                        transform="translate(-10 -10)" />
+                                                </svg>
+                                            </a>
+                                        @endif
+                                    </div>
                             </div>
                         </div>
                         @endif
                     </div>
                     <div class="col-lg-3 col-12">
                         <div class="cmnBx pl-45">
-                            @if(@$site_common_content->email|| @$site_common_content->phone)
-                            <div class="fTitle">CONTACT US</div>
-                            @if(@$site_common_content->phone)
-                            <a href="tel:{{@$site_common_content->phone}}" class="call"> {{@$site_common_content->phone}}</a>
-                            @endif
-                            @if(@$site_common_content->email)
-                            <a href="mailto:sales@almasaralsaree.com" class="mail">sales@almasaralsaree.com</a>
-                            @endif
+                            @if (@$site_common_content->email || @$site_common_content->phone)
+                                <div class="fTitle">CONTACT US</div>
+                                @if (@$site_common_content->phone)
+                                    <a href="tel:{{ @$site_common_content->phone }}" class="call">
+                                        {{ @$site_common_content->phone }}</a>
+                                @endif
+                                @if (@$site_common_content->email)
+                                    <a href="mailto:sales@almasaralsaree.com"
+                                        class="mail">sales@almasaralsaree.com</a>
+                                @endif
                             @endif
                             <div class="newsLtr">
                                 <div class="ttle">Subscribe News LEtter</div>
                                 <div class="flB">
                                     <div class="ltB">
-                                        <input type="text" class="form-control" placeholder="Enter Email Address">
+                                        <input type="text" class="form-control"
+                                            placeholder="Enter Email Address">
                                         <div class="icon">
                                             <svg viewBox="0 0 13.5 9.492">
                                                 <g id="mail" transform="translate(0 -76)">
-                                                    <g id="Group_445" data-name="Group 445" transform="translate(0 76)">
+                                                    <g id="Group_445" data-name="Group 445"
+                                                        transform="translate(0 76)">
                                                         <path id="Path_351" data-name="Path 351" class="cls-1"
                                                             d="M12.313,76H1.187A1.188,1.188,0,0,0,0,77.187v7.119a1.188,1.188,0,0,0,1.187,1.187H12.313A1.188,1.188,0,0,0,13.5,84.306V77.187A1.188,1.188,0,0,0,12.313,76Zm-.166.791L7.589,81.325a1.187,1.187,0,0,1-1.679,0L1.353,76.791ZM.791,84.145v-6.8l3.418,3.4Zm.562.557,3.417-3.4.582.579a1.978,1.978,0,0,0,2.8,0l.582-.579,3.417,3.4Zm11.356-.557-3.418-3.4,3.418-3.4Z"
                                                             transform="translate(0 -76)" />
@@ -369,10 +393,11 @@
                     © <?= date('Y') ?> All Rights Reserved Al Masar Al Saree 2023
                 </div>
                 <div class="RSide">
-                    @if(@$site_common_content->payment_image)
-                    <div class="pay">
-                        <img src="{{Storage::disk('public')->exists($site_common_content->payment_image)? Storage::url($site_common_content->payment_image):asset($site_common_content->payment_image)}}" alt="">
-                    </div>
+                    @if (@$site_common_content->payment_image)
+                        <div class="pay">
+                            <img src="{{ Storage::disk('public')->exists($site_common_content->payment_image) ? Storage::url($site_common_content->payment_image) : asset($site_common_content->payment_image) }}"
+                                alt="">
+                        </div>
                     @endif
                     <div class="design">
                         Designed By: Inter Smart

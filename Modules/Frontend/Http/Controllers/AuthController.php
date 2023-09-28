@@ -3,13 +3,15 @@
 namespace Modules\Frontend\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Country;
 use Illuminate\Support\Str;
 use App\Helpers\AdminHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Helpers\FrontendHelper;
-use App\Models\Country;
+use App\Models\SiteCommonContent;
 use App\Models\SiteCommonSetting;
+use App\Models\UserEmailVerify;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +22,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Modules\Frontend\Http\Requests\UserRegisterRequest;
 
 class AuthController extends Controller
@@ -85,31 +88,41 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->office_phone = $request->office_phone;
-
-        if($request->has('attachment')) {
+        $user->phone_verified = 0;
+        $user->office_phone_verified = 0;
+        $user->email_verified = 0;
+        $user->register_status = 1; //registration completed
+        
+        if($request->hasFile('attachment')) {
             $file = $request->file('attachment');
-            $user->file_name = $user->uploadImage($file, $user->getImageDirectory());
+            $user->attachment = $user->uploadImage($file, $user->getImageDirectory());
         }
 
         if($user->save())
         {
-            if($user->email) { 
-                $email_verification_code = mt_rand(100000, 999999);
-                $user->emailOtps()->create([
-                    'code' => $email_verification_code,
-                ]);
-                // $site_settings = SiteCommonSetting::first();
-                Mail::send('frontend::emails.registration', compact('user', 'site_settings'), function($message) use($request){
+            if($user->email) {
+                $token = Str::random(64);
+                // Send email verification notification
+                UserEmailVerify::create([
+                    'user_id' => $user->id, 
+                    'token' => $token
+                  ]);
+        
+                Mail::send('frontend::emails.email-verify', ['token' => $token], function($message) use($request){
                     $message->to($request->email);
-                    $message->subject(AdminHelper::getValueByKey('website_name'). ' - Registration Successfully Done');
+                    $message->subject('Email Verification Mail');
                 });
             }
+            
             if($user->phone) {
-                $phone_verification_code = mt_rand(100000, 999999);
+                //sending phone otp
+                $phone_verification_code = mt_rand(1000, 9999);
                 $user->phoneOtps()->create([
                     'code' => $phone_verification_code,
                     'phone_number' => $user->phone,
                 ]);
+
+                session()->put('user', $user);
 
                 return view('frontend::auth.phone-verification', compact('user'));
             } else {
@@ -118,6 +131,27 @@ class AuthController extends Controller
         } else {
             return redirect()->back()->withErrors(['email' => 'Some error occurred while creating account']);
         }
+    }
+
+    public function verifyEmail($token)
+    {
+        $verifyUser = UserEmailVerify::where('token', $token)->latest()->first();
+  
+        $message = 'Sorry your email cannot be identified.';
+  
+        if(!is_null($verifyUser) ){
+            $user = $verifyUser->user;
+              
+            if(!$user->email_verified) {
+                $verifyUser->user->email_verified = 1;
+                $verifyUser->user->save();
+                $message = "Your e-mail is verified. You can now login.";
+            } else {
+                $message = "Your e-mail is already verified. You can now login.";
+            }
+        }
+
+        return to_route('home')->with('message', $message);
     }
 
     public function showForgotPasswordForm()
