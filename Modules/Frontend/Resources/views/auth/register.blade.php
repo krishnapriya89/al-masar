@@ -172,7 +172,7 @@
                 },
                 messages: {
                     attachment: {
-                        extension: 'Please choose file type of docx,doc,pdf'
+                        extension: 'Please choose file type of pdf'
                     }
                 },
                 errorElement: 'span',

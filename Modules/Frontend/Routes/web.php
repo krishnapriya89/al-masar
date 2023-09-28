@@ -24,6 +24,10 @@ use Modules\Frontend\Http\Controllers\HomeController;
 //user
 Route::get('/register', [AuthController::class,'showRegisterForm'])->name('user.register.form');
 Route::post('/register-store', [AuthController::class,'register'])->name('user.register.store');
+Route::get('/verify-phone', [AuthController::class,'showPhoneVerificationForm'])->name('user.show-phone-verification.form');
+Route::post('/verify-phone-store', [AuthController::class,'verifyPhone'])->name('user.verify-phone');
+Route::get('/verify-office-phone', [AuthController::class,'showOfficePhoneVerificationForm'])->name('user.show-office-phone-verification.form');
+Route::post('/verify-office-phone-store', [AuthController::class,'verifyOfficePhone'])->name('user.verify-office-phone');
 Route::get('/login', [AuthController::class,'showLoginForm'])->name('user.login.form');
 
 Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('user.email.verify'); 
