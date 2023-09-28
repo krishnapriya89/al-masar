@@ -8,6 +8,7 @@ use Modules\Admin\Http\Controllers\AuthController;
 use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Admin\Http\Controllers\AdminConfigController;
 use Modules\Admin\Http\Controllers\ContactController;
+use Modules\Admin\Http\Controllers\ContactEnquiryController;
 use Modules\Admin\Http\Controllers\StateController;
 use Modules\Admin\Http\Controllers\CountryController;
 use Modules\Admin\Http\Controllers\DashboardController;
@@ -64,7 +65,7 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::delete('state/{state}', [StateController::class, 'destroy'])->name('state.destroy');
         //vendor
         Route::resource('vendor', VendorController::class);
-        
+
         //product and related data routes
         //main category
         Route::resource('product-main-category', ProductMainCategoryController::class);
@@ -99,5 +100,8 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         // site common cms
         Route::get('site-common-cms/edit',[SiteSettingsController::class,'edit'])->name('site-common-cms.edit');
         Route::post('site-common-cms/update/{id}',[SiteSettingsController::class,'update'])->name('site-common-cms.update');
+        //Contact Enquiry Listing
+        Route::resource('contact-enquiry-listing',ContactEnquiryController::class);
+        Route::post('reply',[ContactEnquiryController::class,'addReply'])->name('contact-enquiry-listing.reply');
     });
 });

@@ -155,9 +155,9 @@
                     </ul>
                 </li>
                 <li class="nav-header">CMS</li>
-                <li class="nav-item {{ Nav::isRoute(['home-banner.index','home-banner.create','home-banner.edit','about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit','privacy-policy.edit','terms-and-conditions.edit','site-common-cms.edit'],'menu-open') }}">
+                <li class="nav-item {{ Nav::isRoute(['home-banner.index','home-banner.create','home-banner.edit','about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit','privacy-policy.edit','terms-and-conditions.edit','site-common-cms.edit','contact-enquiry-listing.index','contact-enquiry-listing.show'],'menu-open') }}">
                     <a href="#"
-                       class="nav-link {{ Nav::isRoute(['about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit','privacy-policy.edit','terms-and-conditions.edit','site-common-cms.edit']) }}  {{ Nav::isResource('home-banner') }} ">
+                       class="nav-link {{ Nav::isRoute(['about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit','privacy-policy.edit','terms-and-conditions.edit','site-common-cms.edit']) }}  {{ Nav::isResource('home-banner') }} {{ Nav::isResource('contact-enquiry-listing') }}">
                         <i class="nav-icon fa fa-info"></i>
                         <p>
                        Cms
@@ -198,6 +198,13 @@
                                class="nav-link {{ Nav::isRoute('contact.edit') }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Contact</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('contact-enquiry-listing.index')  }}"
+                               class="nav-link {{ Nav::isResource('contact-enquiry-listing') }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Contact Enquiry Listing</p>
                             </a>
                         </li>
                         <li class="nav-item">

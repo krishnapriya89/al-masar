@@ -38,6 +38,7 @@
         rel="stylesheet">
         <link href="//cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel=" stylesheet" href="{{ asset('backend/plugins/toastr/toastr.min.css') }}">
 
         @stack('css')
 
@@ -94,8 +95,12 @@
         @yield('content')
         {{-- footer --}}
         @include('frontend::layouts.footer')
+        {{-- toastr --}}
+        @include('frontend::layouts.toastr-message')
         <!-- CUSTOME --->
         <script type="text/javascript" src="{{ asset('frontend/js/app.min.js') }}"></script>
+        {{-- Toastr --}}
+        <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
 
         @stack('js')
         <script type="text/javascript" src="{{asset('frontend/js/custom.js')}}"></script>
