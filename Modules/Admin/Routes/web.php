@@ -21,6 +21,7 @@ use Modules\Admin\Http\Controllers\WhyChooseController;
 use Modules\Admin\Http\Controllers\ProductController;
 use Modules\Admin\Http\Controllers\ProductSubCategoryController;
 use Modules\Admin\Http\Controllers\ProductMainCategoryController;
+use Modules\Admin\Http\Controllers\UserController;
 use Modules\Admin\Http\Controllers\VendorController;
 
 /*
@@ -77,6 +78,13 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         //product
         Route::resource('product', ProductController::class);
 
+        // user management
+        Route::resource('user-management', UserController::class);
+        //change status
+        Route::post('change-status',[UserController::class,'changeStatus'])->name('user-management.change-status');
+        //verify user
+        Route::post('verify-user',[UserController::class,'VerifyUser'])->name('user-management.verify-user');
+
         //Home Banner
         Route::resource('home-banner',HomeBannerController::class);
         //about us
@@ -103,5 +111,11 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         //Contact Enquiry Listing
         Route::resource('contact-enquiry-listing',ContactEnquiryController::class);
         Route::post('reply',[ContactEnquiryController::class,'addReply'])->name('contact-enquiry-listing.reply');
+    });
+
+    Route::fallback(function () {
+        if (request()->is('al-masar-admin-auth/*')) {
+            return response()->view('admin::errors.404', [], Response::HTTP_NOT_FOUND);
+        }
     });
 });

@@ -55,77 +55,8 @@
                                 <p>Sub Category</p>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a href="{{ route('flower-type.index') }}"
-                               class="nav-link {{ Nav::isResource('flower-type') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Flower Type</p>
-                            </a>
-                        </li> --}}
-                        {{-- <li class="nav-item">
-                        <a href="{{ route('delivery-location.index') }}"
-                           class="nav-link {{ Nav::isResource('delivery-location') }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Delivery Location</p>
-                        </a> --}}
-                    {{-- </li>
-                        <li class="nav-item">
-                            <a href="{{ route('metro-station-category.index') }}"
-                               class="nav-link {{ Nav::isResource('metro-station-category') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Metro Station Category</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('metro-station.index') }}"
-                               class="nav-link {{ Nav::isResource('metro-station') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Metro Station</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('product-tag.index') }}"
-                               class="nav-link {{ Nav::isResource('product-tag') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tag</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('product-feature.index') }}"
-                               class="nav-link {{ Nav::isResource('product-feature') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Feature</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('time-slot.index') }}"
-                               class="nav-link {{ Nav::isResource('time-slot') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Time slot</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('sub-product.index') }}"
-                               class="nav-link {{ Nav::isResource('sub-product') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Sub Product</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('time-slot.index') }}"
-                               class="nav-link {{ Nav::isResource('time-slot') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Time slot</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('product-collection.index') }}"
-                               class="nav-link {{ Nav::isResource('product-collection') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Product Collection</p>
-                            </a>
-                        </li>
-                    </ul> --}}
+                    </ul>
+                </li>
 
                 {{-- <li class="nav-header">ORDER MANAGEMENT</li> --}}
                 {{-- <li class="nav-item {{ Nav::hasSegment('order', 2, 'menu-open') }} {{ Nav::hasSegment('product-return', 2, 'menu-open') }}"> --}}
@@ -151,8 +82,17 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Returns</p>
                             </a>
-                        </li> --}}
+                        </li>
                     </ul>
+                </li> --}}
+                <li class="nav-header">User Management</li>
+                <li class="nav-item">
+                    <a href="{{ route('user-management.index') }}" class="nav-link {{ Nav::isRoute('user-management.index') }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            User Management
+                        </p>
+                    </a>
                 </li>
                 <li class="nav-header">CMS</li>
                 <li class="nav-item {{ Nav::isRoute(['home-banner.index','home-banner.create','home-banner.edit','about-us.edit','why-choose.edit','how-to-buy.edit','contact.edit','privacy-policy.edit','terms-and-conditions.edit','site-common-cms.edit','contact-enquiry-listing.index','contact-enquiry-listing.show'],'menu-open') }}">
