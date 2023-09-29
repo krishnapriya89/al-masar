@@ -105,7 +105,6 @@
                     @media only screen and ( min-width: 992px )
                         height: 43px
                         font-size: 14px
-
         .TableBx
             overflow: visible
             &::-webkit-scrollbar
@@ -524,3 +523,682 @@
             color: #fff
             font-weight: 600
             text-transform: uppercase
+        .cmnFlxBx
+            @media only screen and ( min-width: 992px )
+                display: flex
+                flex-wrap: wrap
+
+            .lftBx
+                margin-bottom: 20px
+                @media only screen and ( min-width: 992px )
+                    margin-bottom: 0
+                    padding-right: 30px
+                    width: calc( 100% - 300px )
+                @media only screen and ( min-width: 1441px )
+                    width: calc( 100% - 376px )
+                table
+                    width: 100%
+                    thead
+                        tr
+                            th
+                                background: #000
+                                padding: 12px 23px
+                                color: #fff
+                                font-size: 14px
+                                font-weight: 500
+                                text-align: center
+                                &:first-child
+                                    text-align: left
+                                    width: 60%
+                    tbody
+                        tr
+                            td
+                                padding: 12px 23px
+                                background: #fff
+                                font-size: 12px
+                                font-weight: 500
+                                text-align: center
+                                &:first-child
+                                    text-align: left
+                                    width: 60%
+
+                .nav-tabs
+                    border: none
+                    .nav-item
+                        width: 140px
+                        height: 40px
+                        @media only screen and ( min-width: 576px )
+                            width: 180px
+                            height: 44px
+
+                        button
+                            width: 100%
+                            height: 100%
+                            display: flex
+                            align-items: center
+                            justify-content: center
+                            font-size: 14px
+                            color: #000
+                            font-weight: 600
+                            border-radius: 0
+                            border: none
+                            outline: none
+                            box-shadow: none
+                            @media only screen and ( min-width: 576px )
+                                font-size: 16px
+                .tab-content
+                    background: #fff
+                    padding: 39px 30px
+                    .AddressFlx
+                        @media only screen and ( min-width: 768px )
+                            display: flex
+                        .ltB
+                            display: flex
+                            flex-wrap: wrap
+                            margin: 0 -10px
+                            @media only screen and ( min-width: 768px )
+                                padding-right: 26px
+                                width: calc( 100% - 150px )
+                            @media only screen and ( min-width: 1200px )
+                                width: calc( 100% - 188px )
+                            .item
+                                padding: 0 10px
+                                margin-bottom: 20px
+                                width: 100%
+                                @media only screen and ( min-width: 576px )
+                                    width: calc( 100% / 2 )
+                                .adresBox
+                                    position: relative
+                                    input[type="radio"]
+                                        display: none
+
+                                        &:checked + label
+                                            position: relative
+                                            .topBFlx
+                                                .dfault
+                                                    opacity: 1
+                                                    visibility: visible
+                                    label
+                                        border: 1px solid #DBDBDB
+                                        border-radius: 6px
+                                        background-color: rgb(255, 255, 255)
+                                        padding: 8px
+                                        width: 100%
+                                        position: relative
+                                        margin: 0
+                                        cursor: pointer
+                                        .topBFlx
+                                            display: flex
+                                            align-items: center
+                                            justify-content: space-between
+                                            .dfault
+                                                opacity: 0
+                                                visibility: hidden
+                                            .edit, .dlt
+                                                img
+                                                    height: 13px
+                                            .dlt
+                                                margin-left: 7px
+                                        .txtBx
+                                            padding: 0 20px 20px
+                                            .name
+                                                font-size: 14px
+                                                color: rgb(0, 0, 0)
+                                                font-weight: 400
+                                                margin-bottom: 5px
+                                            .addres, .tele
+                                                font-size: 14px
+                                                line-height: 20px
+                                                font-weight: 300
+                                                color: #000000
+                                            a
+                                                font-size: 14px
+                                                line-height: 20px
+                                                font-weight: 300
+                                                color: #000000
+                                                span
+                                                    padding: 0 5px
+                        .newAdress
+                            border-radius: 5px
+                            height: calc( 100% - 20px )
+                            background: #efefef
+                            display: flex
+                            align-items: center
+                            justify-content: center
+                            text-align: center
+                            padding: 25px
+                            width: 100%
+                            margin-bottom: 20px
+                            @media only screen and ( min-width: 768px )
+                                margin-bottom: 0
+                                width: 150px
+                            @media only screen and ( min-width: 1200px )
+                                width: 188px
+
+                            a
+                                display: block
+                                color: #000
+                                font-size: 12px
+                                font-weight: 400
+                                text-transform: capitalize
+                                .icon
+                                    background: $basecolor
+                                    width: 25px
+                                    height: 25px
+                                    border-radius: 50%
+                                    font-size: 18px
+                                    display: flex
+                                    align-items: center
+                                    justify-content: center
+                                    margin: 6px auto
+                                    color: #fff
+                                    transition: all 0.5s ease-out
+                                    line-height: 1px
+                    .agree
+                        display: flex
+                        align-items: center
+                        position: relative
+                        input[type=checkbox]
+                            width: 14px !important
+                            height: 14px !important
+                            position: relative
+                            z-index: 1
+                            outline: none
+                            visibility: hidden
+                            border-radius: 1px
+                            padding: 0
+                            height: initial
+                            width: initial
+                            margin-bottom: 0
+                            display: none
+                            cursor: pointer
+                            @media only screen and (max-width: 576px)
+                                margin-top: 5px
+                            &:checked
+                                &::after
+                                    opacity: 1
+                                    visibility: visible
+                                & + label:after
+                                    content: ''
+                                    display: block
+                                    position: absolute
+                                    background: url(../images/check1.svg) no-repeat
+                                    width: 8px
+                                    height: 6px
+                                    background-size: contain
+                                    left: 4px
+                                    top: 4px
+                        label
+                            margin: 0
+                            color: #000000
+                            font-weight: 400
+                            display: flex
+                            align-items: center
+                            cursor: pointer
+                            position: relative
+                            cursor: pointer
+                            padding-left: 24px
+                            font-size: 12px
+                            line-height: 15px
+                            &:before
+                                content: ""
+                                -webkit-appearance: none
+                                cursor: pointer
+                                position: absolute
+                                left: 0px
+                                vertical-align: middle
+                                display: inline-block
+                                background-color: white
+                                visibility: visible
+                                border-radius: 2px
+                                border: solid 1px #CDCDCD
+                                width: 14px
+                                height: 14px
+                                top: 0
+                                background: #F9F9F9
+
+                .paymentBx
+                    padding: 28px 30px 40px
+                    background: #fff
+                    margin-top: 13px
+                    .Title
+                        font-size: 18px
+                        color: #000
+                        font-weight: 600
+                        margin-bottom: 12px
+                    .paymentBox
+                        ul
+                            li
+                                display: flex
+                                align-items: center
+                                cursor: pointer
+                                width: fit-content
+                                margin-bottom: 25px
+                            .rdBtn
+                                display: flex
+                                align-items: center
+                                input[type=radio]
+                                    width: 17px !important
+                                    height: 17px !important
+                                    position: relative
+                                    z-index: 1
+                                    outline: none
+                                    visibility: hidden
+                                    cursor: pointer
+                                    top: 0
+                                    border-radius: 50%
+                                    &::before
+                                        content: ""
+                                        cursor: pointer
+                                        position: absolute
+                                        left: 0px
+                                        top: 0px
+                                        display: inline-block
+                                        border: 1px solid #707070
+                                        background-color: white
+                                        visibility: visible
+                                        width: 17px
+                                        height: 17px
+                                        transition: ease-in-out all 0.3s
+                                        border-radius: 50%
+                                    &::after
+                                        content: ""
+                                        visibility: visible
+                                        display: inline-block
+                                        cursor: pointer
+                                        width: 9px
+                                        height: 9px
+                                        position: absolute
+                                        left: 0
+                                        bottom: 0
+                                        right: 0
+                                        top: 0
+                                        margin: auto
+                                        background-size: contain
+                                        opacity: 0
+                                        visibility: hidden
+                                        transition: ease-in-out all 0.3s
+                                        background: $basecolor
+                                        border-radius: 50%
+                                    &:checked
+                                        &::after
+                                            opacity: 1
+                                            visibility: visible
+                                label
+                                    margin: 0
+                                .label
+                                    display: flex
+                                    align-items: center
+                                    font-size: 12px
+                                    font-weight: 500
+                                    color: #1A2D14
+                                    margin: 0 10px
+                                    cursor: pointer
+                                    .icon
+                                        min-width: 30px
+                                        margin-right: 10px
+                                        @media only screen and ( min-width: 576px )
+                                            min-width: 50px
+                                            margin-right: 15px
+                                        img
+                                            @media only screen and ( max-width: 576px )
+                                                width: 30px
+
+                        .bankAddress
+                            max-width: 313px
+                            margin-left: 25px
+                            font-size: 12px
+                            font-weight: 400
+                            color: #000
+                            line-height: 20px
+            .ritBx
+                padding: 15px 30px 30px
+                background: #fff
+                height: 100%
+                @media only screen and ( min-width: 992px )
+                    width: 300px
+                @media only screen and ( min-width: 1441px )
+                    width: 376px
+                .title
+                    font-size: 18px
+                    color: #031717
+                    font-weight: 700
+                    padding-bottom: 10px
+                    border-bottom: solid 1px rgba(112, 112, 112, .20)
+                    margin-bottom: 15px
+                ul
+                    li
+                        display: flex
+                        justify-content: space-between
+                        margin-bottom: 10px
+                        .lt
+                            font-weight: 600
+                            color: #000
+                            font-size: 14px
+                            @media only screen and ( min-width: 576px )
+                                font-size: 16px
+                            span
+                                display: block
+                                font-size: 14px
+                                font-weight: 500
+                                margin-top: 10px
+
+                        .rt
+                            color: #535353
+                            font-weight: 600
+                            text-align: right
+                            font-size: 14px
+                            @media only screen and ( min-width: 576px )
+                                font-size: 16px
+                            span
+                                display: block
+                                font-size: 14px
+                                color: #535353
+                                font-weight: 500
+                                margin-top: 10px
+                        &.total
+                            padding-top: 10px
+                            border-top: solid 1px rgba(112, 112, 112, .23)
+                            margin-top: 15px
+                            .lt
+                                color: #000
+                                font-weight: 500
+                                font-size: 16px
+                                @media only screen and ( min-width: 992px )
+                                    font-size: 18px
+                            .rt
+                                color: #000
+                                font-weight: 700
+                                font-size: 16px
+                                @media only screen and ( min-width: 992px )
+                                    font-size: 18px
+                .txt
+                    font-size: 12px
+                    font-weight: 400
+                    color: #000
+                    margin-top: 20px
+                    margin-bottom: 15px
+                    span
+                        font-weight: 600
+                .agree
+                    display: flex
+                    align-items: center
+                    position: relative
+                    input[type=checkbox]
+                        width: 14px !important
+                        height: 14px !important
+                        position: relative
+                        z-index: 1
+                        outline: none
+                        visibility: hidden
+                        border-radius: 1px
+                        padding: 0
+                        height: initial
+                        width: initial
+                        margin-bottom: 0
+                        display: none
+                        cursor: pointer
+                        @media only screen and (max-width: 576px)
+                            margin-top: 5px
+                        &:checked
+                            &::after
+                                opacity: 1
+                                visibility: visible
+                            & + label:after
+                                content: ''
+                                display: block
+                                position: absolute
+                                background: url(../images/check1.svg) no-repeat
+                                width: 8px
+                                height: 6px
+                                background-size: contain
+                                left: 4px
+                                top: 4px
+                    label
+                        margin: 0
+                        color: #000000
+                        font-weight: 400
+                        display: flex
+                        align-items: center
+                        cursor: pointer
+                        position: relative
+                        cursor: pointer
+                        padding-left: 24px
+                        font-size: 12px
+                        line-height: 15px
+                        &:before
+                            content: ""
+                            -webkit-appearance: none
+                            cursor: pointer
+                            position: absolute
+                            left: 0px
+                            vertical-align: middle
+                            display: inline-block
+                            background-color: white
+                            visibility: visible
+                            border-radius: 2px
+                            border: solid 1px #CDCDCD
+                            width: 14px
+                            height: 14px
+                            top: 0
+                            background: #F9F9F9
+                .buttonFlx
+                    display: flex
+                    flex-wrap: wrap
+                    margin: 0 -7px
+                    margin-top: 24px
+                    .item
+                        width: calc( 100% / 2 )
+                        padding: 0 7px
+                        &.w100
+                            width: 100%
+                        button, a
+                            width: 100%
+                            border-radius: 23px
+                            font-size: 14px
+                            color: #fff
+                            font-weight: 600
+                            text-transform: uppercase
+                            height: 38px
+                            @media only screen and ( min-width: 992px )
+                                height: 42px
+                            &.confirm
+                                background: #000
+                            &.cancel
+                                background: $basecolor
+        .addressFormBx
+            padding: 30px 0 0
+            @media only screen and ( min-width: 992px )
+                padding: 30px 0 0
+            @media only screen and ( min-width: 1200px )
+                padding: 39px 0 0
+            .formBx
+                max-width: 813px
+                margin: auto
+                background: #fff
+                padding: 25px 20px
+                @media only screen and ( min-width: 768px )
+                    padding: 30px 30px
+                @media only screen and ( min-width: 1200px )
+                    padding: 37px 34px
+
+                .title
+                    font-size: 18px
+                    font-weight: 600
+                    color: #000
+                    margin-bottom: 22px
+                .row
+                    margin: 0 -6px
+                    &>*
+                        padding: 0 6px
+                .form-group
+                    margin-bottom: 12px
+                    position: relative
+                    .Vfd, .ntVfd
+                        position: absolute
+                        right: 12px
+                        top: 0
+                        width: 74px
+                        height: 25px
+                        border-radius: 4px
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        font-size: 12px
+                        color: #fff
+                        font-weight: 500
+                        .icon
+                            margin-right: 2px
+                        &.Vfd
+                            background: #07D97E
+                        &.ntVfd
+                            background: #E7151F
+
+                .form-control
+                    border: solid 1px #C8C8C8
+                    border-radius: 5px
+                    padding: 5px 18px
+                    height: 40px
+                    @media only screen and ( min-width: 992px )
+                        height: 45px
+                    @media only screen and ( min-width: 1441px )
+                        height: 53px
+
+                .select2
+                    height: 53px
+                    border: solid 1px #C8C8C8
+                    border-radius: 5px
+                .fileUploadInput
+                    position: relative
+                    display: flex
+                    align-items: center
+                    justify-content: space-between
+                    width: 100%
+                    border: solid 1px #C8C8C8
+                    border-radius: 5px
+                    height: 53px
+                    padding: 5px 18px
+                    .custom-file-upload
+                        margin-bottom: 0
+                        font-size: 14px
+                        color: #414040
+                        font-weight: 500
+                    .fileInput
+                        opacity: 0
+                        position: absolute
+                        padding: 0
+                        height: 100%
+                        width: 100%
+                        z-index: 10
+                    .iconBx
+                        height: 25px
+                        width: 103px
+                        border-radius: 7px
+                        background: #FFE8E9
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        font-size: 12px
+                        color: #414040
+                        font-weight: 500
+                        svg
+                            width: 11px
+                            fill: #000
+                            margin-left: 7px
+                .btnBx
+                    display: flex
+                    align-items: center
+                    justify-content: flex-end
+                    margin-top: 20px
+                    button, a
+                        width: 170px
+                        height: 42px
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        border: solid 1px #000
+                        border-radius: 21px
+                        font-size: 14px
+                        color: #000
+                        font-weight: 600
+                        text-transform: uppercase
+                        &.save
+                            background: #000
+                            color: #fff
+                        &.cancel
+                            background: #fff
+                            margin-left: 18px
+                        &:hover
+                            border-color: $basecolor
+                            span
+                                color: #fff
+        .otpFLxBx
+            padding: 80px 0 0
+            .otpBx
+                max-width: 357px
+                background: #fff
+                margin: auto
+                padding: 87px 38px 75px
+                text-align: center
+                .title
+                    color: #000
+                    font-weight: 600
+                    text-align: center
+                    font-size: 20px
+                    margin-bottom: 15px
+                    @media only screen and ( min-width: 576px )
+                        margin-bottom: 20px
+                        font-size: 22px
+                    @media only screen and ( min-width: 768px )
+                        font-size: 25px
+                .subT
+                    font-size: 14px
+                    color: #A5A5A5
+                    font-weight: 500
+                    line-height: 20px
+                    text-align: center
+                    span
+                        display: block
+                        font-size: 15px
+                        font-weight: 700
+                        color: #414040
+                .optB
+                    margin-top: 30px
+                    display: flex
+                    justify-content: space-between
+                    margin-bottom: 25px
+                    .otp
+                        width: 40px
+                        height: 32px
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        border-bottom: solid 1px rgba(112, 112, 112, .21)
+                        text-align: center
+                        font-size: 18px
+                        color: #414040
+                        font-weight: 700
+                        &::placeholder
+                            font-size: 18px
+                            color: #414040
+                            font-weight: 700
+                p
+                    font-size: 14px
+                    color: #414040
+                    font-weight: 500
+                    margin: 0
+                    a
+                        font-size: 14px
+                        text-transform: uppercase
+                        text-decoration: none
+                .btn-submit
+                    width: 100%
+                    height: 42px
+                    background: $basecolor
+                    color: #fff
+                    margin-top: 40px
+        .dashBoardFlx
+            display: flex
+            flex-wrap: wrap
+            .ltBx
+                width: 313px

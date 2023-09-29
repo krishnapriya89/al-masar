@@ -1,5 +1,5 @@
 @extends('frontend::layouts.app')
-@section('title', 'Home')
+@section('title', 'Phone Verification')
 
 @section('content')
     <div id="pageWrapper" class="registerPage InnerPage">
@@ -13,7 +13,7 @@
                         <div class="ritBx">
                             <div class="title">OTP Verification</div>
                             <div class="subT">Enter the OTP send to Phone: <span>{{ $phoneNumber }}</span></div>
-                            <div class="subT">Code <span class="otp-cls"> {{ $phone_verification_code }}</span></div>
+                            {{-- <div class="subT">Code <span class="otp-cls"> {{ $phone_verification_code }}</span></div> --}}
                             <form action="{{ route('user.verify-phone') }}" id="PhoneOtpForm" class="optB" method="POST" autocomplete="off">
                                 @csrf
                                 <input class="otp" name="otp1" value="{{ old('otp1') }}" type="text" oninput='digitValidate(this)' onkeyup='tabChange(1)'

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('login_otps', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->tinyInteger('method')->default(1)->comment('1-phone, 2-email'); // 'email' or 'phone'
             $table->string('identifier'); // email address or phone number
             $table->string('code');

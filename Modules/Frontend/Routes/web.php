@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
 use Modules\Frontend\Http\Controllers\AuthController;
 use Modules\Frontend\Http\Controllers\HomeController;
+use Modules\Frontend\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use Modules\Frontend\Http\Controllers\HomeController;
 //     Route::get('/', 'FrontendController@index');
 // });
 
-//user
+//user registration and login
 Route::get('/register', [AuthController::class,'showRegisterForm'])->name('user.register.form');
 Route::post('/register-store', [AuthController::class,'register'])->name('user.register.store');
 Route::get('/verify-phone', [AuthController::class,'showPhoneVerificationForm'])->name('user.show-phone-verification.form');
@@ -30,8 +31,17 @@ Route::get('/verify-office-phone', [AuthController::class,'showOfficePhoneVerifi
 Route::post('/verify-office-phone-store', [AuthController::class,'verifyOfficePhone'])->name('user.verify-office-phone');
 Route::post('/resend-otp', [AuthController::class,'resendOtp'])->name('user.resend.otp');
 Route::get('/login', [AuthController::class,'showLoginForm'])->name('user.login.form');
+Route::post('/login-otp', [AuthController::class, 'login'])->name('user.login');
+Route::post('/verify-login-otp', [AuthController::class, 'verifyLoginOtp'])->name('user.verify-login-otp');
+//email verification
+Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('user.email.verify');
 
-Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('user.email.verify'); 
+
+Route::group(['middleware' => 'auth.user'], function () {
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+});
+
+
 //home
 Route::get('/',[HomeController::class,'index'])->name('home');
 //about

@@ -1,5 +1,5 @@
 @extends('frontend::layouts.app')
-@section('title', 'Home')
+@section('title', 'Registration')
 
 @section('content')
     <div id="pageWrapper" class="registerPage InnerPage">

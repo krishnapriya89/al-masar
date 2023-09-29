@@ -25,6 +25,7 @@ return new class extends Migration
             $table->tinyInteger('phone_verified')->default(0)->comment('0-Not Verified, 1-Verified');
             $table->tinyInteger('office_phone_verified')->default(0)->comment('0-Not Verified, 1-Verified');
             $table->tinyInteger('email_verified')->default(0)->comment('0-Not Verified, 1-Verified');
+            $table->tinyInteger('admin_verified')->default(0)->comment('0-Not Verified, 1-Verified');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->tinyInteger('status')->default(1)->comment('1:active,0:inactive');

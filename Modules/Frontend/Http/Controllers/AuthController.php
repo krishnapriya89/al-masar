@@ -10,6 +10,7 @@ use App\Helpers\AdminHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Helpers\FrontendHelper;
+use App\Models\LoginOtp;
 use App\Models\UserEmailVerify;
 use App\Models\SiteCommonContent;
 use App\Models\SiteCommonSetting;
@@ -36,9 +37,9 @@ class AuthController extends Controller
             return redirect()->intended('/'); // Redirect to the user dashboard or any other authenticated page
         }
 
-        $encryptedEmail     = Cookie::get('user_email', '');
-        $encryptedPassword  = Cookie::get('user_password', '');
-        $remember           = Cookie::get('user_remember', false);
+        $encryptedEmail     = Cookie::get('al_masar_user_email', '');
+        $encryptedPassword  = Cookie::get('al_masar_user_password', '');
+        $remember           = Cookie::get('al_masar_user_remember', false);
 
         $email              = $encryptedEmail ? Crypt::decrypt($encryptedEmail) : '';
         $password           = $encryptedPassword ? Crypt::decrypt($encryptedPassword) : '';
@@ -51,26 +52,199 @@ class AuthController extends Controller
     {
         $request->validate(
             [
-                'login'     => 'required',
-                'otp'  => 'required'
+                'login'     => 'required'
             ],
             [
-                'login' => 'The username or email field is required'
+                'login' => 'This field is required'
             ]
         );
 
-        $remember       = $request->filled('remember');
+        $identifier = $request->login;
 
-        if (Auth::guard('web')->attempt([$this->username() => $request->login, 'otp' => $request->otp, 'status' => 1, 'user_type' => 'User'], $remember)) {
-            if ($remember) {
-                $this->setRememberMeCookie($request->login, $request->password);
-            } else {
-                $this->clearRememberMeCookie();
-            }
+        $user = User::where('user_type', 'User')->where(function ($query) use ($identifier) {
+            $query->where('phone', $identifier)
+                ->orWhere('email', $identifier);
+        })
+            ->first();
 
-            return to_route('home')->with('success', 'Logged successfully');
+        //check user exists or not
+        if (!$user)
+            return redirect()->back()->withInput()->withErrors(['login' => 'The provided phone number or email does not exist.']);
+
+        //check registration status
+        $is_registration_process_completed = false;
+        switch ($user->register_status) {
+            case 0:
+                $url = 'user.register.form';
+                $message = 'You have to register your details first.';
+                break;
+            case 1:
+                $url = 'user.show-phone-verification.form';
+                $message = 'You have to verify your phone number first.';
+                break;
+            case 2:
+                $url = 'user.show-office-phone-verification.form';
+                $message = 'You have to verify your office phone number first.';
+                break;
+            case 3:
+                $is_registration_process_completed = true;
+                break;
+            default:
+                $url = 'user.login.form';
+                $message = 'Something went wrong.';
+                break;
+        }
+
+        //redirecting to the registration stage
+        if (!$is_registration_process_completed) {
+            $encryptedUserID = Crypt::encrypt($user->id);
+            Session::put('registered_user', $encryptedUserID);
+            return to_route($url)->with('error', $message);;
+        }
+
+        if ($user->phone_verified == 0) {
+            $encryptedUserID = Crypt::encrypt($user->id);
+            Session::put('registered_user', $encryptedUserID);
+            return to_route('user.show-phone-verification.form')->with('error', 'You need to confirm your phone number.');
+        }
+
+        if ($user->office_phone_verified == 0) {
+            $encryptedUserID = Crypt::encrypt($user->id);
+            Session::put('registered_user', $encryptedUserID);
+            return to_route('user.show-office-phone-verification.form')->with('error', 'You need to confirm your office phone number.');
+        }
+
+        if ($user->email_verified == 0)
+            return redirect()->back()->withInput()->withErrors(['login' => 'You need to confirm your account. We have sent you an verification link, please check your email.']);
+
+        if ($user->admin_verified == 0)
+            return redirect()->back()->withInput()->withErrors(['login' => 'Your Registration details are not confirmed from the admin side. Please try after some time or contact Admin.']);
+
+        if ($user->status == 0)
+            return redirect()->back()->withInput()->withErrors(['login' => 'Your Account is suspended by Admin. Please contact Admin.']);
+
+        $phone_verification_code = $this->sendOtp($user->phone);
+
+        if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            $method = 'email';
+            $verification_code = mt_rand(1000, 9999);
+
+            $user->loginOtps()->create([
+                'method' => 2, // email
+                'identifier' => $identifier,
+                'code' => $verification_code,
+            ]);
+
+            //sending otp to email
+            Mail::send('frontend::emails.login-email-otp', ['code' => $verification_code], function ($message) use ($identifier) {
+                $message->to($identifier);
+                $message->subject('Al Masar Al Saree Login OTP');
+            });
         } else {
-            return redirect()->back()->withErrors(['login' => 'Invalid credentials']);
+            $method = 'phone';
+            $verification_code = $this->sendOtp($user->phone);
+
+            $user->loginOtps()->create([
+                'method' => 1, // phone
+                'identifier' => $identifier,
+                'code' => $verification_code,
+            ]);
+        }
+
+        $encryptedUserID = Crypt::encrypt($user->id);
+        Session::put('login_user', $encryptedUserID);
+        Session::put('login_method', $method);
+        Session::put('login_identifier', $identifier);
+
+        return view('frontend::auth.login-otp-verification', compact('method', 'identifier', 'verification_code'));
+    }
+
+    public function  verifyLoginOtp(Request $request)
+    {
+        $request->validate([
+            'otp1' => 'required|digits_between:1,1|integer',
+            'otp2' => 'required|digits_between:1,1|integer',
+            'otp3' => 'required|digits_between:1,1|integer',
+            'otp4' => 'required|digits_between:1,1|integer'
+        ]);
+
+        $submittedOtp = $request->otp1 . $request->otp2 . $request->otp3 . $request->otp4;
+        $submittedOtp = (int)$submittedOtp;
+
+        $encryptedUserID = Session::get('login_user');
+        if (!$encryptedUserID) {
+            session()->flash('error', 'Something went wrong');
+            return response()->json([
+                'status' => false,
+                'url' => route('user.login.form'),
+                'message' => ''
+            ]);
+        }
+
+        $userID = Crypt::decrypt($encryptedUserID) ?? false;
+        if (!$userID) {
+            session()->flash('error', 'Something went wrong');
+            return response()->json([
+                'status' => false,
+                'url' => route('user.login.form'),
+                'message' => ''
+            ]);
+        }
+
+        $user = User::find($userID);
+
+        if (!$user) {
+            session()->flash('error', 'Something went wrong');
+            return response()->json([
+                'status' => false,
+                'url' => route('user.login.form'),
+                'message' => ''
+            ]);
+        }
+
+        $method = Session::get('login_method');
+        $method_val = $method === 'phone' ? 1 : 2;
+        $identifier = Session::get('login_identifier');
+
+        if (!$method || !$identifier) {
+            session()->flash('error', 'Something went wrong');
+            return response()->json([
+                'status' => false,
+                'url' => route('user.login.form'),
+                'message' => ''
+            ]);
+        }
+
+        $otp = LoginOtp::where('user_id', $user->id)
+            ->where('method', $method_val)
+            ->where('identifier', $identifier)
+            ->where('used', false)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if (!$otp) {
+            session()->flash('error', 'Something went wrong. Please try Resend OTP.');
+            return response()->json([
+                'status' => false,
+                'url' => '',
+                'message' => ''
+            ]);
+        }
+
+        if ($submittedOtp == $otp->code) {
+            Auth::login($user);
+            session()->flash('success', 'Login completed');
+            return response()->json([
+                'status' => true,
+                'url' => route('user.dashboard'),
+                'message' => ''
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'url' => '',
+                'message' => 'You have entered the wrong OTP!. Please enter correct one'
+            ]);
         }
     }
 
@@ -80,30 +254,6 @@ class AuthController extends Controller
         if (Auth::guard('web')->check()) {
             return redirect()->intended('/'); // Redirect to the admin dashboard or any other authenticated page
         }
-
-        //use in login case
-        // $user = $this->getRegisteredUserData();
-        // if ($user) {
-        //     switch ($user->register_status) {
-        //         case 0:
-        //             $url = 'user.register.form';
-        //             break;
-        //         case 1:
-        //             $url = 'user.show-phone-verification.form';
-        //             break;
-        //         case 2:
-        //             $url = 'user.show-office-phone-verification.form';
-        //             break;
-        //         case 3:
-        //             $url = 'user.login.form';
-        //             break;
-        //         default:
-        //             $url = 'user.login.form';
-        //             break;
-        //     }
-
-        //     return to_route($url);
-        // }
 
         $countries = Country::active()->get();
         return view('frontend::auth.register', compact('countries'));
@@ -150,7 +300,7 @@ class AuthController extends Controller
 
             return to_route('user.show-phone-verification.form')->with('success', 'Your registration was successful.');
         } else {
-            return redirect()->back()->withErrors(['email' => 'Some error occurred while creating account']);
+            return redirect()->back()->withInput()->withErrors(['email' => 'Some error occurred while creating account']);
         }
     }
 
@@ -351,7 +501,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'url' => route('user.login.form'),
-                // 'message' => $user->phone. ' number verified successfully'
+                'message' => ''
             ]);
         } else {
             return response()->json([
@@ -360,6 +510,31 @@ class AuthController extends Controller
                 'message' => 'You have entered the wrong OTP!. Please enter correct one'
             ]);
         }
+    }
+
+    //email verification using token
+    public function verifyEmail($token)
+    {
+        $verifyUser = UserEmailVerify::where('token', $token)->latest()->first();
+
+        $message_type = 'error';
+        $message = 'Sorry your email cannot be identified.';
+
+        if (!is_null($verifyUser)) {
+            $user = $verifyUser->user;
+
+            if (!$user->email_verified) {
+                $verifyUser->user->email_verified = 1;
+                $verifyUser->user->save();
+                $message_type = 'success';
+                $message = "Your e-mail is verified. You can now login.";
+            } else {
+                $message_type = 'warning';
+                $message = "Your e-mail is already verified. You can now login.";
+            }
+        }
+
+        return to_route('user.login.form')->with($message_type, $message);
     }
 
     //resend otp through ajax
@@ -379,36 +554,33 @@ class AuthController extends Controller
         //check currently in which stage is user
         if ($user->register_status == 1) {
             //check already verified
-            if($user->phone_verified == 1) {
+            if ($user->phone_verified == 1) {
                 session()->flash('error', 'You have already verified ' . $user->phone . 'number');
                 return response()->json([
                     'status' => false,
                     'url' => route('user.show-office-phone-verification.form')
                 ]);
-            }
-            else {
+            } else {
                 $phone = $user->phone;
             }
-        } elseif($user->register_status == 2) {
-            if($user->office_phone_verified == 1) {
+        } elseif ($user->register_status == 2) {
+            if ($user->office_phone_verified == 1) {
                 session()->flash('error', 'You have already verified ' . $user->office_phone . 'number');
                 return response()->json([
                     'status' => false,
                     'url' => route('user.login.form')
                 ]);
-            }
-            else {
+            } else {
                 $phone = $user->office_phone;
             }
-        }
-        else{
+        } else {
             return response()->json([
                 'status' => false,
                 'url' => route('user.login.form')
             ]);
         }
 
-        if($phone == '') {
+        if ($phone == '') {
             return response()->json([
                 'status' => false,
                 'url' => route('user.login.form')
@@ -451,27 +623,6 @@ class AuthController extends Controller
         $phone_verification_code = FrontendHelper::sendOtp($phone);
 
         return $phone_verification_code;
-    }
-
-    public function verifyEmail($token)
-    {
-        $verifyUser = UserEmailVerify::where('token', $token)->latest()->first();
-
-        $message = 'Sorry your email cannot be identified.';
-
-        if (!is_null($verifyUser)) {
-            $user = $verifyUser->user;
-
-            if (!$user->email_verified) {
-                $verifyUser->user->email_verified = 1;
-                $verifyUser->user->save();
-                $message = "Your e-mail is verified. You can now login.";
-            } else {
-                $message = "Your e-mail is already verified. You can now login.";
-            }
-        }
-
-        return to_route('user.login.form')->with('message', $message);
     }
 
     public function showForgotPasswordForm()
@@ -587,22 +738,5 @@ class AuthController extends Controller
             return $user;
         else
             return false;
-    }
-
-    private function setRememberMeCookie($email, $password)
-    {
-        $encryptedEmail     = encrypt($email);
-        $encryptedPassword  = encrypt($password);
-
-        Cookie::queue('user_email', $encryptedEmail, 43200); // Expires in 30 days
-        Cookie::queue('user_password', $encryptedPassword, 43200); // Expires in 30 days
-        Cookie::queue('user_remember', true, 43200); // Expires in 30 days
-    }
-
-    private function clearRememberMeCookie()
-    {
-        Cookie::queue(Cookie::forget('user_email'));
-        Cookie::queue(Cookie::forget('user_password'));
-        Cookie::queue(Cookie::forget('user_remember'));
     }
 }

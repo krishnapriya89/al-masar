@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(PhoneOtp::class);
     }
+
+    public function loginOtps()
+    {
+        return $this->hasMany(LoginOtp::class);
+    }
 }
