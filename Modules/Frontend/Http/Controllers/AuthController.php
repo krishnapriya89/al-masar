@@ -362,7 +362,7 @@ class AuthController extends Controller
         }
     }
 
-    //resend otp
+    //resend otp through ajax
     public function resendOtp()
     {
         $user = $this->getRegisteredUserData();
