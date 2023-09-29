@@ -123,8 +123,6 @@ class AuthController extends Controller
         if ($user->status == 0)
             return redirect()->back()->withInput()->withErrors(['login' => 'Your Account is suspended by Admin. Please contact Admin.']);
 
-        $phone_verification_code = $this->sendOtp($user->phone);
-
         if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
             $method = 'email';
             $verification_code = mt_rand(1000, 9999);
@@ -159,6 +157,7 @@ class AuthController extends Controller
         return view('frontend::auth.login-otp-verification', compact('method', 'identifier', 'verification_code'));
     }
 
+    //verify the login otp
     public function  verifyLoginOtp(Request $request)
     {
         $request->validate([
@@ -203,7 +202,6 @@ class AuthController extends Controller
         }
 
         $method = Session::get('login_method');
-        $method_val = $method === 'phone' ? 1 : 2;
         $identifier = Session::get('login_identifier');
 
         if (!$method || !$identifier) {
@@ -214,6 +212,8 @@ class AuthController extends Controller
                 'message' => ''
             ]);
         }
+
+        $method_val = $method === 'phone' ? 1 : 2;
 
         $otp = LoginOtp::where('user_id', $user->id)
             ->where('method', $method_val)
@@ -246,6 +246,81 @@ class AuthController extends Controller
                 'message' => 'You have entered the wrong OTP!. Please enter correct one'
             ]);
         }
+    }
+
+    //resend login otp through ajax
+    public function resendLoginOtp()
+    {
+        $user = $this->getLoginUserData();
+        if (!$user) {
+            session()->flash('error', 'You have to register your details first');
+            return response()->json([
+                'status' => false,
+                'url' => route('user.register.form')
+            ]);
+        }
+
+        $method = Session::get('login_method');
+        $identifier = Session::get('login_identifier');
+
+        if (!$method || !$identifier) {
+            session()->flash('error', 'Something went wrong');
+            return response()->json([
+                'status' => false,
+                'url' => route('user.login.form'),
+                'message' => ''
+            ]);
+        }
+
+        $method_val = $method === 'phone' ? 1 : 2;
+
+        $lastOtp = LoginOtp::where('user_id', $user->id)
+            ->where('method', $method_val)
+            ->where('identifier', $identifier)
+            ->where('used', false)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if ($lastOtp && now()->diffInMinutes($lastOtp->created_at) < 1) {
+            // An OTP was sent within the last minute, show an error or handle as needed
+            return response()->json([
+                'status' => false,
+                'url' => '',
+                'message' => 'Please wait before requesting a new OTP'
+            ]);
+        }
+
+        $user->loginOtps()->delete();
+        if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            $verification_code = mt_rand(1000, 9999);
+
+            $user->loginOtps()->create([
+                'method' => 2, // email
+                'identifier' => $identifier,
+                'code' => $verification_code,
+            ]);
+
+            //sending otp to email
+            Mail::send('frontend::emails.login-email-otp', ['code' => $verification_code], function ($message) use ($identifier) {
+                $message->to($identifier);
+                $message->subject('Al Masar Al Saree Login OTP');
+            });
+        } else {
+            $verification_code = $this->sendOtp($user->phone);
+
+            $user->loginOtps()->create([
+                'method' => 1, // phone
+                'identifier' => $identifier,
+                'code' => $verification_code,
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'otp' => $verification_code,
+            'url' => '',
+            'message' => 'A new OTP has been sent to '. $method . ': ' . $identifier . '.'
+        ]);
     }
 
     //showing registration form
@@ -723,6 +798,27 @@ class AuthController extends Controller
     protected function getRegisteredUserData()
     {
         $encryptedUserID = Session::get('registered_user');
+        if (!$encryptedUserID) {
+            return false;
+        }
+
+        $userID = Crypt::decrypt($encryptedUserID) ?? false;
+        if (!$userID) {
+            return false;
+        }
+
+        $user = User::find($userID);
+
+        if ($user)
+            return $user;
+        else
+            return false;
+    }
+
+    //returning the data of user, id was stored in the registration process
+    protected function getLoginUserData()
+    {
+        $encryptedUserID = Session::get('login_user');
         if (!$encryptedUserID) {
             return false;
         }

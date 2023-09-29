@@ -29,13 +29,13 @@ Route::get('/verify-phone', [AuthController::class,'showPhoneVerificationForm'])
 Route::post('/verify-phone-store', [AuthController::class,'verifyPhone'])->name('user.verify-phone');
 Route::get('/verify-office-phone', [AuthController::class,'showOfficePhoneVerificationForm'])->name('user.show-office-phone-verification.form');
 Route::post('/verify-office-phone-store', [AuthController::class,'verifyOfficePhone'])->name('user.verify-office-phone');
-Route::post('/resend-otp', [AuthController::class,'resendOtp'])->name('user.resend.otp');
+Route::post('/resend-otp', [AuthController::class,'resendOtp'])->name('user.resend-otp');
 Route::get('/login', [AuthController::class,'showLoginForm'])->name('user.login.form');
 Route::post('/login-otp', [AuthController::class, 'login'])->name('user.login');
+Route::post('/resend-login-otp', [AuthController::class,'resendLoginOtp'])->name('user.resend-login-otp');
 Route::post('/verify-login-otp', [AuthController::class, 'verifyLoginOtp'])->name('user.verify-login-otp');
 //email verification
 Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('user.email.verify');
-
 
 Route::group(['middleware' => 'auth.user'], function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');

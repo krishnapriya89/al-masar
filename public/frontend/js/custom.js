@@ -12,49 +12,53 @@ $(document).ready(function () {
         return digitsOnly.test(value);
     }, "Please enter a valid phone number");
 
-    jQuery.validator.addMethod("notEqual", function(value, element, param) {
+    jQuery.validator.addMethod("notEqual", function (value, element, param) {
         return this.optional(element) || value != $(param).val();
-       }, "This has to be different from the phone number");
+    }, "This has to be different from the phone number");
 
+    var otpDebounceTimer;
+    $('.resend-otp-btn').on('click', function () {
+        clearTimeout(otpDebounceTimer);
 
-    $('.resend-otp-btn').on('click', function() {
-        $.ajax({
-            type: 'POST',
-            url: '/resend-otp',
-            dataType: 'json',
-            success: function (response) {
-                if(response.status) {
-                    if(response.message && response.message != '') {
-                        toastr.success(response.message);
+        otpDebounceTimer = setTimeout(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/resend-otp',
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status) {
+                        if (response.message && response.message != '') {
+                            toastr.success(response.message);
+                        }
+                        if (response.otp && response.otp != '') {
+                            $('.otp-cls').html(response.otp);
+                        }
                     }
-                    if(response.otp && response.otp != '') {
-                        $('.otp-cls').html(response.otp);
+                    else {
+                        if (response.message && response.message != '') {
+                            toastr.error(response.message);
+                        }
+                        if (response.url != '') {
+                            window.location.href = response.url;
+                        }
                     }
                 }
-                else {
-                    if(response.message && response.message != '') {
-                        toastr.error(response.message);
-                    }
-                    if(response.url != '') {
-                        window.location.href = response.url;
-                    }
-                }
-            }
+            });
         });
     });
 
     $("#contactForm").validate({
         rules: {
             name: "required",
-            phone:{
+            phone: {
                 required: true,
                 phoneDigitsOnly: true
             },
             email: {
-                required:true,
-                email:true
+                required: true,
+                email: true
             },
-            message:"required",
+            message: "required",
             subject: "required",
         }
     });
