@@ -16,23 +16,47 @@ $(document).ready(function () {
         return this.optional(element) || value != $(param).val();
        }, "This has to be different from the phone number");
 
-});
-$(document).ready(function(){
 
-    $("#contactForm").validate({
-            rules: {
-                name: "required",
-                phone:{
-                    required: true,
-                    phoneDigitsOnly: true
-                },
-                email: {
-                    required:true,
-                    email:true
-                },
-                message:"required",
-                subject: "required",
+    $('.resend-otp-btn').on('click', function() {
+        $.ajax({
+            type: 'POST',
+            url: '/resend-otp',
+            dataType: 'json',
+            success: function (response) {
+                if(response.status) {
+                    if(response.message && response.message != '') {
+                        toastr.success(response.message);
+                    }
+                    if(response.otp && response.otp != '') {
+                        $('.otp-cls').html(response.otp);
+                    }
+                }
+                else {
+                    if(response.message && response.message != '') {
+                        toastr.error(response.message);
+                    }
+                    if(response.url != '') {
+                        window.location.href = response.url;
+                    }
+                }
             }
         });
+    });
+
+    $("#contactForm").validate({
+        rules: {
+            name: "required",
+            phone:{
+                required: true,
+                phoneDigitsOnly: true
+            },
+            email: {
+                required:true,
+                email:true
+            },
+            message:"required",
+            subject: "required",
+        }
+    });
 
 });

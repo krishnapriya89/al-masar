@@ -177,6 +177,7 @@
                 },
                 errorElement: 'span',
                 errorPlacement: function(error, element) {
+                    element.parent().find('.invalid-feedback').html('');
                     error.addClass('invalid-feedback');
                     element.closest('.form-group').append(error);
                 },

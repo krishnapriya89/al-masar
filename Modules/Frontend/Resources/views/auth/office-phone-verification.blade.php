@@ -13,7 +13,7 @@
                         <div class="ritBx">
                             <div class="title">OTP Verification</div>
                             <div class="subT">Enter the OTP send to Phone: <span>{{ $user->office_phone }}</span></div>
-                            <div class="subT">Code <span> {{ $phone_verification_code }}</span></div>
+                            <div class="subT">Code <span class="otp-cls"> {{ $phone_verification_code }}</span></div>
                             <form action="{{ route('user.verify-office-phone') }}" id="OfficePhoneOtpForm" class="optB" method="POST" autocomplete="off">
                                 @csrf
                                 <input class="otp" name="otp1" value="{{ old('otp1') }}" type="text" oninput='digitValidate(this)' onkeyup='tabChange(1)'
@@ -25,7 +25,7 @@
                                 <input class="otp" name="otp4" value="{{ old('otp4') }}" type="text" oninput='digitValidate(this)' onkeyup='tabChange(4)'
                                     maxlength=1>
                             </form>
-                            <p>OTP not yet received? <a href="javascript:void(0)" class="resend resend-otp">RESEND OTP</a></p>
+                            <p>OTP not yet received? <a href="javascript:void(0)" class="resend resend-otp-btn">RESEND OTP</a></p>
                             <button type="button" class="hoveranim btn-submit phone-otp-form-btn"><span>Register</span></button>
                             <span class="error-span" style="color: red;">@if($errors->any()) Please enter otp @endif</span>
                         </div>

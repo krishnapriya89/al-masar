@@ -20,13 +20,12 @@ class UserRegisterRequest extends FormRequest
             'address' => 'required',
             'country' => 'required',
             'email' => 'required|email|max:255|unique:users,email,NULL,id,deleted_at,NULL',
-            'phone' => 'required|unique:users,phone,NULL,id,deleted_at,NULL|exists:users,office_phone,NULL,id,deleted_at,NULL|regex:/^\+?[0-9]{1,4}[-\s]?[0-9]{6,14}$/',
             'phone' => [
                 'required',
                 new UniquePhoneInUsersTable,
                 'regex:/^\+?[0-9]{1,4}[-\s]?[0-9]{6,14}$/'
             ],
-            'phone' => [
+            'office_phone' => [
                 'required',
                 new UniquePhoneInUsersTable,
                 'regex:/^\+?[0-9]{1,4}[-\s]?[0-9]{6,14}$/'

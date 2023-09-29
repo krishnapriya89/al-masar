@@ -43,6 +43,6 @@ class UniquePhoneInUsersTable implements Rule
      */
     public function message()
     {
-        return 'The phone number already exists in either the phone or office phone column.';
+        return 'The phone number already exists in either the phone or office phone fields.';
     }
 }

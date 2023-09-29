@@ -28,6 +28,7 @@ Route::get('/verify-phone', [AuthController::class,'showPhoneVerificationForm'])
 Route::post('/verify-phone-store', [AuthController::class,'verifyPhone'])->name('user.verify-phone');
 Route::get('/verify-office-phone', [AuthController::class,'showOfficePhoneVerificationForm'])->name('user.show-office-phone-verification.form');
 Route::post('/verify-office-phone-store', [AuthController::class,'verifyOfficePhone'])->name('user.verify-office-phone');
+Route::post('/resend-otp', [AuthController::class,'resendOtp'])->name('user.resend.otp');
 Route::get('/login', [AuthController::class,'showLoginForm'])->name('user.login.form');
 
 Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('user.email.verify'); 

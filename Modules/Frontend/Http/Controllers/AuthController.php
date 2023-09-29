@@ -81,23 +81,29 @@ class AuthController extends Controller
             return redirect()->intended('/'); // Redirect to the admin dashboard or any other authenticated page
         }
 
-        $user = $this->getRegisteredUserData();
-        if($user) {
-            switch($user->register_status) {
-                case 0: $url = 'user.register.form';
-                break;
-                case 1: $url = 'user.show-phone-verification.form';
-                break;
-                case 2: $url = 'user.show-office-phone-verification.form';
-                break;
-                case 3: $url = 'user.login.form';
-                break;
-                default: $url = 'user.login.form';
-                break;
-            }
+        //use in login case
+        // $user = $this->getRegisteredUserData();
+        // if ($user) {
+        //     switch ($user->register_status) {
+        //         case 0:
+        //             $url = 'user.register.form';
+        //             break;
+        //         case 1:
+        //             $url = 'user.show-phone-verification.form';
+        //             break;
+        //         case 2:
+        //             $url = 'user.show-office-phone-verification.form';
+        //             break;
+        //         case 3:
+        //             $url = 'user.login.form';
+        //             break;
+        //         default:
+        //             $url = 'user.login.form';
+        //             break;
+        //     }
 
-            return to_route($url);
-        }
+        //     return to_route($url);
+        // }
 
         $countries = Country::active()->get();
         return view('frontend::auth.register', compact('countries'));
@@ -106,7 +112,6 @@ class AuthController extends Controller
     //store registration data redirect to phone verification form
     public function register(UserRegisterRequest $request)
     {
-        dd($request);
         $user = new User();
         $user->name = $request->name;
         $user->company = $request->company;
@@ -157,15 +162,16 @@ class AuthController extends Controller
         if ($user) {
             if ($user->phone_verified == 0) {
 
-                //sending phone otp
-                $phone_verification_code = $this->sendOtp($user->phone);
-                
+                $phoneNumber = $user->phone;
+                //send otp
+                $phone_verification_code = $this->sendOtp($phoneNumber);
+                $user->phoneOtps()->delete();
                 $user->phoneOtps()->create([
                     'code' => $phone_verification_code,
-                    'phone' => $user->phone,
+                    'phone' => $phoneNumber,
                 ]);
 
-                return view('frontend::auth.phone-verification', compact('user', 'phone_verification_code'));
+                return view('frontend::auth.phone-verification', compact('phoneNumber', 'phone_verification_code'));
             } {
                 return to_route('user.show-office-phone-verification.form')->with('warning', 'You have already verified this ' . $user->phone . ' phone number. Please verify ' . $user->office_phone . ' this number.');
             }
@@ -184,7 +190,7 @@ class AuthController extends Controller
             'otp4' => 'required|digits_between:1,1|integer'
         ]);
 
-        $submittedOtp = $request->otp1.$request->otp2.$request->otp3.$request->otp4;
+        $submittedOtp = $request->otp1 . $request->otp2 . $request->otp3 . $request->otp4;
         $submittedOtp = (int)$submittedOtp;
 
         $user = $this->getRegisteredUserData();
@@ -229,7 +235,7 @@ class AuthController extends Controller
             $user->phone_verified = 1;
             $user->register_status = 2; //phone verification completed
             $user->save();
-            session()->flash('success', $user->phone. ' number verified successfully');
+            session()->flash('success', $user->phone . ' number verified successfully');
 
             return response()->json([
                 'status' => true,
@@ -252,7 +258,7 @@ class AuthController extends Controller
 
         if ($user) {
 
-            if($user->phone_verified != 1) {
+            if ($user->phone_verified != 1) {
                 return to_route('user.show-phone-verification.form')->with('warning', 'You have to verify this ' . $user->phone . ' number first.');
             }
 
@@ -260,14 +266,14 @@ class AuthController extends Controller
 
                 //sending phone otp
                 $phone_verification_code = $this->sendOtp($user->office_phone);
-                
+                $user->phoneOtps()->delete();
                 $user->phoneOtps()->create([
                     'code' => $phone_verification_code,
                     'phone' => $user->office_phone,
                 ]);
 
                 return view('frontend::auth.office-phone-verification', compact('user', 'phone_verification_code'));
-            } else{
+            } else {
                 return to_route('user.login.form')->with('warning', 'You have already verified this ' . $user->phone . ' phone number. Please login.');
             }
         } else {
@@ -285,7 +291,7 @@ class AuthController extends Controller
             'otp4' => 'required|digits_between:1,1|integer'
         ]);
 
-        $submittedOtp = $request->otp1.$request->otp2.$request->otp3.$request->otp4;
+        $submittedOtp = $request->otp1 . $request->otp2 . $request->otp3 . $request->otp4;
         $submittedOtp = (int)$submittedOtp;
 
         $user = $this->getRegisteredUserData();
@@ -340,7 +346,7 @@ class AuthController extends Controller
             $user->register_status = 3; //phone verification completed
             $user->save();
             session()->forget('registered_user');
-            session()->flash('success', $user->office_phone. ' number verified successfully');
+            session()->flash('success', $user->office_phone . ' number verified successfully');
 
             return response()->json([
                 'status' => true,
@@ -356,11 +362,93 @@ class AuthController extends Controller
         }
     }
 
-    public function sendOtp($phone) {
+    //resend otp
+    public function resendOtp()
+    {
+        $user = $this->getRegisteredUserData();
+        if (!$user) {
+            session()->flash('error', 'You have to register your details first');
+            return response()->json([
+                'status' => false,
+                'url' => route('user.register.form')
+            ]);
+        }
+
+        $phone = '';
+
+        //check currently in which stage is user
+        if ($user->register_status == 1) {
+            //check already verified
+            if($user->phone_verified == 1) {
+                session()->flash('error', 'You have already verified ' . $user->phone . 'number');
+                return response()->json([
+                    'status' => false,
+                    'url' => route('user.show-office-phone-verification.form')
+                ]);
+            }
+            else {
+                $phone = $user->phone;
+            }
+        } elseif($user->register_status == 2) {
+            if($user->office_phone_verified == 1) {
+                session()->flash('error', 'You have already verified ' . $user->office_phone . 'number');
+                return response()->json([
+                    'status' => false,
+                    'url' => route('user.login.form')
+                ]);
+            }
+            else {
+                $phone = $user->office_phone;
+            }
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'url' => route('user.login.form')
+            ]);
+        }
+
+        if($phone == '') {
+            return response()->json([
+                'status' => false,
+                'url' => route('user.login.form')
+            ]);
+        }
+
+        $lastOtp = PhoneOtp::where('phone', $phone)->where('used', false)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if ($lastOtp && now()->diffInMinutes($lastOtp->created_at) < 1) {
+            // An OTP was sent within the last minute, show an error or handle as needed
+            return response()->json([
+                'status' => false,
+                'url' => '',
+                'message' => 'Please wait before requesting a new OTP'
+            ]);
+        }
+
+        $phone_verification_code = $this->sendOtp($phone);
+        $user->phoneOtps()->delete();
+        $user->phoneOtps()->create([
+            'code' => $phone_verification_code,
+            'phone' => $phone,
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'otp' => $phone_verification_code,
+            'url' => '',
+            'message' => 'A new OTP has been sent to this number: ' . $phone . '.'
+        ]);
+    }
+
+    public function sendOtp($phone)
+    {
 
         // $lastSentTime = PhoneOtp::where('phone', $phone)->latest()->first();
 
-        $phone_verification_code = mt_rand(1000, 9999);
+        $phone_verification_code = FrontendHelper::sendOtp($phone);
 
         return $phone_verification_code;
     }
@@ -481,21 +569,21 @@ class AuthController extends Controller
     }
 
     //returning the data of user, id was stored in the registration process
-    public function getRegisteredUserData()
+    protected function getRegisteredUserData()
     {
         $encryptedUserID = Session::get('registered_user');
-        if(!$encryptedUserID) {
+        if (!$encryptedUserID) {
             return false;
         }
-        
+
         $userID = Crypt::decrypt($encryptedUserID) ?? false;
-        if(!$userID) {
+        if (!$userID) {
             return false;
         }
-        
+
         $user = User::find($userID);
 
-        if($user)
+        if ($user)
             return $user;
         else
             return false;
