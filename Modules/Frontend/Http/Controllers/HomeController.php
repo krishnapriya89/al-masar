@@ -13,6 +13,7 @@ use App\Models\HowToBuy;
 use App\Models\PrivacyPolicy;
 use App\Models\TermsAndCondition;
 use App\Models\WhyChoose;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -76,6 +77,16 @@ class HomeController extends Controller
             return redirect()->back()->with('success','Contact Form Application Submitted Successfully!');
         }
         return redirect()->back()->with('error','Failed to Submit Contact Form Application');
+    }
+
+    /**
+     * Product Detail Page
+     *
+     */
+    public function productDetailPage($slug)
+    {
+        $product = Product::active()->where('slug',$slug)->first();
+        return view('frontend::product-detail',compact('product'));
     }
 
 
