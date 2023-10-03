@@ -86,7 +86,9 @@ class HomeController extends Controller
     public function productDetailPage($slug)
     {
         $product = Product::active()->where('slug',$slug)->first();
-        return view('frontend::product-detail',compact('product'));
+        $product_galleries = $product->gallery;
+        // dd($product_galleries);
+        return view('frontend::product-detail',compact('product','product_galleries'));
     }
 
 
