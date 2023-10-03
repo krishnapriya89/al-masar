@@ -23,6 +23,7 @@ $(document).ready(function () {
     //change rate in every page load
     currencyRateChange('page_load');
 
+    //resend otp button in register and login
     var otpDebounceTimer;
     $('.resend-otp-btn').on('click', function () {
         clearTimeout(otpDebounceTimer);
@@ -54,6 +55,7 @@ $(document).ready(function () {
         }, 300);
     });
 
+    //contact form validation
     $("#contactForm").validate({
         rules: {
             name: "required",
@@ -69,6 +71,79 @@ $(document).ready(function () {
             subject: "required",
         }
     });
+
+    //change quantity
+    var changeQuantityDebounceTimer;
+    $('body').on("click", ".change-quantity", function () {
+        var _this = $(this);
+
+        var min_quantity_to_buy = _this.siblings('input[name="quantity"]').attr("min");
+        var quantity = _this.siblings('input[name="quantity"]');
+        var currentValue = parseInt(quantity.val());
+        var operation = _this.data("operation");
+
+        var quantityStatus = true;
+        
+        if (operation === "minus") {
+            if (currentValue > min_quantity_to_buy) {
+                quantity.val(currentValue - 1);
+            }
+            else {
+                quantityStatus = false;
+            }
+        }
+
+        if (operation === "plus") {
+            quantity.val(currentValue + 1);
+        }
+
+        var quantityValue = parseInt(quantity.val());
+
+        var product = _this.data("product");
+        if (product && quantityValue && quantityStatus) {
+            clearTimeout(changeQuantityDebounceTimer);
+            calculatePrice(quantityValue, product, _this)
+        }
+    });
+
+    $('body').on('keyup paste', '.change-quantity-input', function() {
+        var _this = $(this);
+
+        var min_quantity_to_buy = parseInt(_this.attr("min"));
+        var quantity = parseInt(_this.val());
+        var product = _this.data("product");
+        
+        if(min_quantity_to_buy <= quantity) {
+            clearTimeout(changeQuantityDebounceTimer);
+            calculatePrice(quantity, product, _this);
+        }
+        else{
+            toastr.error('Please enter the value greater than of min quantity');
+            _this.val(min_quantity_to_buy);
+        }
+    });
+
+    $('.list-add-to-cart').on('click', function() {
+        var _this = $(this);
+
+        var quantity = _this.closest('tr').find("input[name='quantity'").val();
+        var product = _this.data('product');
+
+        $.ajax({
+            url: '/calculate-price',
+            data: {
+                quantity: quantity,
+                product: product,
+            },
+            type: "post",
+            dataType: 'json',
+            success: function (response) {
+                if(response.status) {
+                    _this.closest('tr').find('.product-total-price-div').text(response.price);
+                }
+            }
+        });
+    });
 });
 
 //check the currency data changes in drop down select and every page load
@@ -83,4 +158,23 @@ function currencyRateChange(type) {
                 location.reload();
         }
     });
+}
+
+function calculatePrice(quantity, product, _this) {
+    changeQuantityDebounceTimer = setTimeout(function () {
+        $.ajax({
+            url: '/calculate-price',
+            data: {
+                quantity: quantity,
+                product: product,
+            },
+            type: "post",
+            dataType: 'json',
+            success: function (response) {
+                if(response.status) {
+                    _this.closest('tr').find('.product-total-price-div').text(response.price);
+                }
+            }
+        });
+    }, 300);
 }

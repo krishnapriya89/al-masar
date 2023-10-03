@@ -89,7 +89,7 @@ class Product extends Model
     public function getStockClassAttribute()
     {
         if (!$this->getIsInstockAttribute())
-            return 'notify';
+            return 'notfy';
         else
             return '';
     }

@@ -2,6 +2,7 @@
 
 namespace Modules\Frontend\Http\Controllers;
 
+use App\Helpers\FrontendHelper;
 use App\Models\Product;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -39,5 +40,31 @@ class ProductController extends Controller
         $model_number = $request->model_number;
 
         return view('frontend::includes.product-list', compact('products', 'product_code', 'product_name', 'model_number'));
+    }
+
+    public function calculatePrice(Request $request)
+    {
+        $product = Product::active()->where('slug', $request->product)->first();
+        if(!$product) {
+            return response()->json([
+                'status' => false,
+                'message' => 'The requested product not found!'
+            ]);
+        }
+
+        if($request->quantity < $product->min_quantity_to_buy) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Please enter the quantity greater than of min quantity!'
+            ]);
+        }
+
+        $price = $product->price * $request->quantity;
+
+        return response()->json([
+            'status' => true,
+            'message' => '',
+            'price' =>  FrontendHelper::getCurrencySymbolWithConvertedPrice($price)
+        ]);
     }
 }
