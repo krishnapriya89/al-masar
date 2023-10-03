@@ -93,7 +93,7 @@
                 productSearchDebounceTimer = setTimeout(function() {
                     $.ajax({
                         type: 'POST',
-                        url: '/product-search',
+                        url: '/product-list-search',
                         data: {
                             'product_code': product_code,
                             'product_name': product_name,

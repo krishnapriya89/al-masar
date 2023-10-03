@@ -19,7 +19,8 @@ class ProductController extends Controller
         return view('frontend::product', compact('products'));
     }
 
-    public function search(Request $request)
+    //product listing page search
+    public function listSearch(Request $request)
     {
         $products = Product::active()
         ->when($request->filled('product_code'), function ($query) use ($request) {
