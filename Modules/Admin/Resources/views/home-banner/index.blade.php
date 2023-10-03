@@ -28,8 +28,8 @@
                          @forelse($home_banners as $banner)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $banner->title }}</td>
-                                <td><img src="{{Storage::disk('public')->exists($banner->image) ? Storage::url($banner->image) : asset($banner->image)}}" alt="" height="51"></td>
+                                <td>{!! $banner->title !!}</td>
+                                <td><img src="{{Storage::disk('public')->exists($banner->web_image) ? Storage::url($banner->web_image) : asset($banner->web_image)}}" alt="" height="51"></td>
                                 <td>{{ $banner->sort_order }}</td>
                                 <td>{!! $banner->status == 1
                                     ? '<span class="badge bg-success">Active</span>'

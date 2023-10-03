@@ -43,10 +43,15 @@ class HomeBannerController extends Controller
         $home_banner->button_link   = $request->button_link;
         $home_banner->sort_order     = $request->filled('sort_order') ? $request->sort_order:0;
         $home_banner->status        = $request->status;
-        if($request->hasFile('image'))
+        if($request->hasFile('web_image'))
         {
-            $file = $request->file('image');
-            $home_banner->image = $home_banner->uploadImage($file, $home_banner->getImageDirectory());
+            $file = $request->file('web_image');
+            $home_banner->web_image = $home_banner->uploadImage($file, $home_banner->getImageDirectory());
+        }
+        if($request->hasFile('mob_image'))
+        {
+            $file = $request->file('mob_image');
+            $home_banner->mob_image = $home_banner->uploadImage($file, $home_banner->getImageDirectory());
         }
         if($home_banner->save())
         {
@@ -82,12 +87,19 @@ class HomeBannerController extends Controller
         $home_banner->button_link   = $request->button_link;
         $home_banner->sort_order     = $request->filled('sort_order') ? $request->sort_order:0;
         $home_banner->status        = $request->status;
-        if($request->hasFile('image'))
+        if($request->hasFile('web_image'))
         {
-            if($home_banner->image != '' || $home_banner->image != NULL)
-            $home_banner->deleteImage('image');
-            $file = $request->file('image');
-            $home_banner->image = $home_banner->uploadImage($file, $home_banner->getImageDirectory());
+            if($home_banner->web_image != '' || $home_banner->web_image != NULL)
+            $home_banner->deleteImage('web_image');
+            $file = $request->file('web_image');
+            $home_banner->web_image = $home_banner->uploadImage($file, $home_banner->getImageDirectory());
+        }
+        if($request->hasFile('mob_image'))
+        {
+            if($home_banner->mob_image != '' || $home_banner->mob_image != NULL)
+            $home_banner->deleteImage('mob_image');
+            $file = $request->file('mob_image');
+            $home_banner->mob_image = $home_banner->uploadImage($file, $home_banner->getImageDirectory());
         }
         if($home_banner->save())
         {

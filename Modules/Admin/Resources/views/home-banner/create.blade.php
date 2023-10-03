@@ -112,15 +112,32 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="image">Image</label>
-                                    <div class="input-group @error('image') is-invalid @enderror">
-                                            <input type="file" class="custom-file-input file-preview" id="image"
-                                                   name="image">
+                                    <label for="web_image">Web Image</label>
+                                    <div class="input-group @error('web_image') is-invalid @enderror">
+                                            <input type="file" class="custom-file-input file-preview" id="web_image"
+                                                   name="web_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                       768 x 350
+                                       1920 x 640
                                         <div class="pt-3 file-holder"> </div>
                                     </div>
-                                    @error('image')
+                                    @error('web_image')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="mob_image">Mobile Image</label>
+                                    <div class="input-group @error('mob_image') is-invalid @enderror">
+                                            <input type="file" class="custom-file-input file-preview" id="mob_image"
+                                                   name="mob_image">
+                                            <label class="custom-file-label" for="file">Choose file</label>
+                                   768 x 350
+                                        <div class="pt-3 file-holder"> </div>
+                                    </div>
+                                    @error('mob_image')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
