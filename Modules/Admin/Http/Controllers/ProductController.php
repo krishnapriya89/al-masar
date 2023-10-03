@@ -72,32 +72,27 @@ class ProductController extends Controller
         $product->meta_description = $request->meta_description;
         $product->other_meta_tags = $request->other_meta_tags;
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $ImageUpload = Image::make($image);
-            $image_path = $product->uploadImage($image, $product->getImageDirectory());
-            $product->image = $image_path;
-
-            if ($image->getSize() > 256000) {
-                $ImageUpload->resize(300, 300, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-                $imageName = Str::uuid() . '.' . $image->getClientOriginalExtension();
-                $fileName = 'uploads/' . $product->getThumbImageDirectory() . '/' . $imageName;
-                $filePath = 'public/uploads/' . $product->getThumbImageDirectory() . '/' . $imageName;
-                Storage::put($filePath, $ImageUpload->encode());
-                $product->thumbnail_image = $fileName;
-            } else {
-                $product->thumbnail_image = $image_path;
-            }
-        }
-
         if ($request->hasFile('detail_page_image')) {
             $file = $request->file('detail_page_image');
             $product->detail_page_image = $product->uploadImage($file, $product->getImageDirectory());
+
+            $image = $request->file('detail_page_image');
+            $ImageUpload = Image::make($image);
+            $image_path = $product->uploadImage($image, $product->getImageDirectory());
+            $product->detail_page_image = $image_path;
+
+            $ImageUpload->resize(18, 24, function ($constraint) {
+                // $constraint->aspectRatio();
+            });
+            $imageName = Str::uuid() . '.' . $image->getClientOriginalExtension();
+            $fileName = 'uploads/' . $product->getImageDirectory() . '/' . $imageName;
+            $filePath = 'public/uploads/' . $product->getImageDirectory() . '/' . $imageName;
+            Storage::put($filePath, $ImageUpload->encode());
+            $product->listing_image = $fileName;
         }
 
         if ($product->save()) {
+            session()->flash('success', 'Product created successfully!');
             return response()->json(['status' => true, 'url' => 'product', 'message' => 'Product created successfully!']);
         }
         return response()->json(['status' => false, 'url' => 'product', 'message' => 'Failed to create Product.']);
@@ -155,34 +150,30 @@ class ProductController extends Controller
         $product->meta_description = $request->meta_description;
         $product->other_meta_tags = $request->other_meta_tags;
 
-        if ($request->hasFile('image')) {
-            $product->deleteImage('image');
-            $image = $request->file('image');
-            $ImageUpload = Image::make($image);
-            $image_path = $product->uploadImage($image, $product->getImageDirectory());
-            $product->image = $image_path;
-
-            if ($image->getSize() > 256000) {
-                $ImageUpload->resize(300, 300, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-                $imageName = Str::uuid() . '.' . $image->getClientOriginalExtension();
-                $fileName = 'uploads/' . $product->getThumbImageDirectory() . '/' . $imageName;
-                $filePath = 'public/uploads/' . $product->getThumbImageDirectory() . '/' . $imageName;
-                Storage::put($filePath, $ImageUpload->encode());
-                $product->thumbnail_image = $fileName;
-            } else {
-                $product->thumbnail_image = $image_path;
-            }
-        }
-
         if ($request->hasFile('detail_page_image')) {
             $product->deleteImage('detail_page_image');
+            $product->deleteImage('listing_image');
+
             $file = $request->file('detail_page_image');
             $product->detail_page_image = $product->uploadImage($file, $product->getImageDirectory());
+
+            $image = $request->file('detail_page_image');
+            $ImageUpload = Image::make($image);
+            $image_path = $product->uploadImage($image, $product->getImageDirectory());
+            $product->detail_page_image = $image_path;
+
+            $ImageUpload->resize(18, 24, function ($constraint) {
+                // $constraint->aspectRatio();
+            });
+            $imageName = Str::uuid() . '.' . $image->getClientOriginalExtension();
+            $fileName = 'uploads/' . $product->getImageDirectory() . '/' . $imageName;
+            $filePath = 'public/uploads/' . $product->getImageDirectory() . '/' . $imageName;
+            Storage::put($filePath, $ImageUpload->encode());
+            $product->listing_image = $fileName;
         }
 
         if ($product->save()) {
+            session()->flash('success', 'Product updated successfully!');
             return response()->json(['status' => true, 'url' => 'product', 'message' => 'Product created successfully!']);
         }
         return response()->json(['status' => false, 'url' => 'product', 'message' => 'Failed to create Product.']);

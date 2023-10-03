@@ -342,29 +342,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="image">Listing Page Image</label>
-                                    <div class="input-group @error('image') is-invalid @enderror">
-                                        <input type="file" class="custom-file-input file-preview"
-                                               id="image"
-                                               name="image" data-width="296" data-height="282">
-                                        <label class="custom-file-label" for="file">Choose file</label>
-                                        <span class="pb-2">296 × 282</span>
-                                        <div class="pt-3 file-holder"></div>
-                                    </div>
-                                    @error('image')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
                                     <label for="detail_page_image">Details Page Image</label>
                                     <div class="input-group @error('detail_page_image') is-invalid @enderror">
                                         <input type="file" class="custom-file-input file-preview"
                                                id="detail_page_image"
-                                               name="detail_page_image" data-width="695" data-height="685">
+                                               name="detail_page_image">
                                         <label class="custom-file-label" for="file">Choose file</label>
-                                        <span class="pb-2">695 × 685</span>
+                                        <span class="pb-2">1080 × 1080</span>
                                         <div class="pt-3 file-holder"></div>
                                     </div>
                                     @error('detail_page_image')
@@ -450,7 +434,7 @@
                         }
                     })
                     .done(function (response) {
-                        toastr.success('Product created successfully')
+                        // toastr.success('Product created successfully')
                         window.location.href = "{{ route('product.index')}}";
                     })
                     .fail(function (response) {

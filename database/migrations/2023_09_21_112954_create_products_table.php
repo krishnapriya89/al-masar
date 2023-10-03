@@ -27,9 +27,9 @@ return new class extends Migration
             $table->string('model_number')->nullable();//not unique
             $table->string('sku')->nullable();//unique
             $table->string('slug');//unique
-            $table->string('image')->nullable();
+            $table->string('listing_image')->nullable();
             $table->string('detail_page_image')->nullable();
-            $table->string('thumbnail_image')->nullable();
+            $table->string('mob_image')->nullable();
             $table->longText('description')->nullable();
             $table->longText('specification')->nullable();
             $table->longText('search_keywords')->nullable();

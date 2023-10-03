@@ -30,8 +30,8 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $product->title }}</td>
                                 <td>
-                                    @if($product->image && Storage::disk('public')->exists($product->image))
-                                        <img src="{{ Storage::url($product->image) }}" class="rounded"
+                                    @if($product->detail_page_image && Storage::disk('public')->exists($product->detail_page_image))
+                                        <img src="{{ Storage::url($product->detail_page_image) }}" class="rounded"
                                              alt="{{ $product->title }}" height="51">
                                     @endif
                                 </td>
