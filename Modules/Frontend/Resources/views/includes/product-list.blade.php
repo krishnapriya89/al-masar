@@ -35,7 +35,7 @@
         </td>
         <td>
             @if ($product->is_instock)
-                <input type="text" placeholder="" class="bid" value="">
+                <input type="text" name="bid_price" id="bid_price" placeholder="" class="bid" value="">
                 <div class="txt">@currencySymbolWithConvertedPrice($product->price)
                     <div class="tmns product-total-price-div">@currencySymbolWithConvertedPrice($product->min_product_price)</div>
                 </div>

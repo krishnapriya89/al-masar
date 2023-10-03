@@ -72,7 +72,7 @@ $(document).ready(function () {
         }
     });
 
-    //change quantity
+    //button change quantity function in the product list showing the price
     var changeQuantityDebounceTimer;
     $('body').on("click", ".change-quantity", function () {
         var _this = $(this);
@@ -106,6 +106,7 @@ $(document).ready(function () {
         }
     });
 
+    //input change quantity function in the product list showing the price
     $('body').on('keyup paste', '.change-quantity-input', function() {
         var _this = $(this);
 
@@ -123,17 +124,19 @@ $(document).ready(function () {
         }
     });
 
-    $('.list-add-to-cart').on('click', function() {
+    $('.list-add-to-quotation').on('click', function() {
         var _this = $(this);
 
         var quantity = _this.closest('tr').find("input[name='quantity'").val();
+        var bid_price = _this.closest('tr').find("input[name='bid_price'").val();
         var product = _this.data('product');
 
         $.ajax({
-            url: '/calculate-price',
+            url: '/add-to-quotation',
             data: {
                 quantity: quantity,
                 product: product,
+                bid_price: bid_price
             },
             type: "post",
             dataType: 'json',
@@ -160,6 +163,7 @@ function currencyRateChange(type) {
     });
 }
 
+//change quantity function in the product list showing the price
 function calculatePrice(quantity, product, _this) {
     changeQuantityDebounceTimer = setTimeout(function () {
         $.ajax({
