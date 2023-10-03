@@ -137,9 +137,11 @@ $(".file-preview").on('change', function (event) {
         file_holder.show();
         reader.readAsDataURL($(this)[0].files[0]);
         //removing the already inserted previewing image
-        console.log($(this).parent('div').parent('div').parent('div').parent('div'));
+        console.log($(this).parent('div').parent('div').parent('div'));
         if($(this).parent('div').parent('div').parent('div').parent('div').find('.image-container-div').length > 0)
             $(this).parent('div').parent('div').parent('div').parent('div').find('.image-container-div').empty();
+        else if($(this).parent('div').parent('div').parent('div').find('.image-container-div').length > 0)
+            $(this).parent('div').parent('div').parent('div').find('.image-container-div').empty();
     } else {
         alert("This browser does not support file preview.");
     }

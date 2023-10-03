@@ -1,29 +1,30 @@
 <?php
 
-use Database\Seeders\PrivacyPolicySeeder;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
-use Modules\Admin\Http\Controllers\AboutUsController;
+use Database\Seeders\PrivacyPolicySeeder;
 use Modules\Admin\Http\Controllers\AuthController;
-use Modules\Admin\Http\Controllers\AdminController;
-use Modules\Admin\Http\Controllers\AdminConfigController;
-use Modules\Admin\Http\Controllers\ContactController;
-use Modules\Admin\Http\Controllers\ContactEnquiryController;
-use Modules\Admin\Http\Controllers\StateController;
-use Modules\Admin\Http\Controllers\CountryController;
-use Modules\Admin\Http\Controllers\CurrencyController;
-use Modules\Admin\Http\Controllers\DashboardController;
-use Modules\Admin\Http\Controllers\HomeBannerController;
-use Modules\Admin\Http\Controllers\HowToBuyController;
-use Modules\Admin\Http\Controllers\PrivacyPolicyController;
-use Modules\Admin\Http\Controllers\SiteSettingsController;
-use Modules\Admin\Http\Controllers\TermsAndConditionsController;
-use Modules\Admin\Http\Controllers\WhyChooseController;
-use Modules\Admin\Http\Controllers\ProductController;
-use Modules\Admin\Http\Controllers\ProductSubCategoryController;
-use Modules\Admin\Http\Controllers\ProductMainCategoryController;
 use Modules\Admin\Http\Controllers\UserController;
+use Modules\Admin\Http\Controllers\AdminController;
+use Modules\Admin\Http\Controllers\StateController;
 use Modules\Admin\Http\Controllers\VendorController;
+use Modules\Admin\Http\Controllers\AboutUsController;
+use Modules\Admin\Http\Controllers\ContactController;
+use Modules\Admin\Http\Controllers\CountryController;
+use Modules\Admin\Http\Controllers\ProductController;
+use Modules\Admin\Http\Controllers\CurrencyController;
+use Modules\Admin\Http\Controllers\HowToBuyController;
+use Modules\Admin\Http\Controllers\DashboardController;
+use Modules\Admin\Http\Controllers\WhyChooseController;
+use Modules\Admin\Http\Controllers\HomeBannerController;
+use Modules\Admin\Http\Controllers\AdminConfigController;
+use Modules\Admin\Http\Controllers\SiteSettingsController;
+use Modules\Admin\Http\Controllers\PrivacyPolicyController;
+use Modules\Admin\Http\Controllers\ContactEnquiryController;
+use Modules\Admin\Http\Controllers\ProductGalleryController;
+use Modules\Admin\Http\Controllers\ProductSubCategoryController;
+use Modules\Admin\Http\Controllers\TermsAndConditionsController;
+use Modules\Admin\Http\Controllers\ProductMainCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,9 +78,16 @@ Route::prefix('al-masar-admin-auth')->group(function () {
 
         Route::get('get-parent-sub-categories/{category}', [ProductMainCategoryController::class, 'getParentSubCategories'])->name('get-parent-sub-categories');
         Route::get('get-child-sub-categories/{sub_category}', [ProductMainCategoryController::class, 'getChildSubCategories'])->name('get-child-sub-categories');
-
+        
         //product
         Route::resource('product', ProductController::class);
+        //product gallery
+        Route::get('product/{product}/gallery', [ProductGalleryController::class, 'index'])->name('product-gallery.index');
+        Route::get('product/{product}/gallery/create', [ProductGalleryController::class, 'create'])->name('product-gallery.create');
+        Route::post('product/{product}/gallery/store', [ProductGalleryController::class, 'store'])->name('product-gallery.store');
+        Route::get('product/{product}/gallery/{gallery}/edit', [ProductGalleryController::class, 'edit'])->name('product-gallery.edit');
+        Route::put('product/{product}/gallery/{gallery}/update', [ProductGalleryController::class, 'update'])->name('product-gallery.update');
+        Route::delete('product/{product}gallery/{gallery}', [ProductGalleryController::class, 'destroy'])->name('product-gallery.destroy');
 
         // user management
         Route::resource('user-management', UserController::class);

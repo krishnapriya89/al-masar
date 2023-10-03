@@ -45,11 +45,11 @@
                                         data-original-title="Edit" style="margin-bottom: 2px;">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    {{-- <a href="{{ route('product-gallery.index', base64_encode($product->id)) }}"
+                                    <a href="{{ route('product-gallery.index', base64_encode($product->id)) }}"
                                         class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                                         data-original-title="Gallery" style="margin-bottom: 2px;">
                                          <i class="fas fa-image"></i>
-                                     </a> --}}
+                                     </a>
                                     <form action="{{ route('product.destroy', $product->id) }}"
                                           method="POST"
                                           style="display: inline-block;">

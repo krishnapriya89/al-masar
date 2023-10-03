@@ -42,4 +42,8 @@ class Product extends Model
     public function scopeActive($query){
         return $query->where('status', 1);
     }
+
+    public function gallery() {
+        return $this->hasMany(ProductGallery::class);
+    }
 }
