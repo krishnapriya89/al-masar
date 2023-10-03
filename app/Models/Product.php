@@ -52,6 +52,48 @@ class Product extends Model
             return asset('frontend/images/default-img.png');
     }
 
+    public function getListingImageValueAttribute()
+    {
+        if($this->listing_image && Storage::disk('public')->exists($this->listing_image))
+            return Storage::url($this->listing_image);
+        else
+            return asset('frontend/images/default-img.png');
+    }
+
+    public function getPriceAttribute()
+    {
+        if ($this->discount_type != 0) {
+            if($this->discount_type == 1)
+                return $this->base_price - $this->discount;
+            else
+                return $this->base_price - (($this->base_price * $this->discount) / 100);
+        }
+        else
+            return $this->base_price;
+    }
+
+    //return the product min price that is the min quantity * after offer price or the base price
+    public function getMinProductPriceAttribute()
+    {
+        return (($this->min_quantity_to_buy ?? 1) * $this->getPriceAttribute());
+    }
+
+    public function getIsInstockAttribute()
+    {
+        if ($this->stock < 1 || $this->stock_status == 0)
+            return 0;
+        else
+            return 1;
+    }
+
+    public function getStockClassAttribute()
+    {
+        if (!$this->getIsInstockAttribute())
+            return 'notify';
+        else
+            return '';
+    }
+
     public function gallery() {
         return $this->hasMany(ProductGallery::class);
     }

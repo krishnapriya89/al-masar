@@ -16,6 +16,13 @@ $(document).ready(function () {
         return this.optional(element) || value != $(param).val();
     }, "This has to be different from the phone number");
 
+    //currency rate changing
+    $('#currency_change').on('change', function () {
+        currencyRateChange('change');
+    });
+    //change rate in every page load
+    currencyRateChange('page_load');
+
     var otpDebounceTimer;
     $('.resend-otp-btn').on('click', function () {
         clearTimeout(otpDebounceTimer);
@@ -44,7 +51,7 @@ $(document).ready(function () {
                     }
                 }
             });
-        });
+        }, 300);
     });
 
     $("#contactForm").validate({
@@ -62,5 +69,18 @@ $(document).ready(function () {
             subject: "required",
         }
     });
-
 });
+
+//check the currency data changes in drop down select and every page load
+function currencyRateChange(type) {
+    var code = '';
+    code = $('#currency_change').val();
+    $.ajax({
+        url: "/change-currency/" + code,
+        dataType: 'json',
+        success: function (result) {
+            if(type === 'change')
+                location.reload();
+        }
+    });
+}

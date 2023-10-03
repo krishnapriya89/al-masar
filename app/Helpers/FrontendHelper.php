@@ -39,4 +39,34 @@ class FrontendHelper
 
         return $phone_verification_code;
     }
+
+    /**
+     * currency related functions
+     * 
+     *
+     */
+    public static function getCurrencyRate()
+    {
+        return session('currency_rate') ?? '1';
+    }
+
+    public static function getCurrencySymbol()
+    {
+        return session('currency_symbol') ?? '$';
+    }
+
+    public static function getCurrencyCode()
+    {
+        return session('currency_code') ?? 'USD';
+    }
+
+    public static function getCurrencyConvertedPrice($price)
+    {
+        return AdminHelper::getFormattedPrice(self::getCurrencyRate() * $price);
+    }
+
+    public static function getCurrencySymbolWithConvertedPrice($price)
+    {
+        return self::getCurrencySymbol() .  self::getCurrencyConvertedPrice($price);
+    }
 }

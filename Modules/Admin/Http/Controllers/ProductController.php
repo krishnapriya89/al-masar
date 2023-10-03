@@ -64,7 +64,7 @@ class ProductController extends Controller
         $product->base_price = $request->base_price ?? 0;
         $product->discount_type = $request->discount_type ?? 0;
         $product->discount = $request->discount ?? 0;
-        $product->min_quantity_to_buy = $request->filled('min_quantity_to_buy') ?? 0;
+        $product->min_quantity_to_buy = $request->filled('min_quantity_to_buy') ? $request->min_quantity_to_buy : 0;
         $product->sort_order = $request->filled('sort_order') ? $request->sort_order : 0;
         $product->status = $request->status;
         $product->meta_title = $request->meta_title;
@@ -142,7 +142,7 @@ class ProductController extends Controller
         $product->base_price = $request->base_price ?? 0;
         $product->discount_type = $request->discount_type ?? 0;
         $product->discount = $request->discount ?? 0;
-        $product->min_quantity_to_buy = $request->filled('min_quantity_to_buy') ?? 0;
+        $product->min_quantity_to_buy = $request->filled('min_quantity_to_buy') ? $request->min_quantity_to_buy : 0;
         $product->sort_order = $request->filled('sort_order') ? $request->sort_order : 0;
         $product->status = $request->status;
         $product->meta_title = $request->meta_title;

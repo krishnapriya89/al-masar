@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Request;
 use Modules\Frontend\Http\Controllers\AuthController;
 use Modules\Frontend\Http\Controllers\HomeController;
 use Modules\Frontend\Http\Controllers\UserController;
+use Modules\Frontend\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,7 @@ use Modules\Frontend\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::prefix('frontend')->group(function() {
-//     Route::get('/', 'FrontendController@index');
-// });
+Route::get('change-currency/{country}', [HomeController::class, 'changeCurrency'])->name('change-currency');
 
 //user registration and login
 Route::get('/register', [AuthController::class,'showRegisterForm'])->name('user.register.form');
@@ -38,19 +36,25 @@ Route::post('/verify-login-otp', [AuthController::class, 'verifyLoginOtp'])->nam
 Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('user.email.verify');
 
 Route::group(['middleware' => 'auth.user'], function () {
-    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
-});
+    //cms
+    //about
+    Route::get('about',[HomeController::class,'about'])->name('about');
+    //privacy policy
+    Route::get('privacy-policy',[HomeController::class,'privacyPolicy'])->name('privacy-policy');
+    //Terms And conditions
+    Route::get('terms-and-conditions',[HomeController::class,'termsAndConditions'])->name('terms-and-conditions');
+    //store contact enquiry
+    Route::post('contact-enquiry',[HomeController::class,'storeContact'])->name('contact-enquiry');
 
+    //user
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+    //E-commerce
+    //product
+    Route::get('/product',[ProductController::class,'products'])->name('product');
+    Route::post('/product-search',[ProductController::class,'search'])->name('product-search');
+    //product detail
+    Route::get('product-detail/{slug}',[HomeController::class,'productDetailPage'])->name('product-detail');
+});
 
 //home
 Route::get('/',[HomeController::class,'index'])->name('home');
-//about
-Route::get('about',[HomeController::class,'about'])->name('about');
-//privacy policy
-Route::get('privacy-policy',[HomeController::class,'privacyPolicy'])->name('privacy-policy');
-//Terms And conditions
-Route::get('terms-and-conditions',[HomeController::class,'termsAndConditions'])->name('terms-and-conditions');
-//store contact enquiry
-Route::post('contact-enquiry',[HomeController::class,'storeContact'])->name('contact-enquiry');
-//product detail
-Route::get('product-detail/{slug}',[HomeController::class,'productDetailPage'])->name('product-detail');
