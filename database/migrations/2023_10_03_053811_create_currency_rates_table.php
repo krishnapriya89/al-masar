@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('home_banners', function (Blueprint $table) {
+        Schema::create('currency_rates', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('sub_title')->nullable();
-            $table->string('web_image')->nullable();
-            $table->string('mob_image')->nullable();
-            $table->string('button_name')->nullable();
-            $table->string('button_link')->nullable();
+            $table->unsignedBigInteger('code_id');
+            $table->foreign('code_id')->references('id')->on('currency_code_masters');
+            $table->string('symbol')->nullable();
+            $table->decimal('rate', 10, 3)->default(0);
             $table->integer('sort_order')->default(0);
+            $table->tinyInteger('is_default')->default(0)->comment('1-is default, 0-not');
             $table->tinyInteger('status')->default(1)->comment('1:active','0:inactive');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('home_banners');
+        Schema::dropIfExists('currency_rates');
     }
 };

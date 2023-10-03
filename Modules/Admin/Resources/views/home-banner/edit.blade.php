@@ -113,23 +113,54 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="image">Image</label>
-                                    <div class="input-group @error('image') is-invalid @enderror">
-                                            <input type="file" class="custom-file-input file-preview" id="image"
-                                                   name="image">
+                                    <label for="web_image">Web Image</label>
+                                    <div class="input-group @error('web_image') is-invalid @enderror">
+                                            <input type="file" class="custom-file-input file-preview" id="web_image"
+                                                   name="web_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
-                                        768 x 350
+                                        1920 x 640
                                         <div class="pt-3 file-holder"> </div>
                                     </div>
-                                    @error('image')
+                                    @error('web_image')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-12 image-container-div">
-                                    @if($home_banner->image != '' || $home_banner->image != NULL)
+                                    @if($home_banner->web_image != '' || $home_banner->web_image != NULL)
                                     <div class="form-group" style="display:inline-block;margin-right:10px;">
                                         <div class="image-container">
-                                            <img src="{{ Storage::disk('public')->exists($home_banner->image) ? Storage::url($home_banner->image) : asset($home_banner->image) }}"
+                                            <img src="{{ Storage::disk('public')->exists($home_banner->web_image) ? Storage::url($home_banner->web_image) : asset($home_banner->web_image) }}"
+                                                 alt="Uploaded Image" id="uploadedImage" class="uploaded-image">
+
+                                        </div>
+                                    </div>
+                                    {{-- <div style="display:inline-block;">
+                                        <a href="javascript:void(0)"><i class="fa fa-times text-red deleteImg" data-model="FixedHomeBanner" data-column="image" data-id="{{$home_banner->id}}"></i></a>
+                                    </div> --}}
+                                @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="mob_image">Mobile Image</label>
+                                    <div class="input-group @error('mob_image') is-invalid @enderror">
+                                            <input type="file" class="custom-file-input file-preview" id="mob_image"
+                                                   name="mob_image">
+                                            <label class="custom-file-label" for="file">Choose file</label>
+                                        768 x 350
+                                        <div class="pt-3 file-holder"> </div>
+                                    </div>
+                                    @error('mob_image')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12 image-container-div">
+                                    @if($home_banner->mob_image != '' || $home_banner->mob_image != NULL)
+                                    <div class="form-group" style="display:inline-block;margin-right:10px;">
+                                        <div class="image-container">
+                                            <img src="{{ Storage::disk('public')->exists($home_banner->mob_image) ? Storage::url($home_banner->mob_image) : asset($home_banner->mob_image) }}"
                                                  alt="Uploaded Image" id="uploadedImage" class="uploaded-image">
 
                                         </div>

@@ -11,6 +11,7 @@ use Modules\Admin\Http\Controllers\ContactController;
 use Modules\Admin\Http\Controllers\ContactEnquiryController;
 use Modules\Admin\Http\Controllers\StateController;
 use Modules\Admin\Http\Controllers\CountryController;
+use Modules\Admin\Http\Controllers\CurrencyController;
 use Modules\Admin\Http\Controllers\DashboardController;
 use Modules\Admin\Http\Controllers\HomeBannerController;
 use Modules\Admin\Http\Controllers\HowToBuyController;
@@ -66,6 +67,8 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::delete('state/{state}', [StateController::class, 'destroy'])->name('state.destroy');
         //vendor
         Route::resource('vendor', VendorController::class);
+        //currency
+        Route::resource('currency',CurrencyController::class);
 
         //product and related data routes
         //main category
