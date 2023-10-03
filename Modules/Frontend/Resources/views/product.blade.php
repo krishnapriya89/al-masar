@@ -47,18 +47,18 @@
                             <tr>
                                 <td>
                                     <input type="text" name="product_code" placeholder="" value="{{ @$product_code}}"
-                                        class="form-control product-list-search">
+                                        class="form-control product-list-search" autocomplete="off">
                                 </td>
                                 <td>
                                     <input type="text" name="product_name" placeholder="" value="{{ @$product_name}}"
-                                        class="form-control product-list-search">
+                                        class="form-control product-list-search" autocomplete="off">
                                 </td>
                                 <td>
                             
                                 </td>
                                 <td>
                                     <input type="text" name="model_number" placeholder="" value="{{ @$model_number}}"
-                                        class="form-control product-list-search">
+                                        class="form-control product-list-search" autocomplete="off">
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -69,6 +69,11 @@
                             @include('frontend::includes.product-list')
                         </tbody>
                     </table>
+                    {{-- @if($products)
+                        <ul class="pagination">
+                            {{ $products->render() }}
+                        </ul>
+                    @endif --}}
                 </div>
             </div>
         </section>
@@ -85,7 +90,7 @@
                 var product_name = $("input[name='product_name']").val();
                 var model_number = $("input[name='model_number']").val();
 
-                // productSearchDebounceTimer = setTimeout(function() {
+                productSearchDebounceTimer = setTimeout(function() {
                     $.ajax({
                         type: 'POST',
                         url: '/product-search',
@@ -97,11 +102,12 @@
                         dataType: 'html',
                         success: function(response) {
                             if (response) {
-                                $('#productListTable tbody tr:not(:first)').empty().html(response);
+                                $('#productListTable tbody tr:not(:first)').empty();
+                                $('#productListTable tbody').append(response);
                             }
                         }
                     });
-                // }, 300);
+                }, 300);
             });
         });
     </script>

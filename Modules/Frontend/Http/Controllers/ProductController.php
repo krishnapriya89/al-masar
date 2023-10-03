@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function products()
     {
-        $products = Product::active()->orderBy('sort_order')->paginate(25);
+        $products = Product::active()->orderBy('sort_order')->get();
         return view('frontend::product', compact('products'));
     }
 
@@ -26,12 +26,12 @@ class ProductController extends Controller
             $query->where('product_code', 'like', '%'. $request->input('product_code') . '%');
         })
         ->when($request->filled('product_name'), function ($query) use ($request) {
-            $query->where('product_name', 'like', '%'. $request->input('product_name') . '%');
+            $query->where('title', 'like', '%'. $request->input('product_name') . '%');
         })
         ->when($request->filled('model_number'), function ($query) use ($request) {
             $query->where('model_number', 'like', '%'. $request->input('model_number') . '%');
         })
-        ->orderBy('sort_order')->paginate(25);
+        ->orderBy('sort_order')->get();
 
         $product_code = $request->product_code;
         $product_name = $request->product_name;
