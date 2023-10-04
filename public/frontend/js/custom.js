@@ -243,7 +243,7 @@ function isValidAmount(value) {
     // var numericValue = value.replace(/[^0-9.]/g, '');
 
     // Check if the resulting string is a valid number
-    if (!isNaN(numericValue)) {
+    if (!isNaN(value)) {
         return true;
     } else {
         return false;
