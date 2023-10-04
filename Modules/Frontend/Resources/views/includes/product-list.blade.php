@@ -10,7 +10,7 @@
                 <div class="PimgB">
                     <img src="{{ $product->listing_image_value }}" alt="{{ $product->title }}">
                 </div>
-                <a href="{{ route('product-detail', $product->slug) }}" class="name">{{ $product->title }}</a>
+                <a href="{{ route('product-detail', $product->slug) }}" target="_blank" class="name">{{ $product->title }}</a>
             </div>
         </td>
         <td>
@@ -44,7 +44,7 @@
             @endif
         </td>
         <td>
-            <a href="{{ route('product-detail', $product->slug) }}" class="vMore">View Details</a>
+            <a href="{{ route('product-detail', $product->slug) }}" target="_blank" class="vMore">View Details</a>
         </td>
         <td>
             <div class="cart">

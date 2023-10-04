@@ -60,6 +60,7 @@ class Product extends Model
             return asset('frontend/images/default-img.png');
     }
 
+    //return the discounted value if no discount then return the base price
     public function getPriceAttribute()
     {
         if ($this->discount_type != 0) {
@@ -86,6 +87,7 @@ class Product extends Model
             return 1;
     }
 
+    //used in product list page to blink the out of stock products
     public function getStockClassAttribute()
     {
         if (!$this->getIsInstockAttribute())
@@ -97,6 +99,4 @@ class Product extends Model
     public function gallery() {
         return $this->hasMany(ProductGallery::class);
     }
-   
-
 }

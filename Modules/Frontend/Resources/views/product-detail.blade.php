@@ -193,100 +193,44 @@
                             <div class="pcode">Product Code:<span>{{ $product->code_number }}</span></div>
                             <div class="mdlNu">Model Number:<span>{{ $product->model_number }}</span></div>
                             <div class="sku">SKU:{{ $product->sku }}</div>
-                            <!-- <div class="colorBx">
-                                                    <div class="color">Colour:</div>
-                                                    <div class="flxB">
-                                                        <div class="colorD">
-                                                            <input class="selectcolor" type="radio" id="color1" name="color" value="1"
-                                                                checked="">
-                                                            <label for="color1">
-                                                                <div class="icon">
-                                                                    <img src="assets/images/c1.png" alt="">
-                                                                </div>
-                                                                Light Blue
-                                                            </label>
-                                                        </div>
-                                                        <div class="colorD">
-                                                            <input class="selectcolor" type="radio" id="color2" name="color" value="2"
-                                                                checked="">
-                                                            <label for="color2">
-                                                                <div class="icon">
-                                                                    <img src="assets/images/c2.png" alt="">
-                                                                </div>
-                                                                White
-                                                            </label>
-                                                        </div>
-                                                        <div class="colorD">
-                                                            <input class="selectcolor" type="radio" id="color3" name="color" value="3"
-                                                                checked="">
-                                                            <label for="color3">
-                                                                <div class="icon">
-                                                                    <img src="assets/images/c3.png" alt="">
-                                                                </div>
-                                                                Yellow
-                                                            </label>
-                                                        </div>
-                                                        <div class="colorD">
-                                                            <input class="selectcolor" type="radio" id="color4" name="color" value="4"
-                                                                checked="">
-                                                            <label for="color4">
-                                                                <div class="icon">
-                                                                    <img src="assets/images/c4.png" alt="">
-                                                                </div>
-                                                                Blue
-                                                            </label>
-                                                        </div>
-                                                        <div class="colorD">
-                                                            <input class="selectcolor" type="radio" id="color5" name="color" value="5"
-                                                                checked="">
-                                                            <label for="color5">
-                                                                <div class="icon">
-                                                                    <img src="assets/images/c5.png" alt="">
-                                                                </div>
-                                                                Red
-                                                            </label>
-                                                        </div>
-                                                        <div class="colorD">
-                                                            <input class="selectcolor" type="radio" id="color6" name="color" value="6"
-                                                                checked="">
-                                                            <label for="color6">
-                                                                <div class="icon">
-                                                                    <img src="assets/images/c6.png" alt="">
-                                                                </div>
-                                                                Grey
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
                             @if ($product->is_instock)
                                 <div class="quantitySec">
                                     <div class="label">Minimum Quantity:</div>
                                     <div class="quantity buttons_added">
-                                        <input type="button" value="-" class="minus">
-                                        <input type="number" step="1" min="1" max="10"
-                                            name="quantity" value="1" title="Qty" class="input-text qty text"
-                                            size="4" pattern="" inputmode="">
-                                        <input type="button" value="+" class="plus">
+                                        <input type="button" value="-" data-operation="minus" class="minus change-quantity-detail-page" data-product="{{ $product->slug }}">
+                                        <input type="number" step="1" min="{{ $product->min_quantity_to_buy }}"
+                                            name="quantity" value="{{ $product->min_quantity_to_buy }}" title="Qty" class="input-text qty text change-quantity-input-detail-page"
+                                            size="4" pattern="" inputmode="" data-product="{{ $product->slug }}">
+                                        <input type="button" value="+" data-operation="plus" class="plus change-quantity-detail-page" data-product="{{ $product->slug }}">
                                     </div>
                                 </div>
-                                <div class="deliveryInfo">
+                                {{-- <div class="deliveryInfo">
                                     Delivery by9 Sep, Saturday
                                     <span>if ordered before 5:39 PM</span>
-                                </div>
+                                </div> --}}
                                 <div class="flxBx">
                                     <div class="priceD">
-                                        <div class="cPrice">$45.00</div>
-                                        <div class="oPrice">$50.00</div>
+                                        <div class="cPrice">@currencySymbolWithConvertedPrice($product->price)</div>
+                                        @if ($product->base_price > $product->price)
+                                            <div class="oPrice">@currencySymbolWithConvertedPrice($product->base_price)</div>
+                                        @endif
                                     </div>
-                                    <div class="totalP">
+                                    <div class="totalP payable-amount-div">
                                         <div class="lbl">Payable Amount</div>
-                                        <div class="price">$900.00</div>
+                                        <div class="price product-total-price-div">@currencySymbolWithConvertedPrice($product->min_product_price)</div>
                                     </div>
                                 </div>
                                 <div class="expectedP">
                                     <div class="lbl">Bid Price:</div>
-                                    <input type="text" name="" id="" class="form-control"
-                                        placeholder="Enter Amount" required>
+                                    <input type="number" name="bid_price" id="bid_price" class="form-control bid-price-detail-page"
+                                        data-product="{{ $product->slug }}" placeholder="Enter Amount">
+                                    
+                                </div>
+                                <div class="flxBx">
+                                    <div class="totalP bid-payable-amount-div d-none">
+                                        <div class="lbl">Payable Amount</div>
+                                        <div class="price product-total-price-div">@currencySymbolWithConvertedPrice($product->min_product_price)</div>
+                                    </div>
                                 </div>
                                 <div class="btnBx">
                                     <a href="#!" class="quote">
@@ -305,9 +249,8 @@
                                 </div>
                             @else
                                 <div class="btnBx">
-                                    <a href="#!" class="quote notify-me" id="notify" data-id={{ $product->slug }}>
+                                    <a href="javascript:void(0)" class="quote notify-me" id="notify" data-id={{ $product->slug }}>
                                         Notify Me
-
                                     </a>
                                 </div>
                             @endif
