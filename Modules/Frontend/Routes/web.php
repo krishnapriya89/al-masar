@@ -7,6 +7,7 @@ use Modules\Frontend\Http\Controllers\AuthController;
 use Modules\Frontend\Http\Controllers\HomeController;
 use Modules\Frontend\Http\Controllers\UserController;
 use Modules\Frontend\Http\Controllers\ProductController;
+use Modules\Frontend\Http\Controllers\QuoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,13 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::post('/calculate-price',[ProductController::class,'calculatePrice'])->name('calculate-price');
     //product detail
     Route::get('product-detail/{slug}',[ProductController::class,'productDetailPage'])->name('product-detail');
+
+    Route::get('/',[QuoteController::class, 'index'])->name('quote');
+    Route::post('add-to-quote',[QuoteController::class, 'addToQuote'])->name('add-to-quote');
+    Route::post('update-quote',[QuoteController::class, 'updateQuote'])->name('update-quote');
+    Route::post('remove-from-quote',[QuoteController::class, 'removeFromQuote'])->name('remove-from-quote');
+    Route::get('clear-quote',[QuoteController::class, 'quoteEmpty'])->name('clear-quote');
+
     //notify-me
     Route::post('notify-me',[ProductController::class,'notifyMe'])->name('notify-me');
     //notify-user

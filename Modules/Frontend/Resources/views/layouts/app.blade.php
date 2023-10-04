@@ -58,12 +58,11 @@
 
 <body>
     {{-- header --}}
-    @auth
-        @include('frontend::layouts.header')
-    @endauth
-    @guest
+    @if (Auth::guard('web')->check())
         @include('frontend::layouts.home-header')
-    @endguest
+    @else
+        @include('frontend::layouts.header')
+    @endif
 
     <div id="viewport">
 

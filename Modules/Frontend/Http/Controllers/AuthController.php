@@ -531,7 +531,7 @@ class AuthController extends Controller
         $user = $this->getRegisteredUserData();
 
         if (!$user) {
-            session()->flash('success', 'You have to register your details first');
+            session()->flash('error', 'You have to register your details first');
             return response()->json([
                 'status' => false,
                 'url' => route('user.register.form'),
@@ -540,7 +540,7 @@ class AuthController extends Controller
         }
 
         if ($user->phone_verified == 0) {
-            session()->flash('success', 'You have to verify this ' . $user->phone . ' number first.');
+            session()->flash('error', 'You have to verify this ' . $user->phone . ' number first.');
             return response()->json([
                 'status' => false,
                 'url' => route('user.show-phone-verification.form'),
@@ -549,7 +549,7 @@ class AuthController extends Controller
         }
 
         if ($user->office_phone_verified == 1) {
-            session()->flash('success', 'You have already verified this ' . $user->office_phone . ' phone number. Please verify ' . $user->office_phone . ' this number.');
+            session()->flash('error', 'You have already verified this ' . $user->office_phone . ' phone number. Please verify ' . $user->office_phone . ' this number.');
             return response()->json([
                 'status' => false,
                 'url' => route('user.login.form'),
@@ -581,7 +581,7 @@ class AuthController extends Controller
             $user->save();
             session()->forget('registered_user');
             session()->flash('success', $user->office_phone . ' number verified successfully');
-
+            session()->flash('success', 'Kindly verify the email id as well. A mail is been sent to your registered mail id. And kindly wait for the admin approval.');
             return response()->json([
                 'status' => true,
                 'url' => route('user.login.form'),

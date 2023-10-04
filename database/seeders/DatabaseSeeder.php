@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SiteCommonContentSeeder::class);
         $this->call(CurrencyCodeMasterSeeder::class);
         $this->call(CurrencyRateSeeder::class);
+        $this->call(VendorSeeder::class);
     }
 }

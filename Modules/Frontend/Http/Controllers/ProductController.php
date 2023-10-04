@@ -73,7 +73,7 @@ class ProductController extends Controller
                 'message' => 'The Requested Product is not Found!'
             ]);
         }
-        $notify_count = NotifyProduct::where('user_id',Auth::id())->where('product_id',$product->id)->where('isNotified',0)->count();
+        $notify_count = NotifyProduct::where('user_id',Auth::guard('web')->id())->where('product_id',$product->id)->where('isNotified',0)->count();
         if($notify_count>0){
             return response()->json([
                 'status' => false,
@@ -83,7 +83,7 @@ class ProductController extends Controller
 
             $notify_product =  new NotifyProduct();
             $notify_product->product_id = $product->id;
-            $notify_product->user_id = Auth::id();
+            $notify_product->user_id = Auth::guard('web')->id();
             $notify_product->isNotified = 0;
             if($notify_product->save())
             {

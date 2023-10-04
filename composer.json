@@ -34,7 +34,7 @@
         "files": [
             "app/Helpers/AdminHelper.php",
             "app/Helpers/FrontendHelper.php",
-            "app/Helpers/QuotationHelper.php"
+            "app/Helpers/QuoteHelper.php"
         ]
     },
     "autoload-dev": {

@@ -96,7 +96,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="fileUploadInput">
-                                                <label for="file-upload" class="custom-file-upload">
+                                                <label for="file-upload" class="custom-file-upload  @error('office_phone') is-invalid @enderror">
                                                     <i class="fa fa-cloud-upload"></i> Attachment
                                                 </label>
                                                 <input id="attachment" name='attachment' type="file" class="fileInput">
@@ -113,13 +113,6 @@
                                                     </svg>
                                                 </div>
                                             </div>
-                                            {{-- <input type="file" id="attachment" name="attachment"
-                                                value="{{ old('attachment') }}"
-                                                class="form-control @error('attachment') is-invalid @enderror"
-                                                placeholder="attachment*">
-                                            @error('attachment')
-                                                <span class="invalid-feedback">{{ $message }}</span>
-                                            @enderror --}}
                                         </div>
                                     </div>
                                     <div class="col-md-12">

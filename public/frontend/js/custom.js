@@ -236,7 +236,8 @@ $(document).ready(function () {
         }
     });
 
-    $('.list-add-to-quotation').on('click', function() {
+    //add to quote in product list
+    $('.list-add-to-quote').on('click', function() {
         var _this = $(this);
 
         var quantity = _this.closest('tr').find("input[name='quantity'").val();
@@ -244,7 +245,7 @@ $(document).ready(function () {
         var product = _this.data('product');
 
         $.ajax({
-            url: '/add-to-quotation',
+            url: '/add-to-quote',
             data: {
                 quantity: quantity,
                 product: product,
