@@ -57,7 +57,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="txt">{!! $quote->product->specification !!}</div>
+                                            <div class="txt">{!! $quote->product->specification ?? '--' !!}</div>
                                         </td>
                                         <td>
                                             <div class="txt ">{{ $quote->product->sku }}</div>
@@ -106,7 +106,7 @@
                     <div class="mobVew">
                         <div class="accordion" id="Productaccordion">
                             @foreach ($quotes as $quote)
-                                <div class="accordion-item">
+                                <div class="accordion-item quote-tr-{{ $quote->id }}">
                                     <h2 class="accordion-header" id="heading{{ $loop->iteration }}">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#collapse{{ $loop->iteration }}" aria-expanded="false"
@@ -114,61 +114,62 @@
                                             <div class="flxBx">
                                                 <div class="ltBx">
                                                     <div class="icon">
-                                                        <img src="assets/images/c6.png" alt="">
+                                                        <img src="{{ $quote->product->listing_image_value }}" alt="{{ $quote->product->title }}">
                                                     </div>
                                                     <div class="txtBx">
                                                         <div class="txt">Product Name</div>
-                                                        <div class="name">iPhone 14 Pro</div>
+                                                        <a href="{{ route('product-detail', $quote->product->slug) }}"
+                                                            target="_blank" class="name">{{ $quote->product->title }}</a>
                                                     </div>
                                                 </div>
                                                 <div class="rtBx">
-                                                    <div class="txt">Actual Price</div>
-                                                    <div class="price"><span>$800</span></div>
+                                                    <div class="txt">Bid Price</div>
+                                                    <div class="price"><span>{{ $quote->bid_price }}</span></div>
                                                 </div>
                                             </div>
                                         </button>
                                     </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
+                                    <div id="collapse{{ $loop->iteration }}" class="accordion-collapse collapse " aria-labelledby="heading{{ $loop->iteration }}"
                                         data-bs-parent="#Productaccordion">
                                         <div class="accordion-body">
                                             <div class="dBlock">
                                                 <div class="flxBx">
                                                     <div class="ltbx">
                                                         <div class="lbl">Product Code</div>
-                                                        <div class="txt">A14322</div>
+                                                        <div class="txt">{{ $quote->product->product_code }}</div>
                                                     </div>
                                                     <div class="rtbx">
-                                                        <div class="lbl">Bid Price</div>
-                                                        <div class="txt">2485798546</div>
+                                                        <div class="lbl">SKU</div>
+                                                        <div class="txt">{{ $quote->product->sku }}</div>
                                                     </div>
                                                 </div>
                                                 <div class="flxBx">
                                                     <div class="ltbx">
                                                         <div class="lbl">Model No.</div>
-                                                        <div class="txt">A14322</div>
+                                                        <div class="txt">{{ $quote->product->model_number }}</div>
                                                     </div>
                                                     <div class="rtbx">
                                                         <div class="lbl">Required Qty</div>
                                                         <div class="quantity buttons_added">
-                                                            <input type="button" value="-" class="minus">
-                                                            <input type="number" step="1" min="1"
-                                                                max="10" name="quantity" value="1"
-                                                                title="Qty" class="input-text qty text" size="4"
-                                                                pattern="" inputmode="">
-                                                            <input type="button" value="+" class="plus">
+                                                            <input type="button" value="-" class="minus quote-update-quantity-btn" data-operation="minus">
+                                                            <input type="number" step="1" min="{{ $quote->product->min_quantity_to_buy }}"
+                                                                name="quantity" value="{{ $quote->quantity }}"
+                                                                title="Qty" class="input-text qty text quote-update-quantity-input quantityField" size="4"
+                                                                pattern="" inputmode=""  data-quote-id="{{ $quote->id }}">
+                                                            <input type="button" value="+" class="plus quote-update-quantity-btn" data-operation="plus">
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="flxBx">Total <span
+                                                    class="product-price-{{ $quote->id }} tmns">@currencySymbolWithConvertedPrice($quote->product_total_price)</span>
+                                                </div>
                                                 <div class="spec">
                                                     <div class="ttle">Specifications</div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Graecum enim
-                                                        hunc
-                                                        versum nos tis omnesuavis</p>
+                                                    <p>{{ $quote->product->specification ?? '--' }}</p>
                                                 </div>
                                                 <div class="btnBx">
-                                                    <a href="javascript:void(0)" class="vdtails hoveranim"><span>Submit
-                                                            Quotation</span></a>
-                                                    <button type="" class="dlte">
+                                                    <button type="button" class="dlte quote-delete-btn" data-quote-id="{{ $quote->id }}"
+                                                        data-title="{{ $quote->product->title }}">
                                                         <svg viewBox="0 0 13.401 16.5">
                                                             <g id="delete_1_" data-name="delete (1)"
                                                                 transform="translate(0.003 0.001)">
@@ -193,6 +194,10 @@
                                     </div>
                                 </div>
                             @endforeach
+                            <div class="btnBx">
+                                <a href="javascript:void(0)" class="vdtails hoveranim"><span>Submit
+                                    Quotation</span></a>
+                            </div>
                         </div>
                     </div>
                 </div>
