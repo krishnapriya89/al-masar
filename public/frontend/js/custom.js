@@ -137,8 +137,12 @@ $(document).ready(function () {
         var quantity = _this.closest('tr').find('input[name="quantity"]').val();
         var product = _this.data("product");
         bid_price = _this.val();
+        var numericValue = bid_price.replace(/[^0-9]/g, '');
 
-        if(bid_price && (bid_price < 1 || !isValidAmount(bid_price))) {
+        // Update the input field value
+        _this.val(numericValue);
+
+        if(bid_price && bid_price < 1) {
             toastr.error('Please enter the bid price value min 1');
             _this.val(1);
             clearTimeout(changeQuantityDebounceTimer);
@@ -235,17 +239,4 @@ function calculatePrice(quantity, product, bid_price, _this) {
             }
         });
     }, 300);
-}
-
-//check the value is a valid amount
-function isValidAmount(value) {
-    // Remove any non-numeric characters
-    // var numericValue = value.replace(/[^0-9.]/g, '');
-
-    // Check if the resulting string is a valid number
-    if (!isNaN(value)) {
-        return true;
-    } else {
-        return false;
-    }
 }
