@@ -375,7 +375,7 @@
     <script>
         $(document).ready(function() {
             // Summernote
-            $('#specification,#description').summernote({
+            $('#description').summernote({
                 minHeight: 200,
             });
 
