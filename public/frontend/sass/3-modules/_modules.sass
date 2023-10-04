@@ -1,4 +1,38 @@
 //MODULES
+.fixedRit
+    position: fixed
+    z-index: 500
+    right: 5px
+    top: 50%
+    margin: auto
+    transition: .4s all
+    display: none
+    @media only screen and (min-width: 676px)
+        display: block
+        right: 15px
+    @media only screen and (min-width: 1441px)
+        right: 28px
+    ul
+        li
+            a
+                display: flex
+                align-items: center
+                justify-content: center
+                text-align: center
+                transition: all .3s
+                max-width: 36px
+                min-width: 36px
+                &:hover
+                    filter: none
+                svg
+                    transition: all .3s
+                    max-width: 36px
+                    min-width: 36px
+                    .cls-1
+                        fill: #fff
+
+                    .cls-2
+                        fill: #07d97e
 
 // Flip link
 .fliplink
@@ -327,3 +361,324 @@
             -moz-appearance: none
             appearance: none
             margin: 0
+
+#filterAccodionModal
+    z-index: 999999
+    @media only screen and (min-width: 992px)
+        &::-webkit-scrollbar
+            width: 0
+    .modal-dialog
+        max-width: none
+        margin: 0
+        -webkit-transform: translate(0,0px)
+        transform: translate(0,0px)
+        height: 100%
+        @media only screen and (max-width: 992px)
+            background: #fff
+    .modal-content
+        border: none
+        background: none
+        height: 100%
+        @media only screen and (max-width: 992px)
+            height: 100vh
+            border-radius: 0px
+    .ModalHeader
+        display: flex
+        align-items: center
+        justify-content: space-between
+        position: relative
+        border-bottom: 1px solid rgba(255, 255, 255, .30)
+        background: #000
+        @media only screen and (max-width: 992px)
+            padding: 15px
+        @media only screen and (min-width: 992px)
+            display: none
+            background: transparent
+            padding: 45px 0 23px
+        svg
+            width: 15px
+            height: 15px
+            fill: $basecolor
+            margin-right: 10px
+        .title
+            color: #fff
+            font-weight: 600
+            font-size: 16px
+            text-transform: uppercase
+            display: flex
+            align-items: center
+            .icon
+                width: 19px
+                height: 14px
+                margin-right: 13px
+                span
+                    height: 3px
+                    display: block
+                    background: $basecolor
+                    opacity: 1
+                    -webkit-transition: all 0.3s ease
+                    -moz-transition: all 0.3s ease
+                    -ms-transition: all 0.3s ease
+                    -o-transition: all 0.3s ease
+                    transition: all 0.3s ease
+                    position: relative
+
+                    &:nth-child(1)
+                        width: 100%
+
+                    &:nth-child(2)
+                        width: 65%
+
+                    &:nth-child(3)
+                        width: 100%
+
+                    ~ span
+                        margin-top: 3px
+        .close
+            border-radius: 0px
+            border: none
+            outline: none
+            box-shadow: none
+            font-size: 23px
+            padding: 0
+            width: 45px
+            position: absolute
+            right: 0
+            color: #fff
+            height: 100%
+            top: 0
+            display: flex
+            align-items: center
+            justify-content: center
+            background: $basecolor
+            @media only screen and (min-width: 992px)
+                display: none
+
+    .modal-body
+        padding: 0px 15px 15px
+        @media only screen and (max-width: 992px)
+            background: #ffff
+            height: calc(100vh - 100px)
+            overflow-y: scroll
+        @media only screen and (min-width: 992px)
+            padding: 0px
+    .modal-footer
+        padding: 0
+
+    #filterAccodion
+        @media only screen and ( max-width: 992px )
+            padding-top: 30px
+
+        .card
+            background: none
+            border-radius: 0
+            background: #fff
+            border: none
+            .cardHeader
+                button
+                    &[aria-expanded="true"]
+            .cardHeader
+                margin: 0px
+                border: none
+                display: flex
+                align-items: center
+                padding: 0
+                button
+                    margin: 0px
+                    outline: none
+                    border: none
+                    box-shadow: none
+                    text-decoration: none
+                    width: 100%
+                    display: block
+                    text-align: left
+                    position: relative
+                    padding: 0
+                    display: flex
+                    align-items: center
+                    text-transform: capitalize
+                    justify-content: space-between
+                    font-size: 14px
+                    padding: 15px 15px
+                    color: #000
+                    font-weight: bold
+                    &::after
+                        content: ""
+                        background: url(../images/plus.png) no-repeat
+                        transform: none
+                        width: 9px
+                        height: 9px
+                        background-size: contain
+                    &[aria-expanded="true"]
+                        &::after
+                            content: ""
+                            background: url(../images/minus.png) no-repeat
+                            background-size: contain
+            &:first-of-type
+                .cardHeader
+                    @media only screen and (max-width: 992px)
+                        border: none
+
+            .card-body
+                padding: 0px 25px
+                ul
+                    li
+                        margin-bottom: 5px
+                        a
+                            font-size: 12px
+                            color: #000
+                            font-weight: 500
+                            transition: .4s all
+                            &:hover
+                                color: $basecolor
+
+/***********************SEARCH_MODAL***********************/
+.SearchModal
+    z-index: 9999
+    background: #fff
+    .modal-dialog
+        margin: 0
+        max-width: 100%
+    .modal-content
+        border-radius: 0
+        border: none
+        // height: 100vh
+    .modal-header
+        padding: 0
+        align-items: center
+        border-radius: 0
+        button[data-bs-dismiss="modal"]
+            width: 25px
+            display: flex
+            align-items: center
+            background: transparent
+            border: none
+            outline: none
+            box-shadow: none
+            svg
+                width: 24px
+                height: 24px
+        .searchBox
+            width: calc(100% - 30px)
+            overflow: hidden
+            align-items: center
+            display: none
+            @include display
+            form
+                width: 100%
+                position: unset
+            .form-group
+                border: none
+                overflow: hidden
+                border-radius: 3px
+                @include display
+                position: unset
+            .form-control
+                background-color: rgb(255, 255, 255)
+                width: calc(100% - 40px)
+                border: none
+                font-size: 16px
+                color: rgb(58, 58, 58)
+                padding: 10px 0px
+                height: 45px
+                @media only screen and (min-width: 468px)
+                    height: 55px
+                &::placeholder
+                    color: rgb(58, 58, 58)
+            input[type="search"]
+                &::-webkit-search-cancel-button
+                    -webkit-appearance: none
+                    height: 17px
+                    width: 17px
+                    border-radius: 50em
+                    background: url(../images/close.svg) no-repeat 50% 50%
+                    background-size: contain
+                    position: relative
+                    right: 0
+                    z-index: 100
+                    cursor: pointer
+            .sendBtn
+                width: 40px
+                border: none
+                background: transparent
+                background-color: rgb(255, 255, 255)
+                height: 45px
+                @media only screen and (min-width: 468px)
+                    height: 55px
+                svg
+                    width: 20px
+                    fill: $basecolor
+
+        .SearchBtn
+            display: flex
+            align-items: center
+            svg
+                fill: $white
+                width: 25px
+    .modal-body
+        .results
+            height: auto
+            width: 100%
+            background: #fff
+            z-index: 999
+            display: block
+            &::-webkit-scrollbar
+                width: 0px
+            li
+                .flxBx
+                    display: flex
+                    align-items: center
+                    padding-bottom: 8px
+                    margin-bottom: 8px
+                    // visibility: hidden
+                    cursor: pointer
+                    .imgBx
+                        min-width: 50px
+                        height: 50px
+                        margin-right: 10px
+                        img
+                            @include imgFit
+                            object-fit: contain
+                    .txtBx
+                        .name
+                            font-size: 14px
+                            color: #000
+                            font-weight: 400
+                        .price
+                            font-size: 12px
+                            color: #000
+                            font-weight: 300
+
+#MobMenu
+    position: fixed
+    bottom: 0px
+    width: 100%
+    background: $white
+    z-index: 2000
+    border-top: 1px solid #ececec
+    @media screen and (min-width: 676px)
+        display: none
+    ul
+        display: flex
+        align-items: center
+        justify-content: space-around
+        margin: 0px
+        padding: 0px
+        li
+            a
+                display: block
+                text-align: center
+                padding: 7px 2px
+                &:hover, &.active
+                    svg
+                        fill: $basecolor
+                svg
+                    margin-bottom: 5px
+                    height: 18px
+                    fill: $basecolor
+                    transition: .4s all
+                .txt
+                    font-size: 11px
+                    line-height: normal
+                    color: #000
+                    text-transform: capitalize

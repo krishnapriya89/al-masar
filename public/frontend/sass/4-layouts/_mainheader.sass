@@ -18,26 +18,23 @@ body
     left: 0px
     animation-duration: 0.5s
     position: absolute
-    background: $basecolor
+    background: $basecolor2
     box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.08)
     border-top: solid 4px #000
     .HrMpx
         position: relative
         background-color: #fff
-        padding: 3px 0
+        padding: 6px 0
         border-bottom: solid 1px #F9F9F9
         @media only screen and ( min-width: 992px )
             padding: 0
+            z-index: 10
         .HrMfLx
             display: flex
+            position: relative
+            // z-index: 10
             align-items: center
             justify-content: space-between
-            @media only screen and ( max-width: 1100px )
-                padding-left: 75px
-            @media only screen and ( max-width: 768px )
-                padding-left: 55px
-            @media only screen and ( max-width: 576px )
-                padding-left: 35px
         .WsMLgo
             display: flex
             align-items: center
@@ -79,22 +76,22 @@ body
                 width: calc( 100% - 275px )
                 padding-left: 88px
 
-        
         .HrMfLxRt
             display: flex
             align-items: center
             justify-content: flex-end
             width: 100%
+            // @media only screen and ( max-width: 992px )
+            //     display: none
             .WtSrCh
-                @media only screen and ( max-width: 768px )
-                    display: none
                 @media only screen and ( min-width: 768px )
                     margin-right: 19px
                     width: 100%
                     max-width: 300px
                 @media only screen and ( min-width: 992px )
                     max-width: 340px
-                
+                @media only screen and ( max-width: 992px )
+                    display: none
                 .flxB
                     width: 100%
                     border: solid 1px #7A7A7A
@@ -104,7 +101,6 @@ body
                     display: flex
                     align-items: center
                     will-change: transform
-                    overflow: hidden
                     .form-control
                         padding: 5px 18px
                         padding-right: 30px
@@ -118,6 +114,9 @@ body
                             font-size: 14px
                             font-weight: 400
                             color: #A2A2A2
+                        &:focus ~ .focusBx
+                            opacity: 1
+                            visibility: visible
 
                     input[type="search"]
                         &::-webkit-search-cancel-button
@@ -149,7 +148,53 @@ body
                             min-height: 20px
                             .cls-1
                                 fill: #000
-
+                    .focusBx
+                        position: absolute
+                        top: 100%
+                        margin-top: 2px
+                        left: 0
+                        width: 100%
+                        opacity: 0
+                        visibility: hidden
+                        ul
+                            height: auto
+                            width: 100%
+                            background: #fff
+                            padding: 15px 20px
+                            z-index: 999
+                            display: block
+                            box-shadow: 0 3px 6px rgba(0, 0, 0, .16)
+                            &::-webkit-scrollbar
+                                width: 0px
+                            li
+                                .flxBx
+                                    display: flex
+                                    align-items: center
+                                    padding-bottom: 8px
+                                    margin-bottom: 8px
+                                    // visibility: hidden
+                                    cursor: pointer
+                                    .imgBx
+                                        min-width: 50px
+                                        height: 50px
+                                        margin-right: 10px
+                                        img
+                                            @include imgFit
+                                            object-fit: contain
+                                    .txtBx
+                                        .name
+                                            font-size: 14px
+                                            color: #000
+                                            font-weight: 400
+                                            transition: .4s all
+                                    &:hover
+                                        .txtBx
+                                            .name
+                                                color: $basecolor
+                    &:focus
+                        .focusBx
+                            opacity: 1
+                            visibility: visible
             .TBFLXBX
                 display: flex
                 align-items: center
@@ -158,8 +203,8 @@ body
                     margin-right: 20px
                     @media only screen and ( min-width: 768px )
                         display: none
-                    // @media only screen and ( max-width: 676px )
-                    //     display: none
+                    @media only screen and ( max-width: 992px )
+                        display: none
                     svg
                         height: 15px
                         @media only screen and ( min-width: 992px )
@@ -168,8 +213,8 @@ body
                 .MyaccountDrop
                     position: relative
                     margin-right: 18px
-                    // @media only screen and (max-width: 676px)
-                    //     display: none
+                    @media only screen and ( max-width: 992px )
+                        display: none
                     .DRoPBTn
                         cursor: pointer
                         display: flex
@@ -293,7 +338,6 @@ body
                                 color: rgb(11, 34, 57)
                                 cursor: pointer
                                 text-decoration: none
-                                text-transform: uppercase
                                 font-size: 13px
                                 @media only screen and ( min-width: 1441px )
                                     font-size: 14px
@@ -321,7 +365,6 @@ body
                                 color: rgb(11, 34, 57)
                                 cursor: pointer
                                 text-decoration: none
-                                text-transform: uppercase
                                 width: 100%
                                 background: transparent
                                 border: none
@@ -370,8 +413,8 @@ body
                     border-radius: 50%
                     background: #F2F2F2
                     position: relative
-                    // @media only screen and ( max-width: 676px )
-                    //     display: none
+                    @media only screen and ( max-width: 992px )
+                        display: none
                     .icon
                         svg
                             width: 19px
@@ -390,87 +433,113 @@ body
                         font-weight: 600
                         color: #fff
 
-                .moneyDrop
-                    width: auto
-                    height: 38px
-                    width: 99px
-                    display: flex
-                    align-items: center
-                    border-radius: 19px
-                    border: solid 1px #707070
-                    padding: 4px 5px
-                    margin-right: 12px
-                    select
-                        opacity: 0
-                        visibility: hidden
-                    .icon
-                        height: 30px
-                        width: 30px
-                        border-radius: 50%
-                        display: flex
-                        align-items: center
-                        justify-content: center
-                        background: #FFE3E5
-                        svg
-                            width: 19px
-                            fill: #000
-                    .dropdown
-                        width: calc( 100% - 30px )
-                    button
-                        width: 100%
-                        background: transparent
-                        outline: none !important
-                        box-shadow: none !important
-                        border: none !important
-                        padding: 0 10px
-                        color: #2E2E2E
-                        font-family: $fontstack1
-                        font-weight: 500
+    .moneyDrop
+        width: auto
+        display: flex
+        align-items: center
+        border-radius: 19px
+        border: solid 1px #707070
+        padding: 4px 5px
+        margin-right: 12px
+        width: 80px
+        height: 35px
+        @media only screen and ( min-width: 576px )
+            height: 38px
+            width: 99px
+        &.dskFrp
+            // @media only screen and ( max-width: 992px )
+            //     display: none
+        &.mobV
+            margin-left: 19px
+            margin-right: 0
+            display: none
+            @media only screen and ( min-width: 992px )
+                display: none
+            @media only screen and ( max-width: 992px )
+                margin-bottom: 20px
+        select
+            opacity: 0
+            visibility: hidden
+        .icon
+            border-radius: 50%
+            display: flex
+            align-items: center
+            justify-content: center
+            background: #FFE3E5
+            height: 25px
+            width: 25px
+            @media only screen and ( min-width: 576px )
+                height: 30px
+                width: 30px
+            svg
+                fill: #000
+                width: 15px
+                @media only screen and ( min-width: 576px )
+                    width: 19px
+        .dropdown
+            width: calc( 100% - 30px )
+        button
+            width: 100%
+            background: transparent
+            outline: none !important
+            box-shadow: none !important
+            border: none !important
+            padding: 0 10px
+            font-family: $fontstack1
+            font-weight: 500
+            color: #2E2E2E
+            font-size: 12px
+            @media only screen and ( min-width: 768px )
+                font-size: 14px
+            @media only screen and ( min-width: 1600px )
+                font-size: 16px
+            &::after
+                border: none
+                background: url(../images/dwn.svg) no-repeat
+                width: 10px
+                height: 6px
+                background-size: contain
+                // @media only screen and ( max-width: 992px )
+                //     filter: invert(5) brightness(20)
+            .filter-option
+                .filter-option-inner
+                    // text-align: center
+                    .filter-option-inner-inner
+                        font-weight: 600
+                        color: #000
                         font-size: 12px
                         @media only screen and ( min-width: 768px )
                             font-size: 14px
-                        @media only screen and ( min-width: 1600px )
-                            font-size: 16px
-                        &::after
-                            border: none
-                            background: url(../images/dwn.svg) no-repeat
-                            width: 10px
-                            height: 6px
-                            background-size: contain
-                        .filter-option
-                            .filter-option-inner
-                                // text-align: center
-                                .filter-option-inner-inner
-                                    img
-                                        width: 20px
-                                        @media only screen and ( min-width: 576px )
-                                            width: 26px
-                                            height: 18px
-                                            margin-right: 10px
-                                            margin-top: -5px
-                                        @media only screen and ( min-width: 992px )
-                                            margin-right: 15px
-                    .dropdown-menu
-                        padding: 0
-                        min-width: 99px
-                        left: -36px !important
-                        top: 4px !important
-                        ul
-                            li
-                                a
-                                    color: #2E2E2E
-                                    font-weight: 500
-                                    padding: 5px 5px
-                                    font-size: 10px
-                                    text-align: center
-                                    @media only screen and ( min-width: 576px )
-                                        font-size: 12px
-                                        padding: 5px 10px
-                                    @media only screen and ( min-width: 992px )
-                                        font-size: 14px
-                                    &:active, &.active
-                                        background-color: $basecolor !important
-                                        color: #fff
+                        img
+                            width: 20px
+                            @media only screen and ( min-width: 576px )
+                                width: 26px
+                                height: 18px
+                                margin-right: 10px
+                                margin-top: -5px
+                            @media only screen and ( min-width: 992px )
+                                margin-right: 15px
+        .dropdown-menu
+            padding: 0
+            min-width: 99px
+            left: -36px !important
+            top: 4px !important
+            ul
+                li
+                    a
+                        color: #2E2E2E
+                        font-weight: 500
+                        padding: 5px 5px
+                        font-size: 10px
+                        text-align: center
+                        @media only screen and ( min-width: 576px )
+                            font-size: 12px
+                            padding: 5px 10px
+                        @media only screen and ( min-width: 992px )
+                            font-size: 14px
+                        &:active, &.active
+                            background-color: $basecolor !important
+                            color: #fff
 
     .HrBpx
         background: #fff
@@ -491,13 +560,10 @@ body
                     padding: 0px
                     margin: 0px
                     border: none
-
                     @media only screen and (min-width: 993px)
-                        background: #fff
                         position: absolute
-                        left: 0 !important
+                        // left: 0 !important
                         min-width: 100%
-                        width: 100%
                         opacity: 0
                         top: 0
                         transform: translate3d(0, 42px, 0px) !important
@@ -509,144 +575,88 @@ body
                         visibility: hidden
                         z-index: 200
                         background-clip: unset
-                        min-height: 450px
-                    @media only screen and ( min-width: 992px )
-                        max-height: calc( 100vh - 115px )
-                    @media only screen and ( min-width: 1100px )
-                        max-height: calc( 100vh - 157px )
-                    @media only screen and ( min-width: 1360px )
-                        max-height: 450px
-                    @media only screen and ( min-width: 1441px )
-                        max-height: 598px
-                        min-height: 598px
+                        min-height: 330px
                     &::-webkit-scrollbar
                         width: 0
-
+                    .accordion-collapse
+                        height: auto
+                        border-radius: 0px
+                        padding: 0px
+                        margin: 0px
+                        border: none
                     .accordion-body
                         padding: 0
-                        display: flex
                         height: 100%
-                        .accordion
-                            width: 260px
+                        background: rgba(255, 255, 255, .05)
+                        @media only screen and ( min-width: 992px )
+                            box-shadow: 0 3px 10px rgba(0, 0, 0, .16)
+                            border-radius: 5px
                             background: #fff
-                            padding-top: 35px
-                            // overflow-y: scroll
-                            // max-height: calc(100vh - 150px)
-                            // @media only screen and (min-width: 1441px)
-                            //     max-height: calc(100vh - 182px)
-                            // @media only screen and (min-width: 1600px)
-                            //     max-height: calc(100vh - 260px)
-                            &::-webkit-scrollbar
-                                width: 0
-                            .accordion-item
-                                .accordion-body
-                                    padding: 0
-                                    background: #fff
-
-                                    ul
-                                        width: 100%
-                                        li
-                                            position: relative
-                                            width: 100%
-                                            &:first-child
-                                                a
-                                                    padding-top: 0
-                                            a
-                                                display: block
-                                                padding: 0
-                                                color: #676767
-                                                font-weight: 500
-                                                transition: .4s all
-                                                position: relative
-                                                font-size: 14px
-                                                padding: 10px 0
-                                                @media only screen and ( min-width: 1441px )
-                                                    padding: 12px 0
-                                                    font-size: 16px
-                                                &:hover
-                                                    color: $basecolor2
-                                                    // transform: translate(5px, 0)
-                                            &.active
-                                                &::after
-                                                    content: ""
-                                                    position: absolute
-                                                    right: -16px
-                                                    top: 0
-                                                    bottom: 0
-                                                    margin: auto
-                                                    background: url(../images/crcle.svg) no-repeat
-                                                    width: 32px
-                                                    height: 32px
-                                                    transition: .4s all
-                                                    z-index: 10
-                        .ritAccBx
-                            width: calc( 100% - 260px )
-                            padding: 25px 25px
-                            padding-left: 45px
-                            border-left: solid 1px #DEDEDE
-                            overflow-y: scroll
-                            // height: calc( 100% - 50px )
-                            @media only screen and ( min-width: 1441px )
-                                padding: 35px 25px
-                                padding-left: 95px
-                                // height: calc( 100% - 70px )
-                            &::-webkit-scrollbar
-                                width: 0
-                            .cmn_bx
-                                &.hide
-                                    visibility: hidden
-                                    display: none
-                            .dFlX
+                        .Stilte
+                            padding: 14px 27px
+                            font-size: 16px
+                            font-weight: 700
+                            color: #000
+                            border-bottom: solid 1px rgba(0, 0, 0, .06)
+                            width: 100%
+                            @media only screen and ( max-width: 992px )
+                                display: none
+                        .txtB
+                            position: relative
+                            .coloFlx
+                                position: absolute
+                                left: 0
+                                top: 0
+                                width: 100%
+                                height: 100%
                                 display: flex
-                                flex-wrap: wrap
-                                .flBx
-                                    width: calc( 100% / 3 )
-                                    margin-bottom: 15px
-                                    @media only screen and ( min-width: 1200px )
-                                        margin-bottom: 30px
-                                    @media only screen and ( min-width: 1441px )
-                                        margin-bottom: 45px
-                                    .suBT
-                                        color: #31378E
-                                        font-weight: 700
-                                        font-size: 16px
-                                        margin-bottom: 13px
-                                        @media only screen and ( min-width: 1441px )
-                                            font-size: 18px
-                                            margin-bottom: 17px
-                                    .proB
-                                        display: block
-                                        text-align: center
-                                        .imgBx
-                                            max-width: 150px
-                                            margin: auto
-                                        .txt
-                                            font-size: 13px
-                                            color: #484848
-                                            font-weight: 600
-                                            line-height: 15px
-                                            margin-bottom: 12px
-                                        .price
-                                            font-size: 15px
-                                            color: #31378E
-                                            font-weight: 600
-
-                            ul, .Mlist
+                                @media only screen and ( max-width: 576px )
+                                    display: none
+                                .cl1
+                                    height: 100%
+                                    width: calc( 100% / 2 )
+                                    @media only screen and ( min-width: 768px )
+                                        width: calc( 100% / 3 )
+                                    &:nth-child(2)
+                                        background: rgba(245, 245, 245, .51)
+                                    &:nth-child(3)
+                                        @media only screen and ( max-width: 768px )
+                                            display: none
+                            ul
+                                position: relative
+                                z-index: 10
+                                padding: 15px 0
+                                @media only screen and ( max-width: 576px )
+                                    max-height: 300px
+                                    overflow-y: scroll
+                                    &::-webkit-scrollbar
+                                        width: 1px
+                                @media only screen and ( min-width: 576px )
+                                    column-count: 2
+                                @media only screen and ( min-width: 768px )
+                                    column-count: 3
                                 li
-                                    &:not(:last-of-type)
-                                        margin-bottom: 7px
-                                        @media only screen and ( min-width: 1441px )
-                                            margin-bottom: 10px
+                                    margin-bottom: 10px
+                                    min-width: 195px
+                                    padding-right: 23px
                                     a
-                                        display: block
-                                        color: #2A2A2A
+                                        font-size: 14px
                                         font-weight: 400
                                         transition: .4s all
-                                        font-size: 13px
-                                        @media only screen and ( min-width: 1441px )
-                                            font-size: 14px
+                                        display: block
+                                        padding: 9px 0
+                                        padding-left: 26px
+                                        border-radius: 0 5px 5px 0
+                                        white-space: nowrap
+                                        transition: .4s all
+                                        color: #fff
+                                        @media only screen and ( min-width: 992px )
+                                            color: #000
                                         &:hover
-                                            color: $basecolor2
+                                            color: $basecolor
+                                            @media only screen and ( min-width: 992px )
+                                                background: $basecolor
+                                                color: #fff
 
                     .dskDrp
                         @media only screen and ( max-width: 992px )
@@ -658,7 +668,7 @@ body
             z-index: 99999
             &::-webkit-scrollbar
                 width: 0
-            @media only screen and (min-width: 1101px)
+            @media only screen and (min-width: 992px)
                 background: none
                 position: unset
                 display: block
@@ -679,7 +689,7 @@ body
                 transition: ease-in-out all .3s
                 @media (max-width: 992px) and (min-width: 468px)
                     // max-width: 350px
-                @media only screen and (min-width: 1101px)
+                @media only screen and (min-width: 992px)
                     background: transparent
                     left: auto
                     position: unset
@@ -694,14 +704,14 @@ body
             .modal-body
                 padding: 0px
                 background: #303030
-                @media only screen and (min-width: 1101px)
+                @media only screen and (min-width: 992px)
                     display: flex
                     align-items: center
                     justify-content: center
                     background: transparent
                     position: unset
-                @media only screen and (max-width: 1101px)
-                    padding-top: 55px
+                @media only screen and (max-width: 992px)
+                    padding-top: 70px
                 .btnClose
                     position: fixed
                     opacity: 1
@@ -737,7 +747,7 @@ body
                         &:nth-child(2)
                             transform: rotate(-45deg) translate(2px, -2px)
 
-                    @media only screen and (min-width: 1101px)
+                    @media only screen and (min-width: 992px)
                         display: none
             &.show
                 .modal-dialog
@@ -745,7 +755,7 @@ body
             .accordion
                 position: unset
                 width: 100%
-                @media only screen and (min-width: 1100px)
+                @media only screen and (min-width: 992px)
                     padding: 0
                     display: flex
                     align-items: center
@@ -754,11 +764,11 @@ body
                     border-radius: 0px
                     border: none
                     background: none
-                    position: unset
+                    position: relative
                     &:first-child
                         .accordion-header
                             a, button
-                                @media only screen and (min-width: 1100px)
+                                @media only screen and (min-width: 992px)
                                     padding-left: 0
                     .accordion-header
                         @media only screen and (min-width: 1260px)
@@ -769,8 +779,6 @@ body
                                 display: none
                         a, button
                             color: $white
-                            border: none
-                            background: none
                             outline: none
                             box-shadow: none
                             outline: none
@@ -781,7 +789,12 @@ body
                             line-height: normal
                             font-weight: 500
                             display: block
+                            border-radius: 0
+                            margin-bottom: 1px
+                            background: none
+                            border-bottom: solid 1px #555454
                             @media only screen and (min-width: 992px)
+                                border: none
                                 padding: 10px 15px
                                 color: #000
                                 font-size: 14px
@@ -793,82 +806,10 @@ body
                             &[aria-expanded="true"], &.active, &:hover
                                 color: $basecolor !important
                     .collapsing
-                        @media only screen and (min-width: 1100px)
+                        @media only screen and (min-width: 992px)
                             transition: none !important
                             opacity: 1 !important
-                    .accordion-collapse
-                        height: 100%
-                        border-radius: 0px
-                        padding: 0px
-                        margin: 0px
-                        border: none
-                        .accordion-body
-                            padding: 0
-                            .dskDrp
-                                @media only screen and ( max-width: 1100px )
-                                    display: none
-                            .accordion
-                                @media only screen and ( min-width: 1100px )
-                                    display: none
-                                .accordion-item
-                                    .accordion-header
-                                        .accordion-button
-                                            padding: 7px 10px
-                                            font-size: 15px
-                                    .accordion-body
-                                        ul
-                                            li
-                                                margin-bottom: 10px
-                                                a
-                                                    font-size: 14px
-                                                    color: #fff
-                                                    font-weight: 400
-                                                    transition: .4s all
-                                                    display: block
-                                                    &:hover
-                                                        color: $basecolor2
-                                                        transform: translate(5px, 0)
-                            .lftBccBx
-                                width: 260px
-                                background: #fff
-                                padding-top: 35px
-                                height: 100%
-                                ul
-                                    width: 100%
-                                    li
-                                        position: relative
-                                        width: 100%
-                                        &:first-child
-                                            a
-                                                padding-top: 0
-                                        a
-                                            display: block
-                                            padding: 0
-                                            color: #676767
-                                            font-weight: 500
-                                            transition: .4s all
-                                            position: relative
-                                            font-size: 14px
-                                            padding: 10px 0
-                                            @media only screen and ( min-width: 1441px )
-                                                padding: 12px 0
-                                                font-size: 16px
-                                            &:hover
-                                                color: $basecolor2
-                                                // transform: translate(5px, 0)
-                                        &.active
-                                            &::after
-                                                content: ""
-                                                position: absolute
-                                                right: -16px
-                                                top: 0
-                                                bottom: 0
-                                                margin: auto
-                                                background: url(../images/crcle.svg) no-repeat
-                                                width: 32px
-                                                height: 32px
-                                                transition: .4s all
-                                                z-index: 10
+
                     &.dropdown
                         &:last-child
                             .accordion-collapse
@@ -878,32 +819,23 @@ body
                             .accordion-collapse
                                 opacity: 2
                                 visibility: visible
-                                @media only screen and (min-width: 1100px)
-                                    display: flex !important
-                                    transform: translate3d(0, 52px, 0px) !important
     .MenuIcon
         display: flex
         justify-content: center
         align-items: center
-        position: absolute
+        // position: absolute
         top: 0px
-        left: 0
+        right: 0
         bottom: 0px
-        height: 100%
+        height: 17px
         padding: 0px
         z-index: 2000
-        background: $basecolor
-        width: 40px
-        @media only screen and (min-width: 576px)
-            width: 50px
-        @media only screen and (min-width: 768px)
-            width: 70px
-        @media only screen and (min-width: 1100px)
+        width: 23px
+        @media only screen and (min-width: 992px)
             display: none
         button
             display: block
             border: none
-            height: 50px
             font-size: 0
             outline: none
             margin-right: 0
@@ -913,49 +845,26 @@ body
             background: none
             height: 100%
             width: 50px
-            padding: 10px 10px
-            @media only screen and (min-width: 576px)
-                padding: 10px 15px
-                width: 50px
-
+            padding: 0
             span
                 width: 100%
                 height: 2px
                 display: block
-                background: #fff
+                background: #000
                 -webkit-transition: all 0.3s ease
                 -moz-transition: all 0.3s ease
                 -ms-transition: all 0.3s ease
                 -o-transition: all 0.3s ease
                 transition: all 0.3s ease
                 position: relative
-                &:nth-child(2)
-                    width: 90%
-
-                &:nth-child(3)
-                    width: 66%
-
                 ~ span
                     margin-top: 4px
-            &:hover, &:focus
-                span
-                    &:nth-child(2)
-                        width: 100%
-
-                    &:nth-child(3)
-                        width: 100%
 
         &.open
             z-index: 9999999
             top: 10px
-            left: auto
-            height: fit-content
-            height: -moz-fit-content
             background: transparent
-            right: 10px
             button
-                height: fit-content
-                height: -moz-fit-content
                 span
                     margin: 0
                     width: 100%
@@ -980,20 +889,9 @@ body
         top: 0px
         box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1)
         .HrMpx, .topHdBx
-            @media only screen and ( min-width: 1100px )
+            @media only screen and ( min-width: 992px )
                 height: 0
                 padding: 0
                 opacity: 0
                 visibility: hidden
                 transition: .4s all
-        .HrBpx
-            .BtMFlX
-                .FlTrBX
-                    .mgaAccord
-                        .accordion-body
-                            .accordion
-                                max-height: calc(100vh - 46px)
-                                @media only screen and (min-width: 1441px)
-                                    max-height: calc(100vh - 48px)
-                                @media only screen and (min-width: 1600px)
-                                    max-height: calc(100vh - 71px)

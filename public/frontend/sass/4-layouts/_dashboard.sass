@@ -11,18 +11,19 @@
         @media only screen and ( min-width: 600px )
             padding: 0 0 70px
         .all_products
-            padding: 24px 0
+            padding: 15px 0 10px
+            display: flex
+            align-items: center
+            justify-content: space-between
+            @media only screen and ( min-width: 576px )
+                padding: 24px 0
             @media only screen and ( min-width: 768px )
-                display: flex
-                align-items: center
-                justify-content: space-between
             .Stitle
                 color: #000
-                font-weight: 600
-                font-size: 16px
-                margin-bottom: 15px
-                @media only screen and ( min-width: 768px )
-                    margin-bottom: 0
+                font-weight: 700
+                font-size: 12px
+                @media only screen and ( min-width: 576px )
+                    font-size: 16px
                 @media only screen and ( min-width: 992px )
                     font-size: 18px
                 @media only screen and ( min-width: 1200px )
@@ -105,6 +106,20 @@
                     @media only screen and ( min-width: 992px )
                         height: 43px
                         font-size: 14px
+            .filterOption
+                width: 57px
+                height: 24px
+                border-radius: 3px
+                display: flex
+                align-items: center
+                justify-content: center
+                font-size: 11px
+                font-weight: 500
+                color: #000
+                svg
+                    width: 8px
+                    fill: #000
+                    margin-right: 4px
         .TableBx
             overflow: visible
             &::-webkit-scrollbar
@@ -116,7 +131,7 @@
                 text-align: center
             .tmns
                 font-size: 12px
-                color: #07D97E
+                color: #ff0000
                 text-align: center
                 font-weight: 500
             .txt
@@ -127,7 +142,7 @@
                 text-align: center
                 .tmns
                     font-size: 10px
-                    color: #07D97E
+                    color: #ff0000
                     font-weight: 500
                     line-height: 13px
                     display: inline
@@ -217,10 +232,11 @@
                 .name
                     width: calc( 100% - 18px )
                     padding-left: 14px
-                    white-space: nowrap
+                    // white-space: nowrap
                     font-size: 12px
                     font-weight: 400
                     color: #000
+                    text-align: left
             .vMore
                 font-size: 10px
                 color: #000
@@ -229,6 +245,9 @@
                 text-decoration: underline
                 text-underline-position: under
                 white-space: nowrap
+                transition: .4s all
+                &:hover
+                    color: $basecolor
             .notification
                 position: relative
                 width: fit-content
@@ -261,11 +280,14 @@
                         font-weight: 400
                         font-size: 13px
                         padding: 10px 15px
-                        white-space: nowrap
                         text-align: center
                         @media only screen and (min-width: 468px)
                             padding: 12px 23px
                             font-size: 14px
+                        @media only screen and (min-width: 1441px)
+                            white-space: nowrap
+                        @media only screen and (max-width: 1200px)
+                            white-space: nowrap
                 tbody
                     td
                         padding: 10px 15px
@@ -273,8 +295,10 @@
                         text-align: center
                         @media only screen and (min-width: 468px)
                             padding: 15px 23px
+                        &:nth-child(2)
+                            width: 20%
+
                         .form-control
-                            width: 108px
                             height: 27px
                             background: #fff
                             border-radius: 5px
@@ -287,6 +311,8 @@
                                 font-size: 12px
                                 color: #000
                                 font-weight: 400
+                            @media only screen and (min-width: 1441px)
+                                width: 108px
                         .bid
                             border-radius: 5px
                             border: solid 1px #D5D5D5
@@ -311,9 +337,15 @@
                             justify-content: center
                             background: #F2F2F2
                             margin: auto
+                            transition: .4s all
                             svg
                                 width: 14px
                                 fill: #000
+                                transition: .4s all
+                            &:hover
+                                background: $basecolor
+                                svg
+                                    fill: #fff
                         .notify
                             width: 102px
                             height: 21px
@@ -392,7 +424,7 @@
                                 align-items: center
                                 justify-content: center
                                 &.agree
-                                    background: #07D97E
+                                    background: #ff0000
                                     margin-right: 10px
                                 &.reject
                                     background: #E7151F
@@ -558,6 +590,7 @@
                                 font-size: 12px
                                 font-weight: 500
                                 text-align: center
+                                border-bottom: solid 1px #F5F5F7
                                 &:first-child
                                     text-align: left
                                     width: 60%
@@ -666,7 +699,6 @@
                             align-items: center
                             justify-content: center
                             text-align: center
-                            padding: 25px
                             width: 100%
                             margin-bottom: 20px
                             @media only screen and ( min-width: 768px )
@@ -676,8 +708,14 @@
                                 width: 188px
 
                             a
-                                display: block
+                                display: flex
+                                flex-wrap: wrap
+                                align-content: center
+                                justify-content: center
+                                width: 100%
+                                height: 100%
                                 color: #000
+                                padding: 25px
                                 font-size: 12px
                                 font-weight: 400
                                 text-transform: capitalize
@@ -694,6 +732,48 @@
                                     color: #fff
                                     transition: all 0.5s ease-out
                                     line-height: 1px
+                                .ttxc
+                                    width: 100%
+                                    text-align: center
+                    .addAddress
+                        .accordion-collapse
+                            margin-bottom: 20px
+                        .row
+                            margin: 0 -8px
+                            &>*
+                                padding: 0 8px
+                        .form-group
+                            margin-bottom: 10px
+                        .form-control
+                            border: solid 1px #C8C8C8
+                            border-radius: 5px
+                            padding: 5px 18px
+                            height: 40px
+                            font-size: 13px
+                            font-weight: 400
+                            color: #000
+                            &::placeholder
+                                font-size: 13px
+                                font-weight: 400
+                                color: #000
+                        button, a
+                            border-radius: 23px
+                            color: #fff
+                            font-weight: 600
+                            text-transform: uppercase
+                            height: 32px
+                            background: $basecolor
+                            font-size: 10px
+                            width: 100%
+                            @media only screen and ( min-width: 576px )
+                                width: 200px
+                            @media only screen and ( min-width: 768px )
+                                font-size: 14px
+                                height: 38px
+                            @media only screen and ( min-width: 992px )
+                                height: 42px
+                            &::before
+                                background: $basecolor2
                     .agree
                         display: flex
                         align-items: center
@@ -852,20 +932,27 @@
                             color: #000
                             line-height: 20px
             .ritBx
-                padding: 15px 30px 30px
                 background: #fff
                 height: 100%
+                padding: 14px 18px 21px
+                @media only screen and ( max-width: 768px )
+                    margin-top: 13px
                 @media only screen and ( min-width: 992px )
+                    padding: 15px 30px 30px
                     width: 300px
                 @media only screen and ( min-width: 1441px )
                     width: 376px
                 .title
-                    font-size: 18px
                     color: #031717
                     font-weight: 700
                     padding-bottom: 10px
                     border-bottom: solid 1px rgba(112, 112, 112, .20)
+                    font-size: 12px
                     margin-bottom: 15px
+                    @media only screen and ( min-width: 576px )
+                        font-size: 15px
+                    @media only screen and ( min-width: 768px )
+                        font-size: 18px
                 ul
                     li
                         display: flex
@@ -874,28 +961,36 @@
                         .lt
                             font-weight: 600
                             color: #000
-                            font-size: 14px
-                            @media only screen and ( min-width: 576px )
+                            font-size: 12px
+                            @media only screen and ( min-width: 768px )
+                                font-size: 14px
+                            @media only screen and ( min-width: 992px )
                                 font-size: 16px
                             span
                                 display: block
-                                font-size: 14px
                                 font-weight: 500
                                 margin-top: 10px
+                                font-size: 11px
+                                @media only screen and ( min-width: 768px )
+                                    font-size: 14px
 
                         .rt
                             color: #535353
                             font-weight: 600
                             text-align: right
-                            font-size: 14px
-                            @media only screen and ( min-width: 576px )
+                            font-size: 12px
+                            @media only screen and ( min-width: 768px )
+                                font-size: 14px
+                            @media only screen and ( min-width: 992px )
                                 font-size: 16px
                             span
                                 display: block
-                                font-size: 14px
                                 color: #535353
                                 font-weight: 500
                                 margin-top: 10px
+                                font-size: 11px
+                                @media only screen and ( min-width: 768px )
+                                    font-size: 14px
                         &.total
                             padding-top: 10px
                             border-top: solid 1px rgba(112, 112, 112, .23)
@@ -903,21 +998,31 @@
                             .lt
                                 color: #000
                                 font-weight: 500
-                                font-size: 16px
+                                font-size: 12px
+                                @media only screen and ( min-width: 576px )
+                                    font-size: 14px
+                                @media only screen and ( min-width: 768px )
+                                    font-size: 16px
                                 @media only screen and ( min-width: 992px )
                                     font-size: 18px
                             .rt
                                 color: #000
                                 font-weight: 700
-                                font-size: 16px
+                                font-size: 12px
+                                @media only screen and ( min-width: 576px )
+                                    font-size: 14px
+                                @media only screen and ( min-width: 768px )
+                                    font-size: 16px
                                 @media only screen and ( min-width: 992px )
                                     font-size: 18px
                 .txt
-                    font-size: 12px
                     font-weight: 400
                     color: #000
                     margin-top: 20px
                     margin-bottom: 15px
+                    font-size: 9px
+                    @media only screen and ( min-width: 576px )
+                        font-size: 12px
                     span
                         font-weight: 600
                 .agree
@@ -964,8 +1069,10 @@
                         position: relative
                         cursor: pointer
                         padding-left: 24px
-                        font-size: 12px
                         line-height: 15px
+                        font-size: 9px
+                        @media only screen and ( min-width: 576px )
+                            font-size: 12px
                         &:before
                             content: ""
                             -webkit-appearance: none
@@ -982,6 +1089,10 @@
                             height: 14px
                             top: 0
                             background: #F9F9F9
+                        a
+                            transition: .4s all
+                            &:hover
+                                color: $basecolor
                 .buttonFlx
                     display: flex
                     flex-wrap: wrap
@@ -995,26 +1106,31 @@
                         button, a
                             width: 100%
                             border-radius: 23px
-                            font-size: 14px
                             color: #fff
                             font-weight: 600
                             text-transform: uppercase
-                            height: 38px
+                            height: 32px
+                            font-size: 10px
+                            @media only screen and ( min-width: 768px )
+                                font-size: 14px
+                                height: 38px
                             @media only screen and ( min-width: 992px )
                                 height: 42px
                             &.confirm
                                 background: #000
                             &.cancel
                                 background: $basecolor
+                                &::before
+                                    background: #000
         .addressFormBx
-            padding: 30px 0 0
-            @media only screen and ( min-width: 992px )
-                padding: 30px 0 0
-            @media only screen and ( min-width: 1200px )
-                padding: 39px 0 0
+            // padding: 30px 0 0
+            // @media only screen and ( min-width: 992px )
+            //     padding: 30px 0 0
+            // @media only screen and ( min-width: 1200px )
+            //     padding: 39px 0 0
             .formBx
-                max-width: 813px
-                margin: auto
+                // max-width: 813px
+                // margin: auto
                 background: #fff
                 padding: 25px 20px
                 @media only screen and ( min-width: 768px )
@@ -1050,7 +1166,7 @@
                         .icon
                             margin-right: 2px
                         &.Vfd
-                            background: #07D97E
+                            background: #ff0000
                         &.ntVfd
                             background: #E7151F
 
@@ -1197,8 +1313,558 @@
                     background: $basecolor
                     color: #fff
                     margin-top: 40px
+                    &::before
+                        background: $basecolor2
         .dashBoardFlx
             display: flex
             flex-wrap: wrap
+            padding: 40px 0 0
             .ltBx
-                width: 313px
+                background: #fff
+                width: 100%
+                height: 100%
+                margin-bottom: 20px
+                padding: 35px 15px 28px
+                @media only screen and ( min-width: 576px )
+                    padding: 35px 27px 28px
+                @media only screen and ( min-width: 992px )
+                    margin-bottom: 0
+                    width: 290px
+                @media only screen and ( min-width: 1100px )
+                    width: 313px
+                .userBx
+                    padding-left: 22px
+                    .imgBx
+                        width: 72px
+                        height: 72px
+                        border-radius: 50%
+                        overflow: hidden
+                        margin-bottom: 15px
+                        img
+                            @include imgFit
+                    .name
+                        font-size: 16px
+                        font-weight: 700
+                        color: #000
+                    .mail
+                        font-size: 14px
+                        color: #888888
+                        font-weight: 400
+                ul
+                    margin-top: 20px
+                    li
+                        margin-bottom: 10px
+                        a
+                            display: flex
+                            height: 42px
+                            align-items: center
+                            padding: 5px 19px
+                            border-radius: 7px
+                            transition: .4s all
+                            .icon
+                                width: 20px
+                                svg
+                                    fill: #000
+                            .txt
+                                padding-left: 12px
+                                font-size: 14px
+                                color: #031717
+                                font-weight: 500
+                            &:hover, &.active
+                                background: #F5F5F5
+
+            .rtBx
+                width: 100%
+                @media only screen and ( min-width: 992px )
+                    width: calc( 100% - 290px )
+                    padding-left: 30px
+                @media only screen and ( min-width: 1100px )
+                    width: calc( 100% - 313px )
+                @media only screen and ( min-width: 1441px )
+                    padding-left: 49px
+                .dtailBx
+                    background: #fff
+                    margin-bottom: 9px
+                    padding: 25px 20px
+                    @media only screen and ( min-width: 576px )
+                        padding: 30px 30px
+                    @media only screen and ( min-width: 992px )
+                        padding: 30px 40px
+                    p
+                        font-size: 12px
+                        color: #000
+                        font-weight: 400
+                    .title
+                        font-size: 20px
+                        font-weight: 700
+                        color: #000
+                        margin-bottom: 7px
+                    .gridBx
+                        display: grid
+                        margin: -6px -4px
+                        grid-template-columns: repeat(2, 1fr)
+                        @media only screen and ( min-width: 678px )
+                            grid-template-columns: repeat(3, 1fr)
+                        .item
+                            padding: 5px 4px
+                            &:last-child
+                                grid-column: span 2
+                                .cmnB
+                                    @media only screen and ( max-width: 468px )
+                                        display: block
+                                        .txtBx
+                                            padding-left: 40px
+                            .cmnB
+                                padding: 20px 15px
+                                display: flex
+                                align-items: center
+                                border-radius: 5px
+                                position: relative
+                                overflow: hidden
+                                height: 100%
+                                &::after
+                                    content: ""
+                                    position: absolute
+                                    top: 0
+                                    bottom: 0
+                                    margin: auto
+                                    background: url(../images/lg.png) no-repeat
+                                    width: 47px
+                                    height: 68px
+                                    background-size: contain
+                                    right: -23px
+                                .lBx
+                                    display: flex
+                                    align-items: center
+                                    border-right: solid 1px rgba(112, 112, 112, .10)
+                                    padding-right: 10px
+                                    margin-right: 10px
+                                    @media only screen and ( min-width: 1200px )
+                                        padding-right: 15px
+                                        margin-right: 10px
+                                    @media only screen and ( min-width: 1441px )
+                                        padding-right: 25px
+                                        margin-right: 20px
+
+                                    .ttx
+                                        font-size: 14px
+                                        color: #000
+                                        font-weight: 600
+                                        padding-left: 10px
+                                        width: calc( 100% - 30px )
+                                        @media only screen and ( min-width: 992px )
+                                            padding-left: 15px
+                                        @media only screen and ( min-width: 1441px )
+                                            width: calc( 100% - 40px )
+                                .icon
+                                    width: 25px
+                                    @media only screen and ( min-width: 576px )
+                                        width: 30px
+                                    @media only screen and ( min-width: 1441px )
+                                        width: 40px
+                                    img
+                                        @media only screen and ( max-width: 1441px )
+                                            width: 30px
+                                .txtBx
+                                    padding-left: 11px
+                                    width: calc( 100% - 25px )
+                                    @media only screen and ( min-width: 576px )
+                                        width: calc( 100% - 30px )
+                                    @media only screen and ( min-width: 1441px )
+                                        width: calc( 100% - 40px )
+                                    .txt
+                                        font-weight: 600
+                                        color: #000
+                                        font-size: 12px
+                                        @media only screen and ( min-width: 576px )
+                                            font-size: 14px
+                                    .num
+                                        color: #000
+                                        font-weight: 700
+                                        font-size: 18px
+                                        @media only screen and ( min-width: 1200px )
+                                            font-size: 20px
+
+                            &:nth-child(1)
+                                .cmnB
+                                    background: #E8FDFF
+                            &:nth-child(2)
+                                .cmnB
+                                    background: #FFE7D6
+                            &:nth-child(3)
+                                .cmnB
+                                    background: #C5FFE8
+                            &:nth-child(4)
+                                .cmnB
+                                    background: #FFE8E9
+                            &:nth-child(5)
+                                .cmnB
+                                    background: #E6EFFF
+                .chartBox
+                    background: #fff
+                    padding: 20px 10px
+                    @media only screen and ( min-width: 576px )
+                        padding: 30px 30px
+                    @media only screen and ( min-width: 1200px )
+                        padding: 35px 40px
+
+                    .chart
+                        width: 100%
+                        position: relative
+                        padding-left: 21px
+                        .ltXt
+                            position: absolute
+                            left: 0
+                            writing-mode: vertical-rl
+                            transform: scale(-1, -1)
+                            top: 0
+                            bottom: 0
+                            margin: auto
+                            height: fit-content
+                            height: -moz-fit-content
+                            color: #031717
+                            font-weight: 600
+                            font-size: 10px
+                            @media only screen and ( min-width: 576px )
+                                font-size: 14px
+                        .btXt
+                            color: #031717
+                            font-weight: 600
+                            text-align: center
+                            font-size: 10px
+                            margin-top: 10px
+                            @media only screen and ( min-width: 576px )
+                                font-size: 14px
+                                margin-top: 20px
+
+        .DskTop
+            @media only screen and ( max-width: 768px )
+                display: none !important
+        .mobVew
+            @media only screen and ( min-width: 768px )
+                display: none
+            .searchBx
+                margin-bottom: 9px
+                .flxB
+                    height: 36px
+                    width: 100%
+                    border-radius: 5px
+                    border: solid 1px #D5D5D5
+                    position: relative
+                    background: #fff
+                    .form-control
+                        width: 100%
+                        height: 100%
+                        border: none
+                        box-shadow: none
+                        outline: none
+                        padding: 5px 15px
+                        font-size: 10px
+                        font-weight: 400
+                        color: #000
+                        &::placeholder
+                            font-size: 10px
+                            font-weight: 400
+                            color: #000
+                    button
+                        position: absolute
+                        right: 13px
+                        top: 0
+                        bottom: 0
+                        margin: auto
+                        padding: 0
+                        border: none
+                        width: 13px
+                        svg
+                            width: 13px
+                            fill: #000
+            .accordion
+                .accordion-item
+                    border-radius: 0
+                    border: none
+                    border-bottom: solid 2px #F5F5F7
+                    background: #fff
+                    &.filled
+                        background: #ECECF1
+
+                    .accordion-header
+                        .accordion-button
+                            padding: 10px 20px
+                            border-radius: 0
+                            padding-right: 30px
+                            background: transparent
+                            box-shadow: none
+                            outline: none
+                            &::after
+                                content: ""
+                                background: url(../images/plus.png) no-repeat
+                                transform: none
+                                width: 9px
+                                height: 9px
+                                background-size: contain
+                                margin: 0
+                                position: absolute
+                                right: 9px
+                            &[aria-expanded="true"]
+                                &::after
+                                    content: ""
+                                    background: url(../images/minus.png) no-repeat
+                                    background-size: contain
+                            .flxBx
+                                display: flex
+                                align-items: center
+                                width: 100%
+                                justify-content: space-between
+                                .txt
+                                    font-size: 10px
+                                    color: #949495
+                                    font-weight: 400
+                                    line-height: normal
+                                .name, .price
+                                    font-size: 12px
+                                    color: #000
+                                    font-weight: 500
+                                    line-height: normal
+                                    span
+                                        color: #ff0000
+                                .notification
+                                    position: relative
+                                    width: fit-content
+                                    width: -moz-fit-content
+                                    display: flex
+                                    &::after
+                                        content: ""
+                                        position: absolute
+                                        width: 6px
+                                        top: -5px
+                                        right: -3px
+                                        height: 6px
+                                        border-radius: 50%
+                                        background: #E7151F
+                                        cursor: pointer
+                                        box-shadow: 0 0 0 rgba(231, 21, 31, .4)
+                                        animation: pulse 2s infinite
+                                    abbr[data-title]
+                                        position: absolute
+                                        right: 0
+                                        top: 0
+                                        height: 100%
+                                        width: 100%
+                                    abbr[data-title]:hover::after,
+                                    abbr[data-title]:focus::after
+                                        content: attr(data-title)
+                                        position: absolute
+                                        right: 0
+                                        top: 100%
+                                        width: 132px
+                                        height: 89px
+                                        border-radius: 7px
+                                        box-shadow: 0 3px 6px rgba(0, 0, 0, .16)
+                                        background: #fff
+                                        color: #000
+                                        font-size: 12px
+                                        line-height: 15px
+                                        font-weight: 400
+                                        padding: 12px 11px
+                                        z-index: 10
+                                .ordrId, .total
+                                    font-size: 12px
+                                    color: #000
+                                    font-weight: 500
+                                    span
+                                        font-size: 10px
+                                        color: #949495
+                                        margin-right: 5px
+                                        font-weight: 400
+                                .ltBx
+                                    display: flex
+                                    align-items: center
+                                    .icon
+                                        width: 25px
+                                    .txtBx
+                                        padding-left: 15px
+                                .rtBx
+                                    padding-right: 10px
+                                    text-align: right
+                    .accordion-body
+                        padding: 0
+                        &.clrd
+                            background: #ECECF1
+                        .dBlock
+                            border-top: solid 1px rgba(112, 112, 112, .08)
+                            padding: 15px 20px 17px
+                            padding-right: 30px
+                            .flxBx
+                                display: flex
+                                justify-content: space-between
+                                align-items: center
+                                margin-bottom: 10px
+                                .bid
+                                    border-radius: 5px
+                                    border: solid 1px #D5D5D5
+                                    padding: 2px 5px
+                                    font-size: 12px
+                                    height: 22px
+                                    width: 72px
+                                    text-align: center
+                                    color: #000
+                                    font-weight: 400
+                                    margin-bottom: 4px
+                                    &::placeholder
+                                        font-size: 12px
+                                        color: #000
+                                        font-weight: 400
+                                .quantity
+                                    justify-content: center
+                                    background: transparent
+                                    input[type=number]
+                                        border: solid 1px #D5D5D5
+                                        background: #fff
+                                        width: 53px
+                                        border-radius: 5px
+                                        font-size: 12px
+                                        height: 22px
+                                    input[type=button]
+                                        width: 16px
+                                        background: transparent !important
+                                        &.minus
+                                            text-align: left
+                                        &.plus
+                                            text-align: right
+                                .lbl
+                                    font-size: 10px
+                                    font-weight: 500
+                                    color: #949495
+                                    margin-bottom: 2px
+                                .txt
+                                    font-size: 12px
+                                    color: #000
+                                    font-weight: 500
+                                .total
+                                    font-size: 10px
+                                    color: #000
+                                    font-weight: 500
+                                    span
+                                        color: #ff0000
+                                .rtbx
+                                    text-align: right
+                            .spec
+                                .ttle
+                                    font-size: 10px
+                                    color: #000
+                                    font-weight: 500
+                                    margin-bottom: 6px
+                                p
+                                    font-size: 10px
+                                    line-height: normal
+                                    font-weight: 400
+                                    color: #000
+
+                            .btnBx
+                                margin-top: 10px
+                                display: flex
+                                align-items: center
+                                .vdtails
+                                    height: 33px
+                                    width: calc( 100% - 46px )
+                                    margin-right: 13px
+                                    border-radius: 21px
+                                    background: #000
+                                    display: flex
+                                    align-items: center
+                                    justify-content: center
+                                    font-size: 10px
+                                    color: #fff
+                                    font-weight: 600
+                                    text-transform: uppercase
+                                .cart, .dlte
+                                    width: 33px
+                                    height: 33px
+                                    border-radius: 50%
+                                    display: flex
+                                    align-items: center
+                                    justify-content: center
+                                    border: none
+                                    box-shadow: none
+                                    outline: none
+                                    svg
+                                        width: 14px
+                                        fill: #fff
+                                    &.cart
+                                        background: #E7151F
+                                    &.dlte
+                                        background: #FFE3E5
+                                        svg
+                                            fill: #000
+                            ul
+                                li
+                                    font-size: 12px
+                                    color: #000
+                                    font-weight: 500
+                                    display: flex
+                                    margin-bottom: 13px
+                                    span
+                                        font-size: 10px
+                                        color: #949495
+                                        font-weight: 400
+                                        min-width: 85px
+                                        display: inline-block
+                                        margin-right: 5px
+                                    .sts
+                                        padding: 1px 4px
+                                        &.clr1
+                                            background: #CEDDFF
+                                        &.clr2
+                                            background: #FFE7D6
+                        .accordion-flush
+                            .accordion-item
+                                border: none
+                                .accordion-header
+                                    padding-right: 13px
+                                    .accordion-button
+                                        width: fit-content
+                                        width: -moz-fit-content
+                                        padding: 4px 8px
+                                        border-radius: 5px 5px 0 0
+                                        background: #ECECF1
+                                        height: 22px
+                                        font-size: 10px
+                                        font-weight: 500
+                                        color: #000
+                                        margin: 0 0 0 auto
+                                        &::after
+                                            display: none
+                                .accordion-body
+                                    background: #ECECF1
+                                    padding: 15px 15px
+                                    ul
+                                        li
+                                            display: flex
+                                            font-size: 12px
+                                            color: #000
+                                            font-weight: 500
+                                            margin-bottom: 14px
+                                            span
+                                                font-size: 10px
+                                                color: #949495
+                                                font-weight: 400
+                                                min-width: 45%
+                                    .btnBx
+                                        margin-bottom: 17px
+                                        display: flex
+                                        margin: 0 -4.5px
+                                        .item
+                                            width: 50%
+                                            padding: 0 4.5px
+                                            button
+                                                width: 100%
+                                                height: 32px
+                                                border-radius: 21px
+                                                font-size: 10px
+                                                font-weight: 600
+                                                text-transform: uppercase
+                                                color: #fff
+                                                &.agree
+                                                    background: #ff0000
+                                                &.reject
+                                                    background: #E7151F

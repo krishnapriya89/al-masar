@@ -3,50 +3,65 @@
 /************* PRIVACY_PAGE *************/
 /************** ******* **************/
 .privacyPage
-    #PrivacyPolicy
+    .headBx
+        padding: 29px 0
+        .mainT
+            color: #000
+            font-weight: 800
+            font-size: 22px
+            @media only screen and ( min-width: 992px )
+                font-size: 26px
+            @media only screen and ( min-width: 1200px )
+                font-size: 30px
+            @media only screen and ( min-width: 1441px )
+                font-size: 35px
+
+    .cmnCntSec
         padding: 40px 0
+        background: #fff
         @media only screen and ( min-width: 768px )
             padding: 60px 0
         @media only screen and ( min-width: 992px )
-            padding: 85px 0
+            padding: 70px 0
 
-        .cntntbx
-            @media only screen and ( min-width: 992px )
-                padding: 0 78px
-            @media only screen and ( min-width: 1200px )
-                padding: 0 108px
         h1, h2, h3
-            font-size: 26px
-            font-weight: 300
-            color: #323232
-            letter-spacing: 1px
-            margin-bottom: 15px
-            text-transform: uppercase
+            font-weight: 600
+            color: #000
+            margin-bottom: 24px
+            font-size: 22px
+            @media only screen and ( min-width: 768px )
+                font-size: 24px
+            @media only screen and ( min-width: 1200px )
+                font-size: 28px
+            @media only screen and ( min-width: 1441px )
+                font-size: 32px
 
         h4, h5, h6
-            font-size: 20px
-            font-weight: 300
-            color: #323232
-            letter-spacing: 1px
-            margin-bottom: 15px
-            text-transform: uppercase
-            @media only screen and ( min-width: 576px )
-                padding-top: 10px
+            line-height: normal
+            font-weight: 600
+            color: #000
+            margin-bottom: 24px
+            font-size: 18px
             @media only screen and ( min-width: 992px )
-                padding-top: 20px
+                font-size: 20px
+            @media only screen and ( min-width: 1441px )
+                font-size: 25px
         p
             margin-bottom: 20px
-            color: #535353
+            color: #000
         ul
             margin-bottom: 30px
             li
-                font-size: 14px
-                font-weight: 300
-                line-height: 22px
-                color: #323232
+                font-weight: 400
+                color: #000
                 padding-left: 20px
                 position: relative
                 margin-bottom: 5px
+                font-size: 12px
+                @media only screen and ( min-width: 768px )
+                    font-size: 14px
+                @media only screen and ( min-width: 1651px )
+                    font-size: 16px
                 &::before
                     content: ""
                     position: absolute

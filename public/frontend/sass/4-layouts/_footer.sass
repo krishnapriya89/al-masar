@@ -4,6 +4,8 @@
 /************ ****** ************/
 footer
     background: #000000
+    @media only screen and (max-width:992px)
+        margin-bottom: 52px
     .FootMainWrp
         .FootTop
             padding: 40px 0 20px
@@ -93,9 +95,12 @@ footer
             .socialFlx
                 display: flex
                 align-items: center
-                justify-content: space-between
+                @media only screen and ( min-width: 992px )
+                    justify-content: space-between
                 a
                     display: block
+                    @media only screen and ( max-width: 992px )
+                        margin-right: 30px
                     svg
                         height: 18px
                         fill: #fff
