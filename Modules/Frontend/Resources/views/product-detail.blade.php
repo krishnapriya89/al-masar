@@ -199,7 +199,7 @@
                                     <div class="quantity buttons_added">
                                         <input type="button" value="-" data-operation="minus" class="minus change-quantity-detail-page" data-product="{{ $product->slug }}">
                                         <input type="number" step="1" min="{{ $product->min_quantity_to_buy }}"
-                                            name="quantity" value="{{ $product->min_quantity_to_buy }}" title="Qty" class="input-text qty text change-quantity-input-detail-page"
+                                            name="quantity" value="{{ $product->min_quantity_to_buy }}" title="Qty" class="input-text qty text change-quantity-input-detail-page quantityField"
                                             size="4" pattern="" inputmode="" data-product="{{ $product->slug }}">
                                         <input type="button" value="+" data-operation="plus" class="plus change-quantity-detail-page" data-product="{{ $product->slug }}">
                                     </div>
@@ -222,7 +222,7 @@
                                 </div>
                                 <div class="expectedP">
                                     <div class="lbl">Bid Price:</div>
-                                    <input type="number" name="bid_price" id="bid_price" class="form-control bid-price-detail-page"
+                                    <input type="text" name="bid_price" id="bid_price" class="form-control bid-price-detail-page amountField"
                                         data-product="{{ $product->slug }}" placeholder="Enter Amount">
                                     
                                 </div>
@@ -233,7 +233,7 @@
                                     </div>
                                 </div>
                                 <div class="btnBx">
-                                    <a href="#!" class="quote">
+                                    <a href="javascript:void(0)" class="quote add-to-quote-product-detail" data-product="{{ $product->slug }}">
                                         Add to Quote
                                         <svg viewBox="0 0 19.169 19.5">
                                             <g id="cart" transform="translate(-2.46 -2.25)">

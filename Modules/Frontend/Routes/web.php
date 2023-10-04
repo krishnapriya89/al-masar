@@ -55,17 +55,17 @@ Route::group(['middleware' => 'auth.user'], function () {
     //product detail
     Route::get('product-detail/{slug}',[ProductController::class,'productDetailPage'])->name('product-detail');
 
-    Route::get('/',[QuoteController::class, 'index'])->name('quote');
-    Route::post('add-to-quote',[QuoteController::class, 'addToQuote'])->name('add-to-quote');
-    Route::post('update-quote',[QuoteController::class, 'updateQuote'])->name('update-quote');
-    Route::post('remove-from-quote',[QuoteController::class, 'removeFromQuote'])->name('remove-from-quote');
-    Route::get('clear-quote',[QuoteController::class, 'quoteEmpty'])->name('clear-quote');
+    Route::get('/quote',[QuoteController::class, 'index'])->name('quote');
+    Route::post('/add-to-quote',[QuoteController::class, 'addToQuote'])->name('add-to-quote');
+    Route::post('/update-quote',[QuoteController::class, 'updateQuote'])->name('update-quote');
+    Route::post('/remove-from-quote',[QuoteController::class, 'removeFromQuote'])->name('remove-from-quote');
+    Route::get('/clear-quote',[QuoteController::class, 'quoteEmpty'])->name('clear-quote');
 
     //notify-me
     Route::post('notify-me',[ProductController::class,'notifyMe'])->name('notify-me');
     //notify-user
     Route::get('notify-user',[HomeController::class,'notifyUser'])->name('notify-user');
-    
+
     //user
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
     //add-new-user

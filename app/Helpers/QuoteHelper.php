@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Quote;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class QuoteHelper
@@ -37,13 +38,6 @@ class QuoteHelper
 
     public static function getSubtotal()
     {
-        $carts      = Quote::where('user_id', Auth::guard('web')->id())->sum();
-        $price      = 0;
-        foreach ($carts as $cart) {
-            $price += $cart->product->price * $cart->quantity;
-        }
-
-        return $price;
+        $price     = Quote::where('user_id', Auth::guard('web')->id())->sum(DB::raw('quantity * price'));
     }
-
 }

@@ -37,7 +37,8 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel=" stylesheet" href="{{ asset('backend/plugins/toastr/toastr.min.css') }}">
-
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('backend/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <style>
         /* Inline critical CSS here */
     </style>
@@ -95,6 +96,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- CUSTOME --->
     <script type="text/javascript" src="{{ asset('frontend/js/app.min.js') }}"></script>
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('backend/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     {{-- Toastr --}}
     <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('frontend/js/custom.js') }}"></script>

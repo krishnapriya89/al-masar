@@ -292,8 +292,7 @@
                                     </option>
                                 </select>
                             </div>
-                            <a href="javascript:void(0)" class="cartBtn" data-bs-toggle="modal"
-                                data-bs-target="#cartPop">
+                            <a href="{{ route('quote') }}" class="cartBtn">
                                 <div class="icon">
                                     <svg viewBox="0 0 19.169 19.5">
                                         <g id="cart" transform="translate(-2.46 -2.25)">
@@ -306,7 +305,7 @@
                                         </g>
                                     </svg>
                                 </div>
-                                <div class="count">1</div>
+                                <div class="count quote-count">@checkQuote()</div>
                             </a>
                         </div>
                     </div>

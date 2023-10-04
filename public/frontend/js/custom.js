@@ -18,12 +18,29 @@ $(document).ready(function () {
     }, "This has to be different from the phone number");
 
     //check max file size is greater then of 2MB then return error
-    $.validator.addMethod('maxFileSize', function(value, element, param) {
+    $.validator.addMethod('maxFileSize', function (value, element, param) {
         var maxSize = param * 1024 * 1024; // Convert MB to bytes
         var fileSize = element.files[0].size;
 
         return fileSize <= maxSize;
     }, 'File size must be less than {0} MB.');
+
+    //prevent the entry of non-integer values
+    $(".quantityField").on('keypress', function (e) {
+        var key = e.keyCode;
+        if (!((key >= 48 && key <= 57))) {
+            e.preventDefault();
+        }
+    });
+
+    //prevent the entry of non-floating or non-integer values
+    $(".amountField").on("input", function (evt) {
+        var self = $(this);
+        self.val(self.val().replace(/[^0-9\.]/g, ''));
+        if ((evt.which != 46 || self.val().indexOf('.') != -1) && (evt.which < 48 || evt.which > 57)) {
+            evt.preventDefault();
+        }
+    });
 
     //currency rate changing
     $('#currency_change').on('change', function () {
@@ -94,7 +111,7 @@ $(document).ready(function () {
         bid_price = _this.closest('tr').find('input[name="bid_price"]').val();
 
         var quantityStatus = true;
-        
+
         if (operation === "minus") {
             if (currentValue > min_quantity_to_buy) {
                 quantity.val(currentValue - 1);
@@ -118,7 +135,7 @@ $(document).ready(function () {
     });
 
     //change quantity using input field function in the product list showing the price
-    $('body').on('focusout paste', '.change-quantity-input', function() {
+    $('body').on('focusout paste', '.change-quantity-input', function () {
         var _this = $(this);
         var bid_price = null;
 
@@ -126,12 +143,12 @@ $(document).ready(function () {
         var quantity = parseInt(_this.val());
         var product = _this.data("product");
         bid_price = _this.closest('tr').find('input[name="bid_price"]').val();
-        
-        if(min_quantity_to_buy <= quantity) {
+
+        if (min_quantity_to_buy <= quantity) {
             clearTimeout(changeQuantityDebounceTimer);
             calculatePrice(quantity, product, bid_price, _this);
         }
-        else{
+        else {
             toastr.error('Please enter the value greater than of min quantity');
             _this.val(min_quantity_to_buy);
             calculatePrice(min_quantity_to_buy, product, bid_price, _this);
@@ -139,19 +156,15 @@ $(document).ready(function () {
     });
 
     //bid price in the product list showing the price
-    $('body').on('keyup paste', '.bid-price', function() {
+    $('body').on('keyup paste', '.bid-price', function () {
         var _this = $(this);
         var bid_price = null;
 
         var quantity = _this.closest('tr').find('input[name="quantity"]').val();
         var product = _this.data("product");
         bid_price = _this.val();
-        var numericValue = bid_price.replace(/[^0-9]/g, '');
 
-        // Update the input field value
-        _this.val(numericValue);
-
-        if(bid_price && bid_price < 1) {
+        if (bid_price && bid_price < 1) {
             toastr.error('Please enter the bid price value min 1');
             _this.val(1);
             clearTimeout(changeQuantityDebounceTimer);
@@ -176,7 +189,7 @@ $(document).ready(function () {
         bid_price = $('input[name="bid_price"]').val();
 
         var quantityStatus = true;
-        
+
         if (operation === "minus") {
             if (currentValue > min_quantity_to_buy) {
                 quantity.val(currentValue - 1);
@@ -200,7 +213,7 @@ $(document).ready(function () {
     });
 
     //change quantity using input field function in the product detail showing the price
-    $('body').on('focusout paste', '.change-quantity-input-detail-page', function() {
+    $('body').on('focusout paste', '.change-quantity-input-detail-page', function () {
         var _this = $(this);
         var bid_price = null;
 
@@ -209,11 +222,11 @@ $(document).ready(function () {
         var product = _this.data("product");
         bid_price = $('input[name="bid_price"]').val();
 
-        if(min_quantity_to_buy <= quantity) {
+        if (min_quantity_to_buy <= quantity) {
             clearTimeout(changeQuantityDebounceTimer);
             calculatePrice(quantity, product, bid_price, _this);
         }
-        else{
+        else {
             toastr.error('Please enter the value greater than of min quantity');
             _this.val(min_quantity_to_buy);
             calculatePrice(min_quantity_to_buy, product, bid_price, _this);
@@ -221,19 +234,15 @@ $(document).ready(function () {
     });
 
     //bid price in the product detail showing the price
-    $('body').on('keyup paste', '.bid-price-detail-page', function() {
+    $('body').on('keyup paste', '.bid-price-detail-page', function () {
         var _this = $(this);
         var bid_price = null;
 
         var quantity = $('input[name="quantity"]').val();
         var product = _this.data("product");
         bid_price = _this.val();
-        var numericValue = bid_price.replace(/[^0-9]/g, '');
 
-        // Update the input field value
-        _this.val(numericValue);
-
-        if(bid_price && bid_price < 1) {
+        if (bid_price && bid_price < 1) {
             toastr.error('Please enter the bid price value min 1');
             _this.val(1);
             clearTimeout(changeQuantityDebounceTimer);
@@ -246,7 +255,7 @@ $(document).ready(function () {
     });
 
     //add to quote in product list
-    $('.list-add-to-quote').on('click', function() {
+    $('.list-add-to-quote').on('click', function () {
         var _this = $(this);
 
         var quantity = _this.closest('tr').find("input[name='quantity'").val();
@@ -257,19 +266,149 @@ $(document).ready(function () {
             url: '/add-to-quote',
             data: {
                 quantity: quantity,
-                product: product,
+                slug: product,
                 bid_price: bid_price
             },
             type: "post",
             dataType: 'json',
             success: function (response) {
-                if(response.status) {
-                    _this.closest('tr').find('.product-total-price-div').text(response.price);
+                $('.quote-count').html(response.count);
+                if (response.status) {
+                    toastr.success(response.message);
+                }
+                else {
+                    toastr.error(response.message);
                 }
             }
         });
     });
+
+    //add to quote in product detail page
+    $('.add-to-quote-product-detail').on('click', function () {
+        var _this = $(this);
+
+        var quantity = $('input[name="quantity"]').val();
+        var product = _this.data("product");
+        var bid_price = $('input[name="bid_price"]').val();
+
+        $.ajax({
+            url: '/add-to-quote',
+            data: {
+                quantity: quantity,
+                slug: product,
+                bid_price: bid_price
+            },
+            type: "post",
+            dataType: 'json',
+            success: function (response) {
+                $('.quote-count').html(response.count);
+                if (response.status) {
+                    toastr.success(response.message);
+                }
+                else {
+                    toastr.error(response.message);
+                }
+            }
+        });
+    });
+
+    // change quote item count
+    var quoteDebounceTimer;
+    $(document).on("click", ".quote-update-quantity-btn", function () {
+        clearTimeout(quoteDebounceTimer);
+        var _this = $(this);
+
+        var quote_id = _this
+            .siblings('input[name="quantity"]')
+            .data("quote-id");
+        var min_quantity_to_buy = _this.siblings('input[name="quantity"]').attr("min");
+        var quantity = _this.siblings('input[name="quantity"]');
+        var currentValue = parseInt(quantity.val());
+        var operation = _this.data("operation");
+
+        var quantityStatus = true;
+
+        if (operation === "minus") {
+            if (currentValue > min_quantity_to_buy) {
+                quantity.val(currentValue - 1);
+            }
+            else {
+                quantityStatus = false;
+            }
+        }
+
+        if (operation === "plus") {
+            quantity.val(currentValue + 1);
+        }
+
+        var quantityValue = parseInt(quantity.val());
+
+        if (quote_id && quantityStatus) {
+            updateQuoteQuantity(quantityValue, quote_id);
+        }
+    });
+
+    $(document).on("focusout paste", ".quote-update-quantity-input", function () {
+        clearTimeout(quoteDebounceTimer);
+        var _this = $(this);
+
+        var quote_id = _this.data("quote-id");
+        var min_quantity_to_buy = _this.attr("min");
+        var quantity = parseInt(_this.val());
+
+        if (min_quantity_to_buy <= quantity) {
+            updateQuoteQuantity(quantity, quote_id);
+        }
+        else {
+            toastr.error('Please enter the value greater than of min quantity');
+            _this.val(min_quantity_to_buy);
+            updateQuoteQuantity(min_quantity_to_buy, quote_id);
+        }
+    });
+
+    // Delete quote
+    $(document).on("click", ".quote-delete-btn", function (e) {
+        const quote_id = $(this).data("quote-id");
+        const title = $(this).data("title");
+        const uc_title = capitalizeWords(title);
+        Swal.fire({
+            title: `Remove ${uc_title}`,
+            text: `Are you sure you want to remove ${title} from your quote?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "$success",
+            cancelButtonColor: "$danger",
+            cancelButtonText: "Cancel",
+            confirmButtonText: "Remove",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "/remove-from-quote",
+                    type: "POST",
+                    data: {
+                        quote_id: quote_id,
+                    },
+                    success: function (response) {
+                        if (response.status) {
+                            $('.quote-tr-' + quote_id).remove();
+                            $('.quote-count').html(response.count);
+                            toastr.success(response.message);
+                        } else
+                            toastr.error(response.message);
+                    },
+                    error: function (xhr, status, error) {
+                        toastr.error(`An error occurred while deleting the ${title}`);
+                    },
+                });
+            }
+        });
+    });
 });
+
+// capitalize Words
+function capitalizeWords(str) {
+    return str.replace(/\b\w/g, (match) => match.toUpperCase());
+}
 
 //check the currency data changed in drop down select and every page load
 function currencyRateChange(type) {
@@ -279,18 +418,18 @@ function currencyRateChange(type) {
         url: "/change-currency/" + code,
         dataType: 'json',
         success: function (result) {
-            if(type === 'change')
+            if (type === 'change')
                 location.reload();
         }
     });
 }
 /**notify me */
-$('.notify-me').on('click', function() {
+$('.notify-me').on('click', function () {
     var data = $(this).data('id');
     $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
     $.ajax({
         type: "post",
@@ -298,13 +437,11 @@ $('.notify-me').on('click', function() {
         data: {
             product_slug: data
         },
-        success: function(response) {
-            if(response.status)
-            {
+        success: function (response) {
+            if (response.status) {
                 toastr.success(response.message);
             }
-            else
-            {
+            else {
                 toastr.error(response.message);
             }
         }
@@ -325,22 +462,43 @@ function calculatePrice(quantity, product, bid_price, _this) {
             type: "post",
             dataType: 'json',
             success: function (response) {
-                if(response.status) {
+                if (response.status) {
                     //product list
-                    if(_this.closest('tr').find('.product-total-price-div').length > 0)
+                    if (_this.closest('tr').find('.product-total-price-div').length > 0)
                         _this.closest('tr').find('.product-total-price-div').text(response.price);
-                    else{
+                    else {
                         //product detail page
-                        if(bid_price != null && bid_price != '' && bid_price != undefined) {
+                        if (bid_price != null && bid_price != '' && bid_price != undefined) {
                             $('.bid-payable-amount-div').removeClass('d-none');
                             $('.payable-amount-div').addClass('d-none');
                         } else {
                             $('.bid-payable-amount-div').addClass('d-none');
                             $('.payable-amount-div').removeClass('d-none');
                         }
-                            $('.ProInfoSecWrp .product-total-price-div').text(response.price);
+                        $('.ProInfoSecWrp .product-total-price-div').text(response.price);
                     }
                 }
+            }
+        });
+    }, 300);
+}
+
+//update the quote quantity each button click and direct field change
+function updateQuoteQuantity(quantity, quote_id) {
+    quoteDebounceTimer = setTimeout(function () {
+        $.ajax({
+            url: '/update-quote',
+            data: {
+                quote_id: quote_id,
+                quantity: quantity,
+            },
+            type: "post",
+            dataType: 'json',
+            success: function (response) {
+                if (response.status) {
+                    $('.product-price-' + quote_id).empty().html(response.product_total);
+                } else
+                    toastr.error(response.message);
             }
         });
     }, 300);

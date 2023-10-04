@@ -30,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('currencySymbolWithConvertedPrice', function ($price) {
             return "<?php echo \App\Helpers\FrontendHelper::getCurrencySymbolWithConvertedPrice($price); ?>";
         });
+
+        Blade::directive('checkQuote', function ($price) {
+            return "<?php echo \App\Helpers\QuoteHelper::checkQuote(); ?>";
+        });
     }
 
     /**
