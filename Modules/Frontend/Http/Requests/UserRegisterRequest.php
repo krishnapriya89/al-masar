@@ -30,7 +30,7 @@ class UserRegisterRequest extends FormRequest
                 new UniquePhoneInUsersTable,
                 'regex:/^\+?[0-9]{1,4}[-\s]?[0-9]{6,14}$/'
             ],
-            'attachment' => 'nullable|max:2000|mimes:doc,docs,pdf,jpg,jpeg,png'
+            'attachment' => 'nullable|max:2000|mimes:pdf,jpg,jpeg,png'
         ];
 
         return $rules;

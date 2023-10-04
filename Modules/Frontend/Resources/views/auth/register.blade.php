@@ -160,12 +160,13 @@
                         notEqual: "#phone",
                     },
                     attachment: {
-                        extension: "pdf"
+                        extension: "pdf,jpg,jpeg,png",
+                        maxFileSize: 2
                     }
                 },
                 messages: {
                     attachment: {
-                        extension: 'Please choose file type of pdf'
+                        extension: 'Please choose file type of pdf, jpg, jpeg ,png',
                     }
                 },
                 errorElement: 'span',

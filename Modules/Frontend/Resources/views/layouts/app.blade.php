@@ -59,9 +59,9 @@
 <body>
     {{-- header --}}
     @if (Auth::guard('web')->check())
-        @include('frontend::layouts.home-header')
-    @else
         @include('frontend::layouts.header')
+    @else
+        @include('frontend::layouts.home-header')
     @endif
 
     <div id="viewport">

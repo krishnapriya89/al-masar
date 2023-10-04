@@ -12,9 +12,18 @@ $(document).ready(function () {
         return digitsOnly.test(value);
     }, "Please enter a valid phone number");
 
+    //check the phone and number and office phone number not equal
     jQuery.validator.addMethod("notEqual", function (value, element, param) {
         return this.optional(element) || value != $(param).val();
     }, "This has to be different from the phone number");
+
+    //check max file size is greater then of 2MB then return error
+    $.validator.addMethod('maxFileSize', function(value, element, param) {
+        var maxSize = param * 1024 * 1024; // Convert MB to bytes
+        var fileSize = element.files[0].size;
+
+        return fileSize <= maxSize;
+    }, 'File size must be less than {0} MB.');
 
     //currency rate changing
     $('#currency_change').on('change', function () {
