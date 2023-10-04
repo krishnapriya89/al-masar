@@ -78,13 +78,13 @@
                         <div class="flxBx">
                             <div class="ltB">
                                 <p>{!!@$about_us_common->description!!}</p>
-                                @auth
+                                @if (Auth::guard('web')->check())
                                 <a href="{{ route('about')}}" class="vmore">{{@$about_us_common->home_page_button_name}}
                                     <div class="icon">
                                         <img src="{{asset('frontend/images/arwR.svg')}}" alt="">
                                     </div>
                                 </a>
-                                @endauth
+                                @endif
 
                             </div>
                             <div class="rtB">
