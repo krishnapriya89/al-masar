@@ -25,8 +25,8 @@ class HomeBanner extends Model
 
     public function getImageValueAttribute()
     {
-        if($this->image && Storage::disk('public')->exists($this->image))
-            return Storage::url($this->image);
+        if($this->web_image && Storage::disk('public')->exists($this->web_image))
+            return Storage::url($this->web_image);
         else
             return asset('frontend/images/default-img.png');
     }
