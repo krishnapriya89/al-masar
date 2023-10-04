@@ -76,11 +76,13 @@ $(document).ready(function () {
     var changeQuantityDebounceTimer;
     $('body').on("click", ".change-quantity", function () {
         var _this = $(this);
+        var bid_price = null;
 
         var min_quantity_to_buy = _this.siblings('input[name="quantity"]').attr("min");
         var quantity = _this.siblings('input[name="quantity"]');
         var currentValue = parseInt(quantity.val());
         var operation = _this.data("operation");
+        bid_price = _this.closest('tr').find('input[name="bid_price"]').val();
 
         var quantityStatus = true;
         
@@ -102,25 +104,49 @@ $(document).ready(function () {
         var product = _this.data("product");
         if (product && quantityValue && quantityStatus) {
             clearTimeout(changeQuantityDebounceTimer);
-            calculatePrice(quantityValue, product, _this)
+            calculatePrice(quantityValue, product, bid_price, _this);
         }
     });
 
     //input change quantity function in the product list showing the price
-    $('body').on('keyup paste', '.change-quantity-input', function() {
+    $('body').on('focusout paste', '.change-quantity-input', function() {
         var _this = $(this);
+        var bid_price = null;
 
         var min_quantity_to_buy = parseInt(_this.attr("min"));
         var quantity = parseInt(_this.val());
         var product = _this.data("product");
+        bid_price = _this.closest('tr').find('input[name="bid_price"]').val();
         
         if(min_quantity_to_buy <= quantity) {
             clearTimeout(changeQuantityDebounceTimer);
-            calculatePrice(quantity, product, _this);
+            calculatePrice(quantity, product, bid_price, _this);
         }
         else{
             toastr.error('Please enter the value greater than of min quantity');
             _this.val(min_quantity_to_buy);
+            calculatePrice(min_quantity_to_buy, product, bid_price, _this);
+        }
+    });
+
+    //bid price in the product list showing the price
+    $('body').on('keyup paste', '.bid-price', function() {
+        var _this = $(this);
+        var bid_price = null;
+
+        var quantity = _this.closest('tr').find('input[name="quantity"]').val();
+        var product = _this.data("product");
+        bid_price = _this.val();
+
+        if(bid_price && (bid_price < 1 || !isValidAmount(bid_price))) {
+            toastr.error('Please enter the bid price value min 1');
+            _this.val(1);
+            clearTimeout(changeQuantityDebounceTimer);
+            calculatePrice(quantity, product, 1, _this);
+        }
+        else {
+            clearTimeout(changeQuantityDebounceTimer);
+            calculatePrice(quantity, product, bid_price, _this);
         }
     });
 
@@ -189,14 +215,16 @@ $('.notify-me').on('click', function() {
     });
 });
 
-//change quantity function in the product list showing the price
-function calculatePrice(quantity, product, _this) {
+//showing the bid price
+function calculatePrice(quantity, product, bid_price, _this) {
+
     changeQuantityDebounceTimer = setTimeout(function () {
         $.ajax({
             url: '/calculate-price',
             data: {
                 quantity: quantity,
                 product: product,
+                bid_price: bid_price
             },
             type: "post",
             dataType: 'json',
@@ -207,4 +235,17 @@ function calculatePrice(quantity, product, _this) {
             }
         });
     }, 300);
+}
+
+//check the value is a valid amount
+function isValidAmount(value) {
+    // Remove any non-numeric characters
+    // var numericValue = value.replace(/[^0-9.]/g, '');
+
+    // Check if the resulting string is a valid number
+    if (!isNaN(numericValue)) {
+        return true;
+    } else {
+        return false;
+    }
 }

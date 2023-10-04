@@ -1,11 +1,5 @@
 @extends('frontend::layouts.app')
 @section('title', 'Products')
-{{-- @section('meta_title', @$products->meta_title)
-@section('meta_keywords', @$products->meta_keywords)
-@section('meta_description', @$products->meta_description)
-@section('other_meta_tags')
-    {!! @$products->other_meta_tags !!}
-@endsection --}}
 
 @section('content')
     <div id="pageWrapper" class="DashBoard InnerPage">
@@ -16,19 +10,19 @@
                         <li>
                             <a href="{{ route('home') }}">Home </a>
                         </li>
-                        {{-- <li>
-                            <a href="javascript:void(0)">iphone</a>
-                        </li> --}}
+                        <li>
+                            <a href="javascript:void(0)">{{ $breadcrumb }}</a>
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="container">
                 <div class="all_products">
                     <div class="bdfgBx">
-                        {{-- <div class="Stitle">iPhone</div> --}}
+                        <div class="Stitle">{{ $breadcrumb }}</div>
                     </div>
                 </div>
-                <div class="TableBx table-responsive">
+                <div class="TableBx table-responsive DskTop">
                     <table class="listTable" id="productListTable">
                         <thead>
                             <tr>

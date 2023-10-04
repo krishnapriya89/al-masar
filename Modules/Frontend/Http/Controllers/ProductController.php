@@ -20,8 +20,9 @@ class ProductController extends Controller
      */
     public function products()
     {
+        $breadcrumb = 'Products';
         $products = Product::active()->orderBy('sort_order')->get();
-        return view('frontend::product', compact('products'));
+        return view('frontend::product', compact('products', 'breadcrumb'));
     }
 
     //product listing page search
@@ -105,7 +106,7 @@ class ProductController extends Controller
 
     }
 
-
+    //calculate total price of a product in product list page
     public function calculatePrice(Request $request)
     {
         $product = Product::active()->where('slug', $request->product)->first();
@@ -123,7 +124,10 @@ class ProductController extends Controller
             ]);
         }
 
-        $price = $product->price * $request->quantity;
+        if($request->bid_price)
+            $price = $request->bid_price * $request->quantity;
+        else
+            $price = $product->price * $request->quantity;
 
         return response()->json([
             'status' => true,

@@ -10,7 +10,7 @@
                 <div class="PimgB">
                     <img src="{{ $product->listing_image_value }}" alt="{{ $product->title }}">
                 </div>
-                <div class="name">{{ $product->title }}</div>
+                <a href="{{ route('product-detail', $product->slug) }}" class="name">{{ $product->title }}</a>
             </div>
         </td>
         <td>
@@ -31,12 +31,12 @@
             </div>
         </td>
         <td>
-            <div class="txt {{ $product->stock_class }}">@currencySymbolWithConvertedPrice($product->min_product_price)</div>
+            <div class="txt {{ $product->stock_class }}">@currencySymbolWithConvertedPrice($product->price)</div>
         </td>
         <td>
             @if ($product->is_instock)
-                <input type="text" name="bid_price" id="bid_price" placeholder="" class="bid" value="">
-                <div class="txt">@currencySymbolWithConvertedPrice($product->price)
+                @currencySymbol<input type="number" name="bid_price" id="bid_price" placeholder="" class="bid bid-price" value="" data-product="{{ $product->slug }}">
+                <div class="txt">Total
                     <div class="tmns product-total-price-div">@currencySymbolWithConvertedPrice($product->min_product_price)</div>
                 </div>
             @else
