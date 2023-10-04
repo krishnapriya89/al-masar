@@ -580,8 +580,8 @@ class AuthController extends Controller
             $user->register_status = 3; //phone verification completed
             $user->save();
             session()->forget('registered_user');
-            session()->flash('success', $user->office_phone . ' number verified successfully');
-            session()->flash('success', 'Kindly verify the email id as well. A mail is been sent to your registered mail id. And kindly wait for the admin approval.');
+            session()->flash('success', );
+            session()->flash('success', $user->office_phone . ' number verified successfully Kindly verify the email id as well. A mail is been sent to your registered mail id. And kindly wait for the admin approval.');
             return response()->json([
                 'status' => true,
                 'url' => route('user.login.form'),
