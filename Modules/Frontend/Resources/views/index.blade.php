@@ -76,11 +76,14 @@
                         <div class="flxBx">
                             <div class="ltB">
                                 <p>{!!@$about_us_common->description!!}</p>
-                                <a href="#!" class="vmore">{{@$about_us_common->home_page_button_name}}
+                                @auth
+                                <a href="{{ route('about')}}" class="vmore">{{@$about_us_common->home_page_button_name}}
                                     <div class="icon">
                                         <img src="{{asset('frontend/images/arwR.svg')}}" alt="">
                                     </div>
                                 </a>
+                                @endauth
+
                             </div>
                             <div class="rtB">
                                 <div class="flxGrid">

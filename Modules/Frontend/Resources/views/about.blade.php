@@ -9,7 +9,7 @@
 
 @section('content')
 
-<div id="pageWrapper" class="aboutPage">
+<div id="pageWrapper" class="aboutPage InnerPage">
     <!-- Common Banner Section  -->
     <section id="cmnBanner">
         <div class="bannerImg">
@@ -24,7 +24,7 @@
             <div class="bannerCnt">
                 <div class="container">
                     <div class="Title">{{@$about->banner_title}}</div>
-                    <div class="subT">{!!@$about->banner_description!!}</div>
+                    <div class="subT">{!! @$about->banner_description !!}</div>
                 </div>
             </div>
         </div>
