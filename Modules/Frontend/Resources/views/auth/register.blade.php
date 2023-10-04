@@ -96,7 +96,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="fileUploadInput">
-                                                <label for="file-upload" class="custom-file-upload  @error('office_phone') is-invalid @enderror">
+                                                <label for="file-upload" class="custom-file-upload  @error('attachment') is-invalid @enderror">
                                                     <i class="fa fa-cloud-upload"></i> Attachment
                                                 </label>
                                                 <input id="attachment" name='attachment' type="file" class="fileInput">

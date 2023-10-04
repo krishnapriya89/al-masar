@@ -13,23 +13,29 @@ use App\Models\State;
 class UserController extends Controller
 {
 
-     /**
-      * Add New Address
-      *
-      */
-      public function addBillingAddress()
-      {
-        $countries = Country::active()->get();
-        $states = State::active()->get();
-        return view('frontend::user.add-billing-address',compact('countries','states'));
-      }
+  //user dashboard
+  public function dashboard()
+  {
+    return view('frontend::user.dashboard');
+  }
 
-      /**
-       * Store Billing Address
-       *
-       */
-      public function storeBillingAddress(UserAddressRequest $request)
-      {
-        dd($request->all());
-      }
+  /**
+   * Add New Address
+   *
+   */
+  public function addBillingAddress()
+  {
+    $countries = Country::active()->get();
+    $states = State::active()->get();
+    return view('frontend::user.add-billing-address', compact('countries', 'states'));
+  }
+
+  /**
+   * Store Billing Address
+   *
+   */
+  public function storeBillingAddress(UserAddressRequest $request)
+  {
+    dd($request->all());
+  }
 }

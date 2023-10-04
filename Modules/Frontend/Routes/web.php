@@ -47,8 +47,6 @@ Route::group(['middleware' => 'auth.user'], function () {
     //store contact enquiry
     Route::post('contact-enquiry',[HomeController::class,'storeContact'])->name('contact-enquiry');
 
-    //user
-    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
     //E-commerce
     //product
     Route::get('/product',[ProductController::class,'products'])->name('product');
@@ -67,6 +65,9 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::post('notify-me',[ProductController::class,'notifyMe'])->name('notify-me');
     //notify-user
     Route::get('notify-user',[HomeController::class,'notifyUser'])->name('notify-user');
+    
+    //user
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
     //add-new-user
     Route::get('add-billing-address',[UserController::class,'addBillingAddress'])->name('add-billing-address');
     Route::post('add-billing-address',[UserController::class,'storeBillingAddress'])->name('store-billing-address');
