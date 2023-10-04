@@ -39,7 +39,7 @@ class ProductRequest extends FormRequest
             'stock' => 'required|integer|min:0',
             'min_stock' => 'nullable|integer|min:0',
             'min_quantity_to_buy' => 'required|integer|min:1',
-            'detail_page_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048|dimensions:min_width=1080,min_height=1080,max_width=1080,max_height=1080',
+            'detail_page_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'sort_order' => 'nullable|integer|min:0',
         ];
 

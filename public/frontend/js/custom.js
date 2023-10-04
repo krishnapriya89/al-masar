@@ -261,7 +261,7 @@ $(document).ready(function () {
     });
 });
 
-//check the currency data changes in drop down select and every page load
+//check the currency data changed in drop down select and every page load
 function currencyRateChange(type) {
     var code = '';
     code = $('#currency_change').val();
@@ -301,7 +301,7 @@ $('.notify-me').on('click', function() {
     });
 });
 
-//showing the bid price
+//showing the bid price in both list and detail page
 function calculatePrice(quantity, product, bid_price, _this) {
 
     changeQuantityDebounceTimer = setTimeout(function () {
@@ -316,9 +316,11 @@ function calculatePrice(quantity, product, bid_price, _this) {
             dataType: 'json',
             success: function (response) {
                 if(response.status) {
+                    //product list
                     if(_this.closest('tr').find('.product-total-price-div').length > 0)
                         _this.closest('tr').find('.product-total-price-div').text(response.price);
                     else{
+                        //product detail page
                         if(bid_price != null && bid_price != '' && bid_price != undefined) {
                             $('.bid-payable-amount-div').removeClass('d-none');
                             $('.payable-amount-div').addClass('d-none');
