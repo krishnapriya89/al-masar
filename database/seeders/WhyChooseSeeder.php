@@ -15,16 +15,16 @@ class WhyChooseSeeder extends Seeder
     {
         WhyChoose::insert([
             'title'=>'Why Choose Al Masar Al Saree',
-            'sub_title' => 'lorem ipsum',
+            'sub_title' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Qua ex cognitione facilior facta est',
             'section_one_image'=>'frontend/images/w1.svg',
-            'section_one_title'=>'Best Prices In The Market',
-            'section_one_description'=>'lorem ipsum',
+            'section_one_title'=>'Best Prices In the Market',
+            'section_one_description'=>'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore',
             'section_two_image'=>'frontend/images/w2.svg',
-            'section_two_title'=>'Best Prices In The Market',
-            'section_two_description'=>'lorem ipsum',
+            'section_two_title'=>'Secured Transactions',
+            'section_two_description'=>'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore',
             'section_three_image'=>'frontend/images/w3.svg',
-            'section_three_title'=>'Best Prices In The Market',
-            'section_three_description'=>'lorem ipsum',
+            'section_three_title'=>'Fastest Delivery',
+            'section_three_description'=>'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore',
         ]);
     }
 }

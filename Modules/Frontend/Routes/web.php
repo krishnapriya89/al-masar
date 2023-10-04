@@ -60,7 +60,8 @@ Route::group(['middleware' => 'auth.user'], function () {
     //notify-user
     Route::get('notify-user',[HomeController::class,'notifyUser'])->name('notify-user');
     //add-new-user
-    Route::get('add-new-address',[UserController::class,'addNewAddress'])->name('add-new-address');
+    Route::get('add-billing-address',[UserController::class,'addBillingAddress'])->name('add-billing-address');
+    Route::post('add-billing-address',[UserController::class,'storeBillingAddress'])->name('store-billing-address');
 });
 
 //home
