@@ -31,7 +31,9 @@
                                 <div class="tleWrp">
                                     <div class="subT">{{@$banner->sub_title}}</div>
                                     <h1 class="mTle">{!!@$banner->title!!}</h1>
-                                    <a href="javascript:void(0);" class="about hoveranim"><span>{{ @$banner->button_name}}</span></a>
+                                    @if (@$banner->button_name)
+                                        <a href="{{ @$banner->button_link}}" class="about hoveranim"><span>{{ @$banner->button_name}}</span></a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
