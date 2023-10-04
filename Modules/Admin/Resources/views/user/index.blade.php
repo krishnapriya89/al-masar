@@ -25,9 +25,9 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->phone }}</td>
-                                    <td>{{ $user->office_phone }}</td>
+                                    <td>{{ $user->email }}<br>@if ($user->email_verified) <span class="badge bg-success">User Verfied</span> @else <span  class="badge bg-danger">Not Verfied</span> @endif</td>
+                                    <td>{{ $user->phone }}<br>@if ($user->phone_verified) <span class="badge bg-success">User Verfied</span> @else <span  class="badge bg-danger">Not Verfied</span> @endif</td>
+                                    <td>{{ $user->office_phone }}<br>@if ($user->office_phone_verified) <span class="badge bg-success">User Verfied</span> @else <span  class="badge bg-danger">Not Verfied</span> @endif</td>
                                     <td id="user-status-{{ $user->id }}">
                                         <div class="form-group">
                                             <select class="custom-select form-control-border userStatus"

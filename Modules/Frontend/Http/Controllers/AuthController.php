@@ -370,6 +370,15 @@ class AuthController extends Controller
                 });
             }
 
+            $site_settings = SiteCommonContent::first();
+            Mail::send('frontend::emails.new-user', ['user' => $user], function ($message) use ($site_settings, $user) {
+                $message->to($site_settings->email);
+                $message->subject('New User Registered');
+                if($user->attachment) {
+                    $message->attach(public_path('storage/'.$user->attachment));
+                }
+            });
+
             $encryptedUserID = Crypt::encrypt($user->id);
             Session::put('registered_user', $encryptedUserID);
 
