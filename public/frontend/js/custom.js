@@ -162,6 +162,32 @@ function currencyRateChange(type) {
         }
     });
 }
+/**notify me */
+$('.notify-me').on('click', function() {
+    var data = $(this).data('id');
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $.ajax({
+        type: "post",
+        url: "/notify-me",
+        data: {
+            product_slug: data
+        },
+        success: function(response) {
+            if(response.status)
+            {
+                toastr.success(response.message);
+            }
+            else
+            {
+                toastr.error(response.message);
+            }
+        }
+    });
+});
 
 //change quantity function in the product list showing the price
 function calculatePrice(quantity, product, _this) {

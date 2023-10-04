@@ -40,7 +40,7 @@
                     <div class="tmns product-total-price-div">@currencySymbolWithConvertedPrice($product->min_product_price)</div>
                 </div>
             @else
-                <div class="notify">Notify Me</div>
+                <div class="notify notify-me"  data-id={{ $product->slug }}>Notify Me</div>
             @endif
         </td>
         <td>

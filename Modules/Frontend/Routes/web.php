@@ -54,7 +54,13 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::post('/product-list-search',[ProductController::class,'listSearch'])->name('product-list-search');
     Route::post('/calculate-price',[ProductController::class,'calculatePrice'])->name('calculate-price');
     //product detail
-    Route::get('product-detail/{slug}',[HomeController::class,'productDetailPage'])->name('product-detail');
+    Route::get('product-detail/{slug}',[ProductController::class,'productDetailPage'])->name('product-detail');
+    //notify-me
+    Route::post('notify-me',[ProductController::class,'notifyMe'])->name('notify-me');
+    //notify-user
+    Route::get('notify-user',[HomeController::class,'notifyUser'])->name('notify-user');
+    //add-new-user
+    Route::get('add-new-address',[UserController::class,'addNewAddress'])->name('add-new-address');
 });
 
 //home

@@ -10,10 +10,12 @@ use App\Models\WhyChoose;
 use App\Models\HomeBanner;
 use App\Models\CurrencyRate;
 use Illuminate\Http\Request;
+use App\Models\NotifyProduct;
 use App\Models\PrivacyPolicy;
 use App\Models\ContactEnquiry;
 use App\Models\TermsAndCondition;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Contracts\Support\Renderable;
 
@@ -80,17 +82,6 @@ class HomeController extends Controller
         return redirect()->back()->with('error', 'Failed to Submit Contact Form Application');
     }
 
-    /**
-     * Product Detail Page
-     *
-     */
-    public function productDetailPage($slug)
-    {
-        $product = Product::active()->where('slug',$slug)->first();
-        $product_galleries = $product->gallery;
-        // dd($product_galleries);
-        return view('frontend::product-detail',compact('product','product_galleries'));
-    }
 
     /**
      * Currency changing while page loading and all times
@@ -127,6 +118,26 @@ class HomeController extends Controller
             return response()->json([
                 'status' => true
             ]);
+        }
+    }
+
+    /**
+     * Send Notify mail to user
+     *
+     */
+    public function notifyUser()
+    {
+        $notify_products = NotifyProduct::where('isNotified',0)->get();
+        foreach($notify_products as $product)
+        {
+
+            $user_email = $product->user->email;
+            Mail::send('frontend::emails.product-notify-user', ['data' => $product], function ($message) use ($user_email) {
+                $message->to($user_email);
+                $message->subject('You send a product request to notify');
+            });
+            $product->update(['isNotified'=>1]);
+
         }
     }
 }

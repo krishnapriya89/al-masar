@@ -136,7 +136,7 @@
                                         @endif
                                     @endforeach
                                 @endif
-                                @if (!$product->detail_page_image && $galleries->isEmpty())
+                                @if (!$product->detail_page_image && $product_galleries->isEmpty())
                                     <div class="item">
                                         <a href="{{ $product->detail_page_image_value }}" data-fancybox="proGal">
                                             <img src="{{ $product->detail_page_image_value }}"
@@ -159,15 +159,15 @@
                                         @if ($gallery->file_type == 'Image')
                                             <div class="item">
                                                 <a href="javascript:void(0)">
-                                                    <img src="{{ $gallery->image_value }}" data-lazy="{{ $gallery->image_value }}"
-                                                        alt="pro img">
+                                                    <img src="{{ $gallery->image_value }}"
+                                                        data-lazy="{{ $gallery->image_value }}" alt="pro img">
                                                 </a>
                                             </div>
-                                            @elseif($gallery->file_type == 'Video')
+                                        @elseif($gallery->file_type == 'Video')
                                             <div class="item">
                                                 <a href="javascript:void(0)">
-                                                    <img src="{{ $gallery->thumb_image_value }}" data-lazy="{{ $gallery->thumb_image_value }}"
-                                                        alt="pro img">
+                                                    <img src="{{ $gallery->thumb_image_value }}"
+                                                        data-lazy="{{ $gallery->thumb_image_value }}" alt="pro img">
                                                     <div class="icon">
                                                         <svg viewBox="0 0 33.242 33.238">
                                                             <path id="Path_1773" data-name="Path 1773" class="cls-1"
@@ -189,119 +189,128 @@
                     </div>
                     <div class="ProInfoSec">
                         <div class="ProInfoSecWrp">
-                            <h1 class="name">{{$product->title}}</h1>
-                            <div class="pcode">Product Code:<span>{{$product->code_number}}</span></div>
-                            <div class="mdlNu">Model Number:<span>{{ $product->model_number}}</span></div>
-                            <div class="sku">SKU:{{$product->sku}}</div>
+                            <h1 class="name">{{ $product->title }}</h1>
+                            <div class="pcode">Product Code:<span>{{ $product->code_number }}</span></div>
+                            <div class="mdlNu">Model Number:<span>{{ $product->model_number }}</span></div>
+                            <div class="sku">SKU:{{ $product->sku }}</div>
                             <!-- <div class="colorBx">
-                                                <div class="color">Colour:</div>
-                                                <div class="flxB">
-                                                    <div class="colorD">
-                                                        <input class="selectcolor" type="radio" id="color1" name="color" value="1"
-                                                            checked="">
-                                                        <label for="color1">
-                                                            <div class="icon">
-                                                                <img src="assets/images/c1.png" alt="">
-                                                            </div>
-                                                            Light Blue
-                                                        </label>
+                                                    <div class="color">Colour:</div>
+                                                    <div class="flxB">
+                                                        <div class="colorD">
+                                                            <input class="selectcolor" type="radio" id="color1" name="color" value="1"
+                                                                checked="">
+                                                            <label for="color1">
+                                                                <div class="icon">
+                                                                    <img src="assets/images/c1.png" alt="">
+                                                                </div>
+                                                                Light Blue
+                                                            </label>
+                                                        </div>
+                                                        <div class="colorD">
+                                                            <input class="selectcolor" type="radio" id="color2" name="color" value="2"
+                                                                checked="">
+                                                            <label for="color2">
+                                                                <div class="icon">
+                                                                    <img src="assets/images/c2.png" alt="">
+                                                                </div>
+                                                                White
+                                                            </label>
+                                                        </div>
+                                                        <div class="colorD">
+                                                            <input class="selectcolor" type="radio" id="color3" name="color" value="3"
+                                                                checked="">
+                                                            <label for="color3">
+                                                                <div class="icon">
+                                                                    <img src="assets/images/c3.png" alt="">
+                                                                </div>
+                                                                Yellow
+                                                            </label>
+                                                        </div>
+                                                        <div class="colorD">
+                                                            <input class="selectcolor" type="radio" id="color4" name="color" value="4"
+                                                                checked="">
+                                                            <label for="color4">
+                                                                <div class="icon">
+                                                                    <img src="assets/images/c4.png" alt="">
+                                                                </div>
+                                                                Blue
+                                                            </label>
+                                                        </div>
+                                                        <div class="colorD">
+                                                            <input class="selectcolor" type="radio" id="color5" name="color" value="5"
+                                                                checked="">
+                                                            <label for="color5">
+                                                                <div class="icon">
+                                                                    <img src="assets/images/c5.png" alt="">
+                                                                </div>
+                                                                Red
+                                                            </label>
+                                                        </div>
+                                                        <div class="colorD">
+                                                            <input class="selectcolor" type="radio" id="color6" name="color" value="6"
+                                                                checked="">
+                                                            <label for="color6">
+                                                                <div class="icon">
+                                                                    <img src="assets/images/c6.png" alt="">
+                                                                </div>
+                                                                Grey
+                                                            </label>
+                                                        </div>
                                                     </div>
-                                                    <div class="colorD">
-                                                        <input class="selectcolor" type="radio" id="color2" name="color" value="2"
-                                                            checked="">
-                                                        <label for="color2">
-                                                            <div class="icon">
-                                                                <img src="assets/images/c2.png" alt="">
-                                                            </div>
-                                                            White
-                                                        </label>
-                                                    </div>
-                                                    <div class="colorD">
-                                                        <input class="selectcolor" type="radio" id="color3" name="color" value="3"
-                                                            checked="">
-                                                        <label for="color3">
-                                                            <div class="icon">
-                                                                <img src="assets/images/c3.png" alt="">
-                                                            </div>
-                                                            Yellow
-                                                        </label>
-                                                    </div>
-                                                    <div class="colorD">
-                                                        <input class="selectcolor" type="radio" id="color4" name="color" value="4"
-                                                            checked="">
-                                                        <label for="color4">
-                                                            <div class="icon">
-                                                                <img src="assets/images/c4.png" alt="">
-                                                            </div>
-                                                            Blue
-                                                        </label>
-                                                    </div>
-                                                    <div class="colorD">
-                                                        <input class="selectcolor" type="radio" id="color5" name="color" value="5"
-                                                            checked="">
-                                                        <label for="color5">
-                                                            <div class="icon">
-                                                                <img src="assets/images/c5.png" alt="">
-                                                            </div>
-                                                            Red
-                                                        </label>
-                                                    </div>
-                                                    <div class="colorD">
-                                                        <input class="selectcolor" type="radio" id="color6" name="color" value="6"
-                                                            checked="">
-                                                        <label for="color6">
-                                                            <div class="icon">
-                                                                <img src="assets/images/c6.png" alt="">
-                                                            </div>
-                                                            Grey
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div> -->
-                            <div class="quantitySec">
-                                <div class="label">Minimum Quantity:</div>
-                                <div class="quantity buttons_added">
-                                    <input type="button" value="-" class="minus">
-                                    <input type="number" step="1" min="1" max="10" name="quantity"
-                                        value="1" title="Qty" class="input-text qty text" size="4"
-                                        pattern="" inputmode="">
-                                    <input type="button" value="+" class="plus">
+                                                </div> -->
+                            @if ($product->is_instock)
+                                <div class="quantitySec">
+                                    <div class="label">Minimum Quantity:</div>
+                                    <div class="quantity buttons_added">
+                                        <input type="button" value="-" class="minus">
+                                        <input type="number" step="1" min="1" max="10"
+                                            name="quantity" value="1" title="Qty" class="input-text qty text"
+                                            size="4" pattern="" inputmode="">
+                                        <input type="button" value="+" class="plus">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="deliveryInfo">
-                                Delivery by9 Sep, Saturday
-                                <span>if ordered before 5:39 PM</span>
-                            </div>
-                            <div class="flxBx">
-                                <div class="priceD">
-                                    <div class="cPrice">$45.00</div>
-                                    <div class="oPrice">$50.00</div>
+                                <div class="deliveryInfo">
+                                    Delivery by9 Sep, Saturday
+                                    <span>if ordered before 5:39 PM</span>
                                 </div>
-                                <div class="totalP">
-                                    <div class="lbl">Payable Amount</div>
-                                    <div class="price">$900.00</div>
+                                <div class="flxBx">
+                                    <div class="priceD">
+                                        <div class="cPrice">$45.00</div>
+                                        <div class="oPrice">$50.00</div>
+                                    </div>
+                                    <div class="totalP">
+                                        <div class="lbl">Payable Amount</div>
+                                        <div class="price">$900.00</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="expectedP">
-                                <div class="lbl">Bid Price:</div>
-                                <input type="text" name="" id="" class="form-control"
-                                    placeholder="Enter Amount" required>
-                            </div>
-                            <div class="btnBx">
-                                <a href="#!" class="quote">
-                                    Add to Quote
-                                    <svg viewBox="0 0 19.169 19.5">
-                                        <g id="cart" transform="translate(-2.46 -2.25)">
-                                            <path id="Path_102143" data-name="Path 102143"
-                                                d="M21.19,5.83a1.751,1.751,0,0,0-1.3-.58H7.54L7.17,4.13A2.754,2.754,0,0,0,4.56,2.25H3.21a.75.75,0,0,0,0,1.5H4.56a1.25,1.25,0,0,1,1.19.85l.52,1.56.79,7.14a2.742,2.742,0,0,0,2.73,2.45h8.42a2.742,2.742,0,0,0,2.73-2.45l.68-6.11a1.746,1.746,0,0,0-.44-1.36Zm-1.73,7.31a1.246,1.246,0,0,1-1.24,1.11H9.8a1.246,1.246,0,0,1-1.24-1.11L7.85,6.75H19.89a.26.26,0,0,1,.19.08.24.24,0,0,1,.06.19l-.68,6.11Z" />
-                                            <path id="Path_102144" data-name="Path 102144"
-                                                d="M9.5,17.25a2.25,2.25,0,1,0,2.25,2.25A2.253,2.253,0,0,0,9.5,17.25Zm0,3a.75.75,0,1,1,.75-.75A.755.755,0,0,1,9.5,20.25Z" />
-                                            <path id="Path_102145" data-name="Path 102145"
-                                                d="M18.5,17.25a2.25,2.25,0,1,0,2.25,2.25A2.253,2.253,0,0,0,18.5,17.25Zm0,3a.75.75,0,1,1,.75-.75A.755.755,0,0,1,18.5,20.25Z" />
-                                        </g>
-                                    </svg>
-                                </a>
-                            </div>
+                                <div class="expectedP">
+                                    <div class="lbl">Bid Price:</div>
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Amount" required>
+                                </div>
+                                <div class="btnBx">
+                                    <a href="#!" class="quote">
+                                        Add to Quote
+                                        <svg viewBox="0 0 19.169 19.5">
+                                            <g id="cart" transform="translate(-2.46 -2.25)">
+                                                <path id="Path_102143" data-name="Path 102143"
+                                                    d="M21.19,5.83a1.751,1.751,0,0,0-1.3-.58H7.54L7.17,4.13A2.754,2.754,0,0,0,4.56,2.25H3.21a.75.75,0,0,0,0,1.5H4.56a1.25,1.25,0,0,1,1.19.85l.52,1.56.79,7.14a2.742,2.742,0,0,0,2.73,2.45h8.42a2.742,2.742,0,0,0,2.73-2.45l.68-6.11a1.746,1.746,0,0,0-.44-1.36Zm-1.73,7.31a1.246,1.246,0,0,1-1.24,1.11H9.8a1.246,1.246,0,0,1-1.24-1.11L7.85,6.75H19.89a.26.26,0,0,1,.19.08.24.24,0,0,1,.06.19l-.68,6.11Z" />
+                                                <path id="Path_102144" data-name="Path 102144"
+                                                    d="M9.5,17.25a2.25,2.25,0,1,0,2.25,2.25A2.253,2.253,0,0,0,9.5,17.25Zm0,3a.75.75,0,1,1,.75-.75A.755.755,0,0,1,9.5,20.25Z" />
+                                                <path id="Path_102145" data-name="Path 102145"
+                                                    d="M18.5,17.25a2.25,2.25,0,1,0,2.25,2.25A2.253,2.253,0,0,0,18.5,17.25Zm0,3a.75.75,0,1,1,.75-.75A.755.755,0,0,1,18.5,20.25Z" />
+                                            </g>
+                                        </svg>
+                                    </a>
+                                </div>
+                            @else
+                                <div class="btnBx">
+                                    <a href="#!" class="quote notify-me" id="notify" data-id={{ $product->slug }}>
+                                        Notify Me
+
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -312,125 +321,125 @@
         <section id="moreInfoSec">
             <div class="container">
                 <!-- <div class="accordion" id="ProAccord">
-                                    <div class="FlxBtn">
-                                        <div class="buttonSec">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                Description
-                                            </button>
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                Specifications
-                                            </button>
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                Additional Details
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="innerBx">
-                                        <div class="accordion-item">
-                                            <div class="accordion-header" id="headingOne">
-                                                <button class="accordion-button mobBtn collapsed" type="button" data-bs-toggle="collapse"
+                                        <div class="FlxBtn">
+                                            <div class="buttonSec">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                     data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                     Description
                                                 </button>
-                                            </div>
-                                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                                                data-bs-parent="#ProAccord">
-                                                <div class="accordion-body">
-                                                    <div class="details">
-                                                        <div class="specDtail">
-                                                            <p>The iPhone 11 boasts a gorgeous all-screen Liquid Retina LCD that is water
-                                                                resistant up to 2 metres for up to 30 minutes. Moreover, the ultra-wide 13
-                                                                mm lens has a 120-degree field of view for four times more scenes, and the
-                                                                26 mm wide lens provides up to 100% Autofocus in low light.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <div class="accordion-header" id="headingTwo">
-                                                <button class="accordion-button mobBtn collapsed" type="button" data-bs-toggle="collapse"
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                     data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                                     Specifications
                                                 </button>
-                                            </div>
-                                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                                data-bs-parent="#ProAccord">
-                                                <div class="accordion-body">
-                                                    <div class="details">
-                                                        <div class="specBx">
-                                                            <div class="cTitle">General</div>
-                                                            <ul class="spec">
-                                                                <li><span>In The Box</span>Handset, USB-C to Lightning Cable, Documentation
-                                                                </li>
-                                                                <li><span>Model Number</span>MPUF3HN/A</li>
-                                                                <li><span>Model Name</span>iPhone 14</li>
-                                                                <li><span>Color</span>Midnight</li>
-                                                                <li><span>Browse Type</span>Smartphones</li>
-                                                                <li><span>SIM Type</span>Dual Sim(Nano + eSIM)</li>
-                                                                <li><span>Hybrid Sim Slot</span>No</li>
-                                                                <li><span>Touchscreen</span>Yes</li>
-                                                                <li><span>OTG Compatible</span>No</li>
-                                                                <li><span>Sound Enhancements</span>Built-in Stereo Speaker</li>
-                                                            </ul>
-                                                            <div class="cTitle">Display Features</div>
-                                                            <ul class="spec">
-                                                                <li><span>Display Size</span>15.49 cm (6.1 inch)</li>
-                                                                <li><span>Resolution</span>2532 x 1170 Pixels</li>
-                                                                <li><span>Resolution Type</span>Super Retina XDR Display</li>
-                                                                <li><span>GPU</span>5 Core</li>
-                                                                <li><span>Display Type</span>Super Retina XDR Display</li>
-                                                                <li><span>Other Display Features</span>HDR Display, True Tone, Wide Colour
-                                                                    (P3), Haptic Touch, Contrast Ratio: 20,00,000:1, Max Brightness: 800
-                                                                    nits, Peak Brightness: 1,200 nits, Fingerprint Resistant Oleophobic
-                                                                    Coating,
-                                                                    Support for Display of Multiple Languages and Characters Simultaneously
-                                                                </li>
-                                                            </ul>
-                                                            <div class="cTitle">Os & Processor Features</div>
-                                                            <ul class="spec">
-                                                                <li><span>Operating System</span>iOS 16</li>
-                                                                <li><span>Processor Type</span>A15 Bionic Chip, 6 Core Processor</li>
-                                                                <li><span>Processor Core</span>Hexa Core</li>
-                                                                <li><span>Operating Frequency</span>5G NR (Bands n1, n2, n3, n5, n7, n8,
-                                                                    n12, n20, n25, n26, n28, n30, n38, n40, n41, n48, n53, n66, n70, n77,
-                                                                    n78, n79), 4G FDD-LTE (B1, B2, B3, B4, B5, B7, B8, B12, B13, B17, B18,
-                                                                    B19, B20, B25,
-                                                                    B26, B28, B30, B32, B66), 4G TD-LTE (B34, B38, B39, B40, B41, B42, B46,
-                                                                    B48, B53), 3G UMTS/HSPA+/DC-HSDPA (850, 900, 1700/2100, 1900, 2100 MHz),
-                                                                    2G GSM/EDGE (850,
-                                                                    900, 1800, 1900 MHz)</li>
-                                                            </ul>
-                                                            <button type="" class="Readmore"><span>View More Details</span></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <div class="accordion-header" id="headingThree">
-                                                <button class="accordion-button mobBtn collapsed" type="button" data-bs-toggle="collapse"
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                     data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                                     Additional Details
                                                 </button>
                                             </div>
-                                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                                                data-bs-parent="#ProAccord">
-                                                <div class="accordion-body">
-                                                    <div class="details">
+                                        </div>
+                                        <div class="innerBx">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header" id="headingOne">
+                                                    <button class="accordion-button mobBtn collapsed" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                        Description
+                                                    </button>
+                                                </div>
+                                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                                    data-bs-parent="#ProAccord">
+                                                    <div class="accordion-body">
+                                                        <div class="details">
+                                                            <div class="specDtail">
+                                                                <p>The iPhone 11 boasts a gorgeous all-screen Liquid Retina LCD that is water
+                                                                    resistant up to 2 metres for up to 30 minutes. Moreover, the ultra-wide 13
+                                                                    mm lens has a 120-degree field of view for four times more scenes, and the
+                                                                    26 mm wide lens provides up to 100% Autofocus in low light.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <div class="accordion-header" id="headingTwo">
+                                                    <button class="accordion-button mobBtn collapsed" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                        Specifications
+                                                    </button>
+                                                </div>
+                                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                                    data-bs-parent="#ProAccord">
+                                                    <div class="accordion-body">
+                                                        <div class="details">
+                                                            <div class="specBx">
+                                                                <div class="cTitle">General</div>
+                                                                <ul class="spec">
+                                                                    <li><span>In The Box</span>Handset, USB-C to Lightning Cable, Documentation
+                                                                    </li>
+                                                                    <li><span>Model Number</span>MPUF3HN/A</li>
+                                                                    <li><span>Model Name</span>iPhone 14</li>
+                                                                    <li><span>Color</span>Midnight</li>
+                                                                    <li><span>Browse Type</span>Smartphones</li>
+                                                                    <li><span>SIM Type</span>Dual Sim(Nano + eSIM)</li>
+                                                                    <li><span>Hybrid Sim Slot</span>No</li>
+                                                                    <li><span>Touchscreen</span>Yes</li>
+                                                                    <li><span>OTG Compatible</span>No</li>
+                                                                    <li><span>Sound Enhancements</span>Built-in Stereo Speaker</li>
+                                                                </ul>
+                                                                <div class="cTitle">Display Features</div>
+                                                                <ul class="spec">
+                                                                    <li><span>Display Size</span>15.49 cm (6.1 inch)</li>
+                                                                    <li><span>Resolution</span>2532 x 1170 Pixels</li>
+                                                                    <li><span>Resolution Type</span>Super Retina XDR Display</li>
+                                                                    <li><span>GPU</span>5 Core</li>
+                                                                    <li><span>Display Type</span>Super Retina XDR Display</li>
+                                                                    <li><span>Other Display Features</span>HDR Display, True Tone, Wide Colour
+                                                                        (P3), Haptic Touch, Contrast Ratio: 20,00,000:1, Max Brightness: 800
+                                                                        nits, Peak Brightness: 1,200 nits, Fingerprint Resistant Oleophobic
+                                                                        Coating,
+                                                                        Support for Display of Multiple Languages and Characters Simultaneously
+                                                                    </li>
+                                                                </ul>
+                                                                <div class="cTitle">Os & Processor Features</div>
+                                                                <ul class="spec">
+                                                                    <li><span>Operating System</span>iOS 16</li>
+                                                                    <li><span>Processor Type</span>A15 Bionic Chip, 6 Core Processor</li>
+                                                                    <li><span>Processor Core</span>Hexa Core</li>
+                                                                    <li><span>Operating Frequency</span>5G NR (Bands n1, n2, n3, n5, n7, n8,
+                                                                        n12, n20, n25, n26, n28, n30, n38, n40, n41, n48, n53, n66, n70, n77,
+                                                                        n78, n79), 4G FDD-LTE (B1, B2, B3, B4, B5, B7, B8, B12, B13, B17, B18,
+                                                                        B19, B20, B25,
+                                                                        B26, B28, B30, B32, B66), 4G TD-LTE (B34, B38, B39, B40, B41, B42, B46,
+                                                                        B48, B53), 3G UMTS/HSPA+/DC-HSDPA (850, 900, 1700/2100, 1900, 2100 MHz),
+                                                                        2G GSM/EDGE (850,
+                                                                        900, 1800, 1900 MHz)</li>
+                                                                </ul>
+                                                                <button type="" class="Readmore"><span>View More Details</span></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <div class="accordion-header" id="headingThree">
+                                                    <button class="accordion-button mobBtn collapsed" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                        Additional Details
+                                                    </button>
+                                                </div>
+                                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                                    data-bs-parent="#ProAccord">
+                                                    <div class="accordion-body">
+                                                        <div class="details">
 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div> -->
-                                @if($product->description)
-                <div class="title">Description</div>
-                <p>{!!$product->description!!}</p>
+                                    </div> -->
+                @if ($product->description)
+                    <div class="title">Description</div>
+                    <p>{!! $product->description !!}</p>
                 @endif
             </div>
         </section>
@@ -529,6 +538,7 @@
                     var replaceText = $(this).parent().hasClass('open') ? "View Less Details" : "View More Details";
                     $(".Readmore span").text(replaceText);
                 });
+
             </script>
         @endpush
 
