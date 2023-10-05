@@ -17,6 +17,9 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
+            $table->string('currency')->nullable();
+            $table->string('currency_symbol')->nullable();
+            $table->decimal('currency_rate', 10, 2)->default(0);
             $table->integer('quantity')->default(0);
             $table->decimal('price', 10, 2)->default(0);
             $table->decimal('bid_price', 10, 2)->default(0);

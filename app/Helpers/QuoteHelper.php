@@ -38,6 +38,7 @@ class QuoteHelper
 
     public static function getSubtotal()
     {
-        $price     = Quote::where('user_id', Auth::guard('web')->id())->sum(DB::raw('quantity * price'));
+        $price     = Quote::where('user_id', Auth::guard('web')->id())->sum(DB::raw('quantity * bid_price'));
+        return $price;
     }
 }

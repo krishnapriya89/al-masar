@@ -15,4 +15,9 @@ class SiteCommonContent extends Model
     {
         return $this->imageDirectory;
     }
+
+    public function getConvertedPhoneNumberAttribute()
+    {
+        return str_replace(array( '(', ')' ), '', $this->phone);
+    }
 }

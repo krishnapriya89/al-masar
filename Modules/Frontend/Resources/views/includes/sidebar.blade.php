@@ -120,7 +120,7 @@
             </a>
         </li>
         <li>
-            <a href="myQuotation.php" class="lnk">
+            <a href="{{ route('user.quotation') }}" class="lnk">
                 <div class="icon">
                     <!-- <img src="assets/images/d3.svg" alt=""> -->
 

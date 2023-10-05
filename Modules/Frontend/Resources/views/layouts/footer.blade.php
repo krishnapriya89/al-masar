@@ -343,8 +343,8 @@
                                         {{ @$site_common_content->phone }}</a>
                                 @endif
                                 @if (@$site_common_content->email)
-                                    <a href="mailto:sales@almasaralsaree.com"
-                                        class="mail">sales@almasaralsaree.com</a>
+                                    <a href="mailto:{{@$site_common_content->email}}"
+                                        class="mail">{{@$site_common_content->email}}</a>
                                 @endif
                             @endif
                             <div class="newsLtr">

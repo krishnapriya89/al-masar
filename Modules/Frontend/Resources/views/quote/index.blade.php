@@ -99,9 +99,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <button class="sbmt hoveranim DskTop" type="">
+                    <a href="{{ route('user.submit-quotation') }}"><button class="sbmt hoveranim DskTop" type="submit">
                         <span>Submit Quotation</span>
-                    </button>
+                    </button></a>
 
                     <div class="mobVew">
                         <div class="accordion" id="Productaccordion">
@@ -124,7 +124,7 @@
                                                 </div>
                                                 <div class="rtBx">
                                                     <div class="txt">Bid Price</div>
-                                                    <div class="price"><span>{{ $quote->bid_price }}</span></div>
+                                                    <div class="price"><span>@currencySymbolWithConvertedPrice($quote->bid_price)</span></div>
                                                 </div>
                                             </div>
                                         </button>
@@ -160,8 +160,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="flxBx">Total <span
-                                                    class="product-price-{{ $quote->id }} tmns">@currencySymbolWithConvertedPrice($quote->product_total_price)</span>
+                                                <div class="flxBx">
+                                                    <div class="ltbx">
+                                                    </div>
+                                                    <div class="rtbx">
+                                                        <div class="txt">Total</div>
+                                                        <div class="price"><span class="product-price-{{ $quote->id }}">@currencySymbolWithConvertedPrice($quote->product_total_price)</span></div>
+                                                    </div>
                                                 </div>
                                                 <div class="spec">
                                                     <div class="ttle">Specifications</div>
