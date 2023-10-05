@@ -115,19 +115,27 @@
                                                                     <td>{{ $quotation_detail->priceWithSymbol($quotation_detail->converted_bid_price) }}
                                                                     </td>
                                                                     <td>
-                                                                        <div class="status clr1">Reject</div>
-                                                                    </td>
-                                                                    <td></td>
-                                                                    <td>{{ $quotation_detail->priceWithSymbol($quotation_detail->converted_bid_price) }}
+                                                                        <div class="status {{ $quotation_detail->status_class }}">{{ $quotation_detail->status_value }}</div>
                                                                     </td>
                                                                     <td>
-                                                                        <a href="javascript:void(0)" class="notification">
-                                                                            <img src="{{ asset('frontend/images/noti.svg') }}"
-                                                                                alt="">
-                                                                            <abbr
-                                                                                data-title="Lorem ipsum dolor
-                                                        sit amet, conse ctetur adipis cing elit. Bork Placet"></abbr>
-                                                                        </a>
+                                                                        @if ($quotation_detail->status == 1)
+                                                                            <div class="flxB">
+                                                                                <a href="javascript:void(0)" class="agree">Agree</a>
+                                                                                <a href="javascript:void(0)" class="reject">Reject</a>
+                                                                            </div>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td>{{ $quotation_detail->admin_approved_price != 0 ? $quotation_detail->priceWithSymbol($quotation_detail->converted_admin_approved_price) : '--' }}
+                                                                    </td>
+                                                                    <td>
+                                                                        @if ($quotation_detail->remarks)
+                                                                            <a href="javascript:void(0)" class="notification">
+                                                                                <img src="{{ asset('frontend/images/noti.svg') }}"
+                                                                                    alt="">
+                                                                                <abbr
+                                                                                    data-title="{{ $quotation_detail->remarks }}"></abbr>
+                                                                            </a>
+                                                                        @endif
                                                                     </td>
                                                                 </tr>
                                                             @endforeach

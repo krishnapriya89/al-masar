@@ -25,6 +25,7 @@ use Modules\Admin\Http\Controllers\ProductGalleryController;
 use Modules\Admin\Http\Controllers\ProductSubCategoryController;
 use Modules\Admin\Http\Controllers\TermsAndConditionsController;
 use Modules\Admin\Http\Controllers\ProductMainCategoryController;
+use Modules\Admin\Http\Controllers\QuotationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +89,10 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::get('product/{product}/gallery/{gallery}/edit', [ProductGalleryController::class, 'edit'])->name('product-gallery.edit');
         Route::put('product/{product}/gallery/{gallery}/update', [ProductGalleryController::class, 'update'])->name('product-gallery.update');
         Route::delete('product/{product}gallery/{gallery}', [ProductGalleryController::class, 'destroy'])->name('product-gallery.destroy');
+
+        // quotation management
+        Route::get('quotation-management', [QuotationController::class, 'index'])->name('quotation-management.index');
+        Route::post('quotation-management/change-status', [QuotationController::class, 'changeStatus'])->name('quotation-management.change-status');
 
         // user management
         Route::resource('user-management', UserController::class);

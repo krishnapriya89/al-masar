@@ -25,8 +25,9 @@ class QuotationDetail extends Model
             [
                 '0' => 'clr4',
                 '1' => 'clr2',
-                '1' => 'clr3',
+                '2' => 'clr3',
                 '3' => 'clr1',
+                '4' => 'clr5',
             ];
         return $color[$this->status];
     }
@@ -37,14 +38,23 @@ class QuotationDetail extends Model
             [
                 '0' => 'Waiting for approval',
                 '1' => 'Action From Vendor',
-                '1' => 'Accepted',
+                '2' => 'Accepted',
                 '3' => 'Rejected',
+                '4' => 'Requote',
             ];
         return $value[$this->status];
     }
 
+    public function getConvertedPriceAttribute() {
+        return $this->price * $this->quotation->currency_rate;
+    }
+
     public function getConvertedBidPriceAttribute() {
         return $this->bid_price * $this->quotation->currency_rate;
+    }
+
+    public function getConvertedAdminApprovedPriceAttribute() {
+        return $this->admin_approved_price * $this->quotation->currency_rate;
     }
 
     public function getConvertedProductTotalPriceAttribute() {

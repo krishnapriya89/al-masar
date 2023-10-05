@@ -31,6 +31,10 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo \App\Helpers\FrontendHelper::getCurrencySymbolWithConvertedPrice($price); ?>";
         });
 
+        Blade::directive('formattedPrice', function ($price) {
+            return "<?php echo \App\Helpers\AdminHelper::getFormattedPrice($price); ?>";
+        });
+
         Blade::directive('checkQuote', function ($price) {
             return "<?php echo \App\Helpers\QuoteHelper::checkQuote(); ?>";
         });

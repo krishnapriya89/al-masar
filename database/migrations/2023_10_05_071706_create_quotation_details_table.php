@@ -19,11 +19,12 @@ return new class extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->decimal('price', 10, 2)->default(0);
             $table->decimal('bid_price', 10, 2)->default(0);
+            $table->decimal('admin_approved_price', 10, 2)->default(0);
             $table->integer('quantity')->default(0);
             $table->integer('total')->default(0);
             $table->text('remarks')->nullable();
-            $table->decimal('user_dummy_bid_price', 10, 2)->default(0)->comment('storing for to show what is user proposed');
-            $table->tinyInteger('status')->default(0)->comment('0-Waiting for approval, 1 - Action From Vendor, 2 - Accepted, 3 - Rejected, 4 - Proceeded to order');
+            $table->tinyInteger('status')->default(0)->comment('0-Waiting for approval, 1 - Action From Vendor, 2 - Accepted, 3 - Rejected, 4 - Requote, 5 - Proceeded to order');
+            $table->tinyInteger('admin_status')->default(0)->comment('0-Waiting for approval, 2 - Accepted, 3 - Rejected, 4 - Requote, 5 - Proceeded to order');
             $table->timestamps();
             $table->softDeletes();
         });

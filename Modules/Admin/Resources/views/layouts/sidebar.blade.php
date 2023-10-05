@@ -85,6 +85,15 @@
                         </li>
                     </ul>
                 </li> --}}
+                <li class="nav-header">Quotation Management</li>
+                <li class="nav-item">
+                    <a href="{{ route('quotation-management.index') }}" class="nav-link {{ Nav::isRoute('quotation-management.index') }}">
+                        <i class="nav-icon fas fa-shopping-cart"></i>
+                        <p>
+                            Quotation Management
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">User Management</li>
                 <li class="nav-item">
                     <a href="{{ route('user-management.index') }}" class="nav-link {{ Nav::isRoute('user-management.index') }}">

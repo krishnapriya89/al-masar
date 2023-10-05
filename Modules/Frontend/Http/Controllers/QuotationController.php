@@ -23,7 +23,7 @@ class QuotationController extends Controller
      */
     public function index()
     {
-        $quotations = Quotation::where('user_id', Auth::guard('web')->id())->where('status', '!=', 4)->latest()->get();
+        $quotations = Quotation::where('user_id', Auth::guard('web')->id())->where('status', '!=', 5)->latest()->get();
         return view('frontend::quotation.index', compact('quotations'));
     }
 

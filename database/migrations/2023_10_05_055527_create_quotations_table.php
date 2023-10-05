@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('currency_symbol')->nullable();
             $table->decimal('currency_rate', 10, 2)->default(0);
             $table->decimal('total', 10, 2)->default(0);
-            $table->tinyInteger('status')->default(0)->comment('0-Waiting for approval, 1 - Action From Vendor, 2 - Accepted, 3 - Rejected, 4 - Proceeded to order');
+            $table->tinyInteger('status')->default(0)->comment('0-Waiting for approval, 1 - Action From Vendor, 2 - Accepted, 3 - Rejected, 4 - Requote, 5 - Proceeded to order');
+            $table->tinyInteger('admin_status')->default(0)->comment('0-Waiting for approval, 2 - Accepted, 3 - Rejected, 4 - Requote, 5 - Proceeded to order');
             $table->timestamps();
             $table->softDeletes();
         });

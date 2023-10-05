@@ -21,6 +21,11 @@ $(function () {
     if ($('.select2').length > 0) {
         $('.select2').select2({});
     }
+
+    //prevent the entry of non-floating or non-integer values
+    $(".amountField").on("input", function (evt) {
+        this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
+    });
 });
 
 // Disable submit button during form submission
