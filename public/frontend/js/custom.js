@@ -35,11 +35,7 @@ $(document).ready(function () {
 
     //prevent the entry of non-floating or non-integer values
     $(".amountField").on("input", function (evt) {
-        var self = $(this);
-        self.val(self.val().replace(/[^0-9\.]/g, ''));
-        if ((evt.which != 46 || self.val().indexOf('.') != -1) && (evt.which < 48 || evt.which > 57)) {
-            evt.preventDefault();
-        }
+        this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
     });
 
     //currency rate changing
