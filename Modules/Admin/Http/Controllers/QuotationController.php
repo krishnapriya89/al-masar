@@ -2,13 +2,16 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use App\Helpers\AdminHelper;
 use App\Models\Quotation;
+use App\Helpers\AdminHelper;
 use Illuminate\Http\Request;
 use App\Models\QuotationDetail;
+use App\Models\SiteCommonContent;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Admin\Emails\QuotationStatusMail;
 
 class QuotationController extends Controller
 {
@@ -22,7 +25,58 @@ class QuotationController extends Controller
         return view('admin::quotation.index', compact('quotations'));
     }
 
-    public function changeStatus(Request $request)
+    //updating all status of quotation
+    public function changeQuotationStatus(Request $request)
+    {
+        $request->validate([
+            'quotation_uid' => 'required'
+        ]);
+
+        $quotation = Quotation::where('uid', $request->quotation_uid)->first();
+
+        if(!$quotation)
+            return response()->json(['status' => false, 'message' => 'Failed to update!']);
+        
+        if ($quotation->status > 0)
+            return response()->json(['status' => false, 'message' => 'Already updated please refresh the page!']);
+
+        $quotation->status = $request->status;
+
+        //rejected
+        if($quotation->status == 3){
+            $quotation->total_bid_price = 0;
+        }
+
+        if ($quotation->save()) {
+            //update in detail table
+            foreach($quotation->quotationDetails as $quotation_detail) {
+                $quotation_detail->remarks = $request->remarks;
+                $quotation_detail->status = $request->status;
+
+                //rejected
+                if($quotation->status == 3){
+                    $quotation_detail->total_bid_price = 0;
+                } else {
+                    $quotation_detail->admin_approved_price = $quotation_detail->bid_price;
+                }
+
+                $quotation_detail->save();
+            }
+
+            $site_settings = SiteCommonContent::first();
+
+            Mail::to($quotation->user->email)->send(new QuotationStatusMail($quotation, $site_settings));
+            session()->flash('success', 'Status changed successfully');
+            return response()->json(['status' => true]);
+        }
+        else {
+            session()->flash('success', 'Something went wrong');
+            return response()->json(['status' => false]);
+        }
+    }
+
+    //updating quotation detail status
+    public function changeQuotationDetailStatus(Request $request)
     {
         $request->validate([
             'quotation_detail_id' => 'required',
@@ -81,6 +135,12 @@ class QuotationController extends Controller
 
                 $quotation->status = $majorityStatus;
                 $quotation->save();
+            }
+
+            if($quotation->quotationDetails->where('status', 0)->count() == 0) {
+                $site_settings = SiteCommonContent::first();
+
+                Mail::to($quotation->user->email)->send(new QuotationStatusMail($quotation, $site_settings));
             }
             
             return response()->json([

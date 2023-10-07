@@ -41,7 +41,11 @@ class Quotation extends Model
     }
 
     public function getConvertedTotalPriceAttribute() {
-        return $this->total * $this->currency_rate;
+        return $this->total_price * $this->currency_rate;
+    }
+
+    public function getConvertedTotalBidPriceAttribute() {
+        return $this->total_bid_price * $this->currency_rate;
     }
 
     public function getStatusClassAttribute()

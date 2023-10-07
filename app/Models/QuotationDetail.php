@@ -71,7 +71,11 @@ class QuotationDetail extends Model
     }
 
     public function getConvertedProductTotalPriceAttribute() {
-        return $this->bid_price * $this->quantity * $this->quotation->currency_rate;
+        return $this->total_price * $this->quotation->currency_rate;
+    }
+
+    public function getConvertedProductTotalBidPriceAttribute() {
+        return $this->total_bid_price * $this->quotation->currency_rate;
     }
 
     public function priceWithSymbol($price) {

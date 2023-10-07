@@ -86,8 +86,26 @@
                                     <td>$@formattedPrice($quotation->total_price)</td>
                                     <td class="quotation-total-bid-price-{{ $quotation->uid }}">$@formattedPrice($quotation->total_bid_price)</td>
                                     <td class="quotation-{{ $quotation->uid }}">
-                                        <div class="status {{ $quotation->status_class }}">
-                                            {{ $quotation->admin_status_value }}</div>
+                                        @if ($quotation->quotationDetails->where('status', '!=', 0)->count() < 1)
+                                            <div class="form-group">
+                                                <select class="custom-select form-control-border quotation-status-select quotation-status-{{ $quotation->uid }}"
+                                                    data-quotation-uid="{{ $quotation->uid }}">
+                                                    <option value="0" selected disabled>Waiting
+                                                        For Approval</option>
+                                                    <option value="2">Accept All </option>
+                                                    <option value="3">Reject All</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group quotation-div-{{ $quotation->uid }} d-none">
+                                                <textarea class="form-control remarks" placeholder="Remarks"></textarea>
+                                                <button type="button"
+                                                    class="btn btn-xs btn-success quotation-status-form-btn"
+                                                    data-quotation-uid="{{ $quotation->uid }}">Submit</button>
+                                            </div>
+                                        @else
+                                            <div class="status {{ $quotation->status_class }}">
+                                                {{ $quotation->admin_status_value }}</div>
+                                        @endif
                                     </td>
                                     <td><button class="btn btn-default btn-sm"><i class="fa fa-chevron-down"></i></button>
                                     </td>
@@ -118,9 +136,13 @@
                                                             <td>{{ $quotation_detail->product->product_code }}</td>
                                                             <td>{{ $quotation_detail->quantity }}</td>
                                                             <td>$@formattedPrice($quotation_detail->price)</td>
-                                                            <td class="quotation-detail-bid-price-{{ $quotation_detail->id }}">$@formattedPrice($quotation_detail->bid_price)</td>
+                                                            <td
+                                                                class="quotation-detail-bid-price-{{ $quotation_detail->id }}">
+                                                                $@formattedPrice($quotation_detail->bid_price)</td>
                                                             <td>$@formattedPrice($quotation_detail->total_price)</td>
-                                                            <td class="quotation-detail-total-bid-price-{{ $quotation_detail->id }}">$@formattedPrice($quotation_detail->total_bid_price)</td>
+                                                            <td
+                                                                class="quotation-detail-total-bid-price-{{ $quotation_detail->id }}">
+                                                                $@formattedPrice($quotation_detail->total_bid_price)</td>
                                                             <td class="quotation-detail-{{ $quotation_detail->id }}">
                                                                 @if ($quotation_detail->status == 0)
                                                                     <div class="form-group">
@@ -142,7 +164,7 @@
                                                                             class="form-control amountField amount-{{ $quotation_detail->id }} d-none"
                                                                             placeholder="Requote amount">
                                                                         <button type="button"
-                                                                            class="btn btn-xs btn-success quotation-status-form-btn"
+                                                                            class="btn btn-xs btn-success quotation-detail-status-form-btn"
                                                                             data-quotation-detail-id="{{ $quotation_detail->id }}">Submit</button>
                                                                     </div>
                                                                 @else
@@ -179,6 +201,74 @@
             initializeDataTable(options);
         });
 
+        //quotaion dropdown
+        $(document).on("change", ".quotation-status-select", function() {
+            let quotation_uid = $(this).data('quotation-uid');
+            $('.quotation-div-' + quotation_uid).removeClass('d-none');
+        });
+
+        //quotaion detail submit button
+        $(document).on('click', '.quotation-status-form-btn', function() {
+            var _this = $(this);
+            var quotation_uid = _this.data('quotation-uid');
+            var remarks = _this.parent().find('.remarks').val();
+            var status = $('.quotation-status-' + quotation_uid).val();
+            var status_text = $('.quotation-status-' + quotation_uid + ' :selected').text();
+
+            _this.parent().find('.remarks').removeClass('is-invalid');
+            var fields_valid = true;
+
+            //reject
+            if (status == 3 && (remarks == '' || remarks == undefined)) {
+                _this.parent().find('.remarks').addClass('is-invalid');
+                fields_valid = false;
+            }
+
+            if (fields_valid) {
+                _this.attr('disabled', true);
+
+                var message = 'Do you want to change the quotation status to <strong>' + status_text +
+                    '</strong>?</br>You will not be able to recover this!';
+                if (remarks)
+                    message += '</br> Remarks: <strong>' + remarks + '</strong>';
+
+                Swal.fire({
+                    title: "Change Quotation Status",
+                    html: message,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: primary_color,
+                    confirmButtonText: "Update",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('quotation-management.change-quotation-status') }}",
+                            type: "POST",
+                            data: {
+                                quotation_uid: quotation_uid,
+                                status: status,
+                                remarks: remarks,
+                            },
+                            success: function(response) {
+                                if(!response.status && response.message)
+                                    toastr.error(response.message);
+                                else
+                                    location.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                toastr.error('Something went wrong');
+                                location.reload();
+                                _this.attr('disabled', false);
+                            },
+                        });
+                    } else {
+                        _this.attr('disabled', false);
+                    }
+                });
+            }
+        });
+
         //quotation detail dropdown
         $(document).on("change", ".quotation-detail-status-select", function() {
             let quotation_detail_id = $(this).data('quotation-detail-id');
@@ -190,7 +280,7 @@
         });
 
         //quotaion detail submit button
-        $(document).on('click', '.quotation-status-form-btn', function() {
+        $(document).on('click', '.quotation-detail-status-form-btn', function() {
             var _this = $(this);
             $('.amountFieldErrorSpan').remove();
             var quotation_detail_id = _this.data('quotation-detail-id');
@@ -223,7 +313,7 @@
                     _this.parent().find('.amountField').addClass('is-invalid');
                     _this.parent().append(
                         '<span class="amountFieldErrorSpan" style="color: red; font-size: 10px;">Please enter amount greater than of bid amount.</span>'
-                        );
+                    );
                     fields_valid = false;
                 }
             }
@@ -231,14 +321,15 @@
             if (fields_valid) {
                 _this.attr('disabled', true);
 
-                var message = 'Do you want to change the quotation status to <strong>'+status_text+'</strong>?</br>You will not be able to recover this!';
-                if(remarks)
-                    message += '</br> Remarks: <strong>'+remarks+'</strong>';
-                if(amount)
-                    message += '</br> Amount: <strong>'+amount+'</strong>';
-                
+                var message = 'Do you want to change the quotation status to <strong>' + status_text +
+                    '</strong>?</br>You will not be able to recover this!';
+                if (remarks)
+                    message += '</br> Remarks: <strong>' + remarks + '</strong>';
+                if (amount)
+                    message += '</br> Amount: <strong>' + amount + '</strong>';
+
                 Swal.fire({
-                title: "Change Quotation Status",
+                    title: "Change Quotation Status",
                     html: message,
                     icon: "warning",
                     showCancelButton: true,
@@ -248,7 +339,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('quotation-management.change-status') }}",
+                            url: "{{ route('quotation-management.change-quotation-detail-status') }}",
                             type: "POST",
                             data: {
                                 quotation_detail_id: quotation_detail_id,
@@ -257,22 +348,30 @@
                                 amount: amount,
                             },
                             success: function(response) {
-                                toastr.success(response.message);
-                                $('.quotation-detail-' + quotation_detail_id).html(
-                                    `<div class="status ` + response
-                                    .quotation_detail_status_class + `">` + response
-                                    .quotation_detail_status + `</div>`);
-                                $('.quotation-' + response.quotation_uid).html(
-                                    `<div class="status ` + response
-                                    .quotation_status_class + `">` + response
-                                    .quotation_status + `</div>`);
-                                $('.quotation-total-bid-price-'+response.quotation_uid).html(response.quotation_total_bid_price);
-                                $('.quotation-detail-bid-price-'+quotation_detail_id).html(response.quotation_detail_bid_price);
-                                $('.quotation-detail-total-bid-price-'+quotation_detail_id).html(response.quotation_detail_total_bid_price);
-                                _this.attr('disabled', false);
+                                if(response.status) {
+                                    toastr.success(response.message);
+                                    $('.quotation-detail-' + quotation_detail_id).html(
+                                        `<div class="status ` + response
+                                        .quotation_detail_status_class + `">` + response
+                                        .quotation_detail_status + `</div>`);
+                                    $('.quotation-' + response.quotation_uid).html(
+                                        `<div class="status ` + response
+                                        .quotation_status_class + `">` + response
+                                        .quotation_status + `</div>`);
+                                    $('.quotation-total-bid-price-' + response.quotation_uid).html(
+                                        response.quotation_total_bid_price);
+                                    $('.quotation-detail-bid-price-' + quotation_detail_id).html(
+                                        response.quotation_detail_bid_price);
+                                    $('.quotation-detail-total-bid-price-' + quotation_detail_id)
+                                        .html(response.quotation_detail_total_bid_price);
+                                }
+                                else {
+                                    toastr.error(response.message);
+                                }
+                                    _this.attr('disabled', false);
                             },
                             error: function(xhr, status, error) {
-                                toastr.error(response.message);
+                                toastr.error('Something went wrong');
                                 _this.attr('disabled', false);
                             },
                         });

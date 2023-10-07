@@ -92,7 +92,8 @@ Route::prefix('al-masar-admin-auth')->group(function () {
 
         // quotation management
         Route::get('quotation-management', [QuotationController::class, 'index'])->name('quotation-management.index');
-        Route::post('quotation-management/change-status', [QuotationController::class, 'changeStatus'])->name('quotation-management.change-status');
+        Route::post('quotation-management/change-quotation-status', [QuotationController::class, 'changeQuotationStatus'])->name('quotation-management.change-quotation-status');
+        Route::post('quotation-management/change-quotation-detail-status', [QuotationController::class, 'changeQuotationDetailStatus'])->name('quotation-management.change-quotation-detail-status');
 
         // user management
         Route::resource('user-management', UserController::class);

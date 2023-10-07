@@ -142,28 +142,36 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th
-                                                                        style="width: 20%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                        style="width: 15%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
                                                                         Product Name
                                                                     </th>
                                                                     <th
-                                                                        style="width: 20%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                        style="width: 10%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
                                                                         Product Code
                                                                     </th>
                                                                     <th
-                                                                        style="width: 20%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                        style="width: 18%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
                                                                         Specification
                                                                     </th>
                                                                     <th
-                                                                        style="width: 20%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                        style="width: 7%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
                                                                         Qty
                                                                     </th>
                                                                     <th
-                                                                        style="width: 20%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                        style="width: 10%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
                                                                         Price
                                                                     </th>
                                                                     <th
-                                                                        style="width: 20%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                        style="width: 10%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                        Bid Price
+                                                                    </th>
+                                                                    <th
+                                                                        style="width: 15%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
                                                                         Total
+                                                                    </th>
+                                                                    <th
+                                                                        style="width: 15%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                        Total Bid Price
                                                                     </th>
                                                                 </tr>
                                                             </thead>
@@ -181,28 +189,36 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td
-                                                                            style="width: 20%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                            style="width: 15%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
                                                                             {{ $quotation_detail->product->title }}
                                                                         </td>
                                                                         <td
-                                                                            style="width: 20%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                            style="width: 10%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
                                                                             {{ $quotation_detail->product->product_code }}
                                                                         </td>
                                                                         <td
-                                                                            style="width: 20%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                            style="width: 18%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
                                                                             {{ $quotation_detail->product->specification }}
                                                                         </td>
                                                                         <td
-                                                                            style="width: 20%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                            style="width: 7%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
                                                                             {{ $quotation_detail->quantity }}
                                                                         </td>
                                                                         <td
-                                                                            style="width: 20%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                            style="width: 10%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                            {{ $quotation_detail->priceWithSymbol($quotation_detail->converted_price) }}
+                                                                        </td>
+                                                                        <td
+                                                                            style="width: 10%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
                                                                             {{ $quotation_detail->priceWithSymbol($quotation_detail->converted_bid_price) }}
                                                                         </td>
                                                                         <td
-                                                                            style="width: 20%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                            style="width: 15%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
                                                                             {{ $quotation_detail->priceWithSymbol($quotation_detail->converted_product_total_price) }}
+                                                                        </td>
+                                                                        <td
+                                                                            style="width: 15%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
+                                                                            {{ $quotation_detail->priceWithSymbol($quotation_detail->converted_product_total_bid_price) }}
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -237,7 +253,21 @@
                                                 <td style="margin: 0px; text-align: right;">
                                                     <p
                                                         style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
-                                                        {{ $quotation->priceWithSymbol($quotation->converted_total_price) }}
+                                                        {{ $quotation->priceWithSymbol($quotation->total_price) }}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="margin: 0px; text-align: left;">
+                                                    <p
+                                                        style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
+                                                        Total Bid Price
+                                                    </p>
+                                                </td>
+                                                <td style="margin: 0px; text-align: right;">
+                                                    <p
+                                                        style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
+                                                        {{ $quotation->priceWithSymbol($quotation->total_bid_price) }}
                                                     </p>
                                                 </td>
                                             </tr>
