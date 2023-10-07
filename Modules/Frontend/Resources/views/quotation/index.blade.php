@@ -69,18 +69,17 @@
                                                 <div class="item">{{ $quotation->uid }}</div>
                                                 <div class="item">{{ $quotation->quotation_received }}</div>
                                                 <div class="item">{{ $quotation->quotationDetails->count() }}</div>
-                                                <div class="item">{{ $quotation->priceWithSymbol($quotation->total) }}
+                                                <div class="item">{{ $quotation->priceWithSymbol($quotation->total_bid_price) }}
                                                 </div>
                                                 <div class="item">
                                                     <div class="status {{ $quotation->status_class }}">
                                                         {{ $quotation->status_value }}</div>
                                                 </div>
                                                 <div class="item">
-                                                    @if ($quotation->quotationDetails->where('status', 3)->count() > 0)
+                                                    @if ($quotation->quotationDetails->where('remarks', '!=', NULL)->count() > 0)
                                                         <a href="javascript:void(0)" class="notification">
                                                             <img src="{{ asset('frontend/images/noti.svg') }}"
                                                                 alt="">
-                                                            <abbr data-title=""></abbr>
                                                         </a>
                                                     @endif
                                                 </div>

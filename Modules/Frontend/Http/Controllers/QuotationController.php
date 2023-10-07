@@ -44,7 +44,8 @@ class QuotationController extends Controller
         $quotation->currency = session('currency') ?? 'USD';
         $quotation->currency_rate = session('currency_rate') ?? 1;
         $quotation->currency_symbol = session('currency_symbol') ?? '$';
-        $quotation->total = QuoteHelper::getSubtotal();
+        $quotation->total_price = 0;
+        $quotation->total_bid_price = 0;
         $quotation->status = 0; //waiting for approval
         if($quotation->save()) {
             $storeQuotationDetails = $this->storeQuotationDetails($quotation, $quotes);
@@ -55,7 +56,6 @@ class QuotationController extends Controller
 
                 Mail::to($quotation->user->email)->send(new QuotationRequestUserMail($quotation, $site_settings));
                 Mail::to($site_settings->enquiry_receive_email)->send(new QuotationRequestAdminMail($quotation, $site_settings));
-                
                 return to_route('product')->with('success', 'Your Request has been submitted.');
             }
             else{
@@ -66,7 +66,7 @@ class QuotationController extends Controller
 
     //store quotation details data product and price, etc..
     private function storeQuotationDetails($quotation, $quotes) {
-        $total_amount = 0;
+        $total_price = $total_bid_price = 0;
         foreach($quotes as $quote) {
             $quotation_details = new QuotationDetail();
             $quotation_details->quotation_id = $quotation->id;
@@ -74,14 +74,19 @@ class QuotationController extends Controller
             $quotation_details->price = $quote->price;
             $quotation_details->bid_price = $quote->bid_price;
             $quotation_details->quantity = $quote->quantity;
-            $quotation_details->total = $quote->product_total_price;
+            $quotation_details->total_price = $quote->quantity * $quote->price;
+            $quotation_details->total_bid_price = $quote->quantity * $quote->bid_price;
             $quotation_details->status = 0; //waiting for approval
             $quotation_details->save();
 
-            $total_amount += $quotation_details->total;
+            $total_price += $quotation_details->total_price;
+            $total_bid_price += $quotation_details->total_bid_price;
+            $quote->delete();
         }
 
-        $quotation->total = $total_amount;
+        $quotation->total_price = $total_price;
+        $quotation->total_bid_price = $total_bid_price;
+        
         if ($quotation->save()) {
             return true;
         }

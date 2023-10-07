@@ -2,11 +2,13 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Helpers\AdminHelper;
 use App\Models\Quotation;
-use App\Models\QuotationDetail;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use App\Models\QuotationDetail;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Support\Renderable;
 
 class QuotationController extends Controller
 {
@@ -23,10 +25,9 @@ class QuotationController extends Controller
     public function changeStatus(Request $request)
     {
         $request->validate([
-            'status' => 'required|in:2,3,4',
             'quotation_detail_id' => 'required',
-            'remark' => 'required_if:status,3',
-            'amount' => 'required_if:status,4'
+            'remarks' => 'required_if:status,3',
+            'amount' => 'required_if:status,1'
         ]);
 
         $quotation_detail = QuotationDetail::find($request->quotation_detail_id);
@@ -40,20 +41,58 @@ class QuotationController extends Controller
             return response()->json(['status' => false, 'message' => 'Already updated please refresh the page!']);
         }
 
-        $quotation_detail->status = 2;//action from vendor
+        $quotation_detail->status = $request->status;
+
         $quotation_detail->remarks = $request->remarks ?? null;
 
-        //check is requote
-        if ($quotation_detail->status == 4)
+        //requote
+        if ($quotation_detail->status == 1) {
             $quotation_detail->admin_approved_price = $request->amount;
-        else
+            $quotation_detail->total_bid_price = $quotation_detail->admin_approved_price * $quotation_detail->quantity;
+        }
+        //accepted
+        else if($quotation_detail->status == 2){
             $quotation_detail->admin_approved_price = $quotation_detail->bid_price;
+            $quotation_detail->total_bid_price = $quotation_detail->admin_approved_price * $quotation_detail->quantity;
+        }
+        //rejected
+        else {
+            $quotation_detail->total_bid_price = 0;
+        }
 
         if ($quotation_detail->save()) {
+            $quotation = $quotation_detail->quotation;
+
+            $quotation->total_bid_price = $quotation->quotationDetails->sum('total_bid_price');
+
+            //check any product quotation accepted then mark quotation table accepted
+            if ($request->status == 2 || $quotation->quotationDetails->where('status', 2)->count() > 0) {
+                $quotation->status = 2;
+                $quotation->save();
+            } else {
+                //Other wise saving the majority status of the quotation details
+                $majorityStatus = QuotationDetail::select('status', DB::raw('COUNT(*) as count'))
+                    ->where('quotation_id', $quotation_detail->quotation_id)
+                    ->groupBy('status')
+                    ->orderByDesc('count')
+                    ->limit(1)
+                    ->pluck('status')
+                    ->first();
+
+                $quotation->status = $majorityStatus;
+                $quotation->save();
+            }
+            
             return response()->json([
-                'status' => true, 
-                'quotation_id' => $quotation_detail->quotation->uid, 
-                'detail_status' => $quotation_detail->status_value, 
+                'status' => true,
+                'quotation_uid' => $quotation->uid,
+                'quotation_status' => $quotation->admin_status_value,
+                'quotation_status_class' => $quotation->status_class,
+                'quotation_detail_status' => $quotation_detail->admin_status_value,
+                'quotation_detail_status_class' => $quotation_detail->status_class,
+                'quotation_total_bid_price' => AdminHelper::getFormattedPrice($quotation->total_bid_price),
+                'quotation_detail_bid_price' => AdminHelper::getFormattedPrice($quotation_detail->admin_approved_price),
+                'quotation_detail_total_bid_price' => AdminHelper::getFormattedPrice($quotation_detail->total_bid_price),
                 'message' => 'Status changed successfully'
             ]);
         } else {

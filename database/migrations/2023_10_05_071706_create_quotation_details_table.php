@@ -21,10 +21,10 @@ return new class extends Migration
             $table->decimal('bid_price', 10, 2)->default(0);
             $table->decimal('admin_approved_price', 10, 2)->default(0);
             $table->integer('quantity')->default(0);
-            $table->integer('total')->default(0);
+            $table->decimal('total_price', 10, 2)->default(0);
+            $table->decimal('total_bid_price', 10, 2)->default(0);
             $table->text('remarks')->nullable();
-            $table->tinyInteger('status')->default(0)->comment('0-Waiting for approval, 1 - Action From Vendor, 2 - Accepted, 3 - Rejected, 4 - Requote, 5 - Proceeded to order');
-            $table->tinyInteger('admin_status')->default(0)->comment('0-Waiting for approval, 2 - Accepted, 3 - Rejected, 4 - Requote, 5 - Proceeded to order');
+            $table->tinyInteger('status')->default(0)->comment('0-Waiting for approval, 1 - Action From Vendor, 2 - Accepted, 3 - Rejected, 4 - Rejected by Vendor, 5 - Proceeded to order');
             $table->timestamps();
             $table->softDeletes();
         });

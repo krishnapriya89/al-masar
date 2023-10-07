@@ -50,8 +50,9 @@ class Quotation extends Model
             [
                 '0' => 'clr4',
                 '1' => 'clr2',
-                '1' => 'clr3',
+                '2' => 'clr3',
                 '3' => 'clr1',
+                '4' => 'clr5',
             ];
         return $color[$this->status];
     }
@@ -62,8 +63,22 @@ class Quotation extends Model
             [
                 '0' => 'Waiting for approval',
                 '1' => 'Action From Vendor',
-                '1' => 'Accepted',
+                '2' => 'Accepted',
                 '3' => 'Rejected',
+                '4' => 'Rejected by Vendor',
+            ];
+        return $value[$this->status];
+    }
+
+    public function getAdminStatusValueAttribute()
+    {
+        $value =
+            [
+                '0' => 'Waiting for approval',
+                '1' => 'Action From Vendor',
+                '2' => 'Order Waiting',
+                '3' => 'Rejected by Admin',
+                '4' => 'Rejected by Vendor',
             ];
         return $value[$this->status];
     }

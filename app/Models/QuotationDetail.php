@@ -40,7 +40,20 @@ class QuotationDetail extends Model
                 '1' => 'Action From Vendor',
                 '2' => 'Accepted',
                 '3' => 'Rejected',
-                '4' => 'Requote',
+                '4' => 'Rejected by Vendor',
+            ];
+        return $value[$this->status];
+    }
+
+    public function getAdminStatusValueAttribute()
+    {
+        $value =
+            [
+                '0' => 'Waiting for approval',
+                '1' => 'Action From Vendor',
+                '2' => 'Order Waiting',
+                '3' => 'Rejected by Admin',
+                '4' => 'Rejected by Vendor',
             ];
         return $value[$this->status];
     }
