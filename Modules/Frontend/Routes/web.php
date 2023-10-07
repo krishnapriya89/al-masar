@@ -62,11 +62,12 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::post('/update-quote',[QuoteController::class, 'updateQuote'])->name('update-quote');
     Route::post('/remove-from-quote',[QuoteController::class, 'removeFromQuote'])->name('remove-from-quote');
     Route::get('/clear-quote',[QuoteController::class, 'quoteEmpty'])->name('clear-quote');
+    Route::get('/submit-quote',[QuoteController::class, 'submitQuote'])->name('user.submit-quote');
 
     //quotation functionalities
     Route::get('/quotation',[QuotationController::class, 'index'])->name('user.quotation');
-    Route::get('/submit-quotation',[QuotationController::class, 'store'])->name('user.submit-quotation');
     Route::post('/vendor-action',[QuotationController::class, 'vendorAction'])->name('user.quotation.vendor-action');
+    Route::get('/submit-quotation',[QuotationController::class, 'submitQuotation'])->name('user.submit-quotation');
 
     //notify-me
     Route::post('notify-me',[ProductController::class,'notifyMe'])->name('notify-me');

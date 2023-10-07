@@ -141,10 +141,12 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                @if ($quotation->status == 2)
-                                                    <a href="javascript:void(0)" class="continue hoveranim"><span>Continue
-                                                    to Checkout</span></a>
-                                                @endif
+                                                <div class="submit-quotation-div">
+                                                    @if ($quotation->quotationDetails->whereIn('status', [0,1])->count() < 1 && $quotation->quotationDetails->where('status', 2)->count() > 0)
+                                                        <a href="{{ route('user.submit-quotation')}}" class="continue hoveranim"><span>Continue
+                                                        to Checkout</span></a>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -487,6 +489,12 @@
                                         .quotation_status + `</div>`);
                                     $('.quotation-price-' + response.quotation_uid).html(
                                         response.quotation_total_bid_price);
+
+                                    if(response.submit_quotation) {
+                                        $('.submit-quotation-div').html(`<a href="{{ route('user.submit-quotation')}}" class="continue hoveranim"><span>Continue
+                                                    to Checkout</span></a>`);
+                                        
+                                    }
                                 } else {
                                     toastr.error(response.message);
                                 }

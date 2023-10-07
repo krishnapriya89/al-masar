@@ -99,7 +99,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <a href="{{ route('user.submit-quotation') }}"><button class="sbmt hoveranim DskTop" type="submit">
+                    <a href="{{ route('user.submit-quote') }}"><button class="sbmt hoveranim DskTop" type="submit">
                         <span>Submit Quotation</span>
                     </button></a>
 
