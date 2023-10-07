@@ -119,22 +119,29 @@ class QuotationController extends Controller
 
             $quotation->total_bid_price = $quotation->quotationDetails->sum('total_bid_price');
 
-            //check any product quotation accepted then mark quotation table accepted
-            if ($request->status == 2 || $quotation->quotationDetails->where('status', 2)->count() > 0) {
-                $quotation->status = 2;
+            //check if no one is accepted and any one of them is requote
+            if ($request->status == 1 || $quotation->quotationDetails->where('status', 1)->count() > 0) {
+                $quotation->status = 1;
                 $quotation->save();
             } else {
-                //Other wise saving the majority status of the quotation details
-                $majorityStatus = QuotationDetail::select('status', DB::raw('COUNT(*) as count'))
-                    ->where('quotation_id', $quotation_detail->quotation_id)
-                    ->groupBy('status')
-                    ->orderByDesc('count')
-                    ->limit(1)
-                    ->pluck('status')
-                    ->first();
+                //check any product quotation accepted then mark quotation table accepted
+                if(($request->status == 2 || $quotation->quotationDetails->where('status', 2)->count() > 0) && $quotation->quotationDetails->where('status', 1)->count() == 0) {
+                    $quotation->status = 2;
+                    $quotation->save();
+                }
+                else {
+                    //Other wise saving the majority status of the quotation details
+                    $majorityStatus = QuotationDetail::select('status', DB::raw('COUNT(*) as count'))
+                        ->where('quotation_id', $quotation_detail->quotation_id)
+                        ->groupBy('status')
+                        ->orderByDesc('count')
+                        ->limit(1)
+                        ->pluck('status')
+                        ->first();
 
-                $quotation->status = $majorityStatus;
-                $quotation->save();
+                    $quotation->status = $majorityStatus;
+                    $quotation->save();
+                }
             }
 
             if($quotation->quotationDetails->where('status', 0)->count() == 0) {
@@ -142,12 +149,20 @@ class QuotationController extends Controller
 
                 Mail::to($quotation->user->email)->send(new QuotationStatusMail($quotation, $site_settings));
             }
+
+            $quotation_status_class = $quotation->status_class;
+            $quotation_status_value = $quotation->admin_status_value;
+
+            if($quotation->quotationDetails->where('status',  0)->count() > 0) {
+                $quotation_status_class = 'clr4';
+                $quotation_status_value = 'Waiting for approval';
+            }
             
             return response()->json([
                 'status' => true,
                 'quotation_uid' => $quotation->uid,
-                'quotation_status' => $quotation->admin_status_value,
-                'quotation_status_class' => $quotation->status_class,
+                'quotation_status' => $quotation_status_value,
+                'quotation_status_class' => $quotation_status_class,
                 'quotation_detail_status' => $quotation_detail->admin_status_value,
                 'quotation_detail_status_class' => $quotation_detail->status_class,
                 'quotation_total_bid_price' => AdminHelper::getFormattedPrice($quotation->total_bid_price),

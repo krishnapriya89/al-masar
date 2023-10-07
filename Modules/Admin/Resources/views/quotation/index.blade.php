@@ -103,8 +103,12 @@
                                                     data-quotation-uid="{{ $quotation->uid }}">Submit</button>
                                             </div>
                                         @else
-                                            <div class="status {{ $quotation->status_class }}">
-                                                {{ $quotation->admin_status_value }}</div>
+                                            @if ($quotation->quotationDetails->where('status',  0)->count() > 0)
+                                                <div class="status clr4">Waiting for approval</div>
+                                            @else
+                                                <div class="status {{ $quotation->status_class }}">
+                                                    {{ $quotation->admin_status_value }}</div>
+                                            @endif
                                         @endif
                                     </td>
                                     <td><button class="btn btn-default btn-sm"><i class="fa fa-chevron-down"></i></button>
@@ -159,7 +163,7 @@
                                                                     <div
                                                                         class="form-group quotation-detail-div-{{ $quotation_detail->id }} d-none">
                                                                         <textarea class="form-control remarks" placeholder="Remarks"></textarea>
-                                                                        <input type="number"
+                                                                        <input type="number" data-price={{ $quotation_detail->price }}
                                                                             data-bid-price={{ $quotation_detail->bid_price }}
                                                                             class="form-control amountField amount-{{ $quotation_detail->id }} d-none"
                                                                             placeholder="Requote amount">
@@ -308,11 +312,12 @@
             //check amount is valid or not
             if (amount != '' && amount != undefined) {
                 var bid_price = _this.parent().find('.amountField').data('bid-price');
+                var price = _this.parent().find('.amountField').data('price');
                 amount = parseInt(amount);
-                if (amount <= parseInt(bid_price) || amount < 1) {
+                if (amount <= parseInt(bid_price) || amount < 1 || amount > parseInt(price)) {
                     _this.parent().find('.amountField').addClass('is-invalid');
                     _this.parent().append(
-                        '<span class="amountFieldErrorSpan" style="color: red; font-size: 10px;">Please enter amount greater than of bid amount.</span>'
+                        '<span class="amountFieldErrorSpan" style="color: red; font-size: 10px;">Amount is invalid please enter correct amount and submit.</span>'
                     );
                     fields_valid = false;
                 }
@@ -326,7 +331,7 @@
                 if (remarks)
                     message += '</br> Remarks: <strong>' + remarks + '</strong>';
                 if (amount)
-                    message += '</br> Amount: <strong>' + amount + '</strong>';
+                    message += '</br> Amount: <strong>$' + amount + '</strong>';
 
                 Swal.fire({
                     title: "Change Quotation Status",

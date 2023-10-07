@@ -66,6 +66,7 @@ Route::group(['middleware' => 'auth.user'], function () {
     //quotation functionalities
     Route::get('/quotation',[QuotationController::class, 'index'])->name('user.quotation');
     Route::get('/submit-quotation',[QuotationController::class, 'store'])->name('user.submit-quotation');
+    Route::post('/vendor-action',[QuotationController::class, 'vendorAction'])->name('user.quotation.vendor-action');
 
     //notify-me
     Route::post('notify-me',[ProductController::class,'notifyMe'])->name('notify-me');

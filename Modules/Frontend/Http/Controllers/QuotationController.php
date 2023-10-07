@@ -4,11 +4,13 @@ namespace Modules\Frontend\Http\Controllers;
 
 use App\Models\Quote;
 use App\Models\Quotation;
+use App\Helpers\AdminHelper;
 use App\Helpers\QuoteHelper;
 use Illuminate\Http\Request;
 use App\Models\QuotationDetail;
 use App\Models\SiteCommonContent;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Support\Renderable;
@@ -95,44 +97,66 @@ class QuotationController extends Controller
         }
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('frontend::show');
-    }
+    //vendor action from quotation page agree / reject the requote
+    public function vendorAction(Request $request) {
+        $quotation_detail = QuotationDetail::find($request->id);
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('frontend::edit');
-    }
+        if(!$quotation_detail)
+            return response()->json(['status' => false, 'message' => 'Failed to update!']);
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        //check the status is not requote (action from vendor) if not return false
+        if ($quotation_detail->status != 1)
+            return response()->json(['status' => false, 'message' => 'Already updated please refresh the page!']);
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        $quotation_detail->status = $request->status;
+
+        //rejected
+        if($quotation_detail->status == 4){
+            $quotation_detail->total_bid_price = 0;
+        }
+
+        if ($quotation_detail->save()) {
+            $quotation = $quotation_detail->quotation;
+
+            $quotation->total_bid_price = $quotation->quotationDetails->sum('total_bid_price');
+
+            //check if no one is accepted and any one of them is requote
+            if ($request->status == 1 || $quotation->quotationDetails->where('status', 1)->count() > 0) {
+                $quotation->status = 1;
+                $quotation->save();
+            } else {
+                //check any product quotation accepted then mark quotation table accepted
+                if(($request->status == 2 || $quotation->quotationDetails->where('status', 2)->count() > 0) && $quotation->quotationDetails->where('status', 1)->count() == 0) {
+                    $quotation->status = 2;
+                    $quotation->save();
+                }
+                else {
+                    //Other wise saving the majority status of the quotation details
+                    $majorityStatus = QuotationDetail::select('status', DB::raw('COUNT(*) as count'))
+                        ->where('quotation_id', $quotation_detail->quotation_id)
+                        ->groupBy('status')
+                        ->orderByDesc('count')
+                        ->limit(1)
+                        ->pluck('status')
+                        ->first();
+
+                    $quotation->status = $majorityStatus;
+                    $quotation->save();
+                }
+            }
+
+            return response()->json([
+                'status' => true,
+                'quotation_uid' => $quotation->uid,
+                'quotation_status' => $quotation->status_value,
+                'quotation_status_class' => $quotation->status_class,
+                'quotation_detail_status' => $quotation_detail->status_value,
+                'quotation_detail_status_class' => $quotation_detail->status_class,
+                'quotation_total_bid_price' => AdminHelper::getFormattedPrice($quotation->total_bid_price),
+                'message' => 'Status changed successfully'
+            ]);
+        } else {
+            return response()->json(['status' => false, 'message' => 'Failed to update!']);
+        }
     }
 }

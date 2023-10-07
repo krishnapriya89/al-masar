@@ -69,9 +69,9 @@
                                                 <div class="item">{{ $quotation->uid }}</div>
                                                 <div class="item">{{ $quotation->quotation_received }}</div>
                                                 <div class="item">{{ $quotation->quotationDetails->count() }}</div>
-                                                <div class="item">{{ $quotation->priceWithSymbol($quotation->total_bid_price) }}
+                                                <div class="item quotation-price-{{ $quotation->uid }}">{{ $quotation->priceWithSymbol($quotation->total_bid_price) }}
                                                 </div>
-                                                <div class="item">
+                                                <div class="item quotation-status-{{ $quotation->uid }}">
                                                     <div class="status {{ $quotation->status_class }}">
                                                         {{ $quotation->status_value }}</div>
                                                 </div>
@@ -113,14 +113,14 @@
                                                                     <td>{{ $quotation_detail->quantity }}</td>
                                                                     <td>{{ $quotation_detail->priceWithSymbol($quotation_detail->converted_bid_price) }}
                                                                     </td>
-                                                                    <td>
+                                                                    <td class="quotation-detail-status-{{ $quotation_detail->id }}">
                                                                         <div class="status {{ $quotation_detail->status_class }}">{{ $quotation_detail->status_value }}</div>
                                                                     </td>
-                                                                    <td>
+                                                                    <td class="quotation-detail-action-{{ $quotation_detail->id }}">
                                                                         @if ($quotation_detail->status == 1)
                                                                             <div class="flxB">
-                                                                                <a href="javascript:void(0)" class="agree">Agree</a>
-                                                                                <a href="javascript:void(0)" class="reject">Reject</a>
+                                                                                <a href="javascript:void(0)" data-value="agree" data-id="{{ $quotation_detail->id }}" data-price="{{ $quotation_detail->priceWithSymbol($quotation_detail->admin_approved_price) }}" class="agree vendor-action">Agree</a>
+                                                                                <a href="javascript:void(0)" data-value="reject" data-id="{{ $quotation_detail->id }}" data-price="{{ $quotation_detail->priceWithSymbol($quotation_detail->admin_approved_price) }}" class="reject vendor-action">Reject</a>
                                                                             </div>
                                                                         @endif
                                                                     </td>
@@ -141,8 +141,10 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <a href="javascript:void(0)" class="continue hoveranim"><span>Continue
-                                                        to Checkout</span></a>
+                                                @if ($quotation->status == 2)
+                                                    <a href="javascript:void(0)" class="continue hoveranim"><span>Continue
+                                                    to Checkout</span></a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -374,12 +376,8 @@
                         </div>
                     </div>
                 </div>
-
         </div>
         </section>
-
-
-
         <div class="modal fade" id="filterAccodionModal" tabindex="-1" aria-labelledby="filterAccodionModal"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -449,3 +447,60 @@
         </div>
     @endif
 @endsection
+@push('js')
+    <script>
+        $('.vendor-action').click(function () {
+            var _this = $(this);
+            var id = _this.data('id');
+            var status_value = _this.data('value');
+            var price =  _this.data('price');
+            var status = status_value == 'agree' ? 2 : 4;
+
+            Swal.fire({
+                    title: capitalizeWords(status_value) +" Quotation",
+                    html: 'Are you sure to <b>' + capitalizeWords(status_value) + price + '</b> this amount</br>You will not be able to recover this!',
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#1d1926',
+                    confirmButtonText: "Update",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('user.quotation.vendor-action') }}",
+                            type: "POST",
+                            data: {
+                                id: id,
+                                status: status,
+                            },
+                            success: function(response) {
+                                if(response.status) {
+                                    toastr.success(response.message);
+                                    $('.quotation-detail-action-' + id).html('');
+                                    $('.quotation-detail-status-' + id).html(
+                                        `<div class="status ` + response
+                                        .quotation_detail_status_class + `">` + response
+                                        .quotation_detail_status + `</div>`);
+                                    $('.quotation-status-' + response.quotation_uid).html(
+                                        `<div class="status ` + response
+                                        .quotation_status_class + `">` + response
+                                        .quotation_status + `</div>`);
+                                    $('.quotation-price-' + response.quotation_uid).html(
+                                        response.quotation_total_bid_price);
+                                } else {
+                                    toastr.error(response.message);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                toastr.error('Something went wrong');
+                                location.reload();
+                                _this.attr('disabled', false);
+                            },
+                        });
+                    } else {
+                        _this.attr('disabled', false);
+                    }
+                });
+        })
+    </script>
+@endpush
