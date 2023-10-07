@@ -386,11 +386,11 @@ $(document).ready(function () {
                     },
                     success: function (response) {
                         if (response.status) {
-                            if(response.count > 0){
+                            if (response.count > 0) {
                                 $('.quote-tr-' + quote_id).remove();
                                 $('.quote-count').html(response.count);
                             }
-                            else{
+                            else {
                                 $('.empty-quote-div').removeClass('d-none');
                                 $('.quote-div').addClass('d-none');
                             }
@@ -505,3 +505,131 @@ function updateQuoteQuantity(quantity, quote_id) {
         });
     }, 300);
 }
+//update isDefault in billing and shipping address
+
+$(".setDefault").click(function () {
+    var _this = $(this);
+    var id = $(this).data("id");
+    var type = $(this).data("type");
+
+    console.log($(this));
+
+    $.ajax({
+        type: "post",
+        url: "/update-default",
+        data: {
+            id: id,
+            type: type,
+        },
+        success: function (response) {
+            console.log(response);
+            if (response.status) {
+
+                toastr.success(response.message);
+                if (type == 1) {
+                    $('.billingAddress').html(`
+                    <div class="txt" >Set as Default</div>
+                `);
+
+                    $('.billing-address-radio-btn').prop('checked', false);
+                    $('.address-' + id).prop('checked', true);
+                    _this.closest('.billingAddress').html(`<div class="dfault">
+                    <img src="frontend/images/dflt.svg" alt="">
+                    <div class="txt">Default</div>
+                </div>`);
+                }
+                if (type == 2) {
+                    $('.shippingAddress').html(`
+                    <div class="txt" >Set as Default</div>
+                `);
+
+                    $('.shipping-address-radio-btn').prop('checked', false);
+                    $('.address-' + id).prop('checked', true);
+                    _this.closest('.shippingAddress').html(`<div class="dfault">
+                    <img src="frontend/images/dflt.svg" alt="">
+                    <div class="txt">Default</div>
+                </div>`);
+                }
+
+            }
+            else {
+                toastr.error(response.message);
+            }
+        }
+    });
+});
+
+// delete address
+$(document).on("click", ".address-delete-btn", function (e) {
+    const id = $(this).data("id");
+
+
+    Swal.fire({
+        title: `Remove Address`,
+        text: `Are you sure you want to remove this Address from your address book?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "$success",
+        cancelButtonColor: "$danger",
+        cancelButtonText: "Cancel",
+        confirmButtonText: "Remove",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "address-destroy",
+                type: "POST",
+                data: {
+                    id: id,
+                },
+                success: function (response) {
+                    console.log(response);
+                    const { success, flag, message, defaultId } = response;
+                    if (success) {
+                        Swal.fire({
+                            icon: "success",
+                            title: message,
+                            showConfirmButton: false,
+                            timer: 3000,
+                            willClose: function () {
+                                if (flag === 1) {
+                                    if (defaultId) {
+                                        $("#address-" + id).remove();
+                                        $(
+                                            "#selectAddress" + defaultId
+                                        ).prop("checked", true);
+                                    } else {
+                                        $("#address-" + id).remove();
+                                    }
+                                } else if (flag === 2) {
+                                    location.reload();
+                                }
+                            },
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: message,
+                            showConfirmButton: false,
+                            timer: 3000,
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire({
+                        icon: "error",
+                        title: `An error occurred while deleting the Address.`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                    });
+                },
+            });
+        }
+    });
+});
+//Change the button url according to the tab
+
+
+$('.btnLink').click(function(){
+    var currentURL = $(this).data('url');
+    $('#addressBtn').attr('href', currentURL);
+});

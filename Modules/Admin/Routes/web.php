@@ -21,10 +21,14 @@ use Modules\Admin\Http\Controllers\AdminConfigController;
 use Modules\Admin\Http\Controllers\SiteSettingsController;
 use Modules\Admin\Http\Controllers\PrivacyPolicyController;
 use Modules\Admin\Http\Controllers\ContactEnquiryController;
+use Modules\Admin\Http\Controllers\PaymentController;
 use Modules\Admin\Http\Controllers\ProductGalleryController;
 use Modules\Admin\Http\Controllers\ProductSubCategoryController;
 use Modules\Admin\Http\Controllers\TermsAndConditionsController;
 use Modules\Admin\Http\Controllers\ProductMainCategoryController;
+use Modules\Admin\Http\Controllers\ProviderController;
+use Modules\Admin\Http\Controllers\ProviderDetailController;
+use Modules\Admin\Http\Controllers\TaxManagementController;
 use Modules\Admin\Http\Controllers\QuotationController;
 
 /*
@@ -71,7 +75,18 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::resource('vendor', VendorController::class);
         //currency
         Route::resource('currency',CurrencyController::class);
-
+        //payment
+        Route::resource('payment',PaymentController::class);
+        //provider
+        Route::resource('provider',ProviderController::class);
+        Route::get('provider/{provider}/provider-detail', [ProviderDetailController::class, 'index'])->name('provider-detail.index');
+        Route::get('provider/{provider}/provider-detail/create', [ProviderDetailController::class, 'create'])->name('provider-detail.create');
+        Route::post('provider/{provider}/provider-detail', [ProviderDetailController::class, 'store'])->name('provider-detail.store');
+        Route::post('provider/{provider}/provider-detail/update', [ProviderDetailController::class, 'update'])->name('provider-detail.update');
+        Route::delete('provider/{provider}/provider-detail/{provider_detail}', [ProviderDetailController::class, 'destroy'])->name('provider-detail.destroy');
+        // Site Settings
+        Route::get('site-settings',[TaxManagementController::class,'edit'])->name('site-settings.edit');
+        Route::post('site-settings/update/{id}',[TaxManagementController::class,'update'])->name('site-settings.update');
         //product and related data routes
         //main category
         Route::resource('product-main-category', ProductMainCategoryController::class);
@@ -79,7 +94,7 @@ Route::prefix('al-masar-admin-auth')->group(function () {
 
         Route::get('get-parent-sub-categories/{category}', [ProductMainCategoryController::class, 'getParentSubCategories'])->name('get-parent-sub-categories');
         Route::get('get-child-sub-categories/{sub_category}', [ProductMainCategoryController::class, 'getChildSubCategories'])->name('get-child-sub-categories');
-        
+
         //product
         Route::resource('product', ProductController::class);
         //product gallery

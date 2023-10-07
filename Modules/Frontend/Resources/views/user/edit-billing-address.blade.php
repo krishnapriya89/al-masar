@@ -1,5 +1,5 @@
 @extends('frontend::layouts.app')
-@section('title', 'Add Billing Address')
+@section('title', 'Edit Billing Address')
 @push('css')
     <style>
         label.error {
@@ -38,15 +38,14 @@
                     <div class="rtBx">
                         <div class="addressFormBx">
                             <div class="formBx">
-                                <div class="title">Add Billing Address</div>
-                                <form action="{{ route('store-billing-address') }}" method="post" id="billingForm">
+                                <div class="title">Edit Billing Address</div>
+                                <form action="{{ route('update-billing-address', $billing_address->id) }}" method="post" id="billingForm">
                                     @csrf
                                     <div class="row">
-                                        <input type="hidden" name="type" value="1">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <input type="text" id="" class="form-control"
-                                                    placeholder="First Name*" name="first_name">
+                                                    placeholder="First Name*" name="first_name" value="{{old('first_name',$billing_address->first_name)}}">
                                             </div>
                                             @error('first_name')
                                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -55,7 +54,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <input type="text" id="" class="form-control"
-                                                    placeholder="Last Name*" name="last_name">
+                                                    placeholder="Last Name*" name="last_name" value="{{old('last_name',$billing_address->last_name)}}">
                                             </div>
                                             @error('last_name')
                                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -64,7 +63,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <input type="text" id="" class="form-control"
-                                                    placeholder="Address*" name="address_one">
+                                                    placeholder="Address*" name="address_one" value="{{old('address_one',$billing_address->address_one)}}">
                                             </div>
                                             @error('address_one')
                                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -73,13 +72,13 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <input type="text" id="" class="form-control"
-                                                    placeholder="Address2" name="address_two">
+                                                    placeholder="Address2" name="address_two" value="{{old('address_two',$billing_address->address_two)}}">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-6">
                                             <div class="form-group">
                                                 <input type="text" id="" class="form-control"
-                                                    placeholder="City*" name="city">
+                                                    placeholder="City*" name="city" value="{{old('city',$billing_address->city)}}">
                                             </div>
                                             @error('city')
                                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -91,7 +90,7 @@
                                                     aria-label="Default select example" name="country">
                                                     <option selected value="" disabled>Country*</option>
                                                     @foreach ($countries as $country)
-                                                        <option value="{{ $country->id }}">{{ $country->title }}</option>
+                                                        <option value="{{ $country->id }}" {{$country->id==$billing_address->country_id? "selected":''}}>{{ $country->title }}</option>
                                                     @endforeach
                                                 </select>
 
@@ -103,7 +102,7 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <input type="text" id="" class="form-control"
-                                                    placeholder="Zip Code*" name="zip_code">
+                                                    placeholder="Zip Code*" name="zip_code" value="{{'zip_code',$billing_address->zip_code}}">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -112,7 +111,7 @@
                                                     aria-label="Default select example" name="state">
                                                     <option selected  value="" disabled>State*</option>
                                                     @foreach ($states as $state)
-                                                        <option value="{{ $state->id }}">{{ $state->title }}</option>
+                                                        <option value="{{ $state->id }}" {{$state->id == $billing_address->state_id?'selected' : ''}}>{{ $state->title }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -120,7 +119,7 @@
 
                                         <div class="col-lg-12">
                                             <div class="btnBx">
-                                                <button class="save hoveranim" type="submit"><span>SAVE</span></button>
+                                                <button class="save hoveranim" type="submit"><span>Update</span></button>
                                                 <button class="cancel hoveranim"><span>CANCEL</span></button>
                                             </div>
                                         </div>

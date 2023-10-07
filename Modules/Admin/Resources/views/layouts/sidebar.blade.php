@@ -241,7 +241,7 @@
                 <li class="nav-header">General Settings</li>
                 <li class="nav-item">
                     <a href="#"
-                       class="nav-link  {{ Nav::isRoute('config.index') }} {{ Nav::isRoute('config.edit') }} {{ Nav::isResource('country') }} {{ Nav::isResource('currency') }}">
+                       class="nav-link  {{ Nav::isRoute('config.index') }} {{ Nav::isRoute('config.edit') }} {{ Nav::isResource('country') }} {{ Nav::isResource('currency') }} {{ Nav::isRoute('payment.index') }} {{ Nav::isRoute('payment.create') }} {{ Nav::isRoute('payment.edit') }} {{ Nav::isResource('provider') }} {{ Nav::isRoute('site-settings.edit') }}">
                         <i class="nav-icon fab fa-product-hunt"></i>
                         <p>
                             General Settings
@@ -285,17 +285,36 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('payment.index') }}"
+                            class="nav-link {{ Nav::isResource('payment') }}">
+                                <i class="nav-icon fa-circle far"></i>
+                                <p>
+                                    Payment
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('provider.index') }}"
+                            class="nav-link {{ Nav::isResource('provider') }}">
+                                <i class="nav-icon fa-circle far"></i>
+                                <p>
+                                    Provider
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('site-settings.edit') }}"
+                            class="nav-link {{ Nav::isRoute('site-settings') }}">
+                                <i class="nav-icon fa-circle far"></i>
+                                <p>
+                                    Site Settings
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="{{ route('provider.index') }}"
-                       class="nav-link {{ Nav::isResource('provider') }}">
-                        <i class="nav-icon fas fa-cog"></i>
-                        <p>
-                            Provider
-                        </p>
-                    </a>
-                </li> --}}
+
                 {{-- <li class="nav-item">
                     <a href="{{ route('payment-methods.index') }}"
                        class="nav-link {{ Nav::isResource('payment-methods') }}">

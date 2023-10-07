@@ -74,10 +74,23 @@ Route::group(['middleware' => 'auth.user'], function () {
 
     //user
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
-    //add-new-user
+
+    //Address
+    Route::get('address',[UserController::class,'newAddress'])->name('address');
+    //add-billing-address
     Route::get('add-billing-address',[UserController::class,'addBillingAddress'])->name('add-billing-address');
     Route::post('add-billing-address',[UserController::class,'storeBillingAddress'])->name('store-billing-address');
+    Route::get('edit-billing-address/{id}', [UserController::class, 'editBillingAddress'])->name('edit-billing-address');
+    Route::post('edit-billing-address/{billing_address}', [UserController::class, 'updateBillingAddress'])->name('update-billing-address');
+    //shipping-address
+    Route::get('add-shipping-address',[UserController::class,'addShippingAddress'])->name('add-shipping-address');
+    Route::post('store-shipping-address',[UserController::class,'storeShippingAddress'])->name('store-shipping-address');
+    Route::get('edit-shipping-address/{id}', [UserController::class, 'editShippingAddress'])->name('edit-shipping-address');
+    Route::post('edit-shipping-address/{shipping_address}', [UserController::class, 'updateShippingAddress'])->name('update-shipping-address');
+    //is default change
+    Route::post('/update-default',[UserController::class,'updateDefault'])->name('update-default');
+    //destroy address
+    Route::post('/address-destroy',[UserController::class,'destroyAddress'])->name('address-destroy');
 });
-
 //home
 Route::get('/',[HomeController::class,'index'])->name('home');
