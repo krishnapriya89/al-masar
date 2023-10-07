@@ -15,15 +15,19 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminConfigSeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(AboutUsSeeder::class);
-        $this->call(WhyChooseSeeder::class);
-        $this->call(HowToBuySeeder::class);
+        $this->call(BankTransferSeeder::class);
         $this->call(ContactSeeder::class);
-        $this->call(PrivacyPolicySeeder::class);
-        $this->call(TermsAndConditionSeeder::class);
-        $this->call(SiteCommonContentSeeder::class);
         $this->call(CurrencyCodeMasterSeeder::class);
         $this->call(CurrencyRateSeeder::class);
+        $this->call(HowToBuySeeder::class);
+        $this->call(PrivacyPolicySeeder::class);
+        $this->call(ProviderSeeder::class);
+        $this->call(ProviderDetailSeeder::class);
+        $this->call(SiteCommonContentSeeder::class);
+        $this->call(TermsAndConditionSeeder::class);
         $this->call(VendorSeeder::class);
-        $this->call(BankTransferSeeder::class);
+        $this->call(WhyChooseSeeder::class);
+
+
     }
 }

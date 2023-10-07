@@ -26,6 +26,8 @@ use Modules\Admin\Http\Controllers\ProductGalleryController;
 use Modules\Admin\Http\Controllers\ProductSubCategoryController;
 use Modules\Admin\Http\Controllers\TermsAndConditionsController;
 use Modules\Admin\Http\Controllers\ProductMainCategoryController;
+use Modules\Admin\Http\Controllers\ProviderController;
+use Modules\Admin\Http\Controllers\ProviderDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +75,13 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::resource('currency',CurrencyController::class);
         //payment
         Route::resource('payment',PaymentController::class);
+        //provider
+        Route::resource('provider',ProviderController::class);
+        Route::get('provider/{provider}/provider-detail', [ProviderDetailController::class, 'index'])->name('provider-detail.index');
+        Route::get('provider/{provider}/provider-detail/create', [ProviderDetailController::class, 'create'])->name('provider-detail.create');
+        Route::post('provider/{provider}/provider-detail', [ProviderDetailController::class, 'store'])->name('provider-detail.store');
+        Route::post('provider/{provider}/provider-detail/update', [ProviderDetailController::class, 'update'])->name('provider-detail.update');
+        Route::delete('provider/{provider}/provider-detail/{provider_detail}', [ProviderDetailController::class, 'destroy'])->name('provider-detail.destroy');
 
         //product and related data routes
         //main category
