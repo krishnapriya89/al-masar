@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
-use Database\Seeders\PrivacyPolicySeeder;
 use Modules\Admin\Http\Controllers\AuthController;
 use Modules\Admin\Http\Controllers\UserController;
 use Modules\Admin\Http\Controllers\AdminController;
