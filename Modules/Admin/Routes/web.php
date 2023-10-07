@@ -21,6 +21,7 @@ use Modules\Admin\Http\Controllers\AdminConfigController;
 use Modules\Admin\Http\Controllers\SiteSettingsController;
 use Modules\Admin\Http\Controllers\PrivacyPolicyController;
 use Modules\Admin\Http\Controllers\ContactEnquiryController;
+use Modules\Admin\Http\Controllers\PaymentController;
 use Modules\Admin\Http\Controllers\ProductGalleryController;
 use Modules\Admin\Http\Controllers\ProductSubCategoryController;
 use Modules\Admin\Http\Controllers\TermsAndConditionsController;
@@ -70,6 +71,8 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::resource('vendor', VendorController::class);
         //currency
         Route::resource('currency',CurrencyController::class);
+        //payment
+        Route::resource('payment',PaymentController::class);
 
         //product and related data routes
         //main category
@@ -78,7 +81,7 @@ Route::prefix('al-masar-admin-auth')->group(function () {
 
         Route::get('get-parent-sub-categories/{category}', [ProductMainCategoryController::class, 'getParentSubCategories'])->name('get-parent-sub-categories');
         Route::get('get-child-sub-categories/{sub_category}', [ProductMainCategoryController::class, 'getChildSubCategories'])->name('get-child-sub-categories');
-        
+
         //product
         Route::resource('product', ProductController::class);
         //product gallery

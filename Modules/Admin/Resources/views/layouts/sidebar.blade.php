@@ -232,7 +232,7 @@
                 <li class="nav-header">General Settings</li>
                 <li class="nav-item">
                     <a href="#"
-                       class="nav-link  {{ Nav::isRoute('config.index') }} {{ Nav::isRoute('config.edit') }} {{ Nav::isResource('country') }} {{ Nav::isResource('currency') }}">
+                       class="nav-link  {{ Nav::isRoute('config.index') }} {{ Nav::isRoute('config.edit') }} {{ Nav::isResource('country') }} {{ Nav::isResource('currency') }} {{ Nav::isRoute('payment.index') }} {{ Nav::isRoute('payment.create') }} {{ Nav::isRoute('payment.edit') }}">
                         <i class="nav-icon fab fa-product-hunt"></i>
                         <p>
                             General Settings
@@ -273,6 +273,15 @@
                                 <i class="nav-icon fa-circle far"></i>
                                 <p>
                                     Currency
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('payment.index') }}"
+                            class="nav-link {{ Nav::isResource('payment') }}">
+                                <i class="nav-icon fa-circle far"></i>
+                                <p>
+                                    Payment
                                 </p>
                             </a>
                         </li>
