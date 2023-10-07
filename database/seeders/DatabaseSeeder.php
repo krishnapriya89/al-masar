@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProviderDetailSeeder::class);
         $this->call(SiteCommonContentSeeder::class);
         $this->call(TermsAndConditionSeeder::class);
+        $this->call(TaxManagementSeeder::class);
         $this->call(VendorSeeder::class);
         $this->call(WhyChooseSeeder::class);
 

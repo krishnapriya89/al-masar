@@ -28,6 +28,7 @@ use Modules\Admin\Http\Controllers\TermsAndConditionsController;
 use Modules\Admin\Http\Controllers\ProductMainCategoryController;
 use Modules\Admin\Http\Controllers\ProviderController;
 use Modules\Admin\Http\Controllers\ProviderDetailController;
+use Modules\Admin\Http\Controllers\TaxManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,7 +83,9 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::post('provider/{provider}/provider-detail', [ProviderDetailController::class, 'store'])->name('provider-detail.store');
         Route::post('provider/{provider}/provider-detail/update', [ProviderDetailController::class, 'update'])->name('provider-detail.update');
         Route::delete('provider/{provider}/provider-detail/{provider_detail}', [ProviderDetailController::class, 'destroy'])->name('provider-detail.destroy');
-
+        // Site Settings
+        Route::get('site-settings',[TaxManagementController::class,'edit'])->name('site-settings.edit');
+        Route::post('site-settings/update/{id}',[TaxManagementController::class,'update'])->name('site-settings.update');
         //product and related data routes
         //main category
         Route::resource('product-main-category', ProductMainCategoryController::class);
