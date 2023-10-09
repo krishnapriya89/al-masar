@@ -79,10 +79,6 @@ class QuotationDetail extends Model
         return $this->total_bid_price * $this->quotation->currency_rate;
     }
 
-    public function getConvertedProductAdminApprovedPriceAttribute() {
-        return $this->admin_approved_price * $this->quotation->currency_rate;
-    }
-
     public function priceWithSymbol($price) {
         return $this->quotation->currency_symbol . AdminHelper::getFormattedPrice($price);
     }

@@ -23,13 +23,13 @@ class CheckoutController extends Controller
 
         $quotation = Quotation::where('uid', $uid)
                         ->where('user_id', Auth::guard('web')->id())
-                        ->whereHas('quotationDetails', function($query) {
-                            $query->where('status', 2);
-                        })
                         ->first();
 
         if(!$quotation)
-            return to_route('product')->with('error', 'No accepted quotations were found.');
+            return to_route('user.quotation')->with('error', 'No quotation found.');
+
+        if($quotation->quotationDetails->whereIn('status', [0,1])->count() > 1 || $quotation->acceptedQuotationDetails->count() < 1)
+            return to_route('user.quotation')->with('error', 'No accepted quotations were found or Some quotation is not accepted.');
 
         $countries          = Country::all();
         $billing_addresses  = UserAddress::where('user_id', auth()->id())
