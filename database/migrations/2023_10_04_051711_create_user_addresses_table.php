@@ -27,7 +27,7 @@ return new class extends Migration
             $table->foreign('state_id')->references('id')->on('states');
             $table->string('zip_code')->nullable();
             $table->tinyInteger('is_default')->default(0)->comment('1:default,0:no');
-            $table->tinyInteger('status')->default(0)->comment('1:active,0:Inactive');
+            $table->tinyInteger('status')->default(1)->comment('1:active,0:Inactive');
             $table->timestamps();
             $table->softDeletes();
         });
