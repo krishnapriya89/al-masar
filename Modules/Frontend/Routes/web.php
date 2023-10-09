@@ -38,6 +38,10 @@ Route::post('/verify-login-otp', [AuthController::class, 'verifyLoginOtp'])->nam
 Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('user.email.verify');
 
 Route::group(['middleware' => 'auth.user'], function () {
+
+    //logout 
+    Route::post('logout', [AuthController::class,'logout'])->name('user.logout');
+
     //cms
     //about
     Route::get('about',[HomeController::class,'about'])->name('about');
