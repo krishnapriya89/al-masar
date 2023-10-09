@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->text('address_one')->nullable();
             $table->text('address_two')->nullable();
+            $table->text('email')->nullable();
+            $table->text('phone_number')->nullable();
             $table->string('city')->nullable();
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries');

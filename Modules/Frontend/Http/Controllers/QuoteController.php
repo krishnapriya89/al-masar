@@ -43,7 +43,7 @@ class QuoteController extends Controller
             
             $quote = Quote::where('user_id', Auth::guard('web')->id())->where('product_id', $product->id)->first();
             if ($quote) {
-                $quote->quantity += $request->quantity;
+                $quote->quantity = $request->quantity;
                 if ($product->min_quantity_to_buy > $quote->quantity) {
                     $quote->quantity = $product->min_quantity_to_buy;
                 }

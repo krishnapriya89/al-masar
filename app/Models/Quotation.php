@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\AdminHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,6 +29,18 @@ class Quotation extends Model
     public function quotationDetails(): HasMany
     {
         return $this->hasMany(QuotationDetail::class);
+    }
+
+    //admin or user accepted quotations
+    public function acceptedQuotationDetails(): HasMany
+    {
+        return $this->hasMany(QuotationDetail::class)->where('status', 2);
+    }
+
+    //not rejected quotations
+    public function activeQuotationDetails(): HasMany
+    {
+        return $this->hasMany(QuotationDetail::class)->whereNotIn('status', [3,4]);
     }
 
     public function user(): BelongsTo
@@ -88,6 +101,6 @@ class Quotation extends Model
     }
 
     public function priceWithSymbol($price) {
-        return $this->currency_symbol . $price;
+        return $this->currency_symbol . AdminHelper::getFormattedPrice($price);
     }
 }

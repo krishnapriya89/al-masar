@@ -42,15 +42,10 @@ class QuotationController extends Controller
 
         $quotation_detail->status = $request->status;
 
-        //rejected
-        if($quotation_detail->status == 4){
-            $quotation_detail->total_bid_price = 0;
-        }
-
         if ($quotation_detail->save()) {
             $quotation = $quotation_detail->quotation;
 
-            $quotation->total_bid_price = $quotation->quotationDetails->sum('total_bid_price');
+            $quotation->total_bid_price = $quotation->activeQuotationDetails->sum('total_bid_price');
 
             //check if no one is accepted and any one of them is requote
             if ($request->status == 1 || $quotation->quotationDetails->where('status', 1)->count() > 0) {
@@ -58,7 +53,7 @@ class QuotationController extends Controller
                 $quotation->save();
             } else {
                 //check any product quotation accepted then mark quotation table accepted
-                if(($request->status == 2 || $quotation->quotationDetails->where('status', 2)->count() > 0) && $quotation->quotationDetails->where('status', 1)->count() == 0) {
+                if(($request->status == 2 || $quotation->acceptedQuotationDetails->count() > 0) && $quotation->quotationDetails->where('status', 1)->count() == 0) {
                     $quotation->status = 2;
                     $quotation->save();
                 }
@@ -78,7 +73,7 @@ class QuotationController extends Controller
             }
 
             $submit_quotation = false;
-            if($quotation->quotationDetails->whereIn('status', [0,1])->count() < 1 && $quotation->quotationDetails->where('status', 2)->count() > 0)
+            if($quotation->quotationDetails->whereIn('status', [0,1])->count() < 1 && $quotation->acceptedQuotationDetails->count() > 0)
                 $submit_quotation = true;
 
             return response()->json([
@@ -88,7 +83,7 @@ class QuotationController extends Controller
                 'quotation_status_class' => $quotation->status_class,
                 'quotation_detail_status' => $quotation_detail->status_value,
                 'quotation_detail_status_class' => $quotation_detail->status_class,
-                'quotation_total_bid_price' => AdminHelper::getFormattedPrice($quotation->total_bid_price),
+                'quotation_total_bid_price' => $quotation->priceWithSymbol($quotation->total_bid_price),
                 'submit_quotation' => $submit_quotation,
                 'message' => 'Status changed successfully'
             ]);

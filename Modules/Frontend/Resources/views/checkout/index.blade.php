@@ -12,10 +12,10 @@
             <div class="container">
                 <ul>
                     <li>
-                        <a href="javascript:void(0)">Home </a>
+                        <a href="{{ route('home') }}">Home </a>
                     </li>
                     <li>
-                        <a href="{{ route('checkout') }}">Checkout</a>
+                        <a href="javascript:void(0)">Checkout</a>
                     </li>
                 </ul>
             </div>
@@ -41,10 +41,10 @@
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
                                         <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}"
-                                                aria-expanded="false" aria-controls="collapse{{ $loop->iteration }}">
+                                                data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                aria-expanded="false" aria-controls="collapseOne">
                                                 <div class="item">{{ $quotation->uid }}</div>
-                                                <div class="item">{{ $quotation->quotationDetails->count() }}</div>
+                                                <div class="item">{{ $quotation->acceptedQuotationDetails->count() }}</div>
                                                 <div class="item">{{ $quotation->priceWithSymbol($quotation->total_bid_price) }}
                                                 </div>
                                             </button>
@@ -62,18 +62,22 @@
                                                         <th>Specifications</th>
                                                         <th>Quantity</th>
                                                         <th>Price</th>
+                                                        <th>Total Price</th>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>{{ $quotation_detail->product->title }}</td>
-                                                            <td>{{ $quotation_detail->product->product_code }}</td>
-                                                            <td>{{ $quotation_detail->product->sku }}</td>
-                                                            <td>{{ $quotation_detail->product->specification }}
-                                                            </td>
-                                                            <td>{{ $quotation_detail->quantity }}</td>
-                                                            <td>{{ $quotation_detail->priceWithSymbol($quotation_detail->converted_bid_price) }}
-                                                            </td>
-                                                        </tr>
+                                                        @foreach ($quotation->acceptedQuotationDetails as $quotation_detail)
+                                                            <tr>
+                                                                <td>{{ $quotation_detail->product->title }}</td>
+                                                                <td>{{ $quotation_detail->product->product_code }}</td>
+                                                                <td>{{ $quotation_detail->product->sku }}</td>
+                                                                <td>{{ $quotation_detail->product->specification }}
+                                                                </td>
+                                                                <td>{{ $quotation_detail->quantity }}</td>
+                                                                <td>{{ $quotation_detail->priceWithSymbol($quotation_detail->converted_admin_approved_price) }}</td>
+                                                                <td>{{ $quotation_detail->priceWithSymbol($quotation_detail->converted_product_total_bid_price) }}
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -91,7 +95,7 @@
                                         data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                         <div class="flxBx">
                                             <div class="ltBx">
-                                                <div class="ordrId"><span>Order ID: </span>AMAS0245794
+                                                <div class="ordrId"><span>Order ID: </span>{{ $quotation->uid }}
                                                 </div>
                                             </div>
 
@@ -104,8 +108,8 @@
                                         <div class="dBlock">
                                             <ul>
                                                 <li><span>Order ID:</span>{{ $quotation->uid }}</li>
-                                                <li><span>No. of Items:</span>4</li>
-                                                <li><span>Total Amount:</span> $900</li>
+                                                <li><span>No. of Items:</span>{{ $quotation->acceptedQuotationDetails->count() }}</li>
+                                                <li><span>Total Amount:</span>{{ $quotation->priceWithSymbol($quotation->converted_total_bid_price) }}</li>
                                             </ul>
                                         </div>
                                         <div class="accordion accordion-flush" id="dtailAccord">
@@ -120,18 +124,18 @@
                                                 <div id="flush-collapseOne" class="accordion-collapse collapse"
                                                     aria-labelledby="flush-headingOne" data-bs-parent="#dtailAccord">
                                                     <div class="accordion-body">
-                                                        <ul>
-                                                            <li><span>Product Name:</span>iPhone 14 Pro</li>
-                                                            <li><span>Product Code:</span>A2894</li>
-                                                            <li><span>Qty:</span>20</li>
-                                                            <li><span>Price:</span>$400</li>
-                                                            <li><span>Status:</span>
-                                                                <div class="sts clr1">Action from Vendor</div>
-                                                            </li>
-                                                            <li><span>Admin Approved Price:</span>$400</li>
-                                                            <li><span>Specifications:</span>Lorem ipsum dolor sit amet
-                                                            </li>
-                                                        </ul>
+
+                                                            @foreach ($quotation->acceptedQuotationDetails as $quotation_detail)
+                                                            <ul>
+                                                                <li><span>Product Name:</span>{{ $quotation_detail->product->title }}</li>
+                                                                <li><span>Product Code:</span>{{ $quotation_detail->product->product_code }}</li>
+                                                                <li><span>Qty:</span>{{ $quotation_detail->quantity }}</li>
+                                                                <li><span>Price:</span>{{ $quotation_detail->priceWithSymbol($quotation_detail->converted_admin_approved_price) }}</li>
+                                                                <li><span>Total Price:</span>{{ $quotation_detail->priceWithSymbol($quotation_detail->converted_product_total_bid_price) }}</li>
+                                                                <li><span>Specifications:</span>Lorem ipsum dolor sit amet
+                                                                </li>
+                                                            </ul>
+                                                            @endforeach
 
                                                     </div>
                                                 </div>
@@ -159,31 +163,34 @@
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="AddressFlx">
                                 <div class="ltB">
-                                    <div class="item">
-                                        <div class="adresBox">
-                                            <input type="radio" id="add1" name="address" checked="">
-                                            <label for="add1">
-                                                <div class="topBFlx">
-                                                    <div class="dfault">
-                                                        <img src="assets/images/dflt.svg" alt="">
+                                    @foreach ($billing_addresses as $billing_address)
+                                        <div class="item">
+                                            <div class="adresBox">
+                                                <input type="radio" id="add{{ $loop->iteration }}" name="address" checked="">
+                                                <label for="add1">
+                                                    <div class="topBFlx">
+                                                        <div class="dfault">
+                                                            <img src="{{ asset('frontend/images/dflt.svg') }}" alt="">
+                                                        </div>
+                                                        <div class="rtB">
+                                                            <a href="javascript:void(0)" class="edit">
+                                                                <img src="{{ asset('frontend/images/edit.svg') }}" alt="">
+                                                            </a>
+                                                            <a href="javascript:void(0)" class="dlt">
+                                                                <img src="{{ asset('frontend/images/delete.svg') }}" alt="">
+                                                            </a>
+                                                        </div>
                                                     </div>
-                                                    <div class="rtB">
-                                                        <a href="javascript:void(0)" class="edit">
-                                                            <img src="assets/images/edit.svg" alt="">
-                                                        </a>
-                                                        <a href="javascript:void(0)" class="dlt">
-                                                            <img src="assets/images/delete.svg" alt="">
-                                                        </a>
+                                                    <div class="txtBx">
+                                                        <div class="name">{{ $billing_address->full_name }}</div>
+                                                        <div class="addres">{{ $billing_address->full_address }}, <br>{{ $billing_address->state->title }}, {{ $billing_address->coutrny->title }}</div>
+                                                        <div class="tele">Mobile: <span>+914 25656565</span></div>
                                                     </div>
-                                                </div>
-                                                <div class="txtBx">
-                                                    <div class="name">Jozin Jose</div>
-                                                    <div class="addres">Box No. 236847, Al Fujayrah, <br>Emirates</div>
-                                                    <div class="tele">Mobile: <span>+914 25656565</span></div>
-                                                </div>
-                                            </label>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endforeach
+
                                     <div class="item">
                                         <div class="adresBox">
                                             <input type="radio" id="add2" name="address">
@@ -454,3 +461,5 @@
 
 
 </div>
+
+@endsection

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\AdminHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -79,6 +80,6 @@ class QuotationDetail extends Model
     }
 
     public function priceWithSymbol($price) {
-        return $this->quotation->currency_symbol . $price;
+        return $this->quotation->currency_symbol . AdminHelper::getFormattedPrice($price);
     }
 }

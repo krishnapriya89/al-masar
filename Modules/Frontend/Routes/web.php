@@ -38,6 +38,14 @@ Route::post('/verify-login-otp', [AuthController::class, 'verifyLoginOtp'])->nam
 //email verification
 Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('user.email.verify');
 
+//cms
+//privacy policy
+Route::get('privacy-policy',[HomeController::class,'privacyPolicy'])->name('privacy-policy');
+//Terms And conditions
+Route::get('terms-and-conditions',[HomeController::class,'termsAndConditions'])->name('terms-and-conditions');
+//store contact enquiry
+Route::post('contact-enquiry',[HomeController::class,'storeContact'])->name('contact-enquiry');
+
 Route::group(['middleware' => 'auth.user'], function () {
 
     //logout
@@ -46,12 +54,6 @@ Route::group(['middleware' => 'auth.user'], function () {
     //cms
     //about
     Route::get('about',[HomeController::class,'about'])->name('about');
-    //privacy policy
-    Route::get('privacy-policy',[HomeController::class,'privacyPolicy'])->name('privacy-policy');
-    //Terms And conditions
-    Route::get('terms-and-conditions',[HomeController::class,'termsAndConditions'])->name('terms-and-conditions');
-    //store contact enquiry
-    Route::post('contact-enquiry',[HomeController::class,'storeContact'])->name('contact-enquiry');
 
     //E-commerce
     //product

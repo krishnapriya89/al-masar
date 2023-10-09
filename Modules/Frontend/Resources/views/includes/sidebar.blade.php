@@ -3,10 +3,9 @@
         <div class="imgBx">
             <img src="{{asset('frontend/images/user.jpg')}}" alt="">
         </div>
-        <div class="name">Steev David</div>
-        <div class="mail">steevdavid1@gmail.com</div>
+        <div class="name">{{ Auth::guard('web')->user()->name }}</div>
+        <div class="mail">{{ Auth::guard('web')->user()->email }}</div>
     </div>
-
     <ul>
         <li>
             <a href="dashboard.php"
@@ -120,19 +119,9 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('user.quotation') }}" class="lnk">
+            <a href="{{ route('user.quotation') }}" class="lnk {{ Nav::isRoute('user.quotation') }}">
                 <div class="icon">
-                    <!-- <img src="assets/images/d3.svg" alt=""> -->
-
                     <svg viewBox="0 0 18.979 19.3">
-                        <!-- <defs>
-                            <style>
-                            .cls-1 {
-                                stroke: #fff;
-                                stroke-width: 0.3px;
-                            }
-                            </style>
-                        </defs> -->
                         <g id="Group_22543" data-name="Group 22543" transform="translate(-1155.849 -57.85)">
                             <g id="cart" transform="translate(1155.999 58)">
                                 <path id="Path_102143" data-name="Path 102143" class="cls-1"
@@ -147,13 +136,12 @@
                             </g>
                         </g>
                     </svg>
-
                 </div>
                 <div class="txt">My Quotation</div>
             </a>
         </li>
         <li>
-            <a href="addNewAddress.php" class="lnk">
+            <a href="{{ route('address') }}" class="lnk {{ Nav::isRoute('address') }}">
                 <div class="icon">
                     <!-- <img src="assets/images/d4.svg" alt=""> -->
 
