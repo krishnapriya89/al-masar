@@ -21,9 +21,10 @@ class ProductController extends Controller
     public function products(Request $request)
     {
         $breadcrumb = $page_title = 'Products';
-        $keyword    = trim(preg_replace('!\s+!', ' ', $request->input('keyword')));
+        $keyword    = trim(preg_replace('!\s+!', ' ', $request->input('search')));
         $query = Product::active();
         if ($keyword) {
+
             $page_title = 'Search Result of '. '\'' . $keyword .'\'';
             $query->where(function ($query) use ($keyword) {
                 $query->where('title', 'LIKE', '%' . $keyword . '%')->orWhere('product_code', 'LIKE', '%' . $keyword . '%')
@@ -37,7 +38,7 @@ class ProductController extends Controller
             });
         }
         $products = $query->orderBy('sort_order')->get();
-        return view('frontend::product', compact('products', 'breadcrumb', 'page_title'));
+        return view('frontend::product', compact('products', 'breadcrumb', 'page_title','keyword'));
     }
 
     //product listing page search
@@ -163,6 +164,6 @@ class ProductController extends Controller
             });
         });
         $searched_products = $query->orderBy('sort_order')->get();
-        return view('frontend::includes.modal_search_product_list', compact('searched_products'));
+        return view('frontend::includes.modal-search-product-ist', compact('searched_products'));
     }
 }
