@@ -19,7 +19,7 @@
             <div class="container">
                 <div class="all_products">
                     <div class="bdfgBx">
-                        <div class="Stitle">{{ $breadcrumb }}</div>
+                        <div class="Stitle">{{ $page_title }}</div>
                     </div>
                 </div>
                 <div class="TableBx table-responsive DskTop">
@@ -48,7 +48,7 @@
                                         class="form-control product-list-search" autocomplete="off">
                                 </td>
                                 <td>
-                            
+
                                 </td>
                                 <td>
                                     <input type="text" name="model_number" placeholder="" value="{{ @$model_number}}"

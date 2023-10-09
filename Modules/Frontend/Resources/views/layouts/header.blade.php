@@ -219,10 +219,15 @@
                 <div class="ritWERTbx">
                     <div class="HrMfLxRt">
                         <div class="WtSrCh">
-                            <form action="">
+                            <form action="{{ route('product') }}">
                                 <div class="flxB">
+<<<<<<< HEAD
                                     <input type="search" class="form-control" required name="search"
                                         id="search" placeholder="Search for Products">
+=======
+                                    <input type="search" class="form-control main-search-input"
+                                        name="search" id="search" placeholder="Search for Products">
+>>>>>>> a3b1a46ffb8f4cef113ab297843a0a712c60fa7c
                                     <button type="submit">
                                         <svg viewBox="0 0 19.993 20">
                                             <g id="layer1" transform="translate(0 0)">
@@ -232,6 +237,12 @@
                                             </g>
                                         </svg>
                                     </button>
+                                    {{-- search modal --}}
+                                    <div class="focusBx">
+                                        <ul class="results">
+                                            @include('frontend::includes.modal_search_product_list')
+                                        </ul>
+                                    </div>
                                 </div>
                             </form>
                         </div>
