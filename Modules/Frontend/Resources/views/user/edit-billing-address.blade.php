@@ -102,7 +102,7 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <input type="text" id="" class="form-control"
-                                                    placeholder="Zip Code*" name="zip_code" value="{{'zip_code',$billing_address->zip_code}}">
+                                                    placeholder="Zip Code*" name="zip_code" value="{{old('zip_code'),$billing_address->zip_code}}">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">

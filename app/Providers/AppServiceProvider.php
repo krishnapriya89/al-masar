@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\SiteCommonContent;
+use App\Models\ProductSubCategory;
+use App\Models\ProductMainCategory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -16,7 +18,8 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('frontend::*', function ($view) {
             $site_common_content = SiteCommonContent::first();
-            $view->with(compact('site_common_content'));
+            $site_menus = ProductSubCategory::whereNull('parent_id')->whereIn('id', $site_common_content->menu_category)->get();
+            $view->with(compact('site_common_content','site_menus'));
         });
 
         Blade::directive('currencySymbol', function ($money) {

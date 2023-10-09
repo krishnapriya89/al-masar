@@ -6,6 +6,7 @@ use App\Helpers\FrontendHelper;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\NotifyProduct;
+use App\Models\ProductSubCategory;
 use App\Models\SiteCommonContent;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -165,5 +166,29 @@ class ProductController extends Controller
         });
         $searched_products = $query->orderBy('sort_order')->get();
         return view('frontend::includes.modal-search-product-ist', compact('searched_products'));
+    }
+
+    //Category listing
+    public function category($slug)
+    {
+        $sub_category = ProductSubCategory::active()->where('slug',$slug)->first();
+        if($sub_category)
+        {
+            $breadcrumb = $page_title = $sub_category->title;
+            $query = Product::query();
+            if($sub_category->parent)
+            {
+                $query = $query->where('product_sub_category_child_id',$sub_category->id);
+            }
+            else{
+                $query = $query->where('product_sub_category_id', $sub_category->id);
+            }
+
+            $products = $query->active()->orderBy('sort_order')->get();
+            return view('frontend::product', compact('products', 'breadcrumb', 'page_title'));
+        }
+        $breadcrumb = $page_title = 'Products';
+        return 404;
+
     }
 }

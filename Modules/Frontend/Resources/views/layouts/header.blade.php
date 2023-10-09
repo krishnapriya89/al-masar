@@ -221,8 +221,8 @@
                         <div class="WtSrCh">
                             <form action="{{ route('product') }}" method="get">
                                 <div class="flxB">
-                                    <input type="search" class="form-control main-search-input"
-                                        name="search" id="search" placeholder="Search for Products" value="{{@$keyword}}">
+                                    <input type="search" class="form-control main-search-input" name="search"
+                                        id="search" placeholder="Search for Products" value="{{ @$keyword }}">
                                     <button type="submit">
                                         <svg viewBox="0 0 19.993 20">
                                             <g id="layer1" transform="translate(0 0)">
@@ -448,410 +448,39 @@
                                         <span></span>
                                     </button> -->
                                     <div class="accordion" id="AccordMenu">
+                                        @foreach ($site_menus as $site_menu)
                                         <div class="accordion-item dropdown">
-                                            <div class="accordion-header" id="hd1">
-                                                <a href="javascript:void(0)" class="dskLnk">Airpods</a>
-                                                <a href="javascript:void(0)" class="accordion-button collapsed"
-                                                    type="button" data-bs-toggle="collapse" data-bs-target="#cd1"
-                                                    aria-expanded="false" aria-controls="cd1">
-                                                    Airpods
+                                            <div class="accordion-header" id="hd4">
+                                                <a href="{{route('product-category',$site_menu->slug)}}" class="dskLnk">{{$site_menu->title }}</a>
+                                                <a href="{{route('product-category',$site_menu->slug)}}" class="accordion-button collapsed"
+                                                    type="button" data-bs-toggle="collapse" data-bs-target="#cd{{$loop->iteration}}"
+                                                    aria-expanded="false" aria-controls="cd{{$loop->iteration}}">
+                                                    {{$site_menu->title }}
                                                 </a>
                                             </div>
-                                            <!-- <div id="cd1" class="accordion-collapse mgaAccord collapse"
+                                            @if($site_menu->children->isNotEmpty())
+                                            <div id="cd{{$loop->iteration}}" class="accordion-collapse mgaAccord collapse"
                                                 aria-labelledby="headingOne" data-bs-parent="#menuaccord1">
-                                                <div class="container">
-                                                    <div class="accordion-body">
-                                                        <div class="lftBccBx">
-                                                            <ul class="mgaLft">
-                                                                <li class="active">
-                                                                    <a href="products.php" class="mveFlx"
-                                                                        id="q1">Indoor
-                                                                        Lights</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="products.php" class="mveFlx"
-                                                                        id="q2">Outdoor
-                                                                        Lights</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0)" class="mveFlx "
-                                                                        id="q3">Decorative Lights</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0)" id="q4"
-                                                                        class="mveFlx ">Industrial Lights</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0)" class="mveFlx "
-                                                                        id="q5">Solar
-                                                                        Lights</a>
-                                                                </li>
-                                                            </ul>
+                                                <div class="accordion-body">
+                                                    <div class="Stilte">iPhone</div>
+                                                    <div class="txtB">
+                                                        <div class="coloFlx">
+                                                            <div class="cl1"></div>
+                                                            <div class="cl1"></div>
+                                                            <div class="cl1"></div>
                                                         </div>
-                                                        <div class="ritAccBx">
-                                                            <div class="cmn_bx " id="sub_q1">
-                                                                <div class="dFlX">
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p2.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p2.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p2.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="cmn_bx hide" id="sub_q2">
-                                                                <div class="dFlX">
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p2.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p2.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
+                                                        <ul>
+                                                            @foreach ($site_menu->children as $children)
+                                                            <li><a href="{{ route('product-category',$children->slug)}}" class="lk">{{$children->title}}</a></li>
+                                                            @endforeach
 
-                                                                </div>
-                                                            </div>
-                                                            <div class="cmn_bx hide" id="sub_q3">
-                                                                <div class="dFlX">
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p2.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p2.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="cmn_bx hide" id="sub_q4">
-                                                                <div class="dFlX">
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p2.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p2.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="cmn_bx hide" id="sub_q5">
-                                                                <div class="dFlX">
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p2.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p2.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="flBx">
-                                                                        <a href="javascript:void(0)" class="proB">
-                                                                            <div class="imgBx">
-                                                                                <img src="assets/images/p1.png"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="txt">Bitmain Antminer D9
-                                                                                1.8GH/s 2839W (DASH)</div>
-                                                                            <div class="price">$6,980.00</div>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                            </div> -->
-                                        </div>
-                                        <div class="accordion-item">
-                                            <div class="accordion-header" id="hd2">
-                                                <a href="products.php" class="dskLnk"> Apple Watch </a>
-                                                <a href="javascript:void(0)" class="accordion-button collapsed"
-                                                    type="button" data-bs-toggle="collapse" data-bs-target="#cd2"
-                                                    aria-expanded="false" aria-controls="cd2">
-                                                    Apple Watch
-                                                </a>
                                             </div>
+                                            @endif
                                         </div>
-                                        <div class="accordion-item">
-                                            <div class="accordion-header" id="hd3">
-                                                <a href="products.php" class="dskLnk">iPad</a>
-                                                <a href="javascript:void(0)" class="accordion-button collapsed"
-                                                    type="button" data-bs-toggle="collapse" data-bs-target="#cd3"
-                                                    aria-expanded="false" aria-controls="cd3">
-                                                    iPad
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <div class="accordion-header" id="hd4">
-                                                <a href="javascript:void(0)" class="dskLnk">iPhone </a>
-                                                <a href="javascript:void(0)" class="accordion-button collapsed"
-                                                    type="button" data-bs-toggle="collapse" data-bs-target="#cd4"
-                                                    aria-expanded="false" aria-controls="cd4">
-                                                    iPhone
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <div class="accordion-header" id="hd5">
-                                                <a href="javascript:void(0)" class="dskLnk"> MacBook</a>
-                                                <a href="javascript:void(0)" class="accordion-button collapsed"
-                                                    type="button" data-bs-toggle="collapse" data-bs-target="#cd5"
-                                                    aria-expanded="false" aria-controls="cd5">
-                                                    MacBook
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <div class="accordion-header" id="hd6">
-                                                <a href="javascript:void(0)" class="dskLnk">iMac</a>
-                                                <a href="javascript:void(0)" class="accordion-button collapsed"
-                                                    type="button" data-bs-toggle="collapse" data-bs-target="#cd6"
-                                                    aria-expanded="false" aria-controls="cd6">
-                                                    iMac
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <div class="accordion-header" id="hd7">
-                                                <a href="javascript:void(0)" class="dskLnk"> MacMini </a>
-                                                <a href="javascript:void(0)" class="accordion-button collapsed"
-                                                    type="button" data-bs-toggle="collapse" data-bs-target="#cd7"
-                                                    aria-expanded="false" aria-controls="cd7">
-                                                    MacMini
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <div class="accordion-header" id="hd8">
-                                                <a href="javascript:void(0)" class="dskLnk">Accessories</a>
-                                                <a href="javascript:void(0)" class="accordion-button collapsed"
-                                                    type="button" data-bs-toggle="collapse" data-bs-target="#cd8"
-                                                    aria-expanded="false" aria-controls="cd8">
-                                                    Accessories
-                                                </a>
-                                            </div>
-                                        </div>
-
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

@@ -62,6 +62,8 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::post('/calculate-price',[ProductController::class,'calculatePrice'])->name('calculate-price');
     //product detail
     Route::get('product-detail/{slug}',[ProductController::class,'productDetailPage'])->name('product-detail');
+    //category listing
+    Route::get('product-category/{slug}',[ProductController::class,'category'])->name('product-category');
 
     //quote functionalities
     Route::get('/quote',[QuoteController::class, 'index'])->name('quote');
