@@ -77,9 +77,9 @@ class HomeController extends Controller
         $contact_enquiry->subject = $request->subject;
         $contact_enquiry->message = $request->message;
         if ($contact_enquiry->save()) {
-            return redirect()->back()->with('success', 'Contact Form Application Submitted Successfully!');
+            return to_route('home')->with('success', 'Contact Form Application Submitted Successfully!');
         }
-        return redirect()->back()->with('error', 'Failed to Submit Contact Form Application');
+        return to_route('home')->with('error', 'Failed to Submit Contact Form Application');
     }
 
 
