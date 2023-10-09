@@ -219,10 +219,10 @@
                 <div class="ritWERTbx">
                     <div class="HrMfLxRt">
                         <div class="WtSrCh">
-                            <form action="{{ route('product') }}">
+                            <form action="{{ route('product') }}" method="get">
                                 <div class="flxB">
                                     <input type="search" class="form-control main-search-input"
-                                        name="search" id="search" placeholder="Search for Products">
+                                        name="search" id="search" placeholder="Search for Products" value="{{@$keyword}}">
                                     <button type="submit">
                                         <svg viewBox="0 0 19.993 20">
                                             <g id="layer1" transform="translate(0 0)">
@@ -235,7 +235,7 @@
                                     {{-- search modal --}}
                                     <div class="focusBx">
                                         <ul class="results">
-                                            @include('frontend::includes.modal_search_product_list')
+                                            @include('frontend::includes.modal-search-product-list')
                                         </ul>
                                     </div>
                                 </div>

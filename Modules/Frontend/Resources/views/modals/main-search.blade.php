@@ -1,3 +1,3 @@
 
-        @include('frontend::includes.modal_search_product_list')
+        @include('frontend::includes.modal-search-product-list')
 
