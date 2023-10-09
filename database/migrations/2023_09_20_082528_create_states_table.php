@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreign('country_id')->references('id')->on('countries');
             $table->string('title');
             $table->string('code');
+            $table->tinyInteger('free_zone')->default(0)->comment('1:yes,0:no');
             $table->tinyInteger('status')->default(1)->comment('1:active,0:inactive');
             $table->timestamps();
             $table->softDeletes();
