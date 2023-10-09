@@ -3,7 +3,10 @@
 namespace Modules\Frontend\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\Payment;
 use App\Models\Quotation;
+use App\Models\SiteCommonContent;
+use App\Models\TaxManagement;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -44,7 +47,22 @@ class CheckoutController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('frontend::checkout.index', compact('quotation', 'countries', 'billing_addresses', 'shipping_addresses'));
+        $payment_methods = Payment::active()->orderBy('sort_order')->get();
+        $site_settings = TaxManagement::first();
+
+        $total_tax_amount = 0;
+
+        if($site_settings->tax_percentage) {
+            $total_tax_amount += (($quotation->converted_total_bid_price * $site_settings->tax_percentage) / 100);
+        }
+
+        if($site_settings->tax_amount) {
+            $total_tax_amount += $site_settings->tax_amount;
+        }
+
+
+
+        return view('frontend::checkout.index', compact('quotation', 'countries', 'billing_addresses', 'shipping_addresses', 'payment_methods', 'site_settings', 'total_tax_amount'));
     }
 
     /**

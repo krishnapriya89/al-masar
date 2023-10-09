@@ -166,7 +166,7 @@
                                     @foreach ($billing_addresses as $billing_address)
                                         <div class="item">
                                             <div class="adresBox">
-                                                <input type="radio" id="add{{ $loop->iteration }}" name="address" checked="">
+                                                <input type="radio" id="add{{ $loop->iteration }}" name="billing_address" {{ $billing_address->is_default ? 'checked' : ''}}>
                                                 <label for="add1">
                                                     <div class="topBFlx">
                                                         <div class="dfault">
@@ -183,54 +183,29 @@
                                                     </div>
                                                     <div class="txtBx">
                                                         <div class="name">{{ $billing_address->full_name }}</div>
-                                                        <div class="addres">{{ $billing_address->full_address }}, <br>{{ $billing_address->state->title }}, {{ $billing_address->coutrny->title }}</div>
-                                                        <div class="tele">Mobile: <span>+914 25656565</span></div>
+                                                        <div class="addres">{{ $billing_address->full_address }}, <br>{{ $billing_address->state->title }}, {{ $billing_address->country->title }}</div>
+                                                        <div class="tele">Mobile: <span>{{ $billing_address->phone_number }}</span></div>
+                                                        <div class="tele">Email: <span>{{ $billing_address->email }}</span></div>
                                                     </div>
                                                 </label>
                                             </div>
                                         </div>
                                     @endforeach
-
-                                    <div class="item">
-                                        <div class="adresBox">
-                                            <input type="radio" id="add2" name="address">
-                                            <label for="add2">
-                                                <div class="topBFlx">
-                                                    <div class="dfault">
-                                                        <img src="assets/images/dflt.svg" alt="">
-                                                    </div>
-                                                    <div class="rtB">
-                                                        <a href="javascript:void(0)" class="edit">
-                                                            <img src="assets/images/edit.svg" alt="">
-                                                        </a>
-                                                        <a href="javascript:void(0)" class="dlt">
-                                                            <img src="assets/images/delete.svg" alt="">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="txtBx">
-                                                    <div class="name">Jozin Jose</div>
-                                                    <div class="addres">Box No. 236847, Al Fujayrah, <br>Emirates</div>
-                                                    <div class="tele">Mobile: <span>+914 25656565</span></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="rtB">
                                     <div class="newAdress">
                                         <a href="javascript:void(0)" data-bs-toggle="collapse"
-                                            data-bs-target="#AddAddress" aria-expanded="false"
-                                            aria-controls="AddAddress">
+                                            data-bs-target="#BillingAddAddress" aria-expanded="false"
+                                            aria-controls="BillingAddAddress">
                                             <div class="icon">+</div>
                                             <div class="ttxc">Add New Address</div>
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion-item addAddress">
-                                <div id="AddAddress" class="accordion-collapse collapse"
-                                    data-bs-parent="#AddAddressAcord">
+                            <div class="accordion-item billingaddAddress">
+                                <div id="BillingAddAddress" class="accordion-collapse collapse"
+                                    data-bs-parent="#BillingAddAddressAcord">
                                     <div class="accordion-body">
                                         <form action="" method="post">
                                             <div class="row">
@@ -276,65 +251,82 @@
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="AddressFlx">
                                 <div class="ltB">
-                                    <div class="item">
-                                        <div class="adresBox">
-                                            <input type="radio" id="add3" name="address">
-                                            <label for="add3">
-                                                <div class="topBFlx">
-                                                    <div class="dfault">
-                                                        <img src="assets/images/dflt.svg" alt="">
+                                    @foreach ($shipping_addresses as $shipping_address)
+                                        <div class="item">
+                                            <div class="adresBox">
+                                                <input type="radio" id="add{{ $billing_addresses->count() + $loop->iteration }}" name="shipping_address" {{ $shipping_address->is_default ? 'checked' : ''}}>
+                                                <label for="add1">
+                                                    <div class="topBFlx">
+                                                        <div class="dfault">
+                                                            <img src="{{ asset('frontend/images/dflt.svg') }}" alt="">
+                                                        </div>
+                                                        <div class="rtB">
+                                                            <a href="javascript:void(0)" class="edit">
+                                                                <img src="{{ asset('frontend/images/edit.svg') }}" alt="">
+                                                            </a>
+                                                            <a href="javascript:void(0)" class="dlt">
+                                                                <img src="{{ asset('frontend/images/delete.svg') }}" alt="">
+                                                            </a>
+                                                        </div>
                                                     </div>
-                                                    <div class="rtB">
-                                                        <a href="javascript:void(0)" class="edit">
-                                                            <img src="assets/images/edit.svg" alt="">
-                                                        </a>
-                                                        <a href="javascript:void(0)" class="dlt">
-                                                            <img src="assets/images/delete.svg" alt="">
-                                                        </a>
+                                                    <div class="txtBx">
+                                                        <div class="name">{{ $shipping_address->full_name }}</div>
+                                                        <div class="addres">{{ $shipping_address->full_address }}, <br>{{ $shipping_address->state->title }}, {{ $shipping_address->country->title }}</div>
+                                                        <div class="tele">Mobile: <span>{{ $shipping_address->phone_number }}</span></div>
+                                                        <div class="tele">Email: <span>{{ $shipping_address->email }}</span></div>
                                                     </div>
-                                                </div>
-                                                <div class="txtBx">
-                                                    <div class="name">Jozin Jose</div>
-                                                    <div class="addres">Box No. 236847, Al Fujayrah, <br>Emirates</div>
-                                                    <div class="tele">Mobile: <span>+914 25656565</span></div>
-                                                </div>
-                                            </label>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="adresBox">
-                                            <input type="radio" id="add4" name="address">
-                                            <label for="add4">
-                                                <div class="topBFlx">
-                                                    <div class="dfault">
-                                                        <img src="assets/images/dflt.svg" alt="">
-                                                    </div>
-                                                    <div class="rtB">
-                                                        <a href="javascript:void(0)" class="edit">
-                                                            <img src="assets/images/edit.svg" alt="">
-                                                        </a>
-                                                        <a href="javascript:void(0)" class="dlt">
-                                                            <img src="assets/images/delete.svg" alt="">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="txtBx">
-                                                    <div class="name">Jozin Jose</div>
-                                                    <div class="addres">Box No. 236847, Al Fujayrah, <br>Emirates</div>
-                                                    <div class="tele">Mobile: <span>+914 25656565</span></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                                 <div class="rtB">
                                     <div class="newAdress">
                                         <a href="javascript:void(0)" data-bs-toggle="collapse"
-                                            data-bs-target="#AddAddress" aria-expanded="false"
-                                            aria-controls="AddAddress">
+                                            data-bs-target="#ShippingAddAddress" aria-expanded="false"
+                                            aria-controls="ShippingAddAddress">
                                             <div class="icon">+</div>
                                             <div class="ttxc">Add New Address</div>
                                         </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item shippingaddAddress">
+                                <div id="ShippingAddAddress" class="accordion-collapse collapse"
+                                    data-bs-parent="#ShippingAddAddressAcord">
+                                    <div class="accordion-body">
+                                        <form action="" method="post">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="Name" name="Name"
+                                                            placeholder="Name" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="Email" name="Email"
+                                                            placeholder="Email" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="Mobile Number"
+                                                            placeholder="Mobile Number" name="Mobile Number"
+                                                            required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <textarea name="Address" class="form-control" id="Address"
+                                                            cols="30" placeholder="Address" rows="10"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn-submit hoveranim">
+                                                <span>Save address</span>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -350,68 +342,27 @@
                         <div class="Title">Select Payment Method</div>
                         <div class="paymentBox">
                             <ul>
-                                <li>
-                                    <div class="rdBtn">
-                                        <input type="radio" id="p1" name="payment" checked="">
-                                        <label for="p1">
-                                            <div class="label">
-                                                <div class="icon">
-                                                    <img src="assets/images/pay1.png" alt="cards">
+                                @foreach ($payment_methods as $payment_method)
+                                    <li>
+                                        <div class="rdBtn">
+                                            <input type="radio" id="p{{ $loop->iteration }}" name="payment" {{ $loop->first ? 'checked' : ''}}>
+                                            <label for="p{{ $loop->iteration }}">
+                                                <div class="label">
+                                                    <div class="icon">
+                                                        <img src="{{ $payment_method->image_value }}" alt="cards">
+                                                    </div>
+                                                    {{ $payment_method->title }}
                                                 </div>
-                                                Cryptocurrency
-                                            </div>
-                                        </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="rdBtn">
-                                        <input type="radio" id="p2" name="payment">
-                                        <label for="p2">
-                                            <div class="label">
-                                                <div class="icon">
-                                                    <img src="assets/images/pay2.png" alt="cod">
-                                                </div>
-                                                Paypal
-                                            </div>
-                                        </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="rdBtn">
-                                        <input type="radio" id="p3" name="payment">
-                                        <label for="p3">
-                                            <div class="label">
-                                                <div class="icon">
-                                                    <img src="assets/images/pay3.png" alt="cod">
-                                                </div>
-                                                Credit Card /debit card
-                                            </div>
-                                        </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="rdBtn">
-                                        <input type="radio" id="p4" name="payment">
-                                        <label for="p4">
-                                            <div class="label">
-                                                <div class="icon">
-                                                    <img src="assets/images/pay4.png" alt="cod">
-                                                </div>
-                                                Bank Trasfer
-                                            </div>
-                                        </label>
-                                    </div>
-                                </li>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    @if ($payment_method->description)
+                                        <div class="bankAddress">
+                                            {{ $payment_method->description }}
+                                        </div>
+                                    @endif
+                                @endforeach
                             </ul>
-                            <div class="bankAddress">
-                                Bank: Bank of America, NA, 555 California St,
-                                San Francisco, CA 94104
-                                Business Name: Lizheng Stainless Steel Tube and
-                                Coil Corp Business Address: 3902 Henderson Blvd,
-                                Suite 208-207, Tampa, Florida, 33629
-                                Swift #: BOFAUS3N
-                                Account #: 898037918555
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -419,36 +370,34 @@
                     <div class="title">Price Details</div>
                     <ul>
                         <li>
-                            <div class="lt">Price (3 Items) <span>VAT (5%)</span></div>
-                            <div class="rt">$4690.00 <span>$350.00</span></div>
-                        </li>
-                        <br>
-                        <br>
-                        <li>
-                            <div class="lt">Delivery Fee</div>
-                            <div class="rt"><span>$ 50.00</span></div>
+                            <div class="lt">Price ({{ $quotation->acceptedQuotationDetails->count() }} Items)
+                                @if ($site_settings->tax_name && ($site_settings->tax_percentage || $site_settings->tax_amount))
+                                    <span>{{ $site_settings->tax_name }} ({{ $site_settings->tax_percentage ? $site_settings->tax_percentage.'%' : ''}}) {{ $site_settings->tax_amount ?  ' +'.$site_settings->tax_amount.'AED' : ''}}</span>
+                                @endif
+                            </div>
+                            <div class="rt">{{ $quotation->priceWithSymbol($quotation->converted_total_bid_price)}} <span>{{ $total_tax_amount != 0 ? $total_tax_amount : '' }}</span></div>
                         </li>
                         <li class="total">
                             <div class="lt">Total</div>
-                            <div class="rt">$5090.00</div>
+                            <div class="rt">{{ $quotation->priceWithSymbol($quotation->converted_total_bid_price + $total_tax_amount)}}</div>
                         </li>
-                        <li>
+                        {{-- <li>
                             <div class="lt"><span>Minimum amount<br>
                                     to be paid (10%)</span></div>
                             <div class="rt">
                                 $509.00
                             </div>
-                        </li>
+                        </li> --}}
                     </ul>
-                    <div class="txt"><span>Delivery by9 Sep, Saturday</span> if ordered before 5:39 PM</div>
+                    {{-- <div class="txt"><span>Delivery by9 Sep, Saturday</span> if ordered before 5:39 PM</div> --}}
                     <div class="agree">
                         <input type="checkbox" id="a2" name="c2" value="" required="">
-                        <label for="a2">*I agree to the <a href="PrivacyPolicy.php">Terms and Conditions</a>.
+                        <label for="a2">*I agree to the <a href="{{ route('terms-and-conditions')}}">Terms and Conditions</a>.
                         </label>
                     </div>
                     <div class="buttonFlx">
                         <div class="item w100">
-                            <button type="" class="confirm hoveranim"><span>MAke Payment</span></button>
+                            <button type="submit" class="confirm hoveranim"><span>MAke Payment</span></button>
                         </div>
                     </div>
                 </div>
