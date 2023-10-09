@@ -4,6 +4,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
 use Modules\Frontend\Http\Controllers\AuthController;
+use Modules\Frontend\Http\Controllers\CheckoutController;
 use Modules\Frontend\Http\Controllers\HomeController;
 use Modules\Frontend\Http\Controllers\UserController;
 use Modules\Frontend\Http\Controllers\ProductController;
@@ -71,7 +72,10 @@ Route::group(['middleware' => 'auth.user'], function () {
     //quotation functionalities
     Route::get('/quotation',[QuotationController::class, 'index'])->name('user.quotation');
     Route::post('/vendor-action',[QuotationController::class, 'vendorAction'])->name('user.quotation.vendor-action');
-    Route::get('/submit-quotation',[QuotationController::class, 'submitQuotation'])->name('user.submit-quotation');
+
+    //checkout
+    Route::get('/checkout/{quotation_uid}',[CheckoutController::class, 'index'])->name('checkout');
+
 
     //notify-me
     Route::post('notify-me',[ProductController::class,'notifyMe'])->name('notify-me');

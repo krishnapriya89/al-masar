@@ -12,6 +12,9 @@
 body
     &.NightMode
         background: rgba(0, 0, 0, .90)
+        .themeChange
+            svg
+                fill: #fff !important
         #Header
             .MenuIcon
                 button
@@ -36,6 +39,16 @@ body
                             .DRoPBTn
                                 svg
                                     fill: #fff
+                            #MyaccountDropMenu
+                                border-color: #545454
+                                background: #2b2b2b
+                                .boxCntnt, .boxFoot
+                                    a, button
+                                        color: #fff
+                                        svg
+                                            fill: #fff
+                                .boxFoot
+                                    border-color: #545454
             .HrBpx
                 background: rgba(0, 0, 0, .90)
                 #HeaderPOP
@@ -45,6 +58,19 @@ body
                                 a, button
                                     @media only screen and (min-width: 992px)
                                         color: #fff
+                .BtMFlX
+                    .FlTrBX
+                        .mgaAccord
+                            .accordion-body
+                                background: #2b2b2b
+                                .Stilte
+                                    color: #fff
+                                    border-color: #545454
+                                .txtB
+                                    ul
+                                        li
+                                            a
+                                                color: #fff
             .moneyDrop
                 button
                     .filter-option
@@ -53,6 +79,22 @@ body
                                 color: #fff
                     &::after
                         filter: invert(1) brightness(20)
+        #filterAccodionModal
+            .modal-body
+                background: #2b2b2b
+                #filterAccodion
+                    .card
+                        background: #2b2b2b
+                        .cardHeader
+                            button
+                                background: #2b2b2b
+                                color: #fff
+                        .card-body
+                            ul
+                                li
+                                    a
+                                        color: #fff
+
         .DashBoard
             #proListing
                 .all_products
@@ -68,6 +110,20 @@ body
                         .addressFormBx
                             .formBx
                                 background: #2b2b2b
+                            .savedAddBx
+                                .adresBox
+                                    label
+                                        background: #2b2b2b
+                                        .topBFlx
+                                            .dfault 
+                                                .txt
+                                                    color: #fff
+                                            .rtB
+                                                img
+                                                    filter: invert(2) brightness(5)
+                                        .txtBx
+                                            &>*
+                                                color: #fff
 
                 .addressFormBx
                     .formBx
@@ -90,6 +146,54 @@ body
                                     background: transparent
                                     border: solid 1px #545454
                                     color: #fff
+                    .allAddress
+                        background: #2b2b2b
+                        .headFlx 
+                            .title
+                                color: #fff
+                    .nav-tabs 
+                        .nav-item 
+                            button
+                                color: #fff
+                .mobVew
+                    .accordion
+                        .accordion-item
+                            .accordion-header
+                                .accordion-button
+                                    .flxBx
+                                        .total
+                                            color: #fff
+                            .accordion-body
+                                &.clrd
+                                    background: #2b2b2b
+                .tableAccordionBx
+                    .detailFlx
+                        .accordion
+                            border-radius: 0
+                            background: #2b2b2b
+                            .accordion-item
+                                border-color: #545454
+                                .accordion-header
+                                    .accordion-button
+                                        background: #2b2b2b
+                                        &>*
+                                            color: #fff
+                                .accordion-body
+                                    background: #2b2b2b
+                                    .title
+                                        color: #fff
+                                    table
+                                        tbody
+                                            td
+                                                background: #545454
+                                                border-color: #2b2b2b
+                                                color: #fff
+                                                &>*
+                                                    color: #fff
+                                .notification
+                                    img
+                                        filter: invert(2) brightness(5)
+
         .privacyPage
             .headBx
                 .mainT
@@ -108,18 +212,43 @@ body
         .registerPage
             #UserLogin
                 .flxBx
+                    background: #2b2b2b
                     .ritBx
                         background: #2b2b2b
+                        .title
+                            color: #fff
+                        .form-control
+                            color: #fff
+                            &::placeholder
+                                color: #fff
                         .topB
                             .title
                                 color: #fff
                             .form-control
                                 color: #fff
+                                border-color: #545454
                                 &::placeholder
                                     color: #fff
+                            .total
+                                color: #fff
                         .btmB
                             p
                                 color: #fff
+                        form
+                            .row
+                                .select2-selection__rendered
+                                    color: #fff !important
+                        .select2
+                            .select2-selection
+                                &::after
+                                    filter: invert(2) brightness(5)
+                        .iti__selected-dial-code
+                            color: #fff !important
+                        .fileUploadInput
+                            .custom-file-upload
+                                color: #fff !important
+                        p
+                            color: #fff
                 .OtpFormBx
                     background: #2b2b2b
                     .ritBx
@@ -131,6 +260,14 @@ body
                                 color: #ffffff6b
                         p
                             color: #fff
+                    .flxBx
+                        .ritBx
+                            .optB
+                                .otp
+                                    border-color: #545454
+                                    color: #fff
+                                    &::placeholder
+                                        color: #fff
         .DashBoard
             #proListing
                 .dashBoardFlx
@@ -170,6 +307,27 @@ body
                     .formBx
                         .title
                             color: #fff
+                        .fileUploadInput
+                            border-color: #545454
+                            .custom-file-upload
+                                color: #fff
+                        .iti__selected-dial-code
+                            color: #fff
+                .otpFLxBx
+                    .otpBx
+                        background: #2b2b2b
+                        &>*
+                            color: #fff
+                        .subT
+                            span
+                                color: #fff
+                        .optB
+                            .otp
+                                background: transparent
+                                color: #fff
+                                border-color: #545454
+                                &::placeholder
+                                    color: #fff
                 .cmnFlxBx
                     .lftBx
                         table
@@ -194,8 +352,22 @@ body
                             .addAddress
                                 .form-control
                                     color: #fff
+                                    border-color: #545454
                                     &::placeholder
                                         color: #fff
+                            .AddressFlx
+                                .ltB
+                                    .item
+                                        .adresBox
+                                            label
+                                                background: #2b2b2b
+                                                .topBFlx
+                                                    .rtB
+                                                        img
+                                                            filter: invert(2) brightness(5)
+                                                .txtBx
+                                                    &>*
+                                                        color: #fff
                         .paymentBx
                             background: #2b2b2b
                             &>*
@@ -224,3 +396,134 @@ body
                         .agree
                             label
                                 color: #fff
+                .TableBx
+                    table
+                        .quantity
+                            background: transparent
+                            &>*
+                                background: transparent
+                                color: #fff
+                                border-color: #545454
+                        tbody
+                            td
+                                background: #2b2b2b
+                                border-color: #545454
+                                color: #fff
+                                &>*
+                                    color: #fff
+                                .delete
+                                    img
+                                        filter: invert(2) brightness(5)
+                                .bid
+                                    background: transparent
+                                    color: #fff
+                                    &::placeholder
+                                        color: #fff
+                                .form-control
+                                    background: transparent
+                                    color: #fff
+                                    &::placeholder
+                                        color: #fff
+                        &.listTable
+                            tbody
+                                tr
+                                    &:first-child
+                                        td
+                                            background: #585858
+                    .txt
+                        color: #fff
+                    .proFlx
+                        .name
+                            color: #fff
+                .mobVew
+                    .accordion
+                        .accordion-item
+                            background: #2b2b2b
+                            border-color: #545454
+                            .accordion-header
+                                .accordion-button
+                                    .flxBx
+                                        .ordrId, .name, .price
+                                            color: #fff
+                                        .notification
+                                            img
+                                                filter: invert(2) grayscale(2) brightness(5)
+                            .accordion-body
+                                .dBlock
+                                    ul
+                                        li
+                                            color: #fff
+                                    .flxBx
+                                        .txt
+                                            color: #fff
+                                    .total
+                                        color: #fff
+                                    .spec
+                                        .ttle, p
+                                            color: #fff
+
+                                .accordion-flush
+                                    .accordion-item
+                                        .accordion-body
+                                            background: #2b2b2b
+                                            ul
+                                                li
+                                                    color: #fff
+
+        #MobMenu
+            background: #2b2b2b
+            border-color: #000
+            ul
+                li
+                    a
+                        .txt
+                            color: #fff
+        .errorPage
+            .allBx
+                background: #2b2b2b
+                .emptyBx
+                    .emptytitle, .subT
+                        color: #fff
+        .shopDetailspage
+            #shopDtlSec
+                .ProInfoSec
+                    .name, .pcode, .mdlNu, .sku, .deliveryInfo
+                        color: #fff
+                    .quantitySec
+                        .label
+                            color: #fff
+                    .deliveryInfo
+                        span
+                            color: #fff
+                    .expectedP
+                        .lbl
+                            color: #fff
+                    .btnBx
+                        .quote
+                            background: $basecolor
+                            &::before
+                                background: $basecolor2
+            #moreInfoSec
+                .title, p
+                    color: #fff
+        .MainHead 
+            .Head
+                color: #fff
+        p
+            color: #fff
+        .vmore
+            color: #fff
+            .icon
+                img
+                    filter: invert(2) brightness(5)
+        #AboutSec 
+            .ritBx 
+                .flxBx 
+                    .rtB 
+                        .flxGrid 
+                            .item 
+                                .flb 
+                                    .count
+                                        color: #fff
+                                .txt
+                                    color: #fff

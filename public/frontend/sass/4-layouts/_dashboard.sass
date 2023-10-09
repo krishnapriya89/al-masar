@@ -293,6 +293,7 @@
                         padding: 10px 15px
                         border-bottom: solid 2px #F5F5F7
                         text-align: center
+                        font-size: 12px
                         @media only screen and (min-width: 468px)
                             padding: 15px 23px
                         &:nth-child(2)
@@ -376,6 +377,9 @@
                 &.flx8
                     &>*
                         width: calc( 100% / 8 )
+                &.flx3
+                    &>*
+                        width: calc( 100% / 3 )
 
             .detailFlx
                 &.flx8
@@ -385,9 +389,17 @@
                                 .accordion-button
                                     &>*
                                         width: calc( 100% / 8 )
+                &.flx3
+                    .accordion
+                        .accordion-item
+                            .accordion-header
+                                .accordion-button
+                                    &>*
+                                        width: calc( 100% / 3 )
 
                 .accordion
                     .accordion-item
+                        border-radius: 0
                         .status
                             padding: 3px 6px
                             min-height: 19px
@@ -412,6 +424,7 @@
                         .flxB
                             display: flex
                             align-items: center
+                            justify-content: center
                             a
                                 font-size: 10px
                                 font-weight: 500
@@ -479,6 +492,7 @@
                                 border: none
                                 outline: none
                                 box-shadow: none
+                                border-radius: 0
                                 &>*
                                     width: calc( 100% / 6 )
                                     text-align: center
@@ -486,8 +500,19 @@
                                     color: #000
                                     font-weight: 500
                                 &::after
+                                    content: ""
                                     position: absolute
                                     right: 13px
+                                    background-image: url(../images/dwn.svg) !important
+                                    background-size: contain
+                                    background-repeat: no-repeat
+                                    width: 9px
+                                    height: 5px
+                                    transform: none
+                                    transition: none
+                                &[aria-expanded="true"]
+                                    &::after
+                                        transform: scale(-1, -1)
 
                         .accordion-body
                             background: #ECECF1
@@ -542,6 +567,10 @@
                                 color: #fff
                                 font-weight: 600
                                 margin: 9px 0 0 auto
+        .mb30
+            margin-bottom: 15px
+            @media only screen and ( min-width: 576px )
+                margin-bottom: 30px
         .sbmt
             width: 182px
             height: 43px
@@ -581,7 +610,7 @@
                                 text-align: center
                                 &:first-child
                                     text-align: left
-                                    width: 60%
+                                    // width: 60%
                     tbody
                         tr
                             td
@@ -593,15 +622,15 @@
                                 border-bottom: solid 1px #F5F5F7
                                 &:first-child
                                     text-align: left
-                                    width: 60%
+                                    // width: 60%
 
                 .nav-tabs
                     border: none
                     .nav-item
-                        width: 140px
+                        min-width: 140px
                         height: 40px
                         @media only screen and ( min-width: 576px )
-                            width: 180px
+                            min-width: 180px
                             height: 44px
 
                         button
@@ -1169,7 +1198,10 @@
                             background: #ff0000
                         &.ntVfd
                             background: #E7151F
-
+                .iti__selected-dial-code
+                    font-size: 13px
+                    font-weight: 400
+                    color: #000
                 .form-control
                     border: solid 1px #C8C8C8
                     border-radius: 5px
@@ -1181,9 +1213,13 @@
                         height: 53px
 
                 .select2
-                    height: 53px
                     border: solid 1px #C8C8C8
                     border-radius: 5px
+                    height: 40px
+                    @media only screen and ( min-width: 992px )
+                        height: 45px
+                    @media only screen and ( min-width: 1441px )
+                        height: 53px
                 .fileUploadInput
                     position: relative
                     display: flex
@@ -1192,8 +1228,12 @@
                     width: 100%
                     border: solid 1px #C8C8C8
                     border-radius: 5px
-                    height: 53px
                     padding: 5px 18px
+                    height: 40px
+                    @media only screen and ( min-width: 992px )
+                        height: 45px
+                    @media only screen and ( min-width: 1441px )
+                        height: 53px
                     .custom-file-upload
                         margin-bottom: 0
                         font-size: 14px
@@ -1248,6 +1288,136 @@
                             border-color: $basecolor
                             span
                                 color: #fff
+            .allAddress
+                background: #fff
+                padding: 30px 20px
+                @media only screen and ( min-width: 768px )
+                    padding: 40px 40px
+                .headFlx
+                    display: flex
+                    align-items: center
+                    justify-content: space-between
+                    margin-bottom: 20px
+                    .title
+                        font-size: 18px
+                        font-weight: 600
+                        color: #000
+                    .addNew
+                        background: #000
+                        height: 32px
+                        min-width: 100px
+                        padding: 2px 7px
+                        border-radius: 21px
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        color: #fff
+                        font-size: 12px
+                        font-weight: 400
+                        text-transform: uppercase
+            .savedAddBx
+                display: flex
+                flex-wrap: wrap
+                margin: -7px -7px
+                @media only screen and ( min-width: 768px )
+                    margin: -10px -10px
+                .item
+                    padding: 7px 7px
+                    width: 100%
+                    @media only screen and ( min-width: 468px )
+                        width: calc( 100% / 2 )
+                    @media only screen and ( min-width: 768px )
+                        padding: 10px 10px
+                    @media only screen and ( min-width: 1200px )
+                        width: calc( 100% / 3 )
+                    .adresBox
+                        position: relative
+                        input[type="radio"]
+                            display: none
+
+                            &:checked + label
+                                position: relative
+                                .topBFlx
+                                    .dfault
+                                        opacity: 1
+                                        visibility: visible
+                        label
+                            border: 1px solid #DBDBDB
+                            border-radius: 6px
+                            background-color: rgb(255, 255, 255)
+                            padding: 8px
+                            width: 100%
+                            position: relative
+                            margin: 0
+                            cursor: pointer
+                            .topBFlx
+                                display: flex
+                                align-items: center
+                                justify-content: space-between
+                                margin-bottom: 5px
+                                .dfault
+                                    opacity: 0
+                                    visibility: hidden
+                                    display: flex
+                                    align-items: center
+                                    .txt
+                                        width: calc( 100% - 13px )
+                                        padding-left: 10px
+                                        font-size: 12px
+                                        font-weight: 400
+                                        color: #000
+                                .edit, .dlt
+                                    img
+                                        height: 13px
+                                .dlt
+                                    margin-left: 7px
+                            .txtBx
+                                padding: 0 10px 10px
+                                @media only screen and ( min-width: 992px )
+                                    padding: 0 20px 20px
+                                .name
+                                    font-size: 14px
+                                    color: rgb(0, 0, 0)
+                                    font-weight: 400
+                                    margin-bottom: 5px
+                                .addres, .tele
+                                    font-size: 14px
+                                    line-height: 20px
+                                    font-weight: 300
+                                    color: #000000
+                                a
+                                    font-size: 14px
+                                    line-height: 20px
+                                    font-weight: 300
+                                    color: #000000
+                                    span
+                                        padding: 0 5px
+            .nav-tabs
+                margin-bottom: 10px
+                .nav-item
+                    min-width: 140px
+                    height: 40px
+                    @media only screen and ( min-width: 576px )
+                        min-width: 180px
+                        height: 44px
+
+                    button
+                        width: 100%
+                        height: 100%
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        font-size: 14px
+                        color: #000
+                        font-weight: 600
+                        border-radius: 0
+                        border: none
+                        outline: none
+                        box-shadow: none
+                        padding: 2px 5px
+                        &.active
+                            background: $basecolor
+                            color: #fff
         .otpFLxBx
             padding: 80px 0 0
             .otpBx
@@ -1812,6 +1982,7 @@
                                         margin-right: 5px
                                     .sts
                                         padding: 1px 4px
+                                        color: #000
                                         &.clr1
                                             background: #CEDDFF
                                         &.clr2
@@ -1838,6 +2009,9 @@
                                     background: #ECECF1
                                     padding: 15px 15px
                                     ul
+                                        &:not(:last-of-type)
+                                            margin-bottom: 25px
+                                            border-bottom: solid 1px #80808050
                                         li
                                             display: flex
                                             font-size: 12px

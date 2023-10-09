@@ -21,11 +21,24 @@ body
     background: $basecolor2
     box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.08)
     border-top: solid 4px #000
+    .topHeader
+        background: $basecolor
+        .flxB
+            display: flex
+            justify-content: center
+        marquee, p
+            font-size: 13px
+            color: #fff
+            font-weight: 400
+            margin: 0
+        marquee
+            max-width: 50%
     .HrMpx
         position: relative
         background-color: #fff
         padding: 6px 0
         border-bottom: solid 1px #F9F9F9
+        z-index: 200
         @media only screen and ( min-width: 992px )
             padding: 0
             z-index: 10
@@ -275,6 +288,7 @@ body
                             opacity: 1
                             visibility: visible
                             transform: translate(0, 0) !important
+                            transition: .5s all
                     #MyaccountDropMenu
                         position: absolute
                         min-width: 250px
@@ -289,7 +303,6 @@ body
                         opacity: 0
                         visibility: hidden
                         transform: translate(0, 25px) !important
-                        transition: .5s all
                         padding: 0px
                         left: 0px !important
                         @media only screen and (min-width: 576px)
@@ -468,6 +481,7 @@ body
             background: #FFE3E5
             height: 25px
             width: 25px
+            position: absolute
             @media only screen and ( min-width: 576px )
                 height: 30px
                 width: 30px
@@ -477,7 +491,7 @@ body
                 @media only screen and ( min-width: 576px )
                     width: 19px
         .dropdown
-            width: calc( 100% - 30px )
+            width: 100%
         button
             width: 100%
             background: transparent
@@ -489,7 +503,9 @@ body
             font-weight: 500
             color: #2E2E2E
             font-size: 12px
+            padding-left: 34px
             @media only screen and ( min-width: 768px )
+                padding-left: 40px
                 font-size: 14px
             @media only screen and ( min-width: 1600px )
                 font-size: 16px
@@ -521,8 +537,7 @@ body
                                 margin-right: 15px
         .dropdown-menu
             padding: 0
-            min-width: 99px
-            left: -36px !important
+            min-width: 100%
             top: 4px !important
             ul
                 li
@@ -573,7 +588,7 @@ body
                         animation: Grow .4s ease-in-out
                         display: block
                         visibility: hidden
-                        z-index: 200
+                        z-index: 2000
                         background-clip: unset
                         min-height: 330px
                     &::-webkit-scrollbar
@@ -712,6 +727,7 @@ body
                     position: unset
                 @media only screen and (max-width: 992px)
                     padding-top: 70px
+                    border-bottom: solid 1px #555454
                 .btnClose
                     position: fixed
                     opacity: 1
@@ -775,9 +791,14 @@ body
                             .accordion-button
                                 display: none
                         @media only screen and (max-width: 1260px)
-                            .dskLnk
-                                display: none
-                        a, button
+                            // .dskLnk
+                            //     display: none
+                        @media only screen and (max-width: 992px)
+                            display: flex
+                            width: 100%
+                            justify-content: space-between
+                            border-bottom: solid 1px #555454
+                        a
                             color: $white
                             outline: none
                             box-shadow: none
@@ -792,7 +813,6 @@ body
                             border-radius: 0
                             margin-bottom: 1px
                             background: none
-                            border-bottom: solid 1px #555454
                             @media only screen and (min-width: 992px)
                                 border: none
                                 padding: 10px 15px
@@ -805,6 +825,23 @@ body
                                 padding: 11px 20px
                             &[aria-expanded="true"], &.active, &:hover
                                 color: $basecolor !important
+                        button
+                            width: 30px
+                            border-radius: 0
+                            padding: 0
+                            display: flex
+                            align-items: center
+                            justify-content: center
+                            background: #3b3b3b
+                            border: none
+                            box-shadow: none
+                            outline: none
+                            display: none
+                            &::after
+                                display: none
+                            svg
+                                fill: #fff
+                                width: 10px
                     .collapsing
                         @media only screen and (min-width: 992px)
                             transition: none !important
@@ -819,6 +856,10 @@ body
                             .accordion-collapse
                                 opacity: 2
                                 visibility: visible
+                        .accordion-header
+                            @media only screen and ( max-width: 992px )
+                                button
+                                    display: flex
     .MenuIcon
         display: flex
         justify-content: center
@@ -830,7 +871,9 @@ body
         height: 17px
         padding: 0px
         z-index: 2000
-        width: 23px
+        width: 18px
+        @media only screen and (min-width: 768px)
+            width: 23px
         @media only screen and (min-width: 992px)
             display: none
         button
@@ -844,7 +887,7 @@ body
             border-radius: 0
             background: none
             height: 100%
-            width: 50px
+            width: 100%
             padding: 0
             span
                 width: 100%
@@ -868,7 +911,7 @@ body
                 span
                     margin: 0
                     width: 100%
-                    background: #fff
+                    background: #000
                     &:nth-child(1)
                         transform: rotate(45deg) translate(0px, 0px)
                     &:nth-child(2)
@@ -879,7 +922,7 @@ body
             opacity: 0
             visibility: hidden
 
-    &.sticky
+    &.StickY
         position: fixed
         width: 100%
         animation-name: fadeInDown
@@ -895,3 +938,13 @@ body
                 opacity: 0
                 visibility: hidden
                 transition: .4s all
+
+    .themeChange
+        margin-right: 10px
+        @media only screen and ( min-width: 992px )
+            display: none
+        svg
+            width: 20px
+            fill: #000
+            @media only screen and ( min-width: 576px )
+                width: 25px

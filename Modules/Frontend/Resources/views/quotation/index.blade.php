@@ -143,7 +143,7 @@
                                                 </div>
                                                 <div class="submit-quotation-div">
                                                     @if ($quotation->quotationDetails->whereIn('status', [0,1])->count() < 1 && $quotation->quotationDetails->where('status', 2)->count() > 0)
-                                                        <a href="{{ route('user.submit-quotation')}}" class="continue hoveranim"><span>Continue
+                                                        <a href="{{ route('checkout', $quotation->uid)}}" class="continue hoveranim"><span>Continue
                                                         to Checkout</span></a>
                                                     @endif
                                                 </div>
@@ -491,9 +491,11 @@
                                         response.quotation_total_bid_price);
 
                                     if(response.submit_quotation) {
-                                        $('.submit-quotation-div').html(`<a href="{{ route('user.submit-quotation')}}" class="continue hoveranim"><span>Continue
+
+                                        var route_val = '{{ route('checkout', '')}}/'+ response.quotation_uid;
+
+                                        $('.submit-quotation-div').html(`<a href="`+route_val+`" class="continue hoveranim"><span>Continue
                                                     to Checkout</span></a>`);
-                                        
                                     }
                                 } else {
                                     toastr.error(response.message);
