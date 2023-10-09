@@ -39,7 +39,7 @@ class CheckoutController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('frontend::checkout.index');
+        return view('frontend::checkout.index', compact('quotation', 'countries', 'billing_addresses', 'shipping_addresses'));
     }
 
     /**
