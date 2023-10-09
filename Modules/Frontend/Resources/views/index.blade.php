@@ -463,31 +463,31 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Name" name="name">
+                                        <input type="text" class="form-control" placeholder="Name" name="name" value="{{old('name')}}">
                                         <div class="help-block d-none">Invalid Input</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Email" name="email">
+                                        <input type="text" class="form-control" placeholder="Email" name="email" value="{{old('email')}}">
                                         <div class="help-block d-none">Invalid Input</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Phone" name="phone">
+                                        <input type="text" class="form-control" placeholder="Phone" name="phone" value="{{old('phone')}}">
                                         <div class="help-block d-none">Invalid Input</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="mobile_code" placeholder="Subject" name="subject">
+                                        <input type="text" class="form-control" id="mobile_code" placeholder="Subject" name="subject" value="{{old('subject')}}">
                                         <div class="help-block d-none">Invalid Input</div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <textarea class="form-control" placeholder="Message" name="message"></textarea>
+                                        <textarea class="form-control" placeholder="Message" name="message">{{old('message')}}</textarea>
                                         <div class="help-block d-none">Invalid Input</div>
                                     </div>
                                 </div>

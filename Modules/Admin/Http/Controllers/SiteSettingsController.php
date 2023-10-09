@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\SiteCommonContent;
+use App\Models\ProductSubCategory;
 
 class SiteSettingsController extends Controller
 {
@@ -18,7 +19,8 @@ class SiteSettingsController extends Controller
     public function edit()
     {
         $common_content = SiteCommonContent::first();
-        return view('admin::site-cms.edit',compact('common_content'));
+        $categories = ProductSubCategory::whereNull('parent_id')->get();
+        return view('admin::site-cms.edit',compact('common_content','categories'));
     }
 
     /**
@@ -44,6 +46,10 @@ class SiteSettingsController extends Controller
         $common_content->twitter_link = $request->twitter_link;
         $common_content->facebook_link = $request->facebook_link;
         $common_content->linkedIn_link = $request->linkedIn_link;
+
+
+
+        $common_content->menu_category = $request->menu_category;
         if($request->hasFile('payment_image'))
         {
             if($common_content->payment_image != '' || $common_content->payment_image != NULL)

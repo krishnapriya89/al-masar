@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('site_common_contents', function (Blueprint $table) {
             $table->id();
+            $table->string('header_note')->nullable();
             $table->string('header_phone_number')->nullable();
             $table->longText('footer_description')->nullable();
             $table->text('address')->nullable();
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->string('instagram_link')->nullable();
             $table->string('twitter_link')->nullable();
             $table->string('linkedIn_link')->nullable();
+            $table->string('menu_category')->nullable();
             $table->timestamps();
         });
     }
