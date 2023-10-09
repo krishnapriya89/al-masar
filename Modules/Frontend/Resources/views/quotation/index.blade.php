@@ -142,7 +142,7 @@
                                                     </table>
                                                 </div>
                                                 <div class="submit-quotation-div">
-                                                    @if ($quotation->quotationDetails->whereIn('status', [0,1])->count() < 1 && $quotation->quotationDetails->where('status', 2)->count() > 0)
+                                                    @if ($quotation->quotationDetails->whereIn('status', [0,1])->count() < 1 && $quotation->acceptedQuotationDetails->count() > 0)
                                                         <a href="{{ route('checkout', $quotation->uid)}}" class="continue hoveranim"><span>Continue
                                                         to Checkout</span></a>
                                                     @endif

@@ -36,7 +36,7 @@ class QuotationController extends Controller
 
         if(!$quotation)
             return response()->json(['status' => false, 'message' => 'Failed to update!']);
-        
+
         if ($quotation->status > 0)
             return response()->json(['status' => false, 'message' => 'Already updated please refresh the page!']);
 
@@ -53,10 +53,8 @@ class QuotationController extends Controller
                 $quotation_detail->remarks = $request->remarks;
                 $quotation_detail->status = $request->status;
 
-                //rejected
-                if($quotation->status == 3){
-                    $quotation_detail->total_bid_price = 0;
-                } else {
+                //accepted
+                if($quotation->status == 2){
                     $quotation_detail->admin_approved_price = $quotation_detail->bid_price;
                 }
 
@@ -109,15 +107,11 @@ class QuotationController extends Controller
             $quotation_detail->admin_approved_price = $quotation_detail->bid_price;
             $quotation_detail->total_bid_price = $quotation_detail->admin_approved_price * $quotation_detail->quantity;
         }
-        //rejected
-        else {
-            $quotation_detail->total_bid_price = 0;
-        }
 
         if ($quotation_detail->save()) {
             $quotation = $quotation_detail->quotation;
 
-            $quotation->total_bid_price = $quotation->quotationDetails->sum('total_bid_price');
+            $quotation->total_bid_price = $quotation->activeQuotationDetails->sum('total_bid_price');
 
             //check if no one is accepted and any one of them is requote
             if ($request->status == 1 || $quotation->quotationDetails->where('status', 1)->count() > 0) {
@@ -125,7 +119,7 @@ class QuotationController extends Controller
                 $quotation->save();
             } else {
                 //check any product quotation accepted then mark quotation table accepted
-                if(($request->status == 2 || $quotation->quotationDetails->where('status', 2)->count() > 0) && $quotation->quotationDetails->where('status', 1)->count() == 0) {
+                if(($request->status == 2 || $quotation->acceptedQuotationDetails->count() > 0) && $quotation->quotationDetails->where('status', 1)->count() == 0) {
                     $quotation->status = 2;
                     $quotation->save();
                 }
@@ -157,7 +151,7 @@ class QuotationController extends Controller
                 $quotation_status_class = 'clr4';
                 $quotation_status_value = 'Waiting for approval';
             }
-            
+
             return response()->json([
                 'status' => true,
                 'quotation_uid' => $quotation->uid,

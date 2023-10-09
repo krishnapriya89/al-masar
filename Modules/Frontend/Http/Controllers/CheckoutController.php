@@ -21,10 +21,15 @@ class CheckoutController extends Controller
         if(!$uid)
             return to_route('product')->with('error', 'Something went wrong');
 
-        $quotation = Quotation::where('uid', $uid)->where('user_id', Auth::guard('web')->id())->first();
+        $quotation = Quotation::where('uid', $uid)
+                        ->where('user_id', Auth::guard('web')->id())
+                        ->whereHas('quotationDetails', function($query) {
+                            $query->where('status', 2);
+                        })
+                        ->first();
 
         if(!$quotation)
-            return to_route('product')->with('error', 'No Quotation found');
+            return to_route('product')->with('error', 'No accepted quotations were found.');
 
         $countries          = Country::all();
         $billing_addresses  = UserAddress::where('user_id', auth()->id())
