@@ -3,7 +3,7 @@
         <div class="container">
             <div class="HrMfLx">
                 <div class="WsMLgo">
-                    <a href="{{ route('home')}}" class="LoGo">
+                    <a href="{{ route('home') }}" class="LoGo">
                         <svg viewBox="0 0 275.731 78">
                             <g id="Group_438" data-name="Group 438" transform="translate(-109.238 315)">
                                 <g id="Group_435" data-name="Group 435" transform="translate(109.238 -315)">
@@ -219,10 +219,10 @@
                 <div class="ritWERTbx">
                     <div class="HrMfLxRt">
                         <div class="WtSrCh">
-                            <form action="">
+                            <form action="{{ route('product') }}">
                                 <div class="flxB">
-                                    <input type="search" class="form-control" required name="search" id="search"
-                                        placeholder="Search for Products">
+                                    <input type="search" class="form-control main-search-input"
+                                        name="search" id="search" placeholder="Search for Products">
                                     <button type="submit">
                                         <svg viewBox="0 0 19.993 20">
                                             <g id="layer1" transform="translate(0 0)">
@@ -232,6 +232,12 @@
                                             </g>
                                         </svg>
                                     </button>
+                                    {{-- search modal --}}
+                                    <div class="focusBx">
+                                        <ul class="results">
+                                            @include('frontend::includes.modal_search_product_list')
+                                        </ul>
+                                    </div>
                                 </div>
                             </form>
                         </div>

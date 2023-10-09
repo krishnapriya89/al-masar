@@ -99,4 +99,13 @@ class Product extends Model
     public function gallery() {
         return $this->hasMany(ProductGallery::class);
     }
+
+    public function category(){
+        return $this->belongsTo(ProductMainCategory::class,'product_main_category_id');
+    }
+
+    public function subCategory()
+    {
+        return $this->belongsTo(ProductSubCategory::class,'product_sub_category_id');
+    }
 }

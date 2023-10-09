@@ -93,6 +93,8 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::post('/update-default',[UserController::class,'updateDefault'])->name('update-default');
     //destroy address
     Route::post('/address-destroy',[UserController::class,'destroyAddress'])->name('address-destroy');
+    //product-search
+    Route::get('product-search',[ProductController::class,'searchProduct'])->name('product-search');
 });
 //home
 Route::get('/',[HomeController::class,'index'])->name('home');
