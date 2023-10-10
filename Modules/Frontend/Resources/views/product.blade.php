@@ -31,8 +31,8 @@
                                 <th>Specifications</th>
                                 <th>Model Number</th>
                                 <th>Required Quantity</th>
-                                <th>Actual Price</th>
-                                <th>Bid Price</th>
+                                <th>Actual Price(Per Unit)</th>
+                                <th>Bid Price(Per Unit)</th>
                                 <th>Details</th>
                                 <th>Add To Quote</th>
                             </tr>

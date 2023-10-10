@@ -1,12 +1,7 @@
 @extends('frontend::layouts.app')
 @section('title', 'Checkout')
-
 @section('content')
-
-
     <div id="pageWrapper" class="DashBoard InnerPage">
-
-
         <section id="proListing">
             <div class="breadCrumb">
                 <div class="container">
@@ -26,10 +21,8 @@
                         <div class="Stitle">Checkout</div>
                     </div>
                 </div>
-
                 <div class="cmnFlxBx">
                     <div class="lftBx">
-
                         <div class="tableAccordionBx DskTop mb30">
                             <div class="headBxFlx flx3">
                                 <div class="item">Order ID</div>
@@ -101,7 +94,6 @@
                                                     <div class="ordrId"><span>Order ID: </span>{{ $quotation->uid }}
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </button>
                                     </h2>
@@ -131,7 +123,6 @@
                                                     <div id="flush-collapseOne" class="accordion-collapse collapse"
                                                         aria-labelledby="flush-headingOne" data-bs-parent="#dtailAccord">
                                                         <div class="accordion-body">
-
                                                             @foreach ($quotation->acceptedQuotationDetails as $quotation_detail)
                                                                 <ul>
                                                                     <li><span>Product
@@ -152,7 +143,6 @@
                                                                     </li>
                                                                 </ul>
                                                             @endforeach
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -162,7 +152,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
@@ -175,14 +164,12 @@
                                     Address</button>
                             </li>
                         </ul>
-                        <div class="tab-content billing-address-tab-content" id="myTabContent">
+                        <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel"
                                 aria-labelledby="home-tab">
                                 <div class="AddressFlx">
                                     <div class="ltB billing-address-div">
-                                        @foreach ($billing_addresses as $billing_address)
-
-                                        @endforeach
+                                        @include('frontend::includes.billing-address-list')
                                     </div>
                                     <div class="rtB">
                                         <div class="newAdress">
@@ -196,10 +183,11 @@
                                     </div>
                                 </div>
                                 <div class="accordion-item addAddress">
-                                    <div id="BillingAddAddress" class="accordion-collapse collapse"
+                                    <div id="BillingAddAddress" class="accordion-collapse collapse {{ $billing_addresses->count() == 0 ? 'show' : ''}}"
                                         data-bs-parent="#BillingAddAddressAcord">
                                         <div class="accordion-body">
-                                            <form action="{{ route('store-billing-address') }}" id="BillingForm" method="post">
+                                            <form action="{{ route('store-billing-address') }}" id="BillingForm"
+                                                method="post">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-sm-6">
@@ -223,7 +211,7 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <input type="text" id="" class="form-control"
-                                                                placeholder="Address*" name="address_one">
+                                                                placeholder="Address Line*" name="address_one">
                                                         </div>
                                                         @error('address_one')
                                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -232,7 +220,7 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <input type="text" id="" class="form-control"
-                                                                placeholder="Address2" name="address_two">
+                                                                placeholder="Address Line Two" name="address_two">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
@@ -264,7 +252,7 @@
                                                     </div>
                                                     <div class="col-lg-4 col-sm-6">
                                                         <div class="form-group">
-                                                            <select class="select country" data-select2-id="select2-Due1"
+                                                            <select class="select billing-country" data-select2-id="select2-Due1"
                                                                 aria-label="Default select example" name="country">
                                                                 <option selected value="" disabled>Country*</option>
                                                                 @foreach ($countries as $country)
@@ -288,9 +276,9 @@
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
-                                                            <select class="select" data-select2-id="select2-Due2"
+                                                            <select class="select billing_state" data-select2-id="select2-Due2"
                                                                 aria-label="Default select example" name="state"
-                                                                id="state">
+                                                                id="billing_state">
                                                                 <option selected value="" disabled>State*</option>
                                                             </select>
                                                         </div>
@@ -316,48 +304,8 @@
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="AddressFlx">
-                                    <div class="ltB">
-                                        @foreach ($shipping_addresses as $shipping_address)
-                                            <div class="item">
-                                                <div class="adresBox">
-                                                    <input type="radio"
-                                                        id="add{{ $billing_addresses->count() + $loop->iteration }}"
-                                                        name="shipping_address"
-                                                        {{ $shipping_address->is_default ? 'checked' : '' }}>
-                                                    <label for="add1">
-                                                        <div class="topBFlx">
-                                                            <div class="dfault">
-                                                                <img src="{{ asset('frontend/images/dflt.svg') }}"
-                                                                    alt="">
-                                                            </div>
-                                                            <div class="rtB">
-                                                                <a href="javascript:void(0)" class="edit">
-                                                                    <img src="{{ asset('frontend/images/edit.svg') }}"
-                                                                        alt="">
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="dlt">
-                                                                    <img src="{{ asset('frontend/images/delete.svg') }}"
-                                                                        alt="">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="txtBx">
-                                                            <div class="name">{{ $shipping_address->full_name }}</div>
-                                                            <div class="addres">{{ $shipping_address->full_address }},
-                                                                <br>{{ $shipping_address->state->title }},
-                                                                {{ $shipping_address->country->title }}
-                                                            </div>
-                                                            <div class="tele">Mobile:
-                                                                <span>{{ $shipping_address->phone_number }}</span>
-                                                            </div>
-                                                            <div class="tele">Email:
-                                                                <span>{{ $shipping_address->email }}</span>
-                                                            </div>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        @endforeach
+                                    <div class="ltB shipping-address-div">
+                                        @include('frontend::includes.shipping-address-list')
                                     </div>
                                     <div class="rtB">
                                         <div class="newAdress">
@@ -371,10 +319,11 @@
                                     </div>
                                 </div>
                                 <div class="accordion-item addAddress">
-                                    <div id="ShippingAddAddress" class="accordion-collapse collapse"
+                                    <div id="ShippingAddAddress" class="accordion-collapse collapse {{ $shipping_addresses->count() == 0 ? 'show' : ''}}"
                                         data-bs-parent="#ShippingAddAddressAcord">
                                         <div class="accordion-body">
-                                            <form action="{{ route('store-shipping-address') }}" method="post">
+                                            <form action="{{ route('store-shipping-address') }}" id="ShippingForm"
+                                                method="post">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-sm-6">
@@ -398,7 +347,7 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <input type="text" id="" class="form-control"
-                                                                placeholder="Address*" name="address_one">
+                                                                placeholder="Address Line*" name="address_one">
                                                         </div>
                                                         @error('address_one')
                                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -407,12 +356,12 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <input type="text" id="" class="form-control"
-                                                                placeholder="Address2" name="address_two">
+                                                                placeholder="Address Line Two" name="address_two">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <input type="email" id="" class="form-control"
+                                                            <input type="email" id="email" class="form-control"
                                                                 placeholder="Email*" name="email">
                                                         </div>
                                                         @error('email')
@@ -439,7 +388,7 @@
                                                     </div>
                                                     <div class="col-lg-4 col-sm-6">
                                                         <div class="form-group">
-                                                            <select class="select country" data-select2-id="select2-Due1"
+                                                            <select class="select shipping-country" data-select2-id="select2-Due1"
                                                                 aria-label="Default select example" name="country">
                                                                 <option selected value="" disabled>Country*</option>
                                                                 @foreach ($countries as $country)
@@ -463,9 +412,9 @@
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
-                                                            <select class="select" data-select2-id="select2-Due2"
+                                                            <select class="select shipping_state" data-select2-id="select2-Due2"
                                                                 aria-label="Default select example" name="state"
-                                                                id="state">
+                                                                id="shipping_state">
                                                                 <option selected value="" disabled>State*</option>
                                                             </select>
                                                         </div>
@@ -490,7 +439,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="paymentBx">
                             <div class="Title">Select Payment Method</div>
                             <div class="paymentBox">
@@ -570,21 +518,14 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
-
-
-
-
     </div>
-
 @endsection
-
 @push('js')
     <script>
-        $('.country').change(function() {
-            var selectedCountry = $(".country option:selected").val();
+        $('.billing-country').change(function() {
+            var selectedCountry = $(".billing-country option:selected").val();
             $.ajax({
                 type: "GET",
                 url: "/select-state",
@@ -593,22 +534,33 @@
                 },
                 dataType: "json",
                 success: function(result) {
-                    console.log(result);
-                    $('#state').empty();
-                    var state_id = '';
-                    @if (old('state'))
-                        state_id = '{{ old('state') }}';
-                    @endif
-                    $('#state').append('<option selected value=""> State* </option>');
-                    var selected_value = '';
+                    $('.billing_state').empty();
+                    $('.billing_state').append('<option selected value=""> State* </option>');
                     $.each(result, function(key, value) {
-                        if (state_id == value.id)
-                            var selected_value = 'selected';
-                        $('#state').append('<option ' + selected_value + ' value= ' + value.id +
+                        $('.billing_state').append('<option value= ' + value.id +
                             ' > ' + value.title + ' </option>');
                     });
                 }
+            });
+        });
 
+        $('.shipping-country').change(function() {
+            var selectedCountry = $(".shipping-country option:selected").val();
+            $.ajax({
+                type: "GET",
+                url: "/select-state",
+                data: {
+                    countryId: selectedCountry
+                },
+                dataType: "json",
+                success: function(result) {
+                    $('.shipping_state').empty();
+                    $('.shipping_state').append('<option selected value=""> State* </option>');
+                    $.each(result, function(key, value) {
+                        $('.shipping_state').append('<option value= ' + value.id +
+                            ' > ' + value.title + ' </option>');
+                    });
+                }
             });
         });
 
@@ -617,10 +569,8 @@
         $('.billing-address-submit').click(function(e) {
             clearTimeout(billingDebounceTimer);
             e.preventDefault();
-
             var _this = $(this);
             _this.prop('disabled', true);
-
             var form = document.getElementById("BillingForm");
             let formData = new FormData(form);
             billingDebounceTimer = setTimeout(function() {
@@ -637,7 +587,16 @@
                         }
                     })
                     .done(function(response) {
-                        toastr.success('Address created successfully')
+                        if(response.status) {
+                            $('#BillingForm')[0].reset();
+                            $('.shipping-country').val('').trigger("change");
+                            _this.prop("disabled", false);
+                            $('.accordion-item #BillingAddAddress').removeClass('show')
+                            $('.billing-address-div').empty().html(response.address);
+                            toastr.success('Billing Address created successfully');
+                        } else {
+                            toastr.error('Something went wrong');
+                        }
                     })
                     .fail(function(response) {
                         _this.prop("disabled", false);
@@ -645,6 +604,55 @@
                             var msg = '<span class="error invalid-feedback" for="' +
                                 field_name + '">' + error + '</span>';
                             $("#BillingForm").find('input[name="' + field_name +
+                                    '"], select[name="' + field_name + '"], textarea[name="' +
+                                    field_name + '"]')
+                                .removeClass('is-valid').addClass('is-invalid').attr(
+                                    "aria-invalid", "true").after(msg);
+                        });
+                    });
+            }, 300);
+        });
+
+        //shipping address create
+        var shippingDebounceTimer;
+        $('.shipping-address-submit').click(function(e) {
+            clearTimeout(shippingDebounceTimer);
+            e.preventDefault();
+            var _this = $(this);
+            _this.prop('disabled', true);
+            var form = document.getElementById("ShippingForm");
+            let formData = new FormData(form);
+            shippingDebounceTimer = setTimeout(function() {
+                $.ajax({
+                        type: 'POST',
+                        url: '{{ route('store-shipping-address') }}',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        beforeSend: function() {
+                            $('#ShippingForm').find('input, select, textarea').removeClass(
+                                'is-invalid');
+                            $('.invalid-feedback').remove();
+                        }
+                    })
+                    .done(function(response) {
+                        if(response.status) {
+                            $('#ShippingForm')[0].reset();
+                            $('.shipping-country').val('').trigger("change");
+                            _this.prop("disabled", false);
+                            $('.accordion-item #ShippingAddAddress').removeClass('show')
+                            $('.shipping-address-div').empty().html(response.address);
+                            toastr.success('Shipping Address created successfully');
+                        } else {
+                            toastr.error('Something went wrong');
+                        }
+                    })
+                    .fail(function(response) {
+                        _this.prop("disabled", false);
+                        $.each(response.responseJSON.errors, function(field_name, error) {
+                            var msg = '<span class="error invalid-feedback" for="' +
+                                field_name + '">' + error + '</span>';
+                            $("#ShippingForm").find('input[name="' + field_name +
                                     '"], select[name="' + field_name + '"], textarea[name="' +
                                     field_name + '"]')
                                 .removeClass('is-valid').addClass('is-invalid').attr(

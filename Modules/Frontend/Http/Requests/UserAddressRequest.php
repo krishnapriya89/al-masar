@@ -16,12 +16,12 @@ class UserAddressRequest extends FormRequest
         $rules = [
             'first_name' => 'required|regex:/^[A-Za-z\s]+$/', 'min:3', 'max:25',
             'last_name'  => 'required|regex:/^[A-Za-z\s]+$/', 'min:3', 'max:25',
-            'address_one'=>'required',
-            'city'       => 'required',
+            'address_one'=>'required|min:3',
+            'city'       => 'required|min:2',
             'email'       => 'required|email|max:255',
-            'phone_number' => 'required',
+            'phone_number' => 'required|regex:/^\+?[0-9]{1,4}[-\s]?[0-9]{6,14}$/',
             'country'    =>'required',
-            'zip_code'   => 'required',
+            'zip_code'   => 'required|integer|min_digits:6|max_digits:8',
             'state'      => 'required'
         ];
 
@@ -36,5 +36,14 @@ class UserAddressRequest extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    public function messages()
+    {
+        $messages = [
+            'phone_number.regex' => 'The phone number field has invalid data',
+        ];
+
+        return $messages;
     }
 }

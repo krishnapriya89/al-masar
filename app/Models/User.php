@@ -69,8 +69,15 @@ class User extends Authenticatable
         return $this->hasMany(UserEmailVerify::class);
     }
 
-    public function addresses(): HasMany
+    public function billingAddresses(): HasMany
     {
-        return $this->hasMany(UserAddress::class);
+        return $this->hasMany(UserAddress::class)->where('type', 1)->orderBy('is_default', 'desc')
+            ->orderBy('created_at', 'desc');
+    }
+
+    public function shippingAddresses(): HasMany
+    {
+        return $this->hasMany(UserAddress::class)->where('type', 2)->orderBy('is_default', 'desc')
+            ->orderBy('created_at', 'desc');
     }
 }

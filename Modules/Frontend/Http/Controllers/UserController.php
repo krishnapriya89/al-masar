@@ -8,6 +8,7 @@ use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Frontend\Http\Requests\UserAddressRequest;
@@ -76,17 +77,22 @@ class UserController extends Controller
         $billing_address->is_default        = 1;
 
         if ($billing_address->save()) {
-            if($request->isAjax()){
+            if($request->ajax()){
+                $user = $billing_address->user;
+                $billing_addresses = $user->billingAddresses;
+                $addresses = View::make('frontend::includes.billing-address-list', compact('billing_addresses'))->render();
                 return response()->json([
                     'status' => true,
-                    'id' => base64_encode($billing_address->id)
+                    'address' => $addresses
                 ]);
             }
             else
                 return redirect()->route('address')->with('success', 'Billing Address has been Added Successfully!');
         } else {
-            if($request->isAjax()){
-
+            if($request->ajax()){
+                return response()->json([
+                    'status' => false
+                ]);
             }
             else
                 return redirect()->route('address')->with('error', 'Failed to Add Billing Address');
@@ -161,7 +167,7 @@ class UserController extends Controller
      * Store Shipping Address
      *
      */
-    public function storeShippingAddress(Request $request)
+    public function storeShippingAddress(UserAddressRequest $request)
     {
         $existingShippingAddress = UserAddress::where('user_id', auth()->id())
             ->where('type', 2)
@@ -190,11 +196,25 @@ class UserController extends Controller
         }
 
         if ($shipping_address->save()) {
-            // Session::flash('form', 'shipping-address');
-            return redirect()->route('address')->with('success', 'Shipping address has been added successfully.');
+            if($request->ajax()){
+                $user = $shipping_address->user;
+                $shipping_addresses = $user->shippingAddresses;
+                $addresses = View::make('frontend::includes.shipping-address-list', compact('shipping_addresses'))->render();
+                return response()->json([
+                    'status' => true,
+                    'address' => $addresses
+                ]);
+            }
+            else
+                return redirect()->route('address')->with('success', 'Shipping Address has been Added Successfully!');
         } else {
-            // Session::flash('form', 'shipping-address');
-            return redirect()->route('address')->with('error', 'An error occurred while adding the shipping address.');
+            if($request->ajax()){
+                return response()->json([
+                    'status' => false
+                ]);
+            }
+            else
+                return redirect()->route('address')->with('error', 'Failed to Add Shipping Address');
         }
     }
 
