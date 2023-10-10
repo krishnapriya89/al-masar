@@ -75,6 +75,24 @@
                                                     placeholder="Address2" name="address_two" value="{{old('address_two',$billing_address->address_two)}}">
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="email" id="" class="form-control"
+                                                    placeholder="Email*" name="email"  value="{{old('email',$billing_address->email)}}">
+                                            </div>
+                                            @error('email')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" id="" class="form-control"
+                                                    placeholder="Phone Number*" name="phone_number" value="{{old('phone_number',$billing_address->phone_number)}}">
+                                            </div>
+                                            @error('phone_number')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                         <div class="col-lg-4 col-md-6">
                                             <div class="form-group">
                                                 <input type="text" id="" class="form-control"
@@ -86,7 +104,7 @@
                                         </div>
                                         <div class="col-lg-4 col-md-6">
                                             <div class="form-group">
-                                                <select class="select" data-select2-id="select2-Due1"
+                                                <select class="select country" data-select2-id="select2-Due1"
                                                     aria-label="Default select example" name="country">
                                                     <option selected value="" disabled>Country*</option>
                                                     @foreach ($countries as $country)
@@ -102,13 +120,13 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <input type="text" id="" class="form-control"
-                                                    placeholder="Zip Code*" name="zip_code" value="{{old('zip_code'),$billing_address->zip_code}}">
+                                                    placeholder="Zip Code*" name="zip_code" value="{{old('zip_code',$billing_address->zip_code)}}">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <select class="select" data-select2-id="select2-Due2"
-                                                    aria-label="Default select example" name="state">
+                                                    aria-label="Default select example" name="state" id="state">
                                                     <option selected  value="" disabled>State*</option>
                                                     @foreach ($states as $state)
                                                         <option value="{{ $state->id }}" {{$state->id == $billing_address->state_id?'selected' : ''}}>{{ $state->title }}</option>
@@ -169,5 +187,35 @@
                 $(element).removeClass('is-invalid');
             }
         });
+
+        //select state
+$('.country').change(function(){
+   var selectedCountry = $(".country option:selected").val();
+  $.ajax({
+    type : "GET",
+    url : "/select-state",
+    data:{
+        countryId : selectedCountry
+    },
+    dataType:"json",
+    success:function(result)
+    {
+        console.log(result);
+        $('#state').empty();
+            var state_id = '';
+            @if(old('state'))
+                state_id = '{{ old('state') }}';
+            @endif
+        $('#state').append('<option selected value=""> State* </option>');
+        var selected_value = '';
+        $.each(result, function (key, value) {
+            if(state_id == value.id)
+                var selected_value = 'selected';
+            $('#state').append('<option '+ selected_value +' value= '+ value.id +' > '+ value.title +' </option>');
+        });
+    }
+
+  });
+});
     </script>
 @endpush

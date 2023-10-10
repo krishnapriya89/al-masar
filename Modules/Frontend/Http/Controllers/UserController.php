@@ -40,8 +40,7 @@ class UserController extends Controller
     public function addBillingAddress()
     {
         $countries = Country::active()->get();
-        $states = State::active()->get();
-        return view('frontend::user.add-billing-address', compact('countries', 'states'));
+        return view('frontend::user.add-billing-address', compact('countries'));
     }
 
     /**
@@ -66,6 +65,8 @@ class UserController extends Controller
         $billing_address->city              = $request->city;
         $billing_address->zip_code          = $request->zip_code;
         $billing_address->state_id          = $request->state;
+        $billing_address->email              = $request->email;
+        $billing_address->phone_number      = $request->phone_number;
 
         if ($existingBillingAddress) {
             $existingBillingAddress->is_default = 0;
@@ -89,11 +90,8 @@ class UserController extends Controller
     {
         try {
             $billing_address    = UserAddress::find(decrypt($id));
-            // $billing_address    = UserAddress::find($id);
-            // $isFirstAddress     = UserAddress::where('user_id', auth()->id())->where('id', '<', decrypt($id))->where('type', 1)->doesntExist();
-            $countries          = Country::active()->get();
-            $states             = State::active()->get();
-
+            $countries         = Country::active()->get();
+            $states             = State::active()->where('country_id',$billing_address->country_id)->get();
             return view('frontend::user.edit-billing-address', compact('billing_address', 'countries', 'states'));
         } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
             return redirect()->route('user.dashboard');
@@ -121,6 +119,8 @@ class UserController extends Controller
         $billing_address->city              = $request->city;
         $billing_address->zip_code          = $request->zip_code;
         $billing_address->state_id          = $request->state;
+        $billing_address->email             = $request->email;
+        $billing_address->phone_number      = $request->phone_number;
 
         if ($existingBillingAddress) {
             $existingBillingAddress->is_default = 0;
@@ -143,8 +143,7 @@ class UserController extends Controller
     public function addShippingAddress()
     {
         $countries = Country::active()->get();
-        $states = State::active()->get();
-        return view('frontend::user.add-shipping-address', compact('countries', 'states'));
+        return view('frontend::user.add-shipping-address', compact('countries'));
     }
 
     /**
@@ -170,6 +169,8 @@ class UserController extends Controller
         $shipping_address->city              = $request->city;
         $shipping_address->zip_code          = $request->zip_code;
         $shipping_address->state_id          = $request->state;
+        $shipping_address->email             = $request->email;
+        $shipping_address->phone_number      = $request->phone_number;
 
 
         if ($existingShippingAddress) {
@@ -194,8 +195,8 @@ class UserController extends Controller
     {
         try {
             $shipping_address   = UserAddress::find(decrypt($id));
-            $countries          = Country::active()->get();
-            $states             = State::active()->get();
+            $countries         = Country::active()->get();
+            $states             = State::active()->where('country_id',$shipping_address->country_id)->get();
 
             return view('frontend::user.edit-shipping-address', compact('shipping_address', 'countries', 'states'));
         } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
@@ -223,6 +224,9 @@ class UserController extends Controller
         $shipping_address->city              = $request->city;
         $shipping_address->zip_code          = $request->zip_code;
         $shipping_address->state_id          = $request->state;
+        $shipping_address->email             = $request->email;
+        $shipping_address->phone_number      = $request->phone_number;
+
 
         if ($existingShippingAddress) {
             $existingShippingAddress->is_default = 0;
@@ -310,5 +314,15 @@ class UserController extends Controller
             return response()->json(['success' => true, 'flag' => 1, 'defaultId' => $defaultId, 'message' => 'Address deleted successfully.']);
         }
         return response()->json(['success' => false, 'message' => 'An error occurred while deleting the address.']);
+    }
+
+    /**
+     * select state
+     *
+     */
+    public function selectState(Request $request)
+    {
+        $states = State::where('country_id',$request->countryId)->get();
+        return response()->json($states);
     }
 }
