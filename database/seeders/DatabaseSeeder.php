@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CurrencyCodeMasterSeeder::class);
         $this->call(CurrencyRateSeeder::class);
         $this->call(HowToBuySeeder::class);
+        $this->call(OrderStatusSeeder::class);
         $this->call(PrivacyPolicySeeder::class);
         $this->call(ProviderSeeder::class);
         $this->call(ProviderDetailSeeder::class);
@@ -28,7 +29,5 @@ class DatabaseSeeder extends Seeder
         $this->call(TaxManagementSeeder::class);
         $this->call(VendorSeeder::class);
         $this->call(WhyChooseSeeder::class);
-
-
     }
 }
