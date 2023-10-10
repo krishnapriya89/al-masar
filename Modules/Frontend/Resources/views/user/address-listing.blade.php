@@ -54,11 +54,11 @@
                                                 <div class="item" id="address-{{ $billing_address->id }}">
                                                     <div class="adresBox">
                                                         <input type="radio"
-                                                            id="add{{ base64_encode($billing_address->id) }}"
+                                                            id="add{{ $billing_address->id }}"
                                                             class="address-{{ $billing_address->id }} billing-address-radio-btn"
                                                             name="address"
                                                             {{ $billing_address->is_default ? 'checked' : '' }}>
-                                                        <label for="add{{ base64_encode($billing_address->id) }}">
+                                                        <label for="add{{ $billing_address->id }}">
                                                             <div class="topBFlx">
                                                                 <div class="setDefault billingAddress"
                                                                     data-id="{{ $billing_address->id }}"
@@ -105,11 +105,11 @@
                                                 <div class="item" id="address-{{ $shipping_address->id }}">
                                                     <div class="adresBox">
                                                         <input type="radio"
-                                                            id="add{{ base64_encode($shipping_address->id) }}"
+                                                            id="add{{ $shipping_address->id }}"
                                                             class="shippingaddress-{{ $shipping_address->id }} shipping-address-radio-btn"
                                                             name="address"
                                                             {{ $shipping_address->is_default ? 'checked' : '' }}>
-                                                        <label for="add{{ base64_encode($shipping_address->id) }}">
+                                                        <label for="add{{ $shipping_address->id }}">
                                                             <div class="topBFlx">
                                                                 <div class="setDefault shippingAddress"
                                                                     data-id="{{ $shipping_address->id }}"

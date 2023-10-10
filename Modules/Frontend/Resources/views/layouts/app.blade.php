@@ -103,6 +103,10 @@
     <script type="text/javascript" src="{{ asset('frontend/js/custom.js') }}"></script>
     @stack('js')
     <script>
+        var fc_path = "{{ asset('/') }}";
+        var base_path = "{{ url('/') }}";
+    </script>
+    <script>
         $(".select").select2({
             minimumResultsForSearch: Infinity,
             theme: "bootstrap-5",

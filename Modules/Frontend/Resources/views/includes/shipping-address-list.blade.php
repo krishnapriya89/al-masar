@@ -1,5 +1,5 @@
 @foreach ($shipping_addresses as $shipping_address)
-    <div class="item">
+    <div class="item" id="address-{{ $shipping_address->id }}">
         <div class="adresBox">
             <input type="radio" id="add{{ base64_encode($shipping_address->id) }}" name="shipping_address"
                 {{ $shipping_address->is_default ? 'checked' : '' }}>
@@ -12,7 +12,8 @@
                         <a href="javascript:void(0)" class="edit">
                             <img src="{{ asset('frontend/images/edit.svg') }}" alt="">
                         </a>
-                        <a href="javascript:void(0)" class="dlt">
+                        <a href="javascript:void(0)" class="dlt address-delete-btn"
+                        data-id="{{ $shipping_address->id }}">
                             <img src="{{ asset('frontend/images/delete.svg') }}" alt="">
                         </a>
                     </div>

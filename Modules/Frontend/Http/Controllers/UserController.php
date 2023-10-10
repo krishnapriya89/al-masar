@@ -29,9 +29,11 @@ class UserController extends Controller
      */
     public function newAddress()
     {
-        $shipping_addresses = UserAddress::where('user_id',Auth::guard('web')->id())->where('type',2)->get();
-        $billing_addresses = UserAddress::where('user_id',Auth::guard('web')->id())->where('type',1)->get();
-        return view('frontend::user.address-listing',compact('shipping_addresses','billing_addresses'));
+        $shipping_addresses = UserAddress::where('user_id', Auth::guard('web')->id())->where('type', 2)->orderBy('is_default', 'desc')
+            ->orderBy('created_at', 'desc')->get();
+        $billing_addresses = UserAddress::where('user_id', Auth::guard('web')->id())->where('type', 1)->orderBy('is_default', 'desc')
+            ->orderBy('created_at', 'desc')->get();
+        return view('frontend::user.address-listing', compact('shipping_addresses', 'billing_addresses'));
     }
 
     /**
@@ -77,7 +79,7 @@ class UserController extends Controller
         $billing_address->is_default        = 1;
 
         if ($billing_address->save()) {
-            if($request->ajax()){
+            if ($request->ajax()) {
                 $user = $billing_address->user;
                 $billing_addresses = $user->billingAddresses;
                 $addresses = View::make('frontend::includes.billing-address-list', compact('billing_addresses'))->render();
@@ -85,16 +87,14 @@ class UserController extends Controller
                     'status' => true,
                     'address' => $addresses
                 ]);
-            }
-            else
+            } else
                 return redirect()->route('address')->with('success', 'Billing Address has been Added Successfully!');
         } else {
-            if($request->ajax()){
+            if ($request->ajax()) {
                 return response()->json([
                     'status' => false
                 ]);
-            }
-            else
+            } else
                 return redirect()->route('address')->with('error', 'Failed to Add Billing Address');
         }
     }
@@ -108,7 +108,7 @@ class UserController extends Controller
         try {
             $billing_address    = UserAddress::find(decrypt($id));
             $countries         = Country::active()->get();
-            $states             = State::active()->where('country_id',$billing_address->country_id)->get();
+            $states             = State::active()->where('country_id', $billing_address->country_id)->get();
             return view('frontend::user.edit-billing-address', compact('billing_address', 'countries', 'states'));
         } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
             return redirect()->route('user.dashboard');
@@ -196,7 +196,7 @@ class UserController extends Controller
         }
 
         if ($shipping_address->save()) {
-            if($request->ajax()){
+            if ($request->ajax()) {
                 $user = $shipping_address->user;
                 $shipping_addresses = $user->shippingAddresses;
                 $addresses = View::make('frontend::includes.shipping-address-list', compact('shipping_addresses'))->render();
@@ -204,16 +204,14 @@ class UserController extends Controller
                     'status' => true,
                     'address' => $addresses
                 ]);
-            }
-            else
+            } else
                 return redirect()->route('address')->with('success', 'Shipping Address has been Added Successfully!');
         } else {
-            if($request->ajax()){
+            if ($request->ajax()) {
                 return response()->json([
                     'status' => false
                 ]);
-            }
-            else
+            } else
                 return redirect()->route('address')->with('error', 'Failed to Add Shipping Address');
         }
     }
@@ -227,7 +225,7 @@ class UserController extends Controller
         try {
             $shipping_address   = UserAddress::find(decrypt($id));
             $countries         = Country::active()->get();
-            $states             = State::active()->where('country_id',$shipping_address->country_id)->get();
+            $states             = State::active()->where('country_id', $shipping_address->country_id)->get();
 
             return view('frontend::user.edit-shipping-address', compact('shipping_address', 'countries', 'states'));
         } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
@@ -276,7 +274,7 @@ class UserController extends Controller
      */
     public function updateDefault(Request $request)
     {
-        $address = UserAddress::findOrFail($request->input('id'));
+        $address = UserAddress::findOrFail($request->id);
         if ($address) {
             if ($address->is_default == 1) {
                 return response()->json([
@@ -285,7 +283,7 @@ class UserController extends Controller
                 ]);
             }
             $existingBillingAddress = UserAddress::where('user_id', Auth::guard('web')->id())
-                ->where('type',$request->type)
+                ->where('type', $request->type)
                 ->where('is_default', 1)
                 ->first();
             if ($existingBillingAddress) {
@@ -295,7 +293,7 @@ class UserController extends Controller
             $address->is_default = 1;
             if ($address->save()) {
                 return response()->json([
-                    'id'=> $request->id,
+                    'id' => $request->id,
                     'status' => true,
                     'message' => 'Default address changed successfully'
                 ]);
@@ -353,7 +351,7 @@ class UserController extends Controller
      */
     public function selectState(Request $request)
     {
-        $states = State::where('country_id',$request->countryId)->get();
+        $states = State::where('country_id', $request->countryId)->get();
         return response()->json($states);
     }
 }

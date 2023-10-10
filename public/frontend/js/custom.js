@@ -561,7 +561,7 @@ $(".setDefault").click(function () {
 
 // delete address
 $(document).on("click", ".address-delete-btn", function (e) {
-    const id = $(this).data("id");
+    var address_id = $(this).data("id");
 
 
     Swal.fire({
@@ -576,13 +576,12 @@ $(document).on("click", ".address-delete-btn", function (e) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "address-destroy",
+                url: base_path + "/address-destroy",
                 type: "POST",
                 data: {
-                    id: id,
+                    id: address_id,
                 },
                 success: function (response) {
-                    console.log(response);
                     const { success, flag, message, defaultId } = response;
                     if (success) {
                         Swal.fire({
@@ -593,12 +592,12 @@ $(document).on("click", ".address-delete-btn", function (e) {
                             willClose: function () {
                                 if (flag === 1) {
                                     if (defaultId) {
-                                        $("#address-" + id).remove();
+                                        $("#address-" + address_id).remove();
                                         $(
                                             "#selectAddress" + defaultId
                                         ).prop("checked", true);
                                     } else {
-                                        $("#address-" + id).remove();
+                                        $("#address-" + address_id).remove();
                                     }
                                 } else if (flag === 2) {
                                     location.reload();
@@ -650,5 +649,5 @@ $('.main-search-input').on('keyup keypress paste', function(){
     });
 });
 
-  
+
 
