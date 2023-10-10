@@ -21,10 +21,10 @@
                 <div class="carousel-item {{$loop->first ? 'active' :''}}" data-bs-slide="{{$loop->iteration}}">
                     <div class="bnrSld">
                         <picture>
-                            <source media="(min-width: 576px)" srcset="{{$banner->mobile_image_value}}"
-                                data-srcset="{{$banner->mobile_image_value}}" />
-                            <img alt="A lazy image" class="lazy bnrBg" src="{{$banner->image_value}}"
-                                data-src="{{$banner->image_value}}" />
+                            <source media="(min-width: 576px)" srcset="{{$banner->image_value}}"
+                                data-srcset="{{$banner->image_value}}" />
+                            <img alt="A lazy image" class="lazy bnrBg" src="{{$banner->mobile_image_value}}"
+                                data-src="{{$banner->mobile_image_value}}" />
                         </picture>
                         <div class="cntBx">
                             <div class="container">
