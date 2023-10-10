@@ -21,8 +21,8 @@
                 <div class="carousel-item {{$loop->first ? 'active' :''}}" data-bs-slide="{{$loop->iteration}}">
                     <div class="bnrSld">
                         <picture>
-                            <source media="(min-width: 576px)" srcset="{{$banner->image_value}}"
-                                data-srcset="{{$banner->image_value}}" />
+                            <source media="(min-width: 576px)" srcset="{{$banner->mobile_image_value}}"
+                                data-srcset="{{$banner->mobile_image_value}}" />
                             <img alt="A lazy image" class="lazy bnrBg" src="{{$banner->image_value}}"
                                 data-src="{{$banner->image_value}}" />
                         </picture>
@@ -45,12 +45,10 @@
             </div>
             <div class="carousel-indicators">
                 <div class="container">
-                    <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"><span></span></button>
-                    <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"
-                        aria-label="Slide 2"><span></span></button>
-                    <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2"
-                        aria-label="Slide 3"><span></span></button>
+                    @foreach ($home_banners as $banner)
+                    <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="{{$loop->index}}" class="{{ $loop->first ? 'active' : '' }}"
+                        aria-current="{{ $loop->first ? 'true' : '' }}" aria-label="Slide {{$loop->iteration}}"><span></span></button>
+                    @endforeach
                 </div>
             </div>
         </div>

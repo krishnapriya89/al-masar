@@ -30,4 +30,11 @@ class HomeBanner extends Model
         else
             return asset('frontend/images/default-img.png');
     }
+    public function getMobileImageValueAttribute()
+    {
+        if($this->mob_image && Storage::disk('public')->exists($this->mob_image))
+            return Storage::url($this->mob_image);
+        else
+            return asset('frontend/images/default-img.png');
+    }
 }
