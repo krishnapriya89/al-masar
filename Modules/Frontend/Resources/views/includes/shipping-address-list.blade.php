@@ -9,11 +9,12 @@
                         <img src="{{ asset('frontend/images/dflt.svg') }}" alt="">
                     </div>
                     <div class="rtB">
-                        <a href="javascript:void(0)" class="edit">
+                        <a href="javascript:void(0)" data-id="{{ $shipping_address->id }}"
+                            class="edit checkout-edit-shipping-address">
                             <img src="{{ asset('frontend/images/edit.svg') }}" alt="">
                         </a>
                         <a href="javascript:void(0)" class="dlt address-delete-btn"
-                        data-id="{{ $shipping_address->id }}">
+                            data-id="{{ $shipping_address->id }}">
                             <img src="{{ asset('frontend/images/delete.svg') }}" alt="">
                         </a>
                     </div>

@@ -5,12 +5,13 @@ namespace Modules\Frontend\Http\Controllers;
 use App\Models\Country;
 use App\Models\Payment;
 use App\Models\Quotation;
-use App\Models\SiteCommonContent;
-use App\Models\TaxManagement;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
+use App\Models\TaxManagement;
+use App\Models\SiteCommonContent;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Contracts\Support\Renderable;
 
 class CheckoutController extends Controller
@@ -65,63 +66,25 @@ class CheckoutController extends Controller
         return view('frontend::checkout.index', compact('quotation', 'countries', 'billing_addresses', 'shipping_addresses', 'payment_methods', 'site_settings', 'total_tax_amount'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('frontend::create');
-    }
+    //return the address for edit
+    public function  getAddressData(Request $request) {
+        $address = UserAddress::where('id', $request->id)
+                            ->where('user_id', Auth::guard('web')->id())
+                            ->first();
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if(!$address)
+            return response()->json([
+                'status' => false
+            ]);
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('frontend::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('frontend::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        $countries = Country::all();
+        if($request->type == 1)
+            $address = View::make('frontend::includes.billing-address-form', compact('address', 'countries'))->render();
+        else
+            $address = View::make('frontend::includes.shipping-address-form', compact('address', 'countries'))->render();
+        return response()->json([
+            'status' => true,
+            'address' => $address
+        ]);
     }
 }

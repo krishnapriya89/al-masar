@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth.user'], function () {
 
     //checkout
     Route::get('/checkout/{quotation_uid}',[CheckoutController::class, 'index'])->name('checkout');
+    Route::get('/get-address-data',[CheckoutController::class, 'getAddressData'])->name('get-address-data');
 
 
     //notify-me

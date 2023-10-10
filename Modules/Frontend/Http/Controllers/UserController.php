@@ -119,7 +119,7 @@ class UserController extends Controller
      * Update Billing Address
      *
      */
-    public function updateBillingAddress(Request $request, $id)
+    public function updateBillingAddress(UserAddressRequest $request, $id)
     {
         $billing_address            = UserAddress::find($id);
         $existingBillingAddress     = UserAddress::where('user_id', Auth::guard('web')->id())
@@ -147,9 +147,23 @@ class UserController extends Controller
         $billing_address->is_default        = 1;
 
         if ($billing_address->save()) {
-            return redirect()->route('address')->with('success', 'Billing Address has been updated successfully!');
+            if ($request->ajax()) {
+                $user = $billing_address->user;
+                $billing_addresses = $user->billingAddresses;
+                $addresses = View::make('frontend::includes.billing-address-list', compact('billing_addresses'))->render();
+                return response()->json([
+                    'status' => true,
+                    'address' => $addresses
+                ]);
+            } else
+                return redirect()->route('address')->with('success', 'Billing Address has been Updated Successfully!');
         } else {
-            return redirect()->route('address')->with('error', 'Failed to update billing address');
+            if ($request->ajax()) {
+                return response()->json([
+                    'status' => false
+                ]);
+            } else
+                return redirect()->route('address')->with('error', 'Failed to Update Billing Address');
         }
     }
 
@@ -237,13 +251,14 @@ class UserController extends Controller
      * Update Shipping Address
      *
      */
-    public function updateShippingAddress(Request $request, $id)
+    public function updateShippingAddress(UserAddressRequest $request, $id)
     {
         $existingShippingAddress    = UserAddress::where('user_id', Auth::guard('web')->id())
             ->where('type', 2)
             ->where('is_default', 1)
             ->first();
         $shipping_address                   = UserAddress::find($id);
+
         $shipping_address->first_name        = $request->first_name;
         $shipping_address->last_name         = $request->last_name;
         $shipping_address->address_one       = $request->address_one;
@@ -262,10 +277,25 @@ class UserController extends Controller
             $existingShippingAddress->save();
         }
         $shipping_address->is_default        = 1;
+
         if ($shipping_address->save()) {
-            return redirect()->route('address')->with('success', 'Shipping address has been updated successfully');
+            if ($request->ajax()) {
+                $user = $shipping_address->user;
+                $shipping_addresses = $user->shippingAddresses;
+                $addresses = View::make('frontend::includes.shipping-address-list', compact('shipping_addresses'))->render();
+                return response()->json([
+                    'status' => true,
+                    'address' => $addresses
+                ]);
+            } else
+                return redirect()->route('address')->with('success', 'Shipping Address has been Updated Successfully!');
         } else {
-            return redirect()->route('address')->with('error', 'An error occurred while updating the shipping address.');
+            if ($request->ajax()) {
+                return response()->json([
+                    'status' => false
+                ]);
+            } else
+                return redirect()->route('address')->with('error', 'Failed to Update Shipping Address');
         }
     }
 
