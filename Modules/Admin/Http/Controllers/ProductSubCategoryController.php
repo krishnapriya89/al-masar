@@ -109,16 +109,16 @@ class ProductSubCategoryController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy(ProductSubCategory $sub_category)
+    public function destroy(ProductSubCategory $product_sub_category)
     {
-        if($sub_category->products->count() < 1 && $sub_category->children->count() < 1) {
-            if ($sub_category->delete()) {
+        if($product_sub_category->products->count() < 1 && $product_sub_category->children->count() < 1) {
+            if ($product_sub_category->delete()) {
                 return to_route('product-sub-category.index')->with('success', 'Product Sub Category deleted successfully!');
             } else {
-                return to_route('product-sub-category.index')->with('error', 'Failed to delete Product Sub Category '. $sub_category->title);
+                return to_route('product-sub-category.index')->with('error', 'Failed to delete Product Sub Category '. $product_sub_category->title);
             }
         } else {
-            return to_route('product-sub-category.index')->with('error', 'Product Sub Category '. $sub_category->title .' tagged with products or have child categories.');
+            return to_route('product-sub-category.index')->with('error', 'Product Sub Category '. $product_sub_category->title .' tagged with products or have child categories.');
         }
     }
 }
