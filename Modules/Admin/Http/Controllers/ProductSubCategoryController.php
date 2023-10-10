@@ -86,11 +86,13 @@ class ProductSubCategoryController extends Controller
         $product_sub_category->parent_id = $request->sub_category ?? NULL;
         $successMessage = 'Product Sub Category updated successfully!';
         if($request->is_last_child == 1) {
-            if($product_sub_category->children()->count() > 0)
+            if($product_sub_category->children->count() > 0)
                 $successMessage = 'Cannot update the \'last child\' attribute to \'yes\' because it already has child categories. All other data has been updated.';
             else
                 $product_sub_category->is_last_child = $request->is_last_child;
         }
+        else
+            $product_sub_category->is_last_child = $request->is_last_child;
 
         $product_sub_category->sort_order = $request->filled('sort_order') ? $request->sort_order : 0;
         $product_sub_category->status = $request->status;

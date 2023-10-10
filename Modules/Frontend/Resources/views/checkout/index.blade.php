@@ -203,7 +203,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion-item billingaddAddress">
+                            <div class="accordion-item addAddress">
                                 <div id="BillingAddAddress" class="accordion-collapse collapse"
                                     data-bs-parent="#BillingAddAddressAcord">
                                     <div class="accordion-body">
@@ -291,7 +291,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion-item shippingaddAddress">
+                            <div class="accordion-item addAddress">
                                 <div id="ShippingAddAddress" class="accordion-collapse collapse"
                                     data-bs-parent="#ShippingAddAddressAcord">
                                     <div class="accordion-body">
@@ -299,28 +299,38 @@
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" id="Name" name="Name"
-                                                            placeholder="Name" required="">
+                                                        <input type="text" id="" class="form-control"
+                                                            placeholder="First Name*" name="first_name">
                                                     </div>
+                                                    @error('first_name')
+                                                        <span class="invalid-feedback">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" id="Email" name="Email"
-                                                            placeholder="Email" required="">
+                                                        <input type="text" id="" class="form-control"
+                                                            placeholder="Last Name*" name="last_name">
                                                     </div>
+                                                    @error('last_name')
+                                                        <span class="invalid-feedback">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" id="Mobile Number"
-                                                            placeholder="Mobile Number" name="Mobile Number"
-                                                            required="">
+                                                        <input type="text" id="" class="form-control"
+                                                            placeholder="Address*" name="address_one">
                                                     </div>
+                                                    @error('address_one')
+                                                        <span class="invalid-feedback">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <textarea name="Address" class="form-control" id="Address"
-                                                            cols="30" placeholder="Address" rows="10"></textarea>
+                                                        <input type="text" id="" class="form-control"
+                                                            placeholder="Address2" name="address_two">
                                                     </div>
+
+                                                    
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn-submit hoveranim">
@@ -375,19 +385,27 @@
                                     <span>{{ $site_settings->tax_name }} ({{ $site_settings->tax_percentage ? $site_settings->tax_percentage.'%' : ''}}) {{ $site_settings->tax_amount ?  ' +'.$site_settings->tax_amount.'AED' : ''}}</span>
                                 @endif
                             </div>
-                            <div class="rt">{{ $quotation->priceWithSymbol($quotation->converted_total_bid_price)}} <span>{{ $total_tax_amount != 0 ? $total_tax_amount : '' }}</span></div>
+                            <div class="rt">{{ $quotation->priceWithSymbol($quotation->converted_total_bid_price)}}
+                                <span>
+                                    @if ($total_tax_amount != 0)
+                                        @currencySymbolWithConvertedPrice($total_tax_amount)
+                                    @endif
+                                </span>
+                            </div>
                         </li>
+                        <li></li>
                         <li class="total">
                             <div class="lt">Total</div>
                             <div class="rt">{{ $quotation->priceWithSymbol($quotation->converted_total_bid_price + $total_tax_amount)}}</div>
                         </li>
-                        {{-- <li>
+                        <li>
+                            {{--
                             <div class="lt"><span>Minimum amount<br>
                                     to be paid (10%)</span></div>
                             <div class="rt">
                                 $509.00
-                            </div>
-                        </li> --}}
+                            </div>--}}
+                        </li>
                     </ul>
                     {{-- <div class="txt"><span>Delivery by9 Sep, Saturday</span> if ordered before 5:39 PM</div> --}}
                     <div class="agree">
