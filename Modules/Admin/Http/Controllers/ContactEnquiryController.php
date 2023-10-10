@@ -2,10 +2,12 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use App\Models\ContactEnquiry;
+use App\Models\SiteCommonContent;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Contracts\Support\Renderable;
 
 class ContactEnquiryController extends Controller
 {
@@ -59,6 +61,11 @@ class ContactEnquiryController extends Controller
         $contact = ContactEnquiry::find($request->contact_id);
        $contact->reply   = $request->reply;
        $contact->save();
+       $siteSettings = SiteCommonContent::first();
+       Mail::send('frontend::emails.contact-mail-reply', ['contact' => $contact,'siteSettings'=>$siteSettings], function ($message) use($request,$contact,$siteSettings) {
+           $message->to($request->recipient);
+           $message->subject('Al Masar Al Saree - Contact Reply Send Successfully!');
+       });
        return redirect()->back()->with('success','Reply send Successfully!');
     }
 }

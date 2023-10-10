@@ -462,7 +462,7 @@
                                             <div id="cd{{$loop->iteration}}" class="accordion-collapse mgaAccord collapse"
                                                 aria-labelledby="headingOne" data-bs-parent="#menuaccord1">
                                                 <div class="accordion-body">
-                                                    <div class="Stilte">iPhone</div>
+                                                    <div class="Stilte">{{$site_menu->title}}</div>
                                                     <div class="txtB">
                                                         <div class="coloFlx">
                                                             <div class="cl1"></div>
