@@ -4,6 +4,7 @@ namespace Modules\Admin\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\SiteCommonContent;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
@@ -71,16 +72,17 @@ class UserController extends Controller
         $user->admin_verified = 1;
         if($user->save())
         {
-            Mail::send('admin::emails.user-verify-email', ['user' => $user], function ($message) use($user) {
+            $siteSettings = SiteCommonContent::first();
+            Mail::send('admin::emails.user-verify-email', ['user' => $user,'siteSettings'=>$siteSettings], function ($message) use($user) {
                 $message->to($user->email);
                 $message->subject('Al Masar Al Saree - Admin Verification Done');
             });
-            
+
             return response()->json([
                 'status' => true,
             ]);
         }
-        
+
         return response()->json([
             'status' => false,
         ]);

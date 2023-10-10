@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\NotifyProduct;
 use App\Models\PrivacyPolicy;
 use App\Models\ContactEnquiry;
+use App\Models\SiteCommonContent;
 use App\Models\TermsAndCondition;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -76,7 +77,17 @@ class HomeController extends Controller
         $contact_enquiry->phone = $request->phone;
         $contact_enquiry->subject = $request->subject;
         $contact_enquiry->message = $request->message;
-        if ($contact_enquiry->save()) {
+        if ($contact_enquiry->save())
+         {
+            $siteSettings = SiteCommonContent::first();
+            Mail::send('frontend::emails.contact-mail-user', ['contact_enquiry' => $contact_enquiry,'siteSettings'=>$siteSettings], function ($message) use($contact_enquiry,$siteSettings) {
+                $message->to($contact_enquiry->email);
+                $message->subject('Al Masar Al Saree - Contact Send Successfully!');
+            });
+            Mail::send('frontend::emails.contact-mail-admin', ['contact_enquiry' => $contact_enquiry,'siteSettings'=>$siteSettings], function ($message) use($contact_enquiry,$siteSettings) {
+                $message->to($siteSettings->enquiry_receive_email);
+                $message->subject('Al Masar Al Saree - Receive Contact Application !');
+            });
             return redirect()->back()->with('success', 'Contact Form Application Submitted Successfully!');
         }
         return redirect()->back()->with('error', 'Failed to Submit Contact Form Application');
@@ -132,7 +143,8 @@ class HomeController extends Controller
         {
 
             $user_email = $product->user->email;
-            Mail::send('frontend::emails.product-notify-user', ['data' => $product], function ($message) use ($user_email) {
+            $siteSettings = SiteCommonContent::first();
+            Mail::send('frontend::emails.product-notify-user', ['data' => $product,'siteSettings'=>$siteSettings], function ($message) use ($user_email) {
                 $message->to($user_email);
                 $message->subject('You send a product request to notify');
             });
