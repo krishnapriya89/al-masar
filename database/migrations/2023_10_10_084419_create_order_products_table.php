@@ -17,6 +17,9 @@ return new class extends Migration
             $table->foreign('order_detail_id')->references('id')->on('order_details');
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
+            $table->string('product_code')->nullable();
+            $table->string('sku')->nullable();
+            $table->string('specification')->nullable();
             $table->decimal('price', 10, 2)->default(0);
             $table->decimal('bid_price', 10, 2)->default(0);
             $table->string('image')->nullable();
