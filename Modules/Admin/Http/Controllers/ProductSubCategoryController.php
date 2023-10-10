@@ -112,10 +112,24 @@ class ProductSubCategoryController extends Controller
     public function destroy(ProductSubCategory $product_sub_category)
     {
         if($product_sub_category->products->count() < 1 && $product_sub_category->children->count() < 1) {
-            if ($product_sub_category->delete()) {
-                return to_route('product-sub-category.index')->with('success', 'Product Sub Category deleted successfully!');
-            } else {
-                return to_route('product-sub-category.index')->with('error', 'Failed to delete Product Sub Category '. $product_sub_category->title);
+            if($product_sub_category->parent) {
+                if($product_sub_category->childProducts->count() < 1) {
+                    if ($product_sub_category->delete()) {
+                        return to_route('product-sub-category.index')->with('success', 'Product Sub Category deleted successfully!');
+                    } else {
+                        return to_route('product-sub-category.index')->with('error', 'Failed to delete Product Sub Category '. $product_sub_category->title);
+                    }
+                }
+                else {
+                    return to_route('product-sub-category.index')->with('error', 'Product Sub Category '. $product_sub_category->title .' tagged with products.');
+                }
+            }
+            else {
+                if ($product_sub_category->delete()) {
+                    return to_route('product-sub-category.index')->with('success', 'Product Sub Category deleted successfully!');
+                } else {
+                    return to_route('product-sub-category.index')->with('error', 'Failed to delete Product Sub Category '. $product_sub_category->title);
+                }
             }
         } else {
             return to_route('product-sub-category.index')->with('error', 'Product Sub Category '. $product_sub_category->title .' tagged with products or have child categories.');

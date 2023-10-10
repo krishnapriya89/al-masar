@@ -40,8 +40,6 @@ class ProductMainCategory extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'product_tagged_main_categories');
+        return $this->hasMany(Product::class);
     }
-
-    
 }
