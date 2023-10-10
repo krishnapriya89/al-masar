@@ -50,7 +50,7 @@
         }
 
         let tabChange = function(val) {
-            let ele = document.querySelectorAll('input');
+            let ele = document.querySelectorAll('.otp');
             if (ele[val - 1].value != '') {
                 ele[val].focus()
             } else if (ele[val - 1].value == '') {

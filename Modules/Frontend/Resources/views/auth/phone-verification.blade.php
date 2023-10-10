@@ -42,7 +42,7 @@
         }
 
         let tabChange = function(val) {
-            let ele = document.querySelectorAll('input');
+            let ele = document.querySelectorAll('.otp');
             if (ele[val - 1].value != '') {
                 ele[val].focus()
             } else if (ele[val - 1].value == '') {
@@ -53,7 +53,7 @@
         var debounceTimer;
         $('.phone-otp-form-btn').on('click', function(e) {
             var required = 0;
-            // Loop through each input field with class "otp"
+            // Loop through each input field with class "otp" to check any field is null
             $( ".otp" ).each(function( index ) {
                 if($(this).val() == undefined || $(this).val() == '')
                     required++;
@@ -105,7 +105,7 @@
                         }, 1000);
                     });
                 }, 300);
-            }  
+            }
             else
                 $('.error-span').empty().html('Please enter otp');
         });
