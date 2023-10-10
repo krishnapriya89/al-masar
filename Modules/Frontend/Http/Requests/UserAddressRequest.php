@@ -15,9 +15,11 @@ class UserAddressRequest extends FormRequest
     {
         $rules = [
             'first_name' => 'required|regex:/^[A-Za-z\s]+$/', 'min:3', 'max:25',
-            'last_name'  => 'nullable|regex:/^[A-Za-z\s]+$/', 'min:3', 'max:25',
+            'last_name'  => 'required|regex:/^[A-Za-z\s]+$/', 'min:3', 'max:25',
             'address_one'=>'required',
             'city'       => 'required',
+            'email'       => 'required|email|max:255',
+            'phone_number' => 'required',
             'country'    =>'required',
             'zip_code'   => 'required',
             'state'      => 'required'

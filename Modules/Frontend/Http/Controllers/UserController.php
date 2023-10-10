@@ -47,7 +47,7 @@ class UserController extends Controller
      * Store Billing Address
      *
      */
-    public function storeBillingAddress(Request $request, UserAddress $billing_address)
+    public function storeBillingAddress(UserAddressRequest $request, UserAddress $billing_address)
     {
         $existingBillingAddress     = UserAddress::where('user_id', Auth::guard('web')->id())
             ->where('type', 1)
@@ -76,9 +76,20 @@ class UserController extends Controller
         $billing_address->is_default        = 1;
 
         if ($billing_address->save()) {
-            return redirect()->route('address')->with('success', 'Billing Address has been Added Successfully!');
+            if($request->isAjax()){
+                return response()->json([
+                    'status' => true,
+                    'id' => base64_encode($billing_address->id)
+                ]);
+            }
+            else
+                return redirect()->route('address')->with('success', 'Billing Address has been Added Successfully!');
         } else {
-            return redirect()->route('address')->with('error', 'Failed to Add Billing Address');
+            if($request->isAjax()){
+
+            }
+            else
+                return redirect()->route('address')->with('error', 'Failed to Add Billing Address');
         }
     }
 

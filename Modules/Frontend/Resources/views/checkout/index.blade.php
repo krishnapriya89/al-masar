@@ -236,34 +236,109 @@
                                     <div id="BillingAddAddress" class="accordion-collapse collapse"
                                         data-bs-parent="#BillingAddAddressAcord">
                                         <div class="accordion-body">
-                                            <form action="" method="post">
+                                            <form action="{{ route('store-billing-address') }}" id="BillingForm" method="post">
+                                                @csrf
                                                 <div class="row">
-                                                    <div class="col-sm-4">
+                                                    <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id="Name"
-                                                                name="Name" placeholder="Name" required="">
+                                                            <input type="text" id="" class="form-control"
+                                                                placeholder="First Name*" name="first_name">
                                                         </div>
+                                                        @error('first_name')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <input type="text" id="" class="form-control"
+                                                                placeholder="Last Name*" name="last_name">
+                                                        </div>
+                                                        @error('last_name')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <input type="text" id="" class="form-control"
+                                                                placeholder="Address*" name="address_one">
+                                                        </div>
+                                                        @error('address_one')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <input type="text" id="" class="form-control"
+                                                                placeholder="Address2" name="address_two">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <input type="email" id="email" class="form-control"
+                                                                placeholder="Email*" name="email">
+                                                        </div>
+                                                        @error('email')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <input type="text" id="" class="form-control"
+                                                                placeholder="Phone Number*" name="phone_number">
+                                                        </div>
+                                                        @error('phone_number')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-lg-4 col-sm-6">
+                                                        <div class="form-group">
+                                                            <input type="text" id="" class="form-control"
+                                                                placeholder="City*" name="city">
+                                                        </div>
+                                                        @error('city')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-lg-4 col-sm-6">
+                                                        <div class="form-group">
+                                                            <select class="select country" data-select2-id="select2-Due1"
+                                                                aria-label="Default select example" name="country">
+                                                                <option selected value="" disabled>Country*</option>
+                                                                @foreach ($countries as $country)
+                                                                    <option value="{{ $country->id }}">
+                                                                        {{ $country->title }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        @error('country')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id="Email"
-                                                                name="Email" placeholder="Email" required="">
+                                                            <input type="text" id="" class="form-control"
+                                                                placeholder="Zip Code*" name="zip_code">
                                                         </div>
+                                                        @error('zip_code')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
-                                                    <div class="col-sm-4">
+                                                    <div class="col-sm-12">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id="Mobile Number"
-                                                                placeholder="Mobile Number" name="Mobile Number"
-                                                                required="">
+                                                            <select class="select" data-select2-id="select2-Due2"
+                                                                aria-label="Default select example" name="state"
+                                                                id="state">
+                                                                <option selected value="" disabled>State*</option>
+                                                            </select>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <textarea name="Address" class="form-control" id="Address" cols="30" placeholder="Address" rows="10"></textarea>
-                                                        </div>
+                                                        @error('state')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn-submit hoveranim">
+                                                <input type="hidden" value="1" name="type" id="type">
+                                                <button type="button"
+                                                    class="btn-submit hoveranim billing-address-submit">
                                                     <span>Save address</span>
                                                 </button>
                                             </form>
@@ -336,7 +411,8 @@
                                     <div id="ShippingAddAddress" class="accordion-collapse collapse"
                                         data-bs-parent="#ShippingAddAddressAcord">
                                         <div class="accordion-body">
-                                            <form action="" method="post">
+                                            <form action="{{ route('store-shipping-address') }}" method="post">
+                                                @csrf
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
@@ -408,7 +484,6 @@
                                                                         {{ $country->title }}</option>
                                                                 @endforeach
                                                             </select>
-
                                                         </div>
                                                         @error('country')
                                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -419,6 +494,9 @@
                                                             <input type="text" id="" class="form-control"
                                                                 placeholder="Zip Code*" name="zip_code">
                                                         </div>
+                                                        @error('zip_code')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
@@ -428,9 +506,14 @@
                                                                 <option selected value="" disabled>State*</option>
                                                             </select>
                                                         </div>
+                                                        @error('state')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn-submit hoveranim">
+                                                <input type="hidden" value="2" name="type" id="type">
+                                                <button type="button"
+                                                    class="btn-submit hoveranim shipping-address-submit">
                                                     <span>Save address</span>
                                                 </button>
                                             </form>
@@ -564,6 +647,48 @@
                 }
 
             });
+        });
+
+        //billing address create
+        var billingDebounceTimer;
+        $('.billing-address-submit').click(function(e) {
+            clearTimeout(billingDebounceTimer);
+            e.preventDefault();
+
+            var _this = $(this);
+            _this.prop('disabled', true);
+
+            var form = document.getElementById("BillingForm");
+            let formData = new FormData(form);
+            billingDebounceTimer = setTimeout(function() {
+                $.ajax({
+                        type: 'POST',
+                        url: '{{ route('store-billing-address') }}',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        beforeSend: function() {
+                            $('#BillingForm').find('input, select, textarea').removeClass(
+                                'is-invalid');
+                            $('.invalid-feedback').remove();
+                        }
+                    })
+                    .done(function(response) {
+                        toastr.success('Address created successfully')
+                    })
+                    .fail(function(response) {
+                        _this.prop("disabled", false);
+                        $.each(response.responseJSON.errors, function(field_name, error) {
+                            var msg = '<span class="error invalid-feedback" for="' +
+                                field_name + '">' + error + '</span>';
+                            $("#BillingForm").find('input[name="' + field_name +
+                                    '"], select[name="' + field_name + '"], textarea[name="' +
+                                    field_name + '"]')
+                                .removeClass('is-valid').addClass('is-invalid').attr(
+                                    "aria-invalid", "true").after(msg);
+                        });
+                    });
+            }, 300);
         });
     </script>
 @endpush
