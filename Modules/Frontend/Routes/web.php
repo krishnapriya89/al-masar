@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
@@ -10,7 +9,6 @@ use Modules\Frontend\Http\Controllers\UserController;
 use Modules\Frontend\Http\Controllers\ProductController;
 use Modules\Frontend\Http\Controllers\QuotationController;
 use Modules\Frontend\Http\Controllers\QuoteController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +20,6 @@ use Modules\Frontend\Http\Controllers\QuoteController;
 |
 */
 Route::get('change-currency/{country}', [HomeController::class, 'changeCurrency'])->name('change-currency');
-
 //user registration and login
 Route::get('/register', [AuthController::class,'showRegisterForm'])->name('user.register.form');
 Route::post('/register-store', [AuthController::class,'register'])->name('user.register.store');
@@ -37,7 +34,6 @@ Route::post('/resend-login-otp', [AuthController::class,'resendLoginOtp'])->name
 Route::post('/verify-login-otp', [AuthController::class, 'verifyLoginOtp'])->name('user.verify-login-otp');
 //email verification
 Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('user.email.verify');
-
 //cms
 //privacy policy
 Route::get('privacy-policy',[HomeController::class,'privacyPolicy'])->name('privacy-policy');
@@ -45,16 +41,12 @@ Route::get('privacy-policy',[HomeController::class,'privacyPolicy'])->name('priv
 Route::get('terms-and-conditions',[HomeController::class,'termsAndConditions'])->name('terms-and-conditions');
 //store contact enquiry
 Route::post('contact-enquiry',[HomeController::class,'storeContact'])->name('contact-enquiry');
-
 Route::group(['middleware' => 'auth.user'], function () {
-
     //logout
     Route::post('logout', [AuthController::class,'logout'])->name('user.logout');
-
     //cms
     //about
     Route::get('about',[HomeController::class,'about'])->name('about');
-
     //E-commerce
     //product
     Route::get('/product',[ProductController::class,'products'])->name('product');
@@ -64,7 +56,6 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::get('product-detail/{slug}',[ProductController::class,'productDetailPage'])->name('product-detail');
     //category listing
     Route::get('product-category/{slug}',[ProductController::class,'category'])->name('product-category');
-
     //quote functionalities
     Route::get('/quote',[QuoteController::class, 'index'])->name('quote');
     Route::post('/add-to-quote',[QuoteController::class, 'addToQuote'])->name('add-to-quote');
@@ -72,24 +63,19 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::post('/remove-from-quote',[QuoteController::class, 'removeFromQuote'])->name('remove-from-quote');
     Route::get('/clear-quote',[QuoteController::class, 'quoteEmpty'])->name('clear-quote');
     Route::get('/submit-quote',[QuoteController::class, 'submitQuote'])->name('user.submit-quote');
-
     //quotation functionalities
     Route::get('/quotation',[QuotationController::class, 'index'])->name('user.quotation');
     Route::post('/vendor-action',[QuotationController::class, 'vendorAction'])->name('user.quotation.vendor-action');
-
     //checkout
     Route::get('/checkout/{quotation_uid}',[CheckoutController::class, 'index'])->name('checkout');
     Route::get('/get-address-data',[CheckoutController::class, 'getAddressData'])->name('get-address-data');
-
-
+    Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.submission');
     //notify-me
     Route::post('notify-me',[ProductController::class,'notifyMe'])->name('notify-me');
     //notify-user
     Route::get('notify-user',[HomeController::class,'notifyUser'])->name('notify-user');
-
     //user
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
-
     //Address
     Route::get('address',[UserController::class,'newAddress'])->name('address');
     //add-billing-address
