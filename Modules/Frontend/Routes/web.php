@@ -107,6 +107,8 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::post('/address-destroy',[UserController::class,'destroyAddress'])->name('address-destroy');
     //product-search
     Route::get('product-search',[ProductController::class,'searchProduct'])->name('product-search');
+    //select state
+    Route::get('select-state',[UserController::class,'selectState'])->name('select-state');
 });
 //home
 Route::get('/',[HomeController::class,'index'])->name('home');

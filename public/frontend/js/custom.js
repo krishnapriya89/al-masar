@@ -649,3 +649,6 @@ $('.main-search-input').on('keyup keypress paste', function(){
         }
     });
 });
+
+  
+
