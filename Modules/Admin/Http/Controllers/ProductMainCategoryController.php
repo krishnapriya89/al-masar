@@ -77,22 +77,22 @@ class ProductMainCategoryController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy(ProductMainCategory $main_category)
+    public function destroy(ProductMainCategory $product_main_category)
     {
-        if($main_category->sub_categories->count() < 1 && $main_category->products->count() < 1){
-            if ($main_category->delete()) {
+        if($product_main_category->sub_categories->count() < 1 && $product_main_category->products->count() < 1){
+            if ($product_main_category->delete()) {
                 return to_route('product-main-category.index')->with('success', 'Product Main Category deleted successfully!');
             } else {
-                return to_route('product-main-category.index')->with('error', 'Failed to delete Product Main Category '.$main_category->title);
+                return to_route('product-main-category.index')->with('error', 'Failed to delete Product Main Category '.$product_main_category->title);
             }
         } else {
-            return to_route('product-main-category.index')->with('error', 'Product Main Category '. $main_category->title .' tagged with sub categories or product');
+            return to_route('product-main-category.index')->with('error', 'Product Main Category '. $product_main_category->title .' tagged with sub categories or product');
         }
     }
 
     //return all subcategories under the category
     public function getSubCategories(ProductMainCategory $category){
-       
+
         return response()->json($category->sub_categories->where('status', 1));
     }
 
@@ -103,7 +103,7 @@ class ProductMainCategoryController extends Controller
 
     //return all sub category children under the sub category
     public function getChildSubCategories(ProductSubCategory $sub_category){
-       
+
         return response()->json($sub_category->children->where('status', 1));
     }
 }
