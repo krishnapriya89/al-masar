@@ -185,7 +185,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="menu_category">Categories</label>
+                                <label for="menu_category">Menu Categories</label>
                                 <select name="menu_category[]" id="menu_category" class="form-control select2" multiple>
                                     <option value="">Please Select Category</option>
                                     @foreach ($categories as $category)

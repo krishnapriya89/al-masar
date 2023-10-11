@@ -58,39 +58,22 @@
                     </ul>
                 </li>
 
-                {{-- <li class="nav-header">ORDER MANAGEMENT</li> --}}
-                {{-- <li class="nav-item {{ Nav::hasSegment('order', 2, 'menu-open') }} {{ Nav::hasSegment('product-return', 2, 'menu-open') }}"> --}}
-                    {{-- <a href="#"
-                       class="nav-link {{ Nav::hasSegment('order', 2) }}">
-                        <i class="nav-icon fab fa-first-order-alt"></i>
-                        <p>
-                            Orders
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('order.index') }}"
-                               class="nav-link {{ Nav::isRoute('order.index') }} {{ Nav::isRoute('order.show') }} }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Orders</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('order.product.return.index') }}"
-                               class="nav-link {{ Nav::isRoute('order.product.return.index') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Returns</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li> --}}
+
                 <li class="nav-header">Quotation Management</li>
                 <li class="nav-item">
                     <a href="{{ route('quotation-management.index') }}" class="nav-link {{ Nav::isRoute('quotation-management.index') }}">
                         <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>
                             Quotation Management
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">Order Management</li>
+                <li class="nav-item">
+                    <a href="{{ route('order-management.index') }}" class="nav-link {{ Nav::isRoute('order-management.index') }}">
+                        <i class="nav-icon fab fa-first-order-alt"></i>
+                        <p>
+                            Order Management
                         </p>
                     </a>
                 </li>

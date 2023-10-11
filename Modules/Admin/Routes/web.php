@@ -29,6 +29,7 @@ use Modules\Admin\Http\Controllers\ProviderController;
 use Modules\Admin\Http\Controllers\ProviderDetailController;
 use Modules\Admin\Http\Controllers\TaxManagementController;
 use Modules\Admin\Http\Controllers\QuotationController;
+use Modules\Admin\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,6 +109,8 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::get('quotation-management', [QuotationController::class, 'index'])->name('quotation-management.index');
         Route::post('quotation-management/change-quotation-status', [QuotationController::class, 'changeQuotationStatus'])->name('quotation-management.change-quotation-status');
         Route::post('quotation-management/change-quotation-detail-status', [QuotationController::class, 'changeQuotationDetailStatus'])->name('quotation-management.change-quotation-detail-status');
+        //Order Management
+        Route::get('order-management',[OrderController::class,'index'])->name('order-management.index');
 
         // user management
         Route::resource('user-management', UserController::class);
