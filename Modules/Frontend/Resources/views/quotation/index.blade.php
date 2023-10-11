@@ -69,7 +69,7 @@
                                                 <div class="item">{{ $quotation->uid }}</div>
                                                 <div class="item">{{ $quotation->quotation_received }}</div>
                                                 <div class="item">{{ $quotation->quotationDetails->count() }}</div>
-                                                <div class="item quotation-price-{{ $quotation->uid }}">{{ $quotation->priceWithSymbol($quotation->total_bid_price) }}
+                                                <div class="item quotation-price-{{ $quotation->uid }}">{{ $quotation->priceWithSymbol($quotation->converted_total_bid_price) }}
                                                 </div>
                                                 <div class="item quotation-status-{{ $quotation->uid }}">
                                                     <div class="status {{ $quotation->status_class }}">
@@ -119,8 +119,8 @@
                                                                     <td class="quotation-detail-action-{{ $quotation_detail->id }}">
                                                                         @if ($quotation_detail->status == 1)
                                                                             <div class="flxB">
-                                                                                <a href="javascript:void(0)" data-value="agree" data-id="{{ $quotation_detail->id }}" data-price="{{ $quotation_detail->priceWithSymbol($quotation_detail->admin_approved_price) }}" class="agree vendor-action">Agree</a>
-                                                                                <a href="javascript:void(0)" data-value="reject" data-id="{{ $quotation_detail->id }}" data-price="{{ $quotation_detail->priceWithSymbol($quotation_detail->admin_approved_price) }}" class="reject vendor-action">Reject</a>
+                                                                                <a href="javascript:void(0)" data-value="agree" data-id="{{ $quotation_detail->id }}" data-price="{{ $quotation_detail->priceWithSymbol($quotation_detail->converted_admin_approved_price) }}" class="agree vendor-action">Agree</a>
+                                                                                <a href="javascript:void(0)" data-value="reject" data-id="{{ $quotation_detail->id }}" data-price="{{ $quotation_detail->priceWithSymbol($quotation_detail->converted_admin_approved_price) }}" class="reject vendor-action">Reject</a>
                                                                             </div>
                                                                         @endif
                                                                     </td>

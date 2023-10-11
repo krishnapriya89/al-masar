@@ -190,8 +190,8 @@
                                     </div>
                                 </div>
                                 <div class="agree">
-                                    <input type="checkbox" id="billing_shipping_same" name="billing_shipping_same"
-                                        value="">
+                                    <input type="checkbox" class="billing_shipping_same" id="billing_shipping_same"
+                                        name="billing_shipping_same">
                                     <label for="billing_shipping_same">My billing and shipping address are the same
                                     </label>
                                 </div>
@@ -201,7 +201,7 @@
                                     <div class="ltB shipping-address-div">
                                         @include('frontend::includes.shipping-address-list')
                                     </div>
-                                    <div class="rtB">
+                                    <div class="rtB shipping-add-new-address-div">
                                         <div class="newAdress">
                                             <a href="javascript:void(0)" class="shipping-address-accordion">
                                                 <div class="icon">+</div>
@@ -228,8 +228,8 @@
                                     @foreach ($payment_methods as $payment_method)
                                         <li>
                                             <div class="rdBtn">
-                                                <input type="radio" id="p{{ $loop->iteration }}" name="payment"
-                                                    {{ $loop->first ? 'checked' : '' }}>
+                                                <input type="radio" id="p{{ $loop->iteration }}" name="payment_method"
+                                                    {{ $loop->first ? 'checked' : '' }} value="{{ $payment_method->id }}">
                                                 <label for="p{{ $loop->iteration }}">
                                                     <div class="label">
                                                         <div class="icon">
@@ -253,28 +253,34 @@
                     <div class="ritBx">
                         <div class="title">Price Details</div>
                         <ul>
-                            <li>
+                            <li class="">
                                 <div class="lt">Price ({{ $quotation->acceptedQuotationDetails->count() }} Items)
-                                    @if ($site_settings->tax_name && ($site_settings->tax_percentage || $site_settings->tax_amount))
-                                        <span>{{ $site_settings->tax_name }}
-                                            ({{ $site_settings->tax_percentage ? $site_settings->tax_percentage . '%' : '' }})
-                                            {{ $site_settings->tax_amount ? ' +' . $site_settings->tax_amount . 'AED' : '' }}</span>
-                                    @endif
                                 </div>
                                 <div class="rt">
                                     {{ $quotation->priceWithSymbol($quotation->converted_total_bid_price) }}
-                                    <span>
-                                        @if ($total_tax_amount != 0)
-                                            @currencySymbolWithConvertedPrice($total_tax_amount)
-                                        @endif
-                                    </span>
                                 </div>
+                            </li>
+                            <li class="tax-details-li">
+                                @if ($total_tax_amount > 0)
+                                    <div class="lt">
+                                        <span>
+                                            @if ($site_settings->tax_name && ($site_settings->tax_percentage || $site_settings->tax_amount))
+                                                {{ $site_settings->tax_name }}
+                                                ({{ $site_settings->tax_percentage ? $site_settings->tax_percentage . '%' : '' }})
+                                                {{ $site_settings->tax_amount ? ' + ' . $quotation->priceWithSymbol($site_settings->tax_amount) : '' }}
+                                            @endif
+                                        </span>
+                                    </div>
+                                    <div class="rt">
+                                        <span>{{ $quotation->priceWithSymbol($total_tax_amount * $quotation->currency_rate) }}</span>
+                                    </div>
+                                @endif
                             </li>
                             <li></li>
                             <li class="total">
                                 <div class="lt">Total</div>
-                                <div class="rt">
-                                    {{ $quotation->priceWithSymbol($quotation->converted_total_bid_price + $total_tax_amount) }}
+                                <div class="rt  total-amount-div">
+                                    {{ $quotation->priceWithSymbol($quotation->converted_total_bid_price + $total_tax_amount * $quotation->currency_rate) }}
                                 </div>
                             </li>
                             <li>
@@ -286,22 +292,28 @@
                         </div> --}}
                             </li>
                         </ul>
-                        <form action="{{ route('checkout.submission') }}" id="CheckoutForm" method="POST">
-                            @csrf
-                            {{-- <div class="txt"><span>Delivery by9 Sep, Saturday</span> if ordered before 5:39 PM</div> --}}
+                            <form action="{{ route('checkout.submission') }}" id="CheckoutForm" method="POST">
+                                @csrf
+                            <input type="hidden" name="selected_billing_address">
+                            <input type="hidden" name="selected_shipping_address">
+                            <input type="hidden" name="selected_billing_shipping_same">
+                            <input type="hidden" name="selected_payment_method">
                             <div class="agree">
-                                <input type="checkbox" id="a2" name="terms_and_condition" value="">
-                                <label for="a2">*I agree to the <a href="{{ route('terms-and-conditions') }}">Terms
+                                <input type="checkbox" id="terms_and_condition" name="terms_and_condition">
+                                <label for="terms_and_condition">*I agree to the <a href="{{ route('terms-and-conditions') }}" target="_blank">Terms
                                         and
-                                        Conditions</a>.
+                                        Conditions.</a>
                                 </label>
                             </div>
                             <div class="buttonFlx">
                                 <div class="item w100">
-                                    <button type="submit" class="confirm hoveranim"><span>MAke Payment</span></button>
+                                    <button type="button" class="confirm hoveranim checkout-form-btn"><span>MAke
+                                            Payment</span></button>
                                 </div>
                             </div>
                         </form>
+                        <div class="checkout-form-error-span">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -491,7 +503,7 @@
                         }
                     }
                 });
-            });
+            }, 300);
         });
         //shipping address edit get form
         var editShippingDebounceTimer;
@@ -521,12 +533,130 @@
                         }
                     }
                 });
-            });
+            }, 300);
         });
-        $('#CheckoutForm').on('submit', function() {
+        //check tax value of a address
+        $('body').on('click', '.shipping_address', function(e) {
+            var address_id = $(this).data('id');
+            checkTaxApplicableForTax(address_id);
+        });
+
+        $('body').on('click', '.billing_address', function(e) {
+            var address_id = $(this).data('id');
+            checkTaxApplicableForTax(address_id);
+        });
+
+        //same as billing functionality
+        $('.billing_shipping_same').change(function() {
+            if ($(this).prop('checked') == true) {
+                $('.shipping-address-div').hide();
+                $('.shipping-add-new-address-div').hide();
+                var billingInput = $('input[name=billing_address]:checked');
+                if (billingInput.length > 0) {
+                    console.log(billingInput);
+                    checkTaxApplicableForTax(billingInput.val());
+                } else {
+                    $('.tax-details-li').empty();
+                }
+            } else {
+                $('.shipping-address-div').show();
+                $('.shipping-add-new-address-div').show();
+                var shippingInput = $('input[name=shipping_address]:checked');
+                if (shippingInput.length > 0) {
+                    checkTaxApplicableForTax(shippingInput.val());
+                } else {
+                    $('.tax-details-li').empty();
+                }
+            }
+        });
+
+        //checking tax changing shipping address or same as billing
+        function checkTaxApplicableForTax(address_id) {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('check-tax-applicable-for-address') }}",
+                data: {
+                    address_id: address_id,
+                    quotation_uid: '{{ $quotation->uid }}'
+                },
+                dataType: "json",
+                success: function(response) {
+                    $('.tax-details-li').empty();
+                    if (response.status) {
+                        var tax_percentage = '';
+                        if (response.tax.tax_percentage) {
+                            tax_percentage += ' (' + response.tax.tax_percentage + '%)';
+                        }
+                        var tax_value = '';
+                        if (response.converted_tax_value) {
+                            tax_value += ' + ' + response.converted_tax_value;
+                        }
+
+                        $('.tax-details-li').html(`
+                        <div class="lt">
+                            <span>
+                                ` + response.tax.tax_name + tax_percentage + tax_value + `
+                            </span>
+                        </div>
+                        <div class="rt">
+                            <span>` + response.converted_total_tax_amount + `</span>
+                        </div>`);
+                    }
+                    $('.total-amount-div').html(response.converted_total_amount);
+                }
+            });
+        }
+
+        //checkout form submit
+        var checkoutFormDebounceTimer;
+        $('.checkout-form-btn').on('click', function(e) {
+            clearTimeout(checkoutFormDebounceTimer);
             e.preventDefault();
-            console.log('yes');
-            sdf;
+            var _this = $(this);
+            $('input[name="selected_billing_address"]').val($('input[name="billing_address"]:checked').val());
+            $('input[name="selected_shipping_address"]').val($('input[name="shipping_address"]:checked').val());
+            $('input[name="selected_billing_shipping_same"]').val($('input[name="billing_shipping_same"]:checked').val());
+            $('input[name="selected_payment_method"]').val($('input[name="payment_method"]:checked').val());
+            _this.prop('disabled', true);
+            _this.css({
+                'pointer-events': 'none',
+                'cursor': 'default'
+            }).html(`<span>Processing</span>`);
+            var form = document.getElementById("CheckoutForm");
+            let formData = new FormData(form);
+
+            checkoutFormDebounceTimer = setTimeout(function() {
+                $.ajax({
+                        type: 'POST',
+                        url: '{{ route('checkout.validation') }}',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        beforeSend: function() {
+                            $('.checkout-form-error-span').empty();
+                        }
+                    })
+                    .done(function(response) {
+                        if (response.status) {
+                            _this.prop("disabled", false);
+                            window.location.href = response.url;
+                        } else {
+                            toastr.error('Something went wrong');
+                        }
+                    })
+                    .fail(function(response) {
+                        _this.prop("disabled", false);
+                        _this.css({
+                            'pointer-events': 'none',
+                            'cursor': 'default'
+                        }).html(`<span>Submit</span>`);
+                        $.each(response.responseJSON.errors, function(field_name, error) {
+                            var msg = '</br><span class="error" style="color:red;">' + error + '</span>';
+                            console.log(msg);
+                            $(".checkout-form-error-span").append(msg);
+                        });
+                    });
+            }, 300);
         });
     </script>
 @endpush

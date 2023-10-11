@@ -2,7 +2,8 @@
     <div class="item" id="address-{{ $shipping_address->id }}">
         <div class="adresBox">
             <input type="radio" id="add{{ base64_encode($shipping_address->id) }}" name="shipping_address"
-                {{ $shipping_address->is_default ? 'checked' : '' }}>
+                class="shipping_address" data-id="{{ $shipping_address->id }}"
+                {{ $shipping_address->is_default ? 'checked' : '' }}  value="{{ $shipping_address->id }}">
             <label for="add{{ base64_encode($shipping_address->id) }}">
                 <div class="topBFlx">
                     <div class="dfault">

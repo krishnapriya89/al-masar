@@ -77,6 +77,8 @@ Route::group(['middleware' => 'auth.user'], function () {
     //checkout
     Route::get('/checkout/{quotation_uid}',[CheckoutController::class, 'index'])->name('checkout');
     Route::get('/get-address-data',[CheckoutController::class, 'getAddressData'])->name('get-address-data');
+    Route::get('/check-tax-applicable-for-address',[CheckoutController::class, 'checkTaxApplicableForAddress'])->name('check-tax-applicable-for-address');
+    Route::post('/checkout-validation', [CheckoutController::class, 'checkoutValidation'])->name('checkout.validation');
     Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.submission');
     //notify-me
     Route::post('notify-me',[ProductController::class,'notifyMe'])->name('notify-me');

@@ -2,7 +2,7 @@
     <div class="item" id="address-{{ $billing_address->id }}">
         <div class="adresBox">
             <input type="radio" id="add{{ base64_encode($billing_address->id) }}" name="billing_address"
-                {{ $billing_address->is_default ? 'checked' : '' }}>
+                {{ $billing_address->is_default ? 'checked' : '' }}  data-id="{{ $billing_address->id }}" value="{{ $billing_address->id }}">
             <label for="add{{ base64_encode($billing_address->id) }}">
                 <div class="topBFlx">
                     <div class="dfault">

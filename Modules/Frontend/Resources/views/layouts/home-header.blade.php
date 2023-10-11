@@ -310,3 +310,14 @@
         </div>
     </div>
 </header>
+<div class="fixedRit">
+    <ul>
+        <li>
+            <a class="whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=+971565378343" target="_blank">
+                <div class="align">
+                    <img src="{{ asset('frontend/images/whatsapp.svg') }}" alt="">
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
