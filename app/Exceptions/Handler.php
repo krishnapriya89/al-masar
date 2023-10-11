@@ -15,6 +15,7 @@ class Handler extends ExceptionHandler
 {
     public function render($request, Throwable $exception)
     {
+        return parent::render($request, $exception);
         if ($exception instanceof NotFoundHttpException || $exception instanceof ErrorException) {
             if ($request->is('al-masar-admin-auth/*')) {
                 return response()->view('admin::errors.404', [], Response::HTTP_NOT_FOUND);
