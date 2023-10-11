@@ -28,6 +28,10 @@ Route::get('privacy-policy',[HomeController::class,'privacyPolicy'])->name('priv
 Route::get('terms-and-conditions',[HomeController::class,'termsAndConditions'])->name('terms-and-conditions');
 //store contact enquiry
 Route::post('contact-enquiry',[HomeController::class,'storeContact'])->name('contact-enquiry');
+//404
+Route::get('/404',[HomeController::class,'error_404'])->name('error.404');
+//500
+Route::get('/500',[HomeController::class,'error_500'])->name('error.500');
 //user registration and login
 Route::get('/register', [AuthController::class,'showRegisterForm'])->name('user.register.form');
 Route::post('/register-store', [AuthController::class,'register'])->name('user.register.store');
@@ -104,6 +108,6 @@ Route::group(['middleware' => 'auth.user'], function () {
 //is invalid url show 404
 Route::fallback(function () {
     if (request()->is('*')) {
-        return response()->view('frontend::errors.404', [], Response::HTTP_NOT_FOUND);
+        return to_route('error.404');
     }
 });

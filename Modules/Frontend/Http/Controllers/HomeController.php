@@ -152,4 +152,8 @@ class HomeController extends Controller
 
         }
     }
+
+    public function error_404() {
+        return view('frontend::errors.404');
+    }
 }

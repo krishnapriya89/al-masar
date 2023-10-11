@@ -19,7 +19,7 @@ class Handler extends ExceptionHandler
             if ($request->is('admin/*')) {
                 return response()->view('admin::errors.404', [], Response::HTTP_NOT_FOUND);
             } else {
-                return response()->view('frontend::errors.404', [], Response::HTTP_NOT_FOUND);
+                return to_route('error.404');
             }
         }
 
@@ -27,7 +27,7 @@ class Handler extends ExceptionHandler
             if ($request->is('admin/*')) {
                 return response()->view('admin::errors.500', [], Response::HTTP_INTERNAL_SERVER_ERROR);
             } else {
-                return response()->view('frontend::errors.500', [], Response::HTTP_INTERNAL_SERVER_ERROR);
+                return to_route('error.500');
             }
         }
 
@@ -35,7 +35,7 @@ class Handler extends ExceptionHandler
             if ($request->is('admin/*')) {
                 return response()->view('admin::errors.404', [], Response::HTTP_NOT_FOUND);
             } else {
-                return response()->view('frontend::errors.404', [], Response::HTTP_NOT_FOUND);
+                return to_route('error.404');
             }
         }
 
