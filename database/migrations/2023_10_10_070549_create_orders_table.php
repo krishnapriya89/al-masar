@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -31,10 +32,11 @@ return new class extends Migration
             $table->tinyInteger('payment_gateway_status')->default(0)->comment('0 - Pending, 1 - Success, 2 - Failed');
             $table->unsignedBigInteger('order_status_id')->nullable()->comment('1 - Pending, 2 - Shipped, 3 - Delivered');
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
-            $table->tinyInteger('status')->default(0)->comment('0 - Checkout Started, 2 - Order Confirmed, 3 - Order Cancelled');
-            $table->tinyInteger('order_status')->default(0)->comment('0 - Ordered, 2 - Order Confirmed By Admin, 3 - Order Cancelled By Admin');
-            $table->tinyInteger('payment_received_status')->default(0)->comment('0 - Checkout Started, 2 - Order Confirmed, 3 - Order Cancelled');
+            $table->tinyInteger('status')->default(0)->comment('0 - Checkout Started, 1 - Order Confirmed, 2 - Order Cancelled');
+            $table->tinyInteger('order_status')->default(0)->comment('0 - Ordered, 1 - Order Confirmed By Admin, 2 - Order Rejected By Admin');
+            $table->tinyInteger('payment_received_status')->default(0)->comment('0 - Not Received, 1 - Partial Amount Received, 2 - Full Received');
             $table->decimal('payment_received_amount', 10, 2)->default(0);
+            $table->text('admin_remarks')->nullable();
             $table->timestamps();
         });
     }
@@ -44,6 +46,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('orders');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 };
