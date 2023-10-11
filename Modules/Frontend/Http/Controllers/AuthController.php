@@ -373,9 +373,9 @@ class AuthController extends Controller
                 });
             }
 
-            $site_settings = SiteCommonContent::first();
-            Mail::send('frontend::emails.new-user', ['user' => $user], function ($message) use ($site_settings, $user) {
-                $message->to($site_settings->email);
+            $siteSettings = SiteCommonContent::first();
+            Mail::send('frontend::emails.new-user', ['user' => $user, 'siteSettings'=>$siteSettings], function ($message) use ($siteSettings, $user) {
+                $message->to($siteSettings->email);
                 $message->subject('New User Registered');
                 if($user->attachment) {
                     $message->attach(public_path('storage/'.$user->attachment));
