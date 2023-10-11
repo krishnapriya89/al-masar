@@ -190,7 +190,7 @@
                     <div class="ProInfoSec">
                         <div class="ProInfoSecWrp">
                             <h1 class="name">{{ $product->title }}</h1>
-                            <div class="pcode">Product Code:<span>{{ $product->code_number }}</span></div>
+                            <div class="pcode">Product Code:<span>{{ $product->product_code }}</span></div>
                             <div class="mdlNu">Model Number:<span>{{ $product->model_number }}</span></div>
                             <div class="sku">SKU:{{ $product->sku }}</div>
                             @if ($product->is_instock)
@@ -224,7 +224,7 @@
                                     <div class="lbl">Bid Price:</div>
                                     <input type="text" name="bid_price" id="bid_price" class="form-control bid-price-detail-page amountField"
                                         data-product="{{ $product->slug }}" placeholder="Enter Amount">
-                                    
+
                                 </div>
                                 <div class="flxBx">
                                     <div class="totalP bid-payable-amount-div d-none">
