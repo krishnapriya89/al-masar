@@ -252,7 +252,6 @@
                                     </g>
                                 </svg>
                             </a>
-
                             <!-- isLoged -->
                             <div class="TBFLXBX ActionItm dropdown MyaccountDrop">
                                 <a class="DRoPBTn" data-bs-toggle="dropdown" aria-expanded="false">
@@ -282,16 +281,164 @@
                                     @if (Auth::guard('web')->check())
                                         <div class="boxCntnt">
                                             <a href="{{ route('user.dashboard') }}" class="active">
-                                                <svg viewBox="0 -32 512.016 512">
-                                                    <path
-                                                        d="m192 213.339844c-58.816406 0-106.667969-47.847656-106.667969-106.664063 0-58.816406 47.851563-106.6679685 106.667969-106.6679685s106.667969 47.8515625 106.667969 106.6679685c0 58.816407-47.851563 106.664063-106.667969 106.664063zm0-181.332032c-41.171875 0-74.667969 33.492188-74.667969 74.667969 0 41.171875 33.496094 74.664063 74.667969 74.664063s74.667969-33.492188 74.667969-74.664063c0-41.175781-33.496094-74.667969-74.667969-74.667969zm0 0" />
-                                                    <path
-                                                        d="m368 448.007812h-352c-8.832031 0-16-7.167968-16-16v-74.667968c0-55.871094 45.460938-101.332032 101.332031-101.332032h181.335938c55.871093 0 101.332031 45.460938 101.332031 101.332032v74.667968c0 8.832032-7.167969 16-16 16zm-336-32h320v-58.667968c0-38.226563-31.105469-69.332032-69.332031-69.332032h-181.335938c-38.226562 0-69.332031 31.105469-69.332031 69.332032zm0 0" />
-                                                    <path
-                                                        d="m496 218.675781h-181.332031c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h181.332031c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" />
-                                                    <path
-                                                        d="m410.667969 304.007812c-4.097657 0-8.191407-1.558593-11.308594-4.691406-6.25-6.253906-6.25-16.386718 0-22.636718l74.027344-74.027344-74.027344-74.027344c-6.25-6.25-6.25-16.382812 0-22.632812s16.382813-6.25 22.636719 0l85.332031 85.332031c6.25 6.25 6.25 16.386719 0 22.636719l-85.332031 85.332031c-3.136719 3.15625-7.234375 4.714843-11.328125 4.714843zm0 0" />
-                                                </svg>Dashboard
+                                                <svg viewBox="0 0 17.7 17.7">
+                                                    <g id="Layer_1" transform="translate(-1.9 -1.9)">
+                                                        <g id="Group_21803" data-name="Group 21803"
+                                                            transform="translate(11.375 10.125)">
+                                                            <path id="Path_102042" data-name="Path 102042"
+                                                                class="cls-1"
+                                                                d="M23.582,24.375H18.543A1.545,1.545,0,0,1,17,22.832V16.543A1.545,1.545,0,0,1,18.543,15h5.039a1.545,1.545,0,0,1,1.543,1.543v6.289A1.545,1.545,0,0,1,23.582,24.375ZM18.543,16.25a.293.293,0,0,0-.293.293v6.289a.293.293,0,0,0,.293.293h5.039a.293.293,0,0,0,.293-.293V16.543a.293.293,0,0,0-.293-.293Z"
+                                                                transform="translate(-17 -15)" />
+                                                        </g>
+                                                        <g id="Group_21804" data-name="Group 21804"
+                                                            transform="translate(11.375 2)">
+                                                            <path id="Path_102043" data-name="Path 102043"
+                                                                class="cls-1"
+                                                                d="M23.582,8.875H18.543A1.545,1.545,0,0,1,17,7.332V3.543A1.545,1.545,0,0,1,18.543,2h5.039a1.545,1.545,0,0,1,1.543,1.543V7.332A1.545,1.545,0,0,1,23.582,8.875ZM18.543,3.25a.293.293,0,0,0-.293.293V7.332a.293.293,0,0,0,.293.293h5.039a.293.293,0,0,0,.293-.293V3.543a.293.293,0,0,0-.293-.293Z"
+                                                                transform="translate(-17 -2)" />
+                                                        </g>
+                                                        <g id="Group_21805" data-name="Group 21805"
+                                                            transform="translate(2 2)">
+                                                            <path id="Path_102044" data-name="Path 102044"
+                                                                class="cls-1"
+                                                                d="M8.582,11.375H3.543A1.545,1.545,0,0,1,2,9.832V3.543A1.545,1.545,0,0,1,3.543,2H8.582a1.545,1.545,0,0,1,1.543,1.543V9.832A1.545,1.545,0,0,1,8.582,11.375ZM3.543,3.25a.293.293,0,0,0-.293.293V9.832a.293.293,0,0,0,.293.293H8.582a.293.293,0,0,0,.293-.293V3.543a.293.293,0,0,0-.293-.293Z"
+                                                                transform="translate(-2 -2)" />
+                                                        </g>
+                                                        <g id="Group_21806" data-name="Group 21806"
+                                                            transform="translate(2 12.625)">
+                                                            <path id="Path_102045" data-name="Path 102045"
+                                                                class="cls-1"
+                                                                d="M8.582,25.875H3.543A1.545,1.545,0,0,1,2,24.332V20.543A1.545,1.545,0,0,1,3.543,19H8.582a1.545,1.545,0,0,1,1.543,1.543v3.789A1.545,1.545,0,0,1,8.582,25.875ZM3.543,20.25a.293.293,0,0,0-.293.293v3.789a.293.293,0,0,0,.293.293H8.582a.293.293,0,0,0,.293-.293V20.543a.293.293,0,0,0-.293-.293Z"
+                                                                transform="translate(-2 -19)" />
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                Dashboard
+                                            </a>
+                                        </div>
+                                        <div class="boxCntnt">
+                                            <a href="myOrders.php" class="active">
+                                                <svg viewBox="0 0 21.667 21.667">
+                                                    <g id="_x33_1_x2C__order_x2C__box_x2C__delivery_x2C__logistics_x2C__receiving"
+                                                        transform="translate(-16 -16)">
+                                                        <g id="Group_21433" data-name="Group 21433"
+                                                            transform="translate(16 16)">
+                                                            <g id="Group_21422" data-name="Group 21422"
+                                                                transform="translate(0 0)">
+                                                                <path id="Path_101928" data-name="Path 101928"
+                                                                    d="M28.42,35.861H16V21.731L19.821,16h4.3v.9H20.3L16.9,22V34.958H28.42Z"
+                                                                    transform="translate(-16 -16)" />
+                                                            </g>
+                                                            <g id="Group_21423" data-name="Group 21423"
+                                                                transform="translate(11.285 0)">
+                                                                <path id="Path_101929" data-name="Path 101929"
+                                                                    d="M272.771,27.826V22l-3.4-5.1H266V16h3.853l3.821,5.731v6.095Z"
+                                                                    transform="translate(-266 -16)" />
+                                                            </g>
+                                                            <g id="Group_21424" data-name="Group 21424"
+                                                                transform="translate(12.187 5.417)">
+                                                                <path id="Path_101930" data-name="Path 101930"
+                                                                    d="M286,136h6.319v.9H286Z"
+                                                                    transform="translate(-286 -136)" />
+                                                            </g>
+                                                            <g id="Group_21425" data-name="Group 21425"
+                                                                transform="translate(0.451 5.417)">
+                                                                <path id="Path_101931" data-name="Path 101931"
+                                                                    d="M26,136h6.319v.9H26Z"
+                                                                    transform="translate(-26 -136)" />
+                                                            </g>
+                                                            <g id="Group_21426" data-name="Group 21426"
+                                                                transform="translate(6.333 0)">
+                                                                <path id="Path_101932" data-name="Path 101932"
+                                                                    d="M157.175,21.978l-.876-.219L157.739,16h3.895l.966,5.794-.891.148-.84-5.039h-2.425Z"
+                                                                    transform="translate(-156.299 -16)" />
+                                                            </g>
+                                                            <g id="Group_21427" data-name="Group 21427"
+                                                                transform="translate(1.806 11.736)">
+                                                                <path id="Path_101933" data-name="Path 101933"
+                                                                    d="M62.319,282.319H56V276h6.319Zm-5.417-.9h4.514V276.9H56.9Z"
+                                                                    transform="translate(-56 -276)" />
+                                                            </g>
+                                                            <g id="Group_21428" data-name="Group 21428"
+                                                                transform="translate(3.611 13.542)">
+                                                                <path id="Path_101934" data-name="Path 101934"
+                                                                    d="M96,316h2.708v.9H96Z"
+                                                                    transform="translate(-96 -316)" />
+                                                            </g>
+                                                            <g id="Group_21429" data-name="Group 21429"
+                                                                transform="translate(3.611 15.347)">
+                                                                <path id="Path_101935" data-name="Path 101935"
+                                                                    d="M96,356h2.708v.9H96Z"
+                                                                    transform="translate(-96 -356)" />
+                                                            </g>
+                                                            <g id="Group_21430" data-name="Group 21430"
+                                                                transform="translate(10.833 10.833)">
+                                                                <path id="Path_101936" data-name="Path 101936"
+                                                                    d="M261.417,266.833a5.417,5.417,0,0,1,0-10.833,5.358,5.358,0,0,1,2.462.591h0a5.418,5.418,0,0,1-2.462,10.243Zm0-9.931a4.511,4.511,0,1,0,2.051.492h0A4.463,4.463,0,0,0,261.417,256.9Z"
+                                                                    transform="translate(-256 -256)" />
+                                                            </g>
+                                                            <g id="Group_21431" data-name="Group 21431"
+                                                                transform="translate(6.319 5.417)">
+                                                                <path id="Path_101937" data-name="Path 101937"
+                                                                    d="M162.319,141.357l-1.806-1.2-1.354.9-1.354-.9-1.806,1.2V136h6.319Zm-4.514-2.289,1.354.9,1.354-.9.9.6V136.9H156.9v2.768Z"
+                                                                    transform="translate(-156 -136)" />
+                                                            </g>
+                                                            <g id="Group_21432" data-name="Group 21432"
+                                                                transform="translate(13.674 14.577)">
+                                                                <path id="Path_101938" data-name="Path 101938"
+                                                                    d="M320.6,342.595l-1.673-1.673.638-.638,1.035,1.035,2.389-2.389.638.638Z"
+                                                                    transform="translate(-318.929 -338.929)" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                My Orders
+                                            </a>
+                                        </div>
+                                        <div class="boxCntnt">
+                                            <a href="{{ route('user.quotation') }}"
+                                                class="lnk {{ Nav::isRoute('user.quotation') }}">
+                                                <svg viewBox="0 0 18.979 19.3">
+                                                    <g id="Group_22543" data-name="Group 22543"
+                                                        transform="translate(-1155.849 -57.85)">
+                                                        <g id="cart" transform="translate(1155.999 58)">
+                                                            <path id="Path_102143" data-name="Path 102143"
+                                                                class="cls-1"
+                                                                d="M20.71,5.738a1.706,1.706,0,0,0-1.267-.565H7.41L7.049,4.082A2.684,2.684,0,0,0,4.506,2.25H3.191a.731.731,0,1,0,0,1.462H4.506a1.218,1.218,0,0,1,1.159.828l.507,1.52.77,6.957A2.671,2.671,0,0,0,9.6,15.4h8.2a2.671,2.671,0,0,0,2.66-2.387l.663-5.953A1.7,1.7,0,0,0,20.7,5.738Zm-1.686,7.123a1.214,1.214,0,0,1-1.208,1.082h-8.2A1.214,1.214,0,0,1,8.4,12.861L7.712,6.635H19.443a.253.253,0,0,1,.185.078.234.234,0,0,1,.058.185l-.663,5.953Z"
+                                                                transform="translate(-2.46 -2.25)" />
+                                                            <path id="Path_102144" data-name="Path 102144"
+                                                                class="cls-1"
+                                                                d="M9.442,17.25a2.192,2.192,0,1,0,2.192,2.192A2.2,2.2,0,0,0,9.442,17.25Zm0,2.923a.731.731,0,1,1,.731-.731A.736.736,0,0,1,9.442,20.173Z"
+                                                                transform="translate(-2.583 -2.635)" />
+                                                            <path id="Path_102145" data-name="Path 102145"
+                                                                class="cls-1"
+                                                                d="M18.442,17.25a2.192,2.192,0,1,0,2.192,2.192A2.2,2.2,0,0,0,18.442,17.25Zm0,2.923a.731.731,0,1,1,.731-.731A.736.736,0,0,1,18.442,20.173Z"
+                                                                transform="translate(-2.814 -2.635)" />
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                <div class="txt">My Quotation</div>
+                                            </a>
+                                        </div>
+                                        <div class="boxCntnt">
+                                            <a href="{{ route('address') }}"
+                                                class="lnk {{ Nav::isRoute('address') }}">
+                                                <svg viewBox="0 0 19.57 22.431">
+                                                    <path id="location"
+                                                        d="M13.285,8.589a3.453,3.453,0,1,1-3.453,3.453,3.453,3.453,0,0,1,3.453-3.453m0-1.151a4.6,4.6,0,1,0,4.6,4.6A4.6,4.6,0,0,0,13.285,7.438ZM15.32,23.845l3.219-3.218a.576.576,0,1,0-.814-.814l-3.219,3.218a1.768,1.768,0,0,1-2.442,0L7.18,18.147a8.634,8.634,0,1,1,12.21,0,.576.576,0,1,0,.814.814,9.785,9.785,0,1,0-13.838,0l4.884,4.884a2.877,2.877,0,0,0,4.07,0Z"
+                                                        transform="translate(-3.5 -2.257)" />
+                                                </svg>
+                                                <div class="txt">Address</div>
+                                            </a>
+                                        </div>
+                                        <div class="boxCntnt">
+                                            <a href="profileSettings.php" class="lnk">
+                                                <svg viewBox="0 0 19.833 17.996">
+                                                    <path id="setting"
+                                                        d="M14.038,20.008H6.962a3.129,3.129,0,0,1-2.487-1.436L.938,12.446a3.089,3.089,0,0,1,0-2.872L4.476,3.448A3.129,3.129,0,0,1,6.963,2.012h7.075a3.129,3.129,0,0,1,2.487,1.436l3.538,6.126a3.089,3.089,0,0,1,0,2.872l-3.538,6.126A3.128,3.128,0,0,1,14.038,20.008ZM6.962,3.3A1.837,1.837,0,0,0,5.59,4.09L2.051,10.217a1.841,1.841,0,0,0,0,1.586l3.538,6.126a1.837,1.837,0,0,0,1.373.792h7.076a1.837,1.837,0,0,0,1.373-.792L18.949,11.8a1.841,1.841,0,0,0,0-1.586L15.411,4.09A1.837,1.837,0,0,0,14.038,3.3ZM10.5,14.815a3.805,3.805,0,1,1,3.806-3.805A3.81,3.81,0,0,1,10.5,14.815Zm0-6.324a2.519,2.519,0,1,0,2.52,2.519A2.522,2.522,0,0,0,10.5,8.491Z"
+                                                        transform="translate(-0.583 -2.012)" />
+                                                </svg>
+                                                <div class="txt">Profile Settings</div>
                                             </a>
                                         </div>
                                         <div class="boxCntnt">
@@ -313,8 +460,7 @@
                                                         <path
                                                             d="M505.7,221.3l-54.8-38.6c-9.9-7-23.6,0.1-23.6,12.3v23.6h-263c-8.3,0-15,6.7-15,15s6.7,15,15,15h263v23.6
                                                             c0,12.2,13.8,19.2,23.6,12.3l54.8-38.6C514,240,514.2,227.4,505.7,221.3z" />
-                                                        <path
-                                                            d="M430.5,329.9c-7.2-4.1-16.3-1.7-20.5,5.5c-35.2,60.9-101.1,101.8-176.4,101.8C121.3,437.2,30,345.9,30,233.6
+                                                        <path d="M430.5,329.9c-7.2-4.1-16.3-1.7-20.5,5.5c-35.2,60.9-101.1,101.8-176.4,101.8C121.3,437.2,30,345.9,30,233.6
                                                             S121.3,30,233.6,30c75.3,0,141.2,40.9,176.4,101.8c4.1,7.2,13.3,9.6,20.5,5.5c7.2-4.1,9.6-13.3,5.5-20.5
                                                             C395.4,46.7,319.7,0,233.6,0C104.5,0,0,104.5,0,233.6c0,129.1,104.5,233.6,233.6,233.6c86.2,0,161.8-46.8,202.3-116.8
                                                             C440.1,343.2,437.6,334.1,430.5,329.9z" />
@@ -328,8 +474,7 @@
                                             <a href="javascript:void(0)" data-bs-toggle="modal"
                                                 data-bs-target="#signupmodal" class="active">
                                                 <svg viewBox="0 0 512 512">
-                                                    <path
-                                                        d="M103.511,197.232h33.134c4.143,0,7.5-3.358,7.5-7.5v-33.133c0-4.142-3.357-7.5-7.5-7.5h-33.134
+                                                    <path d="M103.511,197.232h33.134c4.143,0,7.5-3.358,7.5-7.5v-33.133c0-4.142-3.357-7.5-7.5-7.5h-33.134
                                                             c-4.143,0-7.5,3.358-7.5,7.5v33.133C96.011,193.874,99.368,197.232,103.511,197.232z M111.011,164.099h18.134v18.133h-18.134
                                                             V164.099z" />
                                                     <path
@@ -338,8 +483,7 @@
                                                     <path
                                                         d="M96.011,388.537c0,4.142,3.357,7.5,7.5,7.5h33.134c4.143,0,7.5-3.358,7.5-7.5v-33.134c0-4.142-3.357-7.5-7.5-7.5h-33.134
                                                             c-4.143,0-7.5,3.358-7.5,7.5V388.537z M111.011,362.903h18.134v18.134h-18.134V362.903z" />
-                                                    <path
-                                                        d="M169.778,180.667h165.669c4.143,0,7.5-3.358,7.5-7.5c0-4.142-3.357-7.5-7.5-7.5H169.778c-4.143,0-7.5,3.358-7.5,7.5
+                                                    <path d="M169.778,180.667h165.669c4.143,0,7.5-3.358,7.5-7.5c0-4.142-3.357-7.5-7.5-7.5H169.778c-4.143,0-7.5,3.358-7.5,7.5
                                                             C162.278,177.309,165.636,180.667,169.778,180.667z" />
                                                     <path
                                                         d="M456.229,151.783c-6.11-6.11-14.234-9.475-22.875-9.475c-8.642,0-16.765,3.365-22.876,9.475l-17.833,17.833V57.199
@@ -382,7 +526,6 @@
                                     @endif
                                 </div>
                             </div>
-
                             <div class="moneyDrop">
                                 <div class="icon">
                                     <svg viewBox="0 0 19.133 15.059">
@@ -449,37 +592,43 @@
                                     </button> -->
                                     <div class="accordion" id="AccordMenu">
                                         @foreach ($site_menus as $site_menu)
-                                        <div class="accordion-item dropdown">
-                                            <div class="accordion-header" id="hd4">
-                                                <a href="{{route('product-category',$site_menu->slug)}}" class="dskLnk">{{$site_menu->title }}</a>
-                                                <a href="{{route('product-category',$site_menu->slug)}}" class="accordion-button collapsed"
-                                                    type="button" data-bs-toggle="collapse" data-bs-target="#cd{{$loop->iteration}}"
-                                                    aria-expanded="false" aria-controls="cd{{$loop->iteration}}">
-                                                    {{$site_menu->title }}
-                                                </a>
-                                            </div>
-                                            @if($site_menu->children->isNotEmpty())
-                                            <div id="cd{{$loop->iteration}}" class="accordion-collapse mgaAccord collapse"
-                                                aria-labelledby="headingOne" data-bs-parent="#menuaccord1">
-                                                <div class="accordion-body">
-                                                    <div class="Stilte">{{$site_menu->title}}</div>
-                                                    <div class="txtB">
-                                                        <div class="coloFlx">
-                                                            <div class="cl1"></div>
-                                                            <div class="cl1"></div>
-                                                            <div class="cl1"></div>
-                                                        </div>
-                                                        <ul>
-                                                            @foreach ($site_menu->children as $children)
-                                                            <li><a href="{{ route('product-category',$children->slug)}}" class="lk">{{$children->title}}</a></li>
-                                                            @endforeach
-
-                                                        </ul>
-                                                    </div>
+                                            <div class="accordion-item dropdown">
+                                                <div class="accordion-header" id="hd4">
+                                                    <a href="{{ route('product-category', $site_menu->slug) }}"
+                                                        class="dskLnk">{{ $site_menu->title }}</a>
+                                                    <a href="{{ route('product-category', $site_menu->slug) }}"
+                                                        class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#cd{{ $loop->iteration }}"
+                                                        aria-expanded="false"
+                                                        aria-controls="cd{{ $loop->iteration }}">
+                                                        {{ $site_menu->title }}
+                                                    </a>
                                                 </div>
+                                                @if ($site_menu->children->isNotEmpty())
+                                                    <div id="cd{{ $loop->iteration }}"
+                                                        class="accordion-collapse mgaAccord collapse"
+                                                        aria-labelledby="headingOne" data-bs-parent="#menuaccord1">
+                                                        <div class="accordion-body">
+                                                            <div class="Stilte">{{ $site_menu->title }}</div>
+                                                            <div class="txtB">
+                                                                <div class="coloFlx">
+                                                                    <div class="cl1"></div>
+                                                                    <div class="cl1"></div>
+                                                                    <div class="cl1"></div>
+                                                                </div>
+                                                                <ul>
+                                                                    @foreach ($site_menu->children as $children)
+                                                                        <li><a href="{{ route('product-category', $children->slug) }}"
+                                                                                class="lk">{{ $children->title }}</a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             </div>
-                                            @endif
-                                        </div>
                                         @endforeach
                                     </div>
                                 </div>

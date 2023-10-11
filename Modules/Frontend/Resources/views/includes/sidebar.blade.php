@@ -8,20 +8,10 @@
     </div>
     <ul>
         <li>
-            <a href="dashboard.php"
-                class="lnk <?= basename($_SERVER["SCRIPT_FILENAME"], '.php') == 'dashboard' ? 'active' : '' ?>">
+            <a href="{{ route('user.dashboard')}} "
+                class="lnk {{ Nav::isRoute('user.dashboard')}}">
                 <div class="icon">
-                    <!-- <img src="assets/images/d1.svg" alt=""> -->
-
                     <svg viewBox="0 0 17.7 17.7">
-                        <!-- <defs>
-                            <style>
-                            .cls-1 {
-                                stroke: #f5f5f5;
-                                stroke-width: 0.2px;
-                            }
-                            </style>
-                        </defs> -->
                         <g id="Layer_1" transform="translate(-1.9 -1.9)">
                             <g id="Group_21803" data-name="Group 21803" transform="translate(11.375 10.125)">
                                 <path id="Path_102042" data-name="Path 102042" class="cls-1"
@@ -45,7 +35,6 @@
                             </g>
                         </g>
                     </svg>
-
                 </div>
                 <div class="txt">Dashboard</div>
             </a>
@@ -53,8 +42,6 @@
         <li>
             <a href="myOrders.php" class="lnk">
                 <div class="icon">
-                    <!-- <img src="assets/images/d2.svg" alt=""> -->
-
                     <svg viewBox="0 0 21.667 21.667">
                         <g id="_x33_1_x2C__order_x2C__box_x2C__delivery_x2C__logistics_x2C__receiving"
                             transform="translate(-16 -16)">
@@ -143,8 +130,6 @@
         <li>
             <a href="{{ route('address') }}" class="lnk {{ Nav::isRoute('address') }}">
                 <div class="icon">
-                    <!-- <img src="assets/images/d4.svg" alt=""> -->
-
                     <svg viewBox="0 0 19.57 22.431">
                         <path id="location"
                             d="M13.285,8.589a3.453,3.453,0,1,1-3.453,3.453,3.453,3.453,0,0,1,3.453-3.453m0-1.151a4.6,4.6,0,1,0,4.6,4.6A4.6,4.6,0,0,0,13.285,7.438ZM15.32,23.845l3.219-3.218a.576.576,0,1,0-.814-.814l-3.219,3.218a1.768,1.768,0,0,1-2.442,0L7.18,18.147a8.634,8.634,0,1,1,12.21,0,.576.576,0,1,0,.814.814,9.785,9.785,0,1,0-13.838,0l4.884,4.884a2.877,2.877,0,0,0,4.07,0Z"
@@ -158,8 +143,6 @@
         <li>
             <a href="profileSettings.php" class="lnk">
                 <div class="icon">
-                    <!-- <img src="assets/images/d5.svg" alt=""> -->
-
                     <svg viewBox="0 0 19.833 17.996">
                         <path id="setting"
                             d="M14.038,20.008H6.962a3.129,3.129,0,0,1-2.487-1.436L.938,12.446a3.089,3.089,0,0,1,0-2.872L4.476,3.448A3.129,3.129,0,0,1,6.963,2.012h7.075a3.129,3.129,0,0,1,2.487,1.436l3.538,6.126a3.089,3.089,0,0,1,0,2.872l-3.538,6.126A3.128,3.128,0,0,1,14.038,20.008ZM6.962,3.3A1.837,1.837,0,0,0,5.59,4.09L2.051,10.217a1.841,1.841,0,0,0,0,1.586l3.538,6.126a1.837,1.837,0,0,0,1.373.792h7.076a1.837,1.837,0,0,0,1.373-.792L18.949,11.8a1.841,1.841,0,0,0,0-1.586L15.411,4.09A1.837,1.837,0,0,0,14.038,3.3ZM10.5,14.815a3.805,3.805,0,1,1,3.806-3.805A3.81,3.81,0,0,1,10.5,14.815Zm0-6.324a2.519,2.519,0,1,0,2.52,2.519A2.522,2.522,0,0,0,10.5,8.491Z"
@@ -171,26 +154,18 @@
             </a>
         </li>
         <li>
-            <a href="javascript:void(0)" class="lnk">
+            <form name="LogoutFom" method="post" action="{{ route('user.logout') }}">
+                @csrf
+            </form>
+            <a href="javascript:void(0)" class="lnk logout-form-btn">
                 <div class="icon">
-                    <!-- <img src="assets/images/d6.svg" alt=""> -->
-
                     <svg viewBox="0 0 17.5 17.5">
-                        <!-- <defs>
-                            <style>
-                            .cls-1 {
-                                stroke: #fff;
-                                stroke-width: 0.5px;
-                            }
-                            </style>
-                        </defs> -->
                         <g id="layer1" transform="translate(-0.279 -290.929)">
                             <path id="path52" class="cls-1"
                                 d="M9.02,291.179a.852.852,0,0,0-.842.864v6.832a.851.851,0,1,0,1.7,0v-6.832a.852.852,0,0,0-.86-.864Zm4.959,1.713q-.042,0-.083,0a.855.855,0,0,0-.471,1.508,6.8,6.8,0,1,1-8.816.025.857.857,0,0,0,.095-1.2.848.848,0,0,0-1.2-.1,8.563,8.563,0,0,0,5.529,15.052A8.563,8.563,0,0,0,14.524,293.1a.848.848,0,0,0-.545-.21Z"
                                 transform="translate(0 0)" />
                         </g>
                     </svg>
-
                 </div>
                 <div class="txt">Logout</div>
             </a>
