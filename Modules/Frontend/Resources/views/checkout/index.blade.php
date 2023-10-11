@@ -298,6 +298,7 @@
                             <input type="hidden" name="selected_shipping_address">
                             <input type="hidden" name="selected_billing_shipping_same">
                             <input type="hidden" name="selected_payment_method">
+                            <input type="hidden" name="quotation_uid" value="{{ $quotation->uid }}">
                             <div class="agree">
                                 <input type="checkbox" id="terms_and_condition" name="terms_and_condition">
                                 <label for="terms_and_condition">*I agree to the <a href="{{ route('terms-and-conditions') }}" target="_blank">Terms
@@ -535,25 +536,26 @@
                 });
             }, 300);
         });
-        //check tax value of a address
+        //check tax value of shipping address
         $('body').on('click', '.shipping_address', function(e) {
             var address_id = $(this).data('id');
             checkTaxApplicableForTax(address_id);
         });
-
+        //check tax value of a address if same as billing
         $('body').on('click', '.billing_address', function(e) {
-            var address_id = $(this).data('id');
-            checkTaxApplicableForTax(address_id);
+            if($('input[name=billing_shipping_same]:checked').val()) {
+                var address_id = $(this).data('id');
+                checkTaxApplicableForTax(address_id);
+            }
         });
 
-        //same as billing functionality
+        //same as billing - functionality
         $('.billing_shipping_same').change(function() {
             if ($(this).prop('checked') == true) {
                 $('.shipping-address-div').hide();
                 $('.shipping-add-new-address-div').hide();
                 var billingInput = $('input[name=billing_address]:checked');
                 if (billingInput.length > 0) {
-                    console.log(billingInput);
                     checkTaxApplicableForTax(billingInput.val());
                 } else {
                     $('.tax-details-li').empty();
@@ -618,10 +620,7 @@
             $('input[name="selected_billing_shipping_same"]').val($('input[name="billing_shipping_same"]:checked').val());
             $('input[name="selected_payment_method"]').val($('input[name="payment_method"]:checked').val());
             _this.prop('disabled', true);
-            _this.css({
-                'pointer-events': 'none',
-                'cursor': 'default'
-            }).html(`<span>Processing</span>`);
+            _this.html(`<span>Processing</span>`);
             var form = document.getElementById("CheckoutForm");
             let formData = new FormData(form);
 
@@ -639,20 +638,16 @@
                     .done(function(response) {
                         if (response.status) {
                             _this.prop("disabled", false);
-                            window.location.href = response.url;
+                            $('#CheckoutForm').submit();
                         } else {
                             toastr.error('Something went wrong');
                         }
                     })
                     .fail(function(response) {
                         _this.prop("disabled", false);
-                        _this.css({
-                            'pointer-events': 'none',
-                            'cursor': 'default'
-                        }).html(`<span>Submit</span>`);
+                        _this.html(`<span>Make Payment</span>`);
                         $.each(response.responseJSON.errors, function(field_name, error) {
                             var msg = '</br><span class="error" style="color:red;">' + error + '</span>';
-                            console.log(msg);
                             $(".checkout-form-error-span").append(msg);
                         });
                     });

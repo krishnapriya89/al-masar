@@ -47,4 +47,15 @@ class Order extends Model
         return AdminHelper::getFormattedPrice($this->currency_rate * $this->sub_total);
     }
 
+    public function getConvertedTotalPriceAttribute() {
+        return $this->total_price * $this->currency_rate;
+    }
+
+    public function getConvertedTotalBidPriceAttribute() {
+        return $this->total_bid_price * $this->currency_rate;
+    }
+
+    public function priceWithSymbol($price) {
+        return $this->currency_symbol . AdminHelper::getFormattedPrice($price);
+    }
 }

@@ -80,6 +80,10 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::get('/check-tax-applicable-for-address',[CheckoutController::class, 'checkTaxApplicableForAddress'])->name('check-tax-applicable-for-address');
     Route::post('/checkout-validation', [CheckoutController::class, 'checkoutValidation'])->name('checkout.validation');
     Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.submission');
+    //cash on delivery
+    Route::match(['get', 'post'], 'bank-transfer/{uid}', [CheckoutController::class, 'bankTransfer'])->name('user.bank.transfer');
+    Route::get('order-success', [CheckoutController::class, 'orderSuccess'])->name('user.order.success');
+            Route::get('/order-failed', [CheckoutController::class, 'orderFailed'])->name('user.order.failed');
     //notify-me
     Route::post('notify-me',[ProductController::class,'notifyMe'])->name('notify-me');
     //notify-user

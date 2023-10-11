@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Helpers\AdminHelper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class OrderDetail extends Model
 {
@@ -23,5 +24,29 @@ class OrderDetail extends Model
     public function orderProduct()
     {
         return $this->hasOne(OrderProduct::class, 'order_detail_id');
+    }
+
+    public function getConvertedPriceAttribute() {
+        return $this->price * $this->quotation->currency_rate;
+    }
+
+    public function getConvertedBidPriceAttribute() {
+        return $this->bid_price * $this->quotation->currency_rate;
+    }
+
+    public function getConvertedAdminApprovedPriceAttribute() {
+        return $this->admin_approved_price * $this->quotation->currency_rate;
+    }
+
+    public function getConvertedProductTotalPriceAttribute() {
+        return $this->total_price * $this->quotation->currency_rate;
+    }
+
+    public function getConvertedProductTotalBidPriceAttribute() {
+        return $this->total_bid_price * $this->quotation->currency_rate;
+    }
+
+    public function priceWithSymbol($price) {
+        return $this->quotation->currency_symbol . AdminHelper::getFormattedPrice($price);
     }
 }

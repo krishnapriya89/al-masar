@@ -17,7 +17,8 @@ class CheckoutRequest extends FormRequest
             'selected_billing_address' => 'required',
             'selected_shipping_address' => 'required_if:selected_billing_shipping_same,null',
             'selected_payment_method' => 'required',
-            'terms_and_condition' => 'required'
+            'terms_and_condition' => 'required',
+            'quotation_uid' => 'required'
         ];
 
         return $rules;
@@ -38,7 +39,8 @@ class CheckoutRequest extends FormRequest
             'selected_billing_address.required' => 'The Billing address field is required',
             'selected_shipping_address' => 'The Shipping address field is required',
             'selected_payment_method' => 'The payment method field is required',
-            'terms_and_condition' => 'Please accept Terms and Conditions'
+            'terms_and_condition' => 'Please accept Terms and Conditions',
+            'quotation_uid' => 'Something went wrong please refresh and try again.'
         ];
 
         return $messages;

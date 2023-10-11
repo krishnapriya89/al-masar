@@ -1,7 +1,7 @@
 @foreach ($billing_addresses as $billing_address)
     <div class="item" id="address-{{ $billing_address->id }}">
         <div class="adresBox">
-            <input type="radio" id="add{{ base64_encode($billing_address->id) }}" name="billing_address"
+            <input type="radio" class="billing_address" id="add{{ base64_encode($billing_address->id) }}" name="billing_address"
                 {{ $billing_address->is_default ? 'checked' : '' }}  data-id="{{ $billing_address->id }}" value="{{ $billing_address->id }}">
             <label for="add{{ base64_encode($billing_address->id) }}">
                 <div class="topBFlx">

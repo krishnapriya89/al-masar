@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Qutation Request</title>
+    <title>Order Confirmation</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -38,7 +38,7 @@
                                                     <td style="padding: 0px;">
                                                         <h1
                                                             style="color: #ffffff; font-size: 18px; font-weight: 400; text-align: center; padding: 0 0 0px;margin: 0;">
-                                                            Qutation Request</h1>
+                                                            Order Confirmation</h1>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -68,12 +68,12 @@
                                     <td style="padding: 0px 0 50px;">
                                         <h1
                                             style="color: #E7151F; font-size: 20px; font-weight: 600; text-align: center; padding: 0 0 10px;margin: 0;">
-                                            Hi Admin</h1>
+                                            Hi {{ $order->user->name }}</h1>
                                         <p
                                             style="text-align: center; margin: auto; width: 300px; font-size: 14px; font-weight: 400; color: #272525; line-height: 26px; margin-top:0px; margin-bottom: 0px;">
-                                            You have received a Quotation Request
+                                            You have completed a Order
                                             <br>
-                                            Order #{{ $quotation->uid }}
+                                            Order #{{ $order->uid }}
                                         </p>
                                     </td>
                                 </tr>
@@ -93,7 +93,7 @@
                                                     <td style="padding: 0px;">
                                                         <h1
                                                             style="color: #ffffff; font-size: 14px; font-weight: 400; text-align: center; padding: 0 0 0px;margin: 0;">
-                                                            Order Id: #{{ $quotation->uid }}</h1>
+                                                            Order Id: #{{ $order->uid }}</h1>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -116,7 +116,7 @@
                                                     <td style="padding: 0px;">
                                                         <p
                                                             style="font-size: 14px;color: #E7151F; font-weight: 400; margin-bottom: 0px; margin-top: 0px; line-height: 10px; text-align: center;">
-                                                            Request received
+                                                            Order Confirmation
                                                         </p>
                                                     </td>
                                                 </tr>
@@ -183,42 +183,42 @@
                                                 <tr>
                                                     <td
                                                         style="margin: 0px; text-align: center; padding-top: 15px; padding-bottom: 20px;">
-                                                        @foreach ($quotation->quotationDetails as $quotation_detail)
+                                                        @foreach ($order->orderDetails as $order_detail)
                                                             <table
                                                                 style="width: 100%; height: 40px; border:1px solid #E2E2E2;">
                                                                 <tbody>
                                                                     <tr>
                                                                         <td
                                                                             style="width: 15%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $quotation_detail->product->title }}
+                                                                            {{ $order_detail->orderProduct>title }}
                                                                         </td>
                                                                         <td
                                                                             style="width: 10%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $quotation_detail->product->product_code }}
+                                                                            {{ $order_detail->orderProduct>product_code }}
                                                                         </td>
                                                                         <td
                                                                             style="width: 18%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $quotation_detail->product->specification }}
+                                                                            {{ $order_detail->orderProduct>specification }}
                                                                         </td>
                                                                         <td
                                                                             style="width: 7%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $quotation_detail->quantity }}
+                                                                            {{ $order_detail->quantity }}
                                                                         </td>
                                                                         <td
                                                                             style="width: 10%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $quotation_detail->priceWithSymbol($quotation_detail->converted_price) }}
+                                                                            {{ $order_detail->priceWithSymbol($order_detail->converted_price) }}
                                                                         </td>
                                                                         <td
                                                                             style="width: 10%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $quotation_detail->priceWithSymbol($quotation_detail->converted_bid_price) }}
+                                                                            {{ $order_detail->priceWithSymbol($order_detail->converted_bid_price) }}
                                                                         </td>
                                                                         <td
                                                                             style="width: 15%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $quotation_detail->priceWithSymbol($quotation_detail->converted_product_total_price) }}
+                                                                            {{ $order_detail->priceWithSymbol($order_detail->converted_product_total_price) }}
                                                                         </td>
                                                                         <td
                                                                             style="width: 15%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $quotation_detail->priceWithSymbol($quotation_detail->converted_product_total_bid_price) }}
+                                                                            {{ $order_detail->priceWithSymbol($order_detail->converted_product_total_bid_price) }}
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -253,7 +253,7 @@
                                                 <td style="margin: 0px; text-align: right;">
                                                     <p
                                                         style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
-                                                        {{ $quotation->priceWithSymbol($quotation->total_price) }}
+                                                        {{ $order->priceWithSymbol($order->total_price) }}
                                                     </p>
                                                 </td>
                                             </tr>
@@ -267,7 +267,7 @@
                                                 <td style="margin: 0px; text-align: right;">
                                                     <p
                                                         style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
-                                                        {{ $quotation->priceWithSymbol($quotation->total_bid_price) }}
+                                                        {{ $order->priceWithSymbol($order->total_bid_price) }}
                                                     </p>
                                                 </td>
                                             </tr>

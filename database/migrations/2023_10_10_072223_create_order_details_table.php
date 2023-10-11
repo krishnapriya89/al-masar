@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->decimal('bid_price', 10, 2)->default(0);
             $table->integer('quantity')->nullable();
             $table->decimal('total', 10, 2)->default(0);
+            $table->decimal('total_bid_price', 10, 2)->default(0);
             $table->unsignedBigInteger('order_status_id')->nullable()->comment('1 - Pending, 2 - Shipped, 3 - Delivered');
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
             $table->timestamps();
@@ -32,6 +34,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('order_details');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 };
