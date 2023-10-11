@@ -317,7 +317,7 @@
                 if (amount <= parseInt(bid_price) || amount < 1 || amount > parseInt(price)) {
                     _this.parent().find('.amountField').addClass('is-invalid');
                     _this.parent().append(
-                        '<span class="amountFieldErrorSpan" style="color: red; font-size: 10px;">Amount is invalid please enter correct amount and submit.</span>'
+                        '<span class="amountFieldErrorSpan" style="color: red; font-size: 12px;">Please enter the amount between the Bid Price and Actual Price</span>'
                     );
                     fields_valid = false;
                 }
