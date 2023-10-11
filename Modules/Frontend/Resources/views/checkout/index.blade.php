@@ -528,5 +528,11 @@
                 });
             });
         });
+
+        $('#CheckoutForm').on('submit', function () {
+            e.preventDefault();
+            console.log('yes');
+            sdf;
+        });
     </script>
 @endpush

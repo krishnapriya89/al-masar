@@ -19,7 +19,15 @@ use Modules\Frontend\Http\Controllers\QuoteController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('change-currency/{country}', [HomeController::class, 'changeCurrency'])->name('change-currency');
+//cms
+//home
+Route::get('/',[HomeController::class,'index'])->name('home');
+//privacy policy
+Route::get('privacy-policy',[HomeController::class,'privacyPolicy'])->name('privacy-policy');
+//Terms And conditions
+Route::get('terms-and-conditions',[HomeController::class,'termsAndConditions'])->name('terms-and-conditions');
+//store contact enquiry
+Route::post('contact-enquiry',[HomeController::class,'storeContact'])->name('contact-enquiry');
 //user registration and login
 Route::get('/register', [AuthController::class,'showRegisterForm'])->name('user.register.form');
 Route::post('/register-store', [AuthController::class,'register'])->name('user.register.store');
@@ -34,19 +42,15 @@ Route::post('/resend-login-otp', [AuthController::class,'resendLoginOtp'])->name
 Route::post('/verify-login-otp', [AuthController::class, 'verifyLoginOtp'])->name('user.verify-login-otp');
 //email verification
 Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('user.email.verify');
-//cms
-//privacy policy
-Route::get('privacy-policy',[HomeController::class,'privacyPolicy'])->name('privacy-policy');
-//Terms And conditions
-Route::get('terms-and-conditions',[HomeController::class,'termsAndConditions'])->name('terms-and-conditions');
-//store contact enquiry
-Route::post('contact-enquiry',[HomeController::class,'storeContact'])->name('contact-enquiry');
+
 Route::group(['middleware' => 'auth.user'], function () {
     //logout
     Route::post('logout', [AuthController::class,'logout'])->name('user.logout');
     //cms
     //about
     Route::get('about',[HomeController::class,'about'])->name('about');
+    //change currency data in session
+    Route::get('change-currency/{country}', [HomeController::class, 'changeCurrency'])->name('change-currency');
     //E-commerce
     //product
     Route::get('/product',[ProductController::class,'products'])->name('product');
@@ -97,5 +101,9 @@ Route::group(['middleware' => 'auth.user'], function () {
     //select state
     Route::get('select-state',[UserController::class,'selectState'])->name('select-state');
 });
-//home
-Route::get('/',[HomeController::class,'index'])->name('home');
+//is invalid url show 404
+Route::fallback(function () {
+    if (request()->is('*')) {
+        return response()->view('frontend::errors.404', [], Response::HTTP_NOT_FOUND);
+    }
+});
