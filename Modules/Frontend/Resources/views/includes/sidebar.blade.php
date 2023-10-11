@@ -154,9 +154,6 @@
             </a>
         </li>
         <li>
-            <form name="LogoutFom" method="post" action="{{ route('user.logout') }}">
-                @csrf
-            </form>
             <a href="javascript:void(0)" class="lnk logout-form-btn">
                 <div class="icon">
                     <svg viewBox="0 0 17.5 17.5">

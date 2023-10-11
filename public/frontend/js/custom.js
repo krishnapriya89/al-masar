@@ -649,5 +649,11 @@ $('.main-search-input').on('keyup keypress paste', function(){
     });
 });
 
+//logout
+$('.logout-form-btn').click(function() {
+    $(this).prop('disabled', true);
+    $('#LogoutFom').submit();
+    $(this).prop('disabled', false);
+});
 
 
