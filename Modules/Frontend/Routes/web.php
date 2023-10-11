@@ -108,8 +108,8 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::get('select-state',[UserController::class,'selectState'])->name('select-state');
 });
 //is invalid url show 404
-Route::fallback(function () {
-    if (request()->is('*')) {
-        return to_route('error.404');
-    }
-});
+// Route::fallback(function () {
+//     if (request()->is('*')) {
+//         return to_route('error.404');
+//     }
+// });
