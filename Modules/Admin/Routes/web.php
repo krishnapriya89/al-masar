@@ -111,6 +111,9 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::post('quotation-management/change-quotation-detail-status', [QuotationController::class, 'changeQuotationDetailStatus'])->name('quotation-management.change-quotation-detail-status');
         //Order Management
         Route::get('order-management',[OrderController::class,'index'])->name('order-management.index');
+        Route::get('order-management/show/{id}',[OrderController::class,'show'])->name('order-management.show');
+        //add remark
+        Route::post('add-remark',[OrderController::class,'addRemark'])->name('add-remark');
 
         // user management
         Route::resource('user-management', UserController::class);

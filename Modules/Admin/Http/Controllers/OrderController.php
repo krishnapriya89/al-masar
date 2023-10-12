@@ -3,6 +3,7 @@
 namespace Modules\Admin\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
@@ -45,7 +46,9 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        return view('admin::show');
+        $order = Order::find(base64_decode($id));
+        $order_statuses     = OrderStatus::all();
+        return view('admin::order.show',compact('order','order_statuses'));
     }
 
     /**
@@ -77,5 +80,21 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * add admin remark
+     *
+     */
+    Public function addRemark(Request $request)
+    {
+        $remark =Order::find($request->id);
+        $remark->admin_remarks = $request->remark;
+        $remark->status = $request->statusId;
+        if($remark->save())
+        {
+            return redirect()->back()->with('success','Admin Remark Added successfully!');
+        }
+        return redirect()->back()->with('error','Failed to Add Admin Remark');
     }
 }

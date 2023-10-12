@@ -4,9 +4,10 @@ namespace App\Models;
 
 use App\Helpers\AdminHelper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -46,5 +47,21 @@ class Order extends Model
     {
         return AdminHelper::getFormattedPrice($this->currency_rate * $this->sub_total);
     }
+    public function getFullBillingAddressAttribute()
+    {
+        return $this->address_one . ', ' .($this->address_two ? $this->address_two . ', ' : '') .  $this->city . ', ' . $this->zip_code;
+    }
+    public function getFullShippingAddressAttribute()
+    {
+        return $this->address_one . ', ' .($this->address_two ? $this->address_two . ', ' : '') .  $this->city . ', ' . $this->zip_code;
+    }
+    public function billingAddress(): HasOne
+    {
+        return $this->hasOne(OrderAddress::class, 'order_id')->where('type', 1);
+    }
 
+    public function shippingAddress(): HasOne
+    {
+        return $this->hasOne(OrderAddress::class, 'order_id')->where('type', 2);
+    }
 }

@@ -109,6 +109,7 @@
 
     <!-- jQuery -->
     <script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('backend/js/jquery-validate-1.19.1.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('backend/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
