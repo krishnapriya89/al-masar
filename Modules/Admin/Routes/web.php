@@ -110,8 +110,8 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::post('quotation-management/change-quotation-status', [QuotationController::class, 'changeQuotationStatus'])->name('quotation-management.change-quotation-status');
         Route::post('quotation-management/change-quotation-detail-status', [QuotationController::class, 'changeQuotationDetailStatus'])->name('quotation-management.change-quotation-detail-status');
         //Order Management
-        Route::get('order-management',[OrderController::class,'index'])->name('order-management.index');
-        Route::get('order-management/show/{id}',[OrderController::class,'show'])->name('order-management.show');
+        Route::get('order',[OrderController::class,'index'])->name('order.index');
+        Route::get('order/{uid}',[OrderController::class,'show'])->name('order.details');
         //accept or reject the order
         Route::post('accept-or-reject-order',[OrderController::class,'acceptOrRejectOrder'])->name('accept-or-reject-order');
 

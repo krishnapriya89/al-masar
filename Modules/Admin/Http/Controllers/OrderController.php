@@ -26,36 +26,18 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('admin::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Show the specified resource.
      * @param int $id
      * @return Renderable
      */
-    public function show($id)
+    public function show($uid)
     {
-        $order = Order::find(base64_decode($id));
+        $order = Order::where('uid', $uid)->first();
         if(!$order)
             return view('admin::errors.404');
-
-        return view('admin::order.show',compact('order'));
+        $prev_order         = Order::where('id', '<', $order->id)->latest('id')->first();
+        $next_order         = Order::where('id', '>', $order->id)->oldest('id')->first();
+        return view('admin::order.show',compact('order', 'prev_order', 'next_order'));
     }
 
     /**

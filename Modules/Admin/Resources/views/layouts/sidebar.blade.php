@@ -70,10 +70,10 @@
                 </li>
                 <li class="nav-header">Order Management</li>
                 <li class="nav-item">
-                    <a href="{{ route('order-management.index') }}" class="nav-link {{ Nav::isRoute('order-management.index') }}">
+                    <a href="{{ route('order.index') }}" class="nav-link {{ Nav::isRoute('order.index') }}">
                         <i class="nav-icon fab fa-first-order-alt"></i>
                         <p>
-                            Order Management
+                            Order
                         </p>
                     </a>
                 </li>

@@ -26,4 +26,8 @@ class OrderAddress extends Model
         return $this->first_name . ' ' . $this->last_name;
     }
 
+    public function getFullAddressAttribute()
+    {
+        return $this->address_one . ', ' .($this->address_two ? $this->address_two . ', ' : '') .  $this->city . ', ' . $this->zip_code;
+    }
 }

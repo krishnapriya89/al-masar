@@ -97,7 +97,7 @@
                                     </td>
                                     <td class="quotation-{{ $order->uid }}">
                                         <button class="btn btn-default btn-sm"><i class="fa fa-chevron-down"></i></button>
-                                        <a href="{{ route('order-management.show', base64_encode($order->id)) }}"
+                                        <a href="{{ route('order.details', $order->uid) }}"
                                             class="btn btn-primary btn-sm " data-toggle="tooltip" data-placement="top"
                                             data-original-title="View">
                                             <i class="fas fa-eye"></i>

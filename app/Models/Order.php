@@ -70,14 +70,6 @@ class Order extends Model
     {
         return ($this->getAmountToBePaidAttribute());
     }
-    public function getFullBillingAddressAttribute()
-    {
-        return $this->address_one . ', ' .($this->address_two ? $this->address_two . ', ' : '') .  $this->city . ', ' . $this->zip_code;
-    }
-    public function getFullShippingAddressAttribute()
-    {
-        return $this->address_one . ', ' .($this->address_two ? $this->address_two . ', ' : '') .  $this->city . ', ' . $this->zip_code;
-    }
 
     public function getConvertedTotalPriceAttribute() {
         return $this->total_price * $this->currency_rate;
