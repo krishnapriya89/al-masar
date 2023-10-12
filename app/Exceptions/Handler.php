@@ -6,6 +6,7 @@ use Throwable;
 use ErrorException;
 use BadMethodCallException;
 use Illuminate\Http\Response;
+use Sentry\Laravel\Integration;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -13,6 +14,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
+    public function register(): void
+    {
+        $this->reportable(function (Throwable $e) {
+            Integration::captureUnhandledException($e);
+        });
+    }
+
     public function render($request, Throwable $exception)
     {
         return parent::render($request, $exception);

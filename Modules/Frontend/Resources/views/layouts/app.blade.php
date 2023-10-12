@@ -15,6 +15,12 @@
         content="width=device-width, initial-scale=1.0, shrink-to-fit=no, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Remove when go to live -->
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+    <!-- end section -->
+
     <title>@yield('meta_title', \App\Helpers\AdminHelper::getValueByKey('website_name'))</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="@yield('meta_description')">

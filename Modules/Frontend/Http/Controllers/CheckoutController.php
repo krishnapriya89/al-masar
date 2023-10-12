@@ -123,16 +123,17 @@ class CheckoutController extends Controller
         $temp_request->address_id = $shipping_address_id;
         $temp_request->quotation_uid = $quotation->uid;
         $tax_response = $this->checkTaXApplicableForAddress($temp_request);
-        $tax_data = '';
+        $tax_data = [];
         if ($tax_response) {
             $tax_data = json_decode($tax_response->getContent(), true);
             if ($tax_data['status']) {
-                $order->tax_name = $tax_data['tax']->tax_name ?? '';
-                $order->tax_percentage = $tax_data['tax']->tax_percentage ?? 0;
-                $order->tax_value = $tax_data['tax']->tax_amount ?? 0;
-                $order->tax_amount = $tax_data['tax']->total_tax_amount ?? 0;
+                $order->tax_name = $tax_data['tax']['tax_name'] ?? '';
+                $order->tax_percentage = $tax_data['tax']['tax_percentage'] ?? 0;
+                $order->tax_value = $tax_data['tax']['tax_amount'] ?? 0;
+                $order->tax_amount = $tax_data['total_tax_amount'] ?? 0;
             }
         }
+
         $order->grand_total = $quotation->total_bid_price + $order->tax_amount;
         $order->payment_gateway_status = 0;
         $order->order_status_id = null;

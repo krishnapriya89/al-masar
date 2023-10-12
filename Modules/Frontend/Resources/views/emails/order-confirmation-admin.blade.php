@@ -206,19 +206,19 @@
                                                                         </td>
                                                                         <td
                                                                             style="width: 10%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $order_detail->priceWithSymbol($order_detail->converted_price) }}
+                                                                            ${{ $order_detail->price}}
                                                                         </td>
                                                                         <td
                                                                             style="width: 10%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $order_detail->priceWithSymbol($order_detail->converted_bid_price) }}
+                                                                            ${{ $order_detail->bid_price}}
                                                                         </td>
                                                                         <td
                                                                             style="width: 15%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $order_detail->priceWithSymbol($order_detail->converted_product_total_price) }}
+                                                                            ${{ $order_detail->total_price}}
                                                                         </td>
                                                                         <td
                                                                             style="width: 15%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $order_detail->priceWithSymbol($order_detail->converted_product_total_bid_price) }}
+                                                                            ${{ $order_detail->total_bid_price}}
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -247,13 +247,13 @@
                                                 <td style="margin: 0px; text-align: left;">
                                                     <p
                                                         style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
-                                                        Total
+                                                        Sub Total
                                                     </p>
                                                 </td>
                                                 <td style="margin: 0px; text-align: right;">
                                                     <p
                                                         style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
-                                                        {{ $order->priceWithSymbol($order->total_price) }}
+                                                        ${{ $order->sub_total }}
                                                     </p>
                                                 </td>
                                             </tr>
@@ -261,13 +261,33 @@
                                                 <td style="margin: 0px; text-align: left;">
                                                     <p
                                                         style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
-                                                        Total Bid Price
+                                                        Sub Total Bid Price
                                                     </p>
                                                 </td>
                                                 <td style="margin: 0px; text-align: right;">
                                                     <p
                                                         style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
-                                                        {{ $order->priceWithSymbol($order->total_bid_price) }}
+                                                        ${{ $order->bid_sub_total }}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            @if($order->tax_amount != 0)
+                                            <tr>
+                                                <td style="margin: 0px; text-align: left;">
+                                                    <p
+                                                        style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
+                                                        Tax Amount
+                                                    </p>
+                                                    <p style="font-size: 12px;color: #000000; font-weight: 400; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
+                                                        {{ $order->tax_name }}
+                                                        @if($order->tax_percentage != 0) ({{ $order->tax_percentage }}%) @endif
+                                                        @if($order->tax_value != 0)  + ${{ $order->tax_value }}% @endif
+                                                    </p>
+                                                </td>
+                                                <td style="margin: 0px; text-align: right;">
+                                                    <p
+                                                        style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
+                                                        ${{ $order->grand_total }}
                                                     </p>
                                                 </td>
                                             </tr>
