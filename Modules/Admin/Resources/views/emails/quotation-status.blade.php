@@ -73,6 +73,7 @@
                                             style="text-align: center; margin: auto; width: 300px; font-size: 14px; font-weight: 400; color: #272525; line-height: 26px; margin-top:0px; margin-bottom: 0px;">
                                             Your Quotation Request against
                                             <br> Order #{{ $quotation->uid }} has been updated.
+                                            <p>You have to view more details from <a href="{{ route('user.quotation')}}">My Quotation</a> page.</p>
                                         </p>
                                     </td>
                                 </tr>
@@ -111,11 +112,11 @@
                                                                     </th>
                                                                     <th
                                                                         style="width: 20%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                        Approved Price
+                                                                        Bid Price
                                                                     </th>
                                                                     <th
                                                                         style="width: 20%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                        Total
+                                                                        Approved Price
                                                                     </th>
                                                                     <th
                                                                         style="width: 20%; font-size: 14px;color: #ffffff; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
@@ -158,7 +159,7 @@
                                                                         </td>
                                                                         <td
                                                                             style="width: 20%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $quotation_detail->priceWithSymbol($quotation_detail->converted_product_total_bid_price) }}
+                                                                            {{ $quotation_detail->priceWithSymbol($quotation_detail->converted_admin_approved_price) }}
                                                                         </td>
                                                                         <td
                                                                             style="width: 20%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
@@ -175,36 +176,6 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding: 0px 20px 0px;">
-                        <table width="565" style="padding: 0px 0px 0px; border-bottom: 1px solid #F4F4F4;">
-                            <tr>
-                                <td style="padding: 0px 17px 0px;">
-                                    <table width="525"
-                                        style="padding: 15px 0 30px; margin: auto; background: #ffffff;" border="0"
-                                        cellpadding="0" cellspacing="0">
-                                        <tbody>
-                                            <tr>
-                                                <td style="margin: 0px; text-align: left;">
-                                                    <p
-                                                        style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
-                                                        Total Bid Price
-                                                    </p>
-                                                </td>
-                                                <td style="margin: 0px; text-align: right;">
-                                                    <p
-                                                        style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
-                                                        {{ $quotation->priceWithSymbol($quotation->converted_total_bid_price) }}
-                                                    </p>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
                         </table>
                     </td>
                 </tr>

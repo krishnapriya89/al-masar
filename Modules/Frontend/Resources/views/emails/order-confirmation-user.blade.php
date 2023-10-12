@@ -253,7 +253,7 @@
                                                 <td style="margin: 0px; text-align: right;">
                                                     <p
                                                         style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
-                                                        {{ $order->priceWithSymbol($order->sub_total) }}
+                                                        ${{ $order->priceWithSymbol($order->sub_total) }}
                                                     </p>
                                                 </td>
                                             </tr>
@@ -267,100 +267,50 @@
                                                 <td style="margin: 0px; text-align: right;">
                                                     <p
                                                         style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
-                                                        {{ $order->priceWithSymbol($order->bid_sub_total) }}
+                                                        ${{ $order->priceWithSymbol($order->bid_sub_total) }}
                                                     </p>
                                                 </td>
                                             </tr>
-                                            @if ($order->tax_amount != 0)
-                                                <tr>
-                                                    <td style="margin: 0px; text-align: left;">
-                                                        <p
-                                                            style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
-                                                            Tax Amount
-                                                        </p>
-                                                        <p
-                                                            style="font-size: 12px;color: #000000; font-weight: 400; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
-                                                            {{ $order->tax_name }}
-                                                            @if ($order->tax_percentage != 0)
-                                                                ({{ $order->tax_percentage }}%) @endif
-                                                            @if ($order->tax_value != 0) +
-                                                                ${{ $order->tax_value }}% @endif
-                                                        </p>
-                                                    </td>
-                                                    <td style="margin: 0px; text-align: right;">
-                                                        <p
-                                                            style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
-                                                            {{ $order->priceWithSymbol($order->grand_total) }}
-                                                        </p>
-                                                    </td>
-                                                </tr>
+                                            @if($order->tax_amount != 0)
+                                            <tr>
+                                                <td style="margin: 0px; text-align: left;">
+                                                    <p
+                                                        style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
+                                                        Tax Amount
+                                                    </p>
+                                                    <p style="font-size: 12px;color: #000000; font-weight: 400; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
+                                                        {{ $order->tax_name }}
+                                                        @if($order->tax_percentage != 0) ({{ $order->tax_percentage }}%) @endif
+                                                        @if($order->tax_value != 0)  + ${{ $order->priceWithSymbol($order->tax_value * $order->currency_rate) }}% @endif
+                                                    </p>
+                                                </td>
+                                                <td style="margin: 0px; text-align: right;">
+                                                    <p
+                                                        style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
+                                                        ${{ $order->priceWithSymbol($order->tax_amount * $order->currency_rate) }}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            @endif
+                                            <tr>
+                                                <td style="margin: 0px; text-align: left;">
+                                                    <p
+                                                        style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
+                                                        Grand Total
+                                                    </p>
+                                                </td>
+                                                <td style="margin: 0px; text-align: right;">
+                                                    <p
+                                                        style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
+                                                        {{ $order->priceWithSymbol($order->grand_total) }}
+                                                    </p>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </td>
                             </tr>
                         </table>
-                        @if ($siteSettings->phone && $siteSettings->email)
-                            <table width="380" border="0" cellpadding="0" cellspacing="0"
-                                style="margin: auto; padding-top: 0px; padding-bottom: 0px; margin-top: 0px;">
-                                <tbody>
-                                    <tr>
-                                        <td style="margin: 0px; text-align: right; width:100%; padding: 0 0 55px;">
-                                            <table style="width: 100%;">
-                                                <tbody>
-                                                    <tr>
-                                                        @if ($siteSettings->phone)
-                                                            <td style="width: 33.3%;">
-                                                                <table>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td
-                                                                                style="width: 26px; text-align: right; padding: 0px;">
-                                                                                <img src="https://ux.intersmarthosting.in/Mailers/AlMasar/images/ic-01.png"
-                                                                                    width="26" height="26"
-                                                                                    style="object-fit: contain;">
-                                                                            </td>
-                                                                            <td
-                                                                                style="padding-left: 15px; padding-right: 0px; font-size: 13px; color: #2f2f2f; font-weight: 400; margin: 0px; text-align: left;">
-                                                                                <a href="tel:{{ @$siteSettings->converted_phone_number }}"
-                                                                                    style="display: block; text-decoration: none; font-size: 14px; color: #444444; font-weight: 400; margin: 0px; text-align: left;">
-                                                                                    Call us
-                                                                                </a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                        @endif
-                                                        @if ($siteSettings->email)
-                                                            <td style="width: 33.3%;">
-                                                                <table>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td style="width: 26px; padding: 0px;">
-                                                                                <img src="https://ux.intersmarthosting.in/Mailers/AlMasar/images/ic-03.png"
-                                                                                    width="26" height="26"
-                                                                                    style="object-fit: contain;">
-                                                                            </td>
-                                                                            <td
-                                                                                style="padding-left: 15px; padding-right: 0px; font-size: 13px; color: #2f2f2f; font-weight: 400; margin: 0px; text-align: right;">
-                                                                                <a href="mailto:{{ @$siteSettings->email }}"
-                                                                                    style="display: block; text-decoration: none; font-size: 14px; color: #444444; font-weight: 400; margin: 0px; text-align: right;">
-                                                                                    Send Email
-                                                                                </a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                        @endif
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        @endif
                     </td>
                 </tr>
             </tbody>
