@@ -136,7 +136,7 @@
                                         </a>
                                         @if ($order->order_status_id == 1)
                                             <select
-                                                class="custom-select form-control-border order-status-select order-status-{{ $order->uid }} acceptOrRejectOrder"
+                                                class="custom-select form-control-border acceptOrRejectOrder"
                                                 data-order-uid="{{ $order->uid }}">
                                                 <option value="0" selected disabled>Waiting
                                                     For Approval</option>
