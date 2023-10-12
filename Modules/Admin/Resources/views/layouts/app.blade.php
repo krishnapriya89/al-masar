@@ -5,6 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Remove when go to live -->
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+    <!-- end section -->
+
     <title>@yield('title', \App\Helpers\AdminHelper::getValueByKey('website_name'))</title>
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend/images/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/images/favicon-32x32.png') }}">
