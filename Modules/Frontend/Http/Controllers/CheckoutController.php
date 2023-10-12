@@ -284,7 +284,7 @@ class CheckoutController extends Controller
             session()->forget('order_uid');
             $order->payment_gateway_status = 1;
             $order->order_status_id = 1;//pending approval from admin
-            $order->status = 2;
+            $order->status = 3;
             if ($order->save()) {
                 $order->orderDetails()->update(['order_status_id' => 1]);
                 $quotation = Quotation::where('uid', $uid)->first();

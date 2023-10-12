@@ -56,9 +56,23 @@
             color: #dc3545;
             font-size: 14px;
         }
+
+        #loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+        }
     </style>
 @endpush
 @section('content')
+    <div id="loader" style="display: none;">
+        <!-- Your loader content, e.g., spinner or loading text -->
+        Loading...
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -83,7 +97,8 @@
                         </thead>
                         <tbody>
                             @forelse($orders as $order)
-                                <tr data-toggle="collapse" data-target="#demo{{ $loop->iteration }}" class="accordion-toggle">
+                                <tr data-toggle="collapse" data-target="#demo{{ $loop->iteration }}"
+                                    class="accordion-toggle">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $order->uid }}</td>
                                     <td>{{ $order->order_received_date }}</td>
@@ -92,25 +107,43 @@
                                     <td>$ @formattedPrice($order->grand_total)</td>
                                     <td>{{ $order->payment->title }}</td>
                                     <td>$ @formattedPrice($order->payment_received_amount)</td>
-                                    <td>
-                                        <span class="status {{ $order->status_class }}">{{ $order->orderStatus->title }}</span>
+                                    <td id="order-status-{{ $order->uid }}">
+                                        @if ($order->order_status_id == 2)
+                                            <select
+                                                class="custom-select form-control-border order-status-select order-status-select-{{ $order->uid }} changeOrderStatus"
+                                                data-order-uid="{{ $order->uid }}">
+                                                <option value="1" selected disabled>In Progress</option>
+                                                <option value="3">Shipped</option>
+                                                <option value="4">Delivered</option>
+                                            </select>
+                                        @elseif ($order->order_status_id == 3)
+                                            <select
+                                                class="custom-select form-control-border order-status-select order-status-select-{{ $order->uid }} changeOrderStatus"
+                                                data-order-uid="{{ $order->uid }}">
+                                                <option value="1" selected disabled>Shipped</option>
+                                                <option value="4">Delivered</option>
+                                            </select>
+                                        @else
+                                            <span
+                                                class="status {{ $order->status_class }}">{{ $order->orderStatus->title }}</span>
+                                        @endif
                                     </td>
                                     <td class="quotation-{{ $order->uid }}">
                                         <button class="btn btn-default btn-sm"><i class="fa fa-chevron-down"></i></button>
-                                        <a href="{{ route('order.details', $order->uid) }}"
-                                            class="btn btn-primary btn-sm " data-toggle="tooltip" data-placement="top"
-                                            data-original-title="View">
+                                        <a href="{{ route('order.details', $order->uid) }}" class="btn btn-primary btn-sm "
+                                            data-toggle="tooltip" data-placement="top" data-original-title="View">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <select
-                                            class="custom-select form-control-border order-status-select order-status-{{ $order->uid }} chngeRmark"
-                                            data-order-uid="{{ $order->uid }}" id=""
-                                            data-id={{ $order->id }}>
-                                            <option value="0" selected disabled>Waiting
-                                                For Approval</option>
-                                            <option value="2">Accept Order</option>
-                                            <option value="5">Reject Order</option>
-                                        </select>
+                                        @if ($order->order_status_id == 1)
+                                            <select
+                                                class="custom-select form-control-border order-status-select order-status-{{ $order->uid }} acceptOrRejectOrder"
+                                                data-order-uid="{{ $order->uid }}">
+                                                <option value="0" selected disabled>Waiting
+                                                    For Approval</option>
+                                                <option value="2">Accept Order</option>
+                                                <option value="5">Reject Order</option>
+                                            </select>
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>
@@ -126,7 +159,6 @@
                                                         <th>Price</th>
                                                         <th>Total Price</th>
                                                         <th>Total Bid Price</th>
-
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -142,7 +174,6 @@
                                                             <td
                                                                 class="quotation-detail-total-bid-price-{{ $order_detail->id }}">
                                                                 $@formattedPrice($order_detail->bid_price)</td>
-
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -157,13 +188,6 @@
                             @endforelse
                         </tbody>
                     </table>
-                    {{--                    @if ($orders) --}}
-                    {{--                        <div class="container"> --}}
-                    {{--                            <ul class="pagination"> --}}
-                    {{--                                {!! $orders->links() !!} --}}
-                    {{--                            </ul> --}}
-                    {{--                        </div> --}}
-                    {{--                    @endif --}}
                 </div>
             </div>
         </div>
@@ -181,7 +205,7 @@
                 <form action="{{ route('accept-or-reject-order') }}" method="post" id="remarkForm">
                     @csrf
                     <div class="modal-body">
-                        <input type="hidden" id="id" name="id">
+                        <input type="hidden" id="uid" name="uid">
                         <input type="hidden" id="statusId" name="statusId">
                         <textarea name="remark" id="remark" class="form-control"></textarea>
                     </div>
@@ -204,20 +228,86 @@
                 // buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"]
             };
             initializeDataTable(options);
-
         });
-        $('.chngeRmark').change(function() {
+        $('.acceptOrRejectOrder').change(function() {
             var statusId = $(this).val();
-            var id = $(this).data('id');
+            var uid = $(this).data('order-uid');
             $('#remark').empty();
-            $('#id').val(id);
+            $('#uid').val(uid);
             $('#statusId').val(statusId);
             $('#remarkModal').modal('show');
         });
-
         $("#remarkForm").validate({
             rules: {
                 remark: "required",
+            }
+        });
+        $('.order-status-select').change(function() {
+            var _this = $(this);
+            var order_status = $(this).val();
+            var uid = $(this).data('order-uid');
+            if (uid && order_status && order_status > 1) {
+                $('.preloader').show();
+                if (order_status == 3) {
+                    var message = 'Do you want to change the order status to Shipped?';
+                } else if (order_status == 4) {
+                    var message = 'Do you want to change the order status to Delivered?';
+                }
+                Swal.fire({
+                    title: "Change Order Status",
+                    text: message,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: primary_color,
+                    confirmButtonText: "Update",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('order.change-status') }}",
+                            type: "POST",
+                            data: {
+                                uid: uid,
+                                order_status: order_status,
+                            },
+                            success: function(response) {
+                                if (response.status) {
+                                    if (order_status == 4) {
+                                        $('#order-status-' + uid).empty().html(response
+                                            .updated_status);
+                                    } else if (order_status == 3) {
+                                        _this.find('option[value="1"]').remove();
+                                        _this.find('option[value="3"]').prop('disabled', true);
+                                    }
+
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: `Status changed successfully`,
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: response.message,
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: `An error occurred while updating the status.`,
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                });
+                            },
+                        });
+                    } else {
+                        $('.order-status-select-' + uid).val(1).trigger('change');
+                    }
+                });
             }
         });
     </script>

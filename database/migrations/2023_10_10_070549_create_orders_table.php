@@ -32,7 +32,7 @@ return new class extends Migration
             $table->tinyInteger('payment_gateway_status')->default(0)->comment('0 - Pending, 1 - Success, 2 - Failed');
             $table->unsignedBigInteger('order_status_id')->nullable()->comment('1 - Pending, 2 - In Progress(Approved By Admin), 3 - Shipped, 4 - Delivered, 5 - Rejected');
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
-            $table->tinyInteger('status')->default(0)->comment('0 - Checkout Started, 1 - Order Confirmed, 2 - Order Cancelled');
+            $table->tinyInteger('status')->default(0)->comment('0 - Checkout Started, 1 - Order Detail, 2 - Order Address, 3 - Order Confirmed, 4 - Order Cancelled');
             $table->tinyInteger('payment_received_status')->default(0)->comment('0 - Not Received, 1 - Partial Amount Received, 2 - Full Received');
             $table->decimal('payment_received_amount', 10, 2)->default(0);
             $table->text('admin_remarks')->nullable();

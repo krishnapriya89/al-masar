@@ -22,7 +22,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::orderBy('id', 'desc')->get();
-        return view('admin::order.index',compact('orders'));
+        return view('admin::order.index', compact('orders'));
     }
 
     /**
@@ -33,37 +33,36 @@ class OrderController extends Controller
     public function show($uid)
     {
         $order = Order::where('uid', $uid)->first();
-        if(!$order)
+        if (!$order)
             return view('admin::errors.404');
         $prev_order         = Order::where('id', '<', $order->id)->latest('id')->first();
         $next_order         = Order::where('id', '>', $order->id)->oldest('id')->first();
-        return view('admin::order.show',compact('order', 'prev_order', 'next_order'));
+        return view('admin::order.show', compact('order', 'prev_order', 'next_order'));
     }
 
     /**
      * accept or reject the order
      *
      */
-    Public function acceptOrRejectOrder(Request $request)
+    public function acceptOrRejectOrder(Request $request)
     {
-        $order =Order::find($request->id);
-        if(!$order)
-            return redirect()->back()->with('error','The requested order was not found!.');
-        if($order->order_status_id > 1)
-            return redirect()->back()->with('error','The requested order status was already updated!.');
+        $order = Order::where('uid', $request->uid)->first();
+        if (!$order)
+            return redirect()->back()->with('error', 'The requested order was not found!.');
+        if ($order->order_status_id > 1)
+            return redirect()->back()->with('error', 'The requested order status was already updated!.');
 
         $order->admin_remarks = $request->remark;
         $order->order_status_id = $request->statusId;
-        if($order->save())
-        {
+        if ($order->save()) {
             $order->orderDetails()->update(['order_status_id' => $request->statusId]);
             $siteSettings = SiteCommonContent::first();
 
             //if accepted update out of stock
-            if($order->status == 2) {
-                foreach($order->orderDetails as $order_detail) {
+            if ($order->order_status_id == 2) {
+                foreach ($order->orderDetails as $order_detail) {
                     $product = Product::find($order_detail->product_id);
-                    if($product) {
+                    if ($product) {
                         $stock              = $product->stock - $order_detail->quantity;
                         $product->stock     = $stock > 0 ? $stock : 0;
                         $product->save();
@@ -74,24 +73,47 @@ class OrderController extends Controller
                 }
             }
             Mail::to($order->user->email)->send(new OrderStatusChange($order, $siteSettings));
-            return redirect()->back()->with('success','You have ' . $order->orderStatus->title . ' the Order Successfully.');
+            return redirect()->back()->with('success', 'You have changed the order status to ' . $order->orderStatus->title . ' Successfully.');
         }
-        return redirect()->back()->with('error','Something went wrong try again!.');
+        return redirect()->back()->with('error', 'Something went wrong try again!.');
     }
 
     /**
      * change status to shipped or delivered
      *
      */
-    Public function changeStatus(Request $request)
+    public function updateOrderStatus(Request $request)
     {
-        $remark =Order::find($request->id);
-        $remark->admin_remarks = $request->remark;
-        $remark->status = $request->statusId;
-        if($remark->save())
-        {
-            return redirect()->back()->with('success','Admin Remark Added successfully!');
+        $order = Order::where('uid', $request->uid)->first();
+        if (!$order)
+            return response()->json([
+                'status' => false,
+                'message' => 'The requested order was not found!.'
+            ]);
+        if ($order->order_status_id == 1 || $order->order_status_id >= 4)
+            return response()->json([
+                'status' => false,
+                'message' => 'The requested order status was already updated.'
+            ]);
+
+        $order->order_status_id = $request->order_status;
+        if ($order->save()) {
+            $order->orderDetails()->update(['order_status_id' => $order->order_status_id]);
+            $siteSettings = SiteCommonContent::first();
+            Mail::to($order->user->email)->send(new OrderStatusChange($order, $siteSettings));
+            $updated_status = '';
+            if($order->order_status_id == 4)
+                $updated_status = '<span class="status ' . $order->status_class . '">' . $order->orderStatus->title . '</span>';
+
+            return response()->json([
+                'status' => true,
+                'updated_status' => $updated_status,
+                'message' => 'Order status changes successfully!.'
+            ]);
         }
-        return redirect()->back()->with('error','Failed to Add Admin Remark');
+        return response()->json([
+            'status' => false,
+            'message' => 'Failed to update status!.'
+        ]);
     }
 }

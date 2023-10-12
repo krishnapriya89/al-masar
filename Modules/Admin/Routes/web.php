@@ -110,10 +110,12 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         Route::post('quotation-management/change-quotation-status', [QuotationController::class, 'changeQuotationStatus'])->name('quotation-management.change-quotation-status');
         Route::post('quotation-management/change-quotation-detail-status', [QuotationController::class, 'changeQuotationDetailStatus'])->name('quotation-management.change-quotation-detail-status');
         //Order Management
-        Route::get('order',[OrderController::class,'index'])->name('order.index');
-        Route::get('order/{uid}',[OrderController::class,'show'])->name('order.details');
+        Route::get('order', [OrderController::class,'index'])->name('order.index');
+        Route::get('order/{uid}', [OrderController::class,'show'])->name('order.details');
         //accept or reject the order
-        Route::post('accept-or-reject-order',[OrderController::class,'acceptOrRejectOrder'])->name('accept-or-reject-order');
+        Route::post('accept-or-reject-order', [OrderController::class,'acceptOrRejectOrder'])->name('accept-or-reject-order');
+        //change order status to shipped or delivered
+        Route::post('order/change-status', [OrderController::class,'updateOrderStatus'])->name('order.change-status');
 
         // user management
         Route::resource('user-management', UserController::class);
