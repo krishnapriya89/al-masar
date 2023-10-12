@@ -637,7 +637,6 @@
                     })
                     .done(function(response) {
                         if (response.status) {
-                            _this.prop("disabled", false);
                             $('#CheckoutForm').submit();
                         } else {
                             toastr.error('Something went wrong');

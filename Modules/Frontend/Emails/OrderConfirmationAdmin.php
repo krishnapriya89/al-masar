@@ -43,7 +43,7 @@ class OrderConfirmationAdmin extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'frontend::emails.order-confirmation-admin',
+            view: 'frontend::emails.order-confirmation-user',
         );
     }
 }

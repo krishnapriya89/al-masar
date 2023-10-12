@@ -40,7 +40,7 @@ class QuoteController extends Controller
                     'count' => QuoteHelper::checkQuote(),
                 ), 200, []);
             }
-            
+
             $quote = Quote::where('user_id', Auth::guard('web')->id())->where('product_id', $product->id)->first();
             if ($quote) {
                 $quote->quantity = $request->quantity;
@@ -63,7 +63,7 @@ class QuoteController extends Controller
                 $quote->price = $product->price;
                 $quote->bid_price = $request->bid_price ?? $product->price;
                 $quote->user_id = Auth::guard('web')->id();
-                
+
                 if ($quote->save()) {
                     return response(array(
                         'status' => true,
@@ -135,7 +135,7 @@ class QuoteController extends Controller
         $quotes = Quote::where('user_id', Auth::guard('web')->id())->get();
         if($quotes->isEmpty())
             return to_route('product')->with('error', 'Currently you have no item in quote. Please add and continue');
-        
+
         $quotation = new Quotation();
         $quotation->user_id = Auth::guard('web')->id();
         $quotation->currency = session('currency') ?? 'USD';
@@ -153,10 +153,10 @@ class QuoteController extends Controller
 
                 Mail::to($quotation->user->email)->send(new QuotationRequestUserMail($quotation, $site_settings));
                 Mail::to($site_settings->enquiry_receive_email)->send(new QuotationRequestAdminMail($quotation, $site_settings));
-                return to_route('product')->with('success', 'Your Request has been submitted.');
+                return to_route('user.quotation')->with('success', 'Your Request has been submitted.');
             }
             else{
-                return to_route('product')->with('error', 'Something went wrong please try after some time');
+                return to_route('user.quotation')->with('error', 'Something went wrong please try after some time');
             }
         }
     }
@@ -183,7 +183,7 @@ class QuoteController extends Controller
 
         $quotation->total_price = $total_price;
         $quotation->total_bid_price = $total_bid_price;
-        
+
         if ($quotation->save()) {
             return true;
         }

@@ -190,15 +190,15 @@
                                                                     <tr>
                                                                         <td
                                                                             style="width: 15%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $order_detail->orderProduct>title }}
+                                                                            {{ $order_detail->orderProduct->title }}
                                                                         </td>
                                                                         <td
                                                                             style="width: 10%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $order_detail->orderProduct>product_code }}
+                                                                            {{ $order_detail->orderProduct->product_code }}
                                                                         </td>
                                                                         <td
                                                                             style="width: 18%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            {{ $order_detail->orderProduct>specification }}
+                                                                            {{ $order_detail->orderProduct->specification }}
                                                                         </td>
                                                                         <td
                                                                             style="width: 7%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">

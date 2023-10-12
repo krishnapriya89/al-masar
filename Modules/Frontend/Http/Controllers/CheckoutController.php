@@ -1,7 +1,5 @@
 <?php
-
 namespace Modules\Frontend\Http\Controllers;
-
 use App\Models\Order;
 use App\Models\Country;
 use App\Models\Payment;
@@ -23,7 +21,6 @@ use Illuminate\Contracts\Support\Renderable;
 use Modules\Frontend\Emails\OrderConfirmationAdmin;
 use Modules\Frontend\Emails\OrderConfirmationUser;
 use Modules\Frontend\Http\Requests\CheckoutRequest;
-
 class CheckoutController extends Controller
 {
     /**
@@ -56,7 +53,6 @@ class CheckoutController extends Controller
         $total_tax_amount = 0;
         $site_settings = TaxManagement::first();
         $default_shipping_address = $shipping_addresses->first();
-
         if ($default_shipping_address->state->free_zone == 1) {
             if ($site_settings->tax_percentage) {
                 $total_tax_amount += (($quotation->converted_total_bid_price * $site_settings->tax_percentage) / 100);
@@ -67,7 +63,6 @@ class CheckoutController extends Controller
         }
         return view('frontend::checkout.index', compact('quotation', 'countries', 'billing_addresses', 'shipping_addresses', 'payment_methods', 'site_settings', 'total_tax_amount'));
     }
-
     //checkout validation
     public function checkoutValidation(CheckoutRequest $request)
     {
@@ -75,17 +70,19 @@ class CheckoutController extends Controller
             'status' => true
         ]);
     }
-
     //checkout
     public function checkout(Request $request)
     {
         $quotation = Quotation::where('uid', $request->quotation_uid)
             ->where('user_id', Auth::guard('web')->id())
             ->first();
-
         if (!$quotation || $quotation->quotationDetails->whereIn('status', [0, 1])->count() > 1 || $quotation->acceptedQuotationDetails->count() < 1) {
             return to_route('user.quotation')->with('error', 'Something went wrong please try again.');
         }
+
+        $checkOrderExist = Order::where('uid', $request->quotation_uid)->first();
+        if($checkOrderExist)
+            return to_route('user.quotation')->with('error', 'You have already processed this order');
 
         $order = $this->createOrder($request, $quotation);
         if ($order) {
@@ -93,8 +90,7 @@ class CheckoutController extends Controller
             if ($order_address) {
                 if ($order->payment_id == 1) {
                     return redirect()->route('user.bank.transfer', ['uid' => $order->uid]);
-                }
-                else {
+                } else {
                     return to_route('user.quotation')->with('success', 'Order Completed');
                 }
             }
@@ -103,31 +99,26 @@ class CheckoutController extends Controller
         }
         return redirect()->route('user.quotation');
     }
-
     public function createOrder($request, $quotation)
     {
         $order = new Order();
         $order->uid = $quotation->uid;
         $order->user_id = auth()->id();
-        $order->sub_total = $quotation->total_price;
-        $order->bid_sub_total = $quotation->total_bid_price;
+        $order->sub_total = $quotation->acceptedQuotationDetails->sum('total_price');
+        $order->bid_sub_total = $quotation->acceptedQuotationDetails->sum('total_bid_price');
         $order->payment_id = $request->selected_payment_method;
-
         $order->currency_code = FrontendHelper::getCurrencyCode();
         $order->currency_symbol = FrontendHelper::getCurrencySymbol();
         $order->currency_rate = FrontendHelper::getCurrencyRate();
-
         $order->tax_name = '';
         $order->tax_percentage = 0;
         $order->tax_value = 0;
         $order->tax_amount = 0;
-
         if ($request->selected_billing_shipping_same) {
             $shipping_address_id = $request->selected_billing_address;
         } else {
             $shipping_address_id = $request->selected_shipping_address;
         }
-
         $temp_request = app(Request::class);
         $temp_request->address_id = $shipping_address_id;
         $temp_request->quotation_uid = $quotation->uid;
@@ -135,7 +126,6 @@ class CheckoutController extends Controller
         $tax_data = '';
         if ($tax_response) {
             $tax_data = json_decode($tax_response->getContent(), true);
-
             if ($tax_data['status']) {
                 $order->tax_name = $tax_data['tax']->tax_name ?? '';
                 $order->tax_percentage = $tax_data['tax']->tax_percentage ?? 0;
@@ -143,7 +133,6 @@ class CheckoutController extends Controller
                 $order->tax_amount = $tax_data['tax']->total_tax_amount ?? 0;
             }
         }
-
         $order->grand_total = $quotation->total_bid_price + $order->tax_amount;
         $order->payment_gateway_status = 0;
         $order->order_status_id = null;
@@ -153,16 +142,14 @@ class CheckoutController extends Controller
         $order->payment_received_amount = 0;
         $order->admin_remarks = null;
         if ($order->save()) {
-            if ($this->createOrderDetails($request, $order, $quotation)) {
+            if ($this->createOrderDetails($order, $quotation)) {
                 return $order;
             }
         }
     }
-
-    private function createOrderDetails($request, $order, $quotation)
+    private function createOrderDetails($order, $quotation)
     {
         try {
-
             foreach ($quotation->acceptedQuotationDetails as $quotation_detail) {
                 $order_detail = new OrderDetail();
                 $order_detail->order_id = $order->id;
@@ -185,7 +172,6 @@ class CheckoutController extends Controller
             return false;
         }
     }
-
     private function createOrderProduct($order_details)
     {
         $product = Product::find($order_details->product_id);
@@ -204,12 +190,10 @@ class CheckoutController extends Controller
         }
         return true;
     }
-
     private function createOrderAddress(Request $request, $order)
     {
         $billing_address = $this->createOrderBillingAddress($request, $order);
         $shipping_address = $this->createOrderShippingAddress($request, $order, $billing_address);
-
         $order->status = 2;
         if ($billing_address && $shipping_address && $order->save()) {
             return true;
@@ -217,7 +201,6 @@ class CheckoutController extends Controller
             return false;
         }
     }
-
     private function createOrderBillingAddress(Request $request, $order)
     {
         $billing_address = UserAddress::find($request->selected_billing_address);
@@ -240,7 +223,6 @@ class CheckoutController extends Controller
             }
         }
     }
-
     private function createOrderShippingAddress(Request $request, $order, $billing_address)
     {
         if ($billing_address && $request->filled('selected_billing_shipping_same')) {
@@ -283,48 +265,41 @@ class CheckoutController extends Controller
             }
         }
     }
-
     //bank transfer
     public function bankTransfer($uid)
     {
         $order = Order::where('uid', $uid)->first();
-
         if (!$order) {
             return redirect()->route('user.order.failed');
         }
-
         session()->put('order_uid', $uid);
-
         return redirect()->route('user.order.success');
     }
-
     public function orderSuccess()
     {
         $uid = session()->get('order_uid');
         if ($uid && $order = Order::where('uid', $uid)->first()) {
-            session()->forget('order_uid');
+            // session()->forget('order_uid');
             $order->payment_gateway_status = 1;
             $order->order_status_id = 1;
             $order->status = 2;
             $order->order_status = 2;
             if ($order->save()) {
                 $order->orderDetails()->update(['order_status_id' => 1]);
-
                 $quotation = Quotation::where('uid', $uid)->first();
                 $quotation->status = 5;
                 $quotation->save();
                 $quotation->acceptedQuotationDetails()->update(['status' => 5]);
-
                 $site_settings = SiteCommonContent::first();
-                Mail::to($order->user->email)->send(new OrderConfirmationUser($quotation, $site_settings));
-                Mail::to($site_settings->email)->send(new OrderConfirmationAdmin($quotation, $site_settings));
+
+                Mail::to($order->user->email)->send(new OrderConfirmationUser($order, $site_settings));
+                Mail::to($site_settings->email)->send(new OrderConfirmationAdmin($order, $site_settings));
             }
             return view('frontend::checkout.order_success', compact('order'));
         } else {
             return redirect()->route('home');
         }
     }
-
     /**
      * Displays order failed page.
      *
@@ -344,7 +319,6 @@ class CheckoutController extends Controller
             return redirect()->route('home');
         }
     }
-
     //return the address data for edit
     public function  getAddressData(Request $request)
     {
@@ -365,14 +339,12 @@ class CheckoutController extends Controller
             'address' => $address
         ]);
     }
-
     //check tax for the selected shipping address
     public function checkTaXApplicableForAddress(Request $request)
     {
         $total_tax_amount = $converted_total_tax_amount = 0;
         $site_settings = TaxManagement::first();
         $shipping_address = UserAddress::find($request->address_id);
-
         $quotation = Quotation::where('uid', $request->quotation_uid)
             ->where('user_id', Auth::guard('web')->id())
             ->first();
@@ -380,9 +352,7 @@ class CheckoutController extends Controller
             return response()->json([
                 'status' => false
             ]);
-
         $converted_total_amount = $quotation->converted_total_bid_price;
-
         if ($shipping_address->state->free_zone == 1) {
             if ($site_settings->tax_percentage) {
                 $total_tax_amount += (($quotation->total_bid_price * $site_settings->tax_percentage) / 100);
@@ -392,10 +362,8 @@ class CheckoutController extends Controller
                 $total_tax_amount += $site_settings->tax_amount;
                 $converted_total_tax_amount += $site_settings->tax_amount * $quotation->currency_rate;
             }
-
             $total_amount = $quotation->total_bid_price + $total_tax_amount;
             $converted_total_amount = $quotation->converted_total_bid_price + $converted_total_tax_amount;
-
             return response()->json([
                 'status' => true,
                 'tax' => $site_settings,

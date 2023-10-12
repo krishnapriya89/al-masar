@@ -27,26 +27,26 @@ class OrderDetail extends Model
     }
 
     public function getConvertedPriceAttribute() {
-        return $this->price * $this->quotation->currency_rate;
+        return $this->price * $this->order->currency_rate;
     }
 
     public function getConvertedBidPriceAttribute() {
-        return $this->bid_price * $this->quotation->currency_rate;
+        return $this->bid_price * $this->order->currency_rate;
     }
 
     public function getConvertedAdminApprovedPriceAttribute() {
-        return $this->admin_approved_price * $this->quotation->currency_rate;
+        return $this->admin_approved_price * $this->order->currency_rate;
     }
 
     public function getConvertedProductTotalPriceAttribute() {
-        return $this->total_price * $this->quotation->currency_rate;
+        return $this->total_price * $this->order->currency_rate;
     }
 
     public function getConvertedProductTotalBidPriceAttribute() {
-        return $this->total_bid_price * $this->quotation->currency_rate;
+        return $this->total_bid_price * $this->order->currency_rate;
     }
 
     public function priceWithSymbol($price) {
-        return $this->quotation->currency_symbol . AdminHelper::getFormattedPrice($price);
+        return $this->order->currency_symbol . AdminHelper::getFormattedPrice($price);
     }
 }
