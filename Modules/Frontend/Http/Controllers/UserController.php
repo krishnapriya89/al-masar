@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
@@ -17,11 +18,20 @@ use Modules\Frontend\Http\Requests\UserAddressRequest;
 
 class UserController extends Controller
 {
-
     //user dashboard
     public function dashboard()
     {
-        return view('frontend::user.dashboard');
+        $pending_order_count = Order::where('user_id', Auth::guard('web')->id())->where('order_status_id', 1)->count();
+        $accepted_order_count = Order::where('user_id', Auth::guard('web')->id())->where('order_status_id', 2)->count();
+        $delivered_order_count = Order::where('user_id', Auth::guard('web')->id())->where('order_status_id', 4)->count();
+        $rejected_order_count = Order::where('user_id', Auth::guard('web')->id())->where('order_status_id', 5)->count();
+        $amount_to_be_paid_query = Order::where('user_id', Auth::guard('web')->id())->where('order_status_id', '!=', 5)
+            ->where(DB::raw('grand_total'), '>', DB::raw('payment_received_amount'));
+        $amount_to_be_paid_order_count = $amount_to_be_paid_query->count();
+        $total_amount_to_be_py = $amount_to_be_paid_query->sum(DB::raw('grand_total - payment_received_amount'));
+
+        return view('frontend::user.dashboard', compact('pending_order_count', 'accepted_order_count',
+                    'delivered_order_count', 'rejected_order_count', 'amount_to_be_paid_order_count', 'total_amount_to_be_py'));
     }
 
     /**
@@ -386,7 +396,8 @@ class UserController extends Controller
         return response()->json($states);
     }
 
-    public function orders () {
+    public function orders()
+    {
         $orders = Order::where('user_id', Auth::guard('web')->id())->latest()->get();
 
         return view('frontend::user.orders', compact('orders'));

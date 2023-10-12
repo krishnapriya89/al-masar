@@ -24,53 +24,53 @@
                     @include('frontend::includes.sidebar')
                     <div class="rtBx">
                         <div class="dtailBx">
-                            <p>Currently you are logged in at 6.30 pm UAE, hence the order will be delivered only on
-                                the next day...</p>
+                            {{-- <p>Currently you are logged in at 6.30 pm UAE, hence the order will be delivered only on
+                                the next day...</p> --}}
                             <div class="title">Welcome !!!</div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Efficiens dici potest. <br>
-                                Equidem, sed audistine modo de Carneade Si alia sentit, inquam, alia loquitur, numquam </p>
+                            {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Efficiens dici potest. <br>
+                                Equidem, sed audistine modo de Carneade Si alia sentit, inquam, alia loquitur, numquam </p> --}}
                             <div class="gridBx">
                                 <div class="item">
                                     <div class="cmnB">
                                         <div class="icon">
-                                            <img src="assets/images/dd1.svg" alt="">
+                                            <img src="{{ asset('frontend/images/dd1.svg') }}" alt="">
                                         </div>
                                         <div class="txtBx">
                                             <div class="txt">Delivered Order</div>
-                                            <div class="num">15050</div>
+                                            <div class="num">{{ $delivered_order_count }}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="cmnB">
                                         <div class="icon">
-                                            <img src="assets/images/dd2.svg" alt="">
+                                            <img src="{{ asset('frontend/images/dd2.svg') }}" alt="">
                                         </div>
                                         <div class="txtBx">
                                             <div class="txt">Pending</div>
-                                            <div class="num">1525</div>
+                                            <div class="num">{{ $pending_order_count }}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="cmnB">
                                         <div class="icon">
-                                            <img src="assets/images/dd2.svg" alt="">
+                                            <img src="{{ asset('frontend/images/dd2.svg') }}" alt="">
                                         </div>
                                         <div class="txtBx">
                                             <div class="txt">Accepted</div>
-                                            <div class="num">1525</div>
+                                            <div class="num">{{ $accepted_order_count }}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="cmnB">
                                         <div class="icon">
-                                            <img src="assets/images/dd2.svg" alt="">
+                                            <img src="{{ asset('frontend/images/dd2.svg') }}" alt="">
                                         </div>
                                         <div class="txtBx">
                                             <div class="txt">Rejected</div>
-                                            <div class="num">1525</div>
+                                            <div class="num">{{ $rejected_order_count }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -78,27 +78,27 @@
                                     <div class="cmnB">
                                         <div class="lBx">
                                             <div class="icon">
-                                                <img src="assets/images/dd2.svg" alt="">
+                                                <img src="{{ asset('frontend/images/dd2.svg') }}" alt="">
                                             </div>
                                             <div class="ttx">Amount to
                                                 be Paid</div>
                                         </div>
                                         <div class="txtBx">
-                                            <div class="num">$50100.00</div>
-                                            <div class="txt">Number of Order Count = 30</div>
+                                            <div class="num">@formattedPrice($total_amount_to_be_py)</div>
+                                            <div class="txt">Number of Order Count = {{ $amount_to_be_paid_order_count }}</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="chartBox">
+                        {{-- <div class="chartBox">
                             <div class="chart">
                                 <div class="ltXt">Delivered Order Count </div>
                                 <canvas id="chart" width="600" height="300"></canvas>
                                 <div class="btXt">Months </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -107,7 +107,7 @@
 @endsection
 @push('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
-    <script>
+    {{-- <script>
         let ctx = document.getElementById("chart").getContext('2d');
 
         var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
@@ -190,5 +190,5 @@
                 }
             }
         });
-    </script>
+    </script> --}}
 @endpush
