@@ -34,6 +34,15 @@ class Order extends Model
     {
         return $this->belongsTo(Payment::class);
     }
+    public function billingAddress(): HasOne
+    {
+        return $this->hasOne(OrderAddress::class)->where('type', 1);
+    }
+
+    public function shippingAddress(): HasOne
+    {
+        return $this->hasOne(OrderAddress::class)->where('type', 2);
+    }
 
     public function getOrderReceivedDateAttribute()
     {
@@ -69,15 +78,6 @@ class Order extends Model
     {
         return $this->address_one . ', ' .($this->address_two ? $this->address_two . ', ' : '') .  $this->city . ', ' . $this->zip_code;
     }
-    public function billingAddress(): HasOne
-    {
-        return $this->hasOne(OrderAddress::class, 'order_id')->where('type', 1);
-    }
-
-    public function shippingAddress(): HasOne
-    {
-        return $this->hasOne(OrderAddress::class, 'order_id')->where('type', 2);
-    }
 
     public function getConvertedTotalPriceAttribute() {
         return $this->total_price * $this->currency_rate;
@@ -95,11 +95,11 @@ class Order extends Model
     {
         $color =
             [
-                '0' => 'clr4',
                 '1' => 'clr2',
-                '2' => 'clr3',
-                '3' => 'clr1',
-                '4' => 'clr5',
+                '2' => 'clr4',
+                '3' => 'clr3',
+                '4' => 'clr3',
+                '5' => 'clr1',
             ];
         return $color[$this->order_status_id];
     }

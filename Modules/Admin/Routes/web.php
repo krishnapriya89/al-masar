@@ -112,8 +112,8 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         //Order Management
         Route::get('order-management',[OrderController::class,'index'])->name('order-management.index');
         Route::get('order-management/show/{id}',[OrderController::class,'show'])->name('order-management.show');
-        //add remark
-        Route::post('add-remark',[OrderController::class,'addRemark'])->name('add-remark');
+        //accept or reject the order
+        Route::post('accept-or-reject-order',[OrderController::class,'acceptOrRejectOrder'])->name('accept-or-reject-order');
 
         // user management
         Route::resource('user-management', UserController::class);

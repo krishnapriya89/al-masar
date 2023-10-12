@@ -54,11 +54,11 @@ class OrderDetail extends Model
     {
         $color =
             [
-                '0' => 'clr4',
-                '1' => 'clr2',
-                '2' => 'clr3',
-                '3' => 'clr1',
-                '4' => 'clr5',
+                '1' => 'clr4',
+                '2' => 'clr2',
+                '3' => 'clr3',
+                '4' => 'clr3',
+                '5' => 'clr1',
             ];
         return $color[$this->order_status_id];
     }

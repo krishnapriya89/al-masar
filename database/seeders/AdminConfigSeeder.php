@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Carbon\Carbon;
-use Illuminate\Database\Seeder;
 use App\Models\AdminConfig;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AdminConfigSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class AdminConfigSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('admin_configs')->truncate();
         $data = [
             [
                 'key'           => 'website_name',
@@ -24,7 +26,7 @@ class AdminConfigSeeder extends Seeder
             ],
             [
                 'key'           => 'website_logo',
-                'value'         => 'frontend/images/logo.svg',
+                'value'         => 'frontend/images/Logo.svg',
                 'type'          => 1,
                 'created_at'    => Carbon::now(),
                 'updated_at'    => Carbon::now()
