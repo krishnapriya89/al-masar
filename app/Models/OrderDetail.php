@@ -39,7 +39,7 @@ class OrderDetail extends Model
     }
 
     public function getConvertedProductTotalPriceAttribute() {
-        return $this->total_price * $this->order->currency_rate;
+        return $this->total * $this->order->currency_rate;
     }
 
     public function getConvertedProductTotalBidPriceAttribute() {

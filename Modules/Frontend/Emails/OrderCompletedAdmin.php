@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OrderConfirmationUser extends Mailable
+class OrderCompletedAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -43,7 +43,7 @@ class OrderConfirmationUser extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'frontend::emails.order-confirmation-user',
+            view: 'frontend::emails.order-completed-admin',
         );
     }
 }

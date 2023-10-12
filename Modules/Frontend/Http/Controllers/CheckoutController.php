@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Frontend\Emails\OrderCompletedAdmin;
+use Modules\Frontend\Emails\OrderCompletedUser;
 use Modules\Frontend\Emails\OrderConfirmationAdmin;
 use Modules\Frontend\Emails\OrderConfirmationUser;
 use Modules\Frontend\Http\Requests\CheckoutRequest;
@@ -280,7 +282,7 @@ class CheckoutController extends Controller
     {
         $uid = session()->get('order_uid');
         if ($uid && $order = Order::where('uid', $uid)->first()) {
-            // session()->forget('order_uid');
+            session()->forget('order_uid');
             $order->payment_gateway_status = 1;
             $order->order_status_id = 1;
             $order->status = 2;
@@ -293,8 +295,8 @@ class CheckoutController extends Controller
                 $quotation->acceptedQuotationDetails()->update(['status' => 5]);
                 $site_settings = SiteCommonContent::first();
 
-                Mail::to($order->user->email)->send(new OrderConfirmationUser($order, $site_settings));
-                Mail::to($site_settings->email)->send(new OrderConfirmationAdmin($order, $site_settings));
+                Mail::to($order->user->email)->send(new OrderCompletedUser($order, $site_settings));
+                Mail::to($site_settings->enquiry_receive_email)->send(new OrderCompletedAdmin($order, $site_settings));
             }
             return view('frontend::checkout.order_success', compact('order'));
         } else {

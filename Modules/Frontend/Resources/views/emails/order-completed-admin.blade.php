@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Order Confirmation</title>
+    <title>Order Request</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
         body,
         p,
         h1,
@@ -19,9 +17,7 @@
             font-weight: 400;
         }
     </style>
-
 </head>
-
 <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
     <div style="margin:auto; width:600px;background: #ffffff;">
         <table id="Table_01" width="600" border="0" cellpadding="0" cellspacing="0" align="center">
@@ -38,7 +34,7 @@
                                                     <td style="padding: 0px;">
                                                         <h1
                                                             style="color: #ffffff; font-size: 18px; font-weight: 400; text-align: center; padding: 0 0 0px;margin: 0;">
-                                                            Order Confirmation</h1>
+                                                            Order Request</h1>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -71,7 +67,7 @@
                                             Hi Admin</h1>
                                         <p
                                             style="text-align: center; margin: auto; width: 300px; font-size: 14px; font-weight: 400; color: #272525; line-height: 26px; margin-top:0px; margin-bottom: 0px;">
-                                            You have received a Order Confirmation
+                                            You have received a Order
                                             <br>
                                             Order #{{ $order->uid }}
                                         </p>
@@ -206,19 +202,19 @@
                                                                         </td>
                                                                         <td
                                                                             style="width: 10%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            $ @formattedPrice($order_detail->pric)
+                                                                            $ @formattedPrice($order_detail->price)
                                                                         </td>
                                                                         <td
                                                                             style="width: 10%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            $ @formattedPrice($order_detail->bid_pric)
+                                                                            $ @formattedPrice($order_detail->bid_price)
                                                                         </td>
                                                                         <td
                                                                             style="width: 15%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            $ @formattedPrice($order_detail->total_pric)
+                                                                            $ @formattedPrice($order_detail->total)
                                                                         </td>
                                                                         <td
                                                                             style="width: 15%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: center;">
-                                                                            $ @formattedPrice($order_detail->total_bid_pric)
+                                                                            $ @formattedPrice($order_detail->total_bid_price)
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -243,7 +239,7 @@
                                         style="padding: 15px 0 30px; margin: auto; background: #ffffff;" border="0"
                                         cellpadding="0" cellspacing="0">
                                         <tbody>
-                                            <tr>
+                                            <tr style="margin-bottom: 8px; ">
                                                 <td style="margin: 0px; text-align: left;">
                                                     <p
                                                         style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
@@ -257,7 +253,7 @@
                                                     </p>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr style="margin-bottom: 8px; ">
                                                 <td style="margin: 0px; text-align: left;">
                                                     <p
                                                         style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
@@ -271,28 +267,33 @@
                                                     </p>
                                                 </td>
                                             </tr>
-                                            @if($order->tax_amount != 0)
-                                            <tr>
-                                                <td style="margin: 0px; text-align: left;">
-                                                    <p
-                                                        style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
-                                                        Tax Amount
-                                                    </p>
-                                                    <p style="font-size: 12px;color: #000000; font-weight: 400; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
-                                                        {{ $order->tax_name }}
-                                                        @if($order->tax_percentage != 0) ({{ $order->tax_percentage }}%) @endif
-                                                        @if($order->tax_value != 0)  + $ @formattedPrice($order->tax_value) % @endif
-                                                    </p>
-                                                </td>
-                                                <td style="margin: 0px; text-align: right;">
-                                                    <p
-                                                        style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
-                                                        $ @formattedPrice($order->tax_amount)
-                                                    </p>
-                                                </td>
-                                            </tr>
+                                            @if ($order->tax_amount != 0)
+                                                <tr style="margin-bottom: 8px; ">
+                                                    <td style="margin: 0px; text-align: left;">
+                                                        <p
+                                                            style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
+                                                            Tax -
+                                                            <span
+                                                                style="font-size: 12px;color: #000000; font-weight: 400;line-height: 22px; text-align: left;">{{ $order->tax_name }}
+                                                                @if ($order->tax_percentage != 0)
+                                                                    ({{ $order->tax_percentage }}%)
+                                                                @endif
+                                                                @if ($order->tax_value != 0)
+                                                                    + $ @formattedPrice($order->tax_value)
+                                                                @endif
+                                                            </span>
+                                                        </p>
+                                                    </td>
+                                                    <td style="margin: 0px; text-align: right;">
+                                                        <p
+                                                            style="font-size: 12px;color: #031717; font-weight: 700; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
+                                                            $ @formattedPrice($order->tax_amount)
+                                                        </p>
+                                                    </td>
+                                                </tr>
                                             @endif
-                                            <tr>
+                                            <br>
+                                            <tr style="margin-bottom: 8px; ">
                                                 <td style="margin: 0px; text-align: left;">
                                                     <p
                                                         style="font-size: 14px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
@@ -344,5 +345,4 @@
         </table>
     </div>
 </body>
-
 </html>
