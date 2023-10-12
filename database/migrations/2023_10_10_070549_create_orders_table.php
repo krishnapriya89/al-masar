@@ -30,10 +30,9 @@ return new class extends Migration
             $table->decimal('tax_value', 10, 2)->default(0)->comment('Tax amount in the site settings');
             $table->decimal('tax_amount', 10, 2)->default(0)->comment('Tax of the sub total');
             $table->tinyInteger('payment_gateway_status')->default(0)->comment('0 - Pending, 1 - Success, 2 - Failed');
-            $table->unsignedBigInteger('order_status_id')->nullable()->comment('1 - Pending, 2 - Shipped, 3 - Delivered');
+            $table->unsignedBigInteger('order_status_id')->nullable()->comment('1 - Pending, 2 - In Progress(Approved By Admin), 3 - Shipped, 4 - Delivered, 5 - Rejected');
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
             $table->tinyInteger('status')->default(0)->comment('0 - Checkout Started, 1 - Order Confirmed, 2 - Order Cancelled');
-            $table->tinyInteger('order_status')->nullable()->comment('0 - Ordered, 1 - Order Confirmed By Admin, 2 - Order Rejected By Admin');
             $table->tinyInteger('payment_received_status')->default(0)->comment('0 - Not Received, 1 - Partial Amount Received, 2 - Full Received');
             $table->decimal('payment_received_amount', 10, 2)->default(0);
             $table->text('admin_remarks')->nullable();

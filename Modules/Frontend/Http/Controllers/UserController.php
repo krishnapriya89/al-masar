@@ -2,6 +2,7 @@
 
 namespace Modules\Frontend\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\State;
 use App\Models\Country;
 use App\Models\UserAddress;
@@ -383,5 +384,11 @@ class UserController extends Controller
     {
         $states = State::where('country_id', $request->countryId)->get();
         return response()->json($states);
+    }
+
+    public function orders () {
+        $orders = Order::where('user_id', Auth::guard('web')->id())->latest()->get();
+
+        return view('frontend::user.orders', compact('orders'));
     }
 }

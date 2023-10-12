@@ -49,4 +49,17 @@ class OrderDetail extends Model
     public function priceWithSymbol($price) {
         return $this->order->currency_symbol . AdminHelper::getFormattedPrice($price);
     }
+
+    public function getStatusClassAttribute()
+    {
+        $color =
+            [
+                '0' => 'clr4',
+                '1' => 'clr2',
+                '2' => 'clr3',
+                '3' => 'clr1',
+                '4' => 'clr5',
+            ];
+        return $color[$this->order_status_id];
+    }
 }

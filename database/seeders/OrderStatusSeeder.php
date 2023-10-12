@@ -21,12 +21,22 @@ class OrderStatusSeeder extends Seeder
                 'updated_at'    => Carbon::now()
             ],
             [
+                'title'         => 'In Progress',
+                'created_at'    => Carbon::now(),
+                'updated_at'    => Carbon::now()
+            ],
+            [
                 'title'         => 'Shipped',
                 'created_at'    => Carbon::now(),
                 'updated_at'    => Carbon::now()
             ],
             [
-                'title'         => 'Completed',
+                'title'         => 'Delivered',
+                'created_at'    => Carbon::now(),
+                'updated_at'    => Carbon::now()
+            ],
+            [
+                'title'         => 'Rejected',
                 'created_at'    => Carbon::now(),
                 'updated_at'    => Carbon::now()
             ],

@@ -40,7 +40,7 @@
             </a>
         </li>
         <li>
-            <a href="myOrders.php" class="lnk">
+            <a href="{{ route('user.order') }}" class="lnk {{ Nav::isRoute('user.order')}}">
                 <div class="icon">
                     <svg viewBox="0 0 21.667 21.667">
                         <g id="_x33_1_x2C__order_x2C__box_x2C__delivery_x2C__logistics_x2C__receiving"

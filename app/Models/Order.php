@@ -13,6 +13,8 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $appends = ['order_received_date'];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -40,12 +42,24 @@ class Order extends Model
 
     public function getConvertedGrandTotalAttribute()
     {
-        return AdminHelper::getFormattedPrice($this->currency_rate * $this->grand_total);
+        return $this->currency_rate * $this->grand_total;
     }
 
     public function getConvertedSubTotalAttribute()
     {
-        return AdminHelper::getFormattedPrice($this->currency_rate * $this->sub_total);
+        return $this->currency_rate * $this->sub_total;
+    }
+    public function getConvertedReceivedAmountAttribute()
+    {
+        return $this->currency_rate * $this->payment_received_amount;
+    }
+    public function getAmountToBePaidAttribute()
+    {
+        return ($this->currency_rate * $this->grand_total) - ($this->currency_rate * $this->payment_received_amount);
+    }
+    public function getConvertedAmountToBePaidAttribute()
+    {
+        return ($this->getAmountToBePaidAttribute());
     }
     public function getFullBillingAddressAttribute()
     {
@@ -74,6 +88,19 @@ class Order extends Model
     }
 
     public function priceWithSymbol($price) {
-        return $this->currency_symbol . AdminHelper::getFormattedPrice($price);
+        return $this->currency_symbol . $price;
+    }
+
+    public function getStatusClassAttribute()
+    {
+        $color =
+            [
+                '0' => 'clr4',
+                '1' => 'clr2',
+                '2' => 'clr3',
+                '3' => 'clr1',
+                '4' => 'clr5',
+            ];
+        return $color[$this->order_status_id];
     }
 }

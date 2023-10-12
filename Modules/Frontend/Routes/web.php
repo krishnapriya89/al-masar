@@ -64,6 +64,8 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::get('product-detail/{slug}',[ProductController::class,'productDetailPage'])->name('product-detail');
     //category listing
     Route::get('product-category/{slug}',[ProductController::class,'category'])->name('product-category');
+    //product-search
+    Route::get('product-search',[ProductController::class,'searchProduct'])->name('product-search');
     //quote functionalities
     Route::get('/quote',[QuoteController::class, 'index'])->name('quote');
     Route::post('/add-to-quote',[QuoteController::class, 'addToQuote'])->name('add-to-quote');
@@ -106,10 +108,10 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::post('/update-default',[UserController::class,'updateDefault'])->name('update-default');
     //destroy address
     Route::post('/address-destroy',[UserController::class,'destroyAddress'])->name('address-destroy');
-    //product-search
-    Route::get('product-search',[ProductController::class,'searchProduct'])->name('product-search');
     //select state
     Route::get('select-state',[UserController::class,'selectState'])->name('select-state');
+    //orders
+    Route::get('order',[UserController::class,'orders'])->name('user.order');
 });
 //is invalid url show 404
 Route::fallback(function () {

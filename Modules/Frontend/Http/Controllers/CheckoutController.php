@@ -140,7 +140,6 @@ class CheckoutController extends Controller
         $order->payment_gateway_status = 0;
         $order->order_status_id = null;
         $order->status = 0;
-        $order->order_status = null;
         $order->payment_received_status = 0;
         $order->payment_received_amount = 0;
         $order->admin_remarks = null;
@@ -284,9 +283,8 @@ class CheckoutController extends Controller
         if ($uid && $order = Order::where('uid', $uid)->first()) {
             session()->forget('order_uid');
             $order->payment_gateway_status = 1;
-            $order->order_status_id = 1;
+            $order->order_status_id = 1;//pending approval from admin
             $order->status = 2;
-            $order->order_status = 2;
             if ($order->save()) {
                 $order->orderDetails()->update(['order_status_id' => 1]);
                 $quotation = Quotation::where('uid', $uid)->first();
