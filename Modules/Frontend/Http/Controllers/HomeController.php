@@ -80,6 +80,7 @@ class HomeController extends Controller
         if ($contact_enquiry->save())
          {
             $siteSettings = SiteCommonContent::first();
+            return view('frontend::emails.contact-mail-admin', compact('contact_enquiry', 'siteSettings'));
             Mail::send('frontend::emails.contact-mail-user', ['contact_enquiry' => $contact_enquiry,'siteSettings'=>$siteSettings], function ($message) use($contact_enquiry,$siteSettings) {
                 $message->to($contact_enquiry->email);
                 $message->subject('Al Masar Al Saree - Contact Send Successfully!');

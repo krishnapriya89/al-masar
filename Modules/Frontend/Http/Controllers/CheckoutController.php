@@ -128,7 +128,7 @@ class CheckoutController extends Controller
             $shipping_address_id = $request->selected_shipping_address;
         }
 
-        $temp_request = new Request();
+        $temp_request = app(Request::class);
         $temp_request->address_id = $shipping_address_id;
         $temp_request->quotation_uid = $quotation->uid;
         $tax_response = $this->checkTaXApplicableForAddress($temp_request);
@@ -316,8 +316,8 @@ class CheckoutController extends Controller
                 $quotation->acceptedQuotationDetails()->update(['status' => 5]);
 
                 $site_settings = SiteCommonContent::first();
-                // Mail::to($order->user->email)->send(new OrderConfirmationUser($quotation, $site_settings));
-                // Mail::to($site_settings->email)->send(new OrderConfirmationAdmin($quotation, $site_settings));
+                Mail::to($order->user->email)->send(new OrderConfirmationUser($quotation, $site_settings));
+                Mail::to($site_settings->email)->send(new OrderConfirmationAdmin($quotation, $site_settings));
             }
             return view('frontend::checkout.order_success', compact('order'));
         } else {
