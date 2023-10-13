@@ -5,6 +5,8 @@ namespace Modules\Frontend\Http\Controllers;
 use App\Models\Order;
 use App\Models\State;
 use App\Models\Country;
+use App\Models\OrderStatus;
+use App\Models\Payment;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -30,8 +32,14 @@ class UserController extends Controller
         $amount_to_be_paid_order_count = $amount_to_be_paid_query->count();
         $total_amount_to_be_py = $amount_to_be_paid_query->sum(DB::raw('grand_total - payment_received_amount'));
 
-        return view('frontend::user.dashboard', compact('pending_order_count', 'accepted_order_count',
-                    'delivered_order_count', 'rejected_order_count', 'amount_to_be_paid_order_count', 'total_amount_to_be_py'));
+        return view('frontend::user.dashboard', compact(
+            'pending_order_count',
+            'accepted_order_count',
+            'delivered_order_count',
+            'rejected_order_count',
+            'amount_to_be_paid_order_count',
+            'total_amount_to_be_py'
+        ));
     }
 
     /**
@@ -399,7 +407,22 @@ class UserController extends Controller
     public function orders()
     {
         $orders = Order::where('user_id', Auth::guard('web')->id())->latest()->get();
+        $order_statuses = OrderStatus::all();
+        $payment_modes = Payment::all();
 
-        return view('frontend::user.orders', compact('orders'));
+        return view('frontend::user.orders', compact('orders', 'order_statuses', 'payment_modes'));
+    }
+
+    public function orderFilter(Request $request)
+    {
+        $orders = Order::where('user_id', Auth::guard('web')->id())
+            ->when($request->filled('status'), function ($query) use ($request) {
+                $query->where('order_status_id', $request->input('status'));
+            })
+            ->when($request->filled('payment_mode'), function ($query) use ($request) {
+                $query->where('payment_id', $request->input('payment_mode'));
+            })
+            ->latest()->get();
+        return view('frontend::includes.order-list', compact('orders'));
     }
 }
