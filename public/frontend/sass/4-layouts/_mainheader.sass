@@ -32,7 +32,9 @@ body
             font-weight: 400
             margin: 0
         marquee
-            max-width: 50%
+            max-width: 100%
+            @media only screen and ( min-width: 576px )
+                max-width: 50%
     .HrMpx
         position: relative
         background-color: #fff
@@ -98,7 +100,7 @@ body
             //     display: none
             .WtSrCh
                 @media only screen and ( min-width: 768px )
-                    margin-right: 19px
+                    // margin-right: 19px
                     width: 100%
                     max-width: 300px
                 @media only screen and ( min-width: 992px )
@@ -225,18 +227,20 @@ body
 
                 .MyaccountDrop
                     position: relative
-                    margin-right: 18px
+                    // margin-right: 18px
                     @media only screen and ( max-width: 992px )
                         display: none
                     .DRoPBTn
                         cursor: pointer
                         display: flex
                         align-items: center
-                        padding: 20px 0
+                        padding: 20px 15px
                         @media only screen and ( min-width: 768px )
-                            padding: 25px 0
+                            padding: 25px 19px
                         @media only screen and ( min-width: 1441px )
-                            padding: 42px 0
+                            padding: 32px 19px
+                        @media only screen and ( min-width: 1551px )
+                            padding: 42px 19px
                         svg
                             width: 17px
                             fill: #000
@@ -307,8 +311,8 @@ body
                         left: 0px !important
                         @media only screen and (min-width: 576px)
                             left: -100px !important
-                        @media only screen and (min-width: 992px)
-                            left: 0px !important
+                        // @media only screen and (min-width: 992px)
+                        //     left: 0px !important
 
                         .boxHead
                             display: flex
@@ -339,7 +343,7 @@ body
                         .boxCntnt
                             padding: 3px 0
                             @media only screen and ( min-width: 576px )
-                                padding: 10px 0
+                                padding: 5px 0
 
                             a
                                 text-align: left
@@ -653,6 +657,7 @@ body
                                 li
                                     margin-bottom: 10px
                                     min-width: 195px
+                                    max-width: 195px
                                     padding-right: 23px
                                     a
                                         font-size: 14px
@@ -662,7 +667,7 @@ body
                                         padding: 9px 0
                                         padding-left: 26px
                                         border-radius: 0 5px 5px 0
-                                        white-space: nowrap
+                                        // white-space: nowrap
                                         transition: .4s all
                                         color: #fff
                                         @media only screen and ( min-width: 992px )
@@ -849,6 +854,10 @@ body
 
                     &.dropdown
                         &:last-child
+                            .accordion-collapse
+                                right: 0
+                                left: auto
+                        &:nth-last-child(-n + 3)
                             .accordion-collapse
                                 right: 0
                                 left: auto

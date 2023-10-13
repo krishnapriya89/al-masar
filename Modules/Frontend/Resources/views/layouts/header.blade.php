@@ -269,10 +269,10 @@
                                 @if (Auth::guard('web')->check())
                                     <a class="LoGbTn" data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="ImgBx">
-                                            <div class="NaMe">SJ</div>
+                                            <div class="NaMe">{{ Auth::guard('web')->user()->name }}</div>
                                         </div>
                                         <div class="txtBx">
-                                            <div class="name">Profile Name</div>
+                                            <div class="name">{{ Auth::guard('web')->user()->email }}</div>
                                         </div>
                                     </a>
                                 @endif
@@ -432,7 +432,7 @@
                                             </a>
                                         </div>
                                         <div class="boxCntnt">
-                                            <a href="profileSettings.php" class="lnk">
+                                            <a href="{{ route('user.profile') }}" class="lnk {{ Nav::isRoute('user.profile')}}">
                                                 <svg viewBox="0 0 19.833 17.996">
                                                     <path id="setting"
                                                         d="M14.038,20.008H6.962a3.129,3.129,0,0,1-2.487-1.436L.938,12.446a3.089,3.089,0,0,1,0-2.872L4.476,3.448A3.129,3.129,0,0,1,6.963,2.012h7.075a3.129,3.129,0,0,1,2.487,1.436l3.538,6.126a3.089,3.089,0,0,1,0,2.872l-3.538,6.126A3.128,3.128,0,0,1,14.038,20.008ZM6.962,3.3A1.837,1.837,0,0,0,5.59,4.09L2.051,10.217a1.841,1.841,0,0,0,0,1.586l3.538,6.126a1.837,1.837,0,0,0,1.373.792h7.076a1.837,1.837,0,0,0,1.373-.792L18.949,11.8a1.841,1.841,0,0,0,0-1.586L15.411,4.09A1.837,1.837,0,0,0,14.038,3.3ZM10.5,14.815a3.805,3.805,0,1,1,3.806-3.805A3.81,3.81,0,0,1,10.5,14.815Zm0-6.324a2.519,2.519,0,1,0,2.52,2.519A2.522,2.522,0,0,0,10.5,8.491Z"

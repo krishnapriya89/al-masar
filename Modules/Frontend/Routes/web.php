@@ -110,6 +110,8 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::post('/update-default', [UserController::class, 'updateDefault'])->name('update-default');
     //destroy address
     Route::post('/address-destroy', [UserController::class, 'destroyAddress'])->name('address-destroy');
+    //profile
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     //select state
     Route::get('select-state', [UserController::class, 'selectState'])->name('select-state');
     //orders

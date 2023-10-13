@@ -262,6 +262,7 @@
                     cursor: pointer
                     box-shadow: 0 0 0 rgba(231, 21, 31, .4)
                     animation: pulse 2s infinite
+
             table
                 background: #fff
                 width: 100vw
@@ -329,6 +330,21 @@
                                 font-size: 12px
                                 color: #000
                                 font-weight: 400
+                        .iputBx
+                            border-radius: 5px
+                            border: solid 1px #D5D5D5
+                            padding: 2px 5px
+                            height: 22px
+                            width: 82px
+                            display: flex
+                            align-items: center
+                            margin: auto
+                            margin-bottom: 5px
+                            input
+                                border: none
+                                background: transparent
+                                margin: 0
+
                         .cart
                             height: 32px
                             width: 32px
@@ -671,6 +687,7 @@
                                     width: calc( 100% / 2 )
                                 .adresBox
                                     position: relative
+                                    height: 100%
                                     input[type="radio"]
                                         display: none
 
@@ -686,6 +703,7 @@
                                         background-color: rgb(255, 255, 255)
                                         padding: 8px
                                         width: 100%
+                                        height: 100%
                                         position: relative
                                         margin: 0
                                         cursor: pointer
@@ -713,6 +731,7 @@
                                                 line-height: 20px
                                                 font-weight: 300
                                                 color: #000000
+                                                word-break: break-word
                                             a
                                                 font-size: 14px
                                                 line-height: 20px
@@ -785,6 +804,17 @@
                                 font-size: 13px
                                 font-weight: 400
                                 color: #000
+                        .select2
+                            border: solid 1px #C8C8C8
+                            border-radius: 5px
+                            height: 40px
+                            // @media only screen and ( min-width: 992px )
+                            //     height: 45px
+                            // @media only screen and ( min-width: 1441px )
+                            //     height: 53px
+                            .select2-selection__rendered
+                                font-size: 13px
+                                font-weight: 400
                         button, a
                             border-radius: 23px
                             color: #fff
@@ -1332,6 +1362,7 @@
                         width: calc( 100% / 3 )
                     .adresBox
                         position: relative
+                        height: 100%
                         input[type="radio"]
                             display: none
 
@@ -1350,6 +1381,7 @@
                             position: relative
                             margin: 0
                             cursor: pointer
+                            height: 100%
                             .topBFlx
                                 display: flex
                                 align-items: center
@@ -1385,6 +1417,7 @@
                                     line-height: 20px
                                     font-weight: 300
                                     color: #000000
+                                    word-break: break-word
                                 a
                                     font-size: 14px
                                     line-height: 20px

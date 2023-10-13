@@ -1,8 +1,5 @@
 <div class="ltBx">
     <div class="userBx">
-        <div class="imgBx">
-            <img src="{{asset('frontend/images/user.jpg')}}" alt="">
-        </div>
         <div class="name">{{ Auth::guard('web')->user()->name }}</div>
         <div class="mail">{{ Auth::guard('web')->user()->email }}</div>
     </div>
@@ -141,7 +138,7 @@
             </a>
         </li>
         <li>
-            <a href="profileSettings.php" class="lnk">
+            <a href="{{ route('user.profile') }}" class="lnk {{ Nav::isRoute('user.profile')}}">
                 <div class="icon">
                     <svg viewBox="0 0 19.833 17.996">
                         <path id="setting"

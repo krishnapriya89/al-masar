@@ -42,6 +42,18 @@ class UserController extends Controller
         ));
     }
 
+    public function profile() {
+        $user = Auth::guard('web')->user();
+
+        if($user) {
+            $countries = Country::active()->get();
+            return view('frontend::user.profile', compact('user', 'countries'));
+        }
+        else {
+            return view('frontend::errors.500');
+        }
+    }
+
     /**
      * Add Address
      *
