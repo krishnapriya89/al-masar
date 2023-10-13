@@ -55,7 +55,7 @@
                     <td style="text-align:center;padding-top:60px; padding-bottom: 95px;">
                         <a style="display: block; width: 208px; margin: auto;" href=""
                             target="_blank" data-saferedirecturl="">
-                            <img src="{{ Storage::disk('public')->exists(\App\Helpers\AdminHelper::getValueByKey('website_logo')) ? Storage::url(\App\Helpers\AdminHelper::getValueByKey('website_logo')) : asset(\App\Helpers\AdminHelper::getValueByKey('website_logo')) }}" width="208"
+                            <img src="{{ url(\App\Helpers\AdminHelper::getValueByKey('website_logo')) }}" width="208"
                                 height="124">
                         </a>
                     </td>
