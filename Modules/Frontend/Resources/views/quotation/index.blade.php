@@ -26,12 +26,13 @@
                             <div class="ltb DskTop">
                                 <div class="display">
                                     <div class="txt">Filter By</div>
-                                    <select name="quotaion_filter" id="quotaion_filter" class="select quotation_filter">
-                                        <option value="1">Action from Vendor</option>
-                                        <option value="0">Waiting for Approval</option>
+                                    <select name="status_web" id="status_web" class="select quotation-filter-web">
+                                        <option value="">All</option>
+                                        <option value="0">Waiting for approval</option>
+                                        <option value="1">Action From Vendor</option>
                                         <option value="2">Accepted</option>
                                         <option value="3">Rejected</option>
-                                        <option value="">All</option>
+                                        <option value="4">Rejected by Vendor</option>
                                     </select>
                                 </div>
                             </div>
@@ -59,7 +60,7 @@
                             <div class="item">Notifications</div>
                         </div>
                         <div class="detailFlx">
-                            <div class="accordion" id="Quatationaccordion">
+                            <div class="accordion" id="QuotationAccordionWeb">
                                 @include('frontend::includes.quotation-list')
                             </div>
                         </div>
@@ -422,6 +423,22 @@
                         _this.attr('disabled', false);
                     }
                 });
-        })
+        });
+
+        $('.quotation-filter-web').on('change', function() {
+            var status = $('#status_web').val();
+
+            $.ajax({
+                url: "{{ route('user.quotation.filter' )}}",
+                type: "GET",
+                data: {
+                    status: status,
+                },
+                dataType: 'html',
+                success: function(response) {
+                    $('#QuotationAccordionWeb').html(response);
+                }
+            });
+        });
     </script>
 @endpush
