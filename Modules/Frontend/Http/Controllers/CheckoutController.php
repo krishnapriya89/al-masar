@@ -99,7 +99,7 @@ class CheckoutController extends Controller
         } else {
             return to_route('user.quotation')->with('error', 'The requested quotation was not found.');
         }
-        return redirect()->route('user.quotation');
+        return to_route('user.quotation')->with('error', 'Something went wrong.');
     }
     public function createOrder($request, $quotation)
     {
