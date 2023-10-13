@@ -251,7 +251,7 @@ $(document).ready(function () {
     });
 
     //add to quote in product list
-    $('body').on("click", '.list-add-to-quote').on('click', function () {
+    $('body').on("click", ".list-add-to-quote", function () {
         var _this = $(this);
 
         var quantity = _this.closest('tr').find("input[name='quantity'").val();
@@ -280,7 +280,7 @@ $(document).ready(function () {
     });
 
     //add to quote in product detail page
-    $('body').on("click", '.add-to-quote-product-detail').on('click', function () {
+    $('body').on("click", '.add-to-quote-product-detail', function () {
         var _this = $(this);
 
         var quantity = $('input[name="quantity"]').val();
