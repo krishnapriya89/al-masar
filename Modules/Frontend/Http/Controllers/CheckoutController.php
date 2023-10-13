@@ -354,7 +354,7 @@ class CheckoutController extends Controller
                 'status' => false
             ]);
         $converted_total_amount = $quotation->converted_total_bid_price;
-        if ($shipping_address->state->free_zone == 1) {
+        if ($shipping_address && $shipping_address->state->free_zone == 1) {
             if ($site_settings->tax_percentage) {
                 $total_tax_amount += (($quotation->total_bid_price * $site_settings->tax_percentage) / 100);
                 $converted_total_tax_amount += $total_tax_amount * $quotation->currency_rate;
