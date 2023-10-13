@@ -1,5 +1,5 @@
 @extends('frontend::layouts.app')
-@section('title', 'Quote')
+@section('title', 'Quotaion')
 
 @section('content')
     @if ($quotations->isNotEmpty())
