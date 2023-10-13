@@ -412,7 +412,7 @@ class UserController extends Controller
 
         return view('frontend::user.orders', compact('orders', 'order_statuses', 'payment_modes'));
     }
-
+    //order filter with order status and payment method
     public function orderFilter(Request $request)
     {
         $orders = Order::where('user_id', Auth::guard('web')->id())

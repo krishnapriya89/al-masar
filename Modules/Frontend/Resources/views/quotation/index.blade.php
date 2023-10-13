@@ -26,7 +26,7 @@
                             <div class="ltb DskTop">
                                 <div class="display">
                                     <div class="txt">Filter By</div>
-                                    <select name="quotaion_filter" id="quotaion_filter" class="select">
+                                    <select name="quotaion_filter" id="quotaion_filter" class="select quotation_filter">
                                         <option value="1">Action from Vendor</option>
                                         <option value="0">Waiting for Approval</option>
                                         <option value="2">Accepted</option>

@@ -29,6 +29,19 @@ class QuotationController extends Controller
         return view('frontend::quotation.index', compact('quotations'));
     }
 
+    public function filter(Request $request)
+    {
+        $orders = Quotation::where('user_id', Auth::guard('web')->id())
+            ->when($request->filled('status'), function ($query) use ($request) {
+                $query->where('order_status_id', $request->input('status'));
+            })
+            ->when($request->filled('payment_mode'), function ($query) use ($request) {
+                $query->where('payment_id', $request->input('payment_mode'));
+            })
+            ->latest()->get();
+        return view('frontend::includes.order-list', compact('orders'));
+    }
+
     //vendor action from quotation page agree / reject the requote
     public function vendorAction(Request $request) {
         $quotation_detail = QuotationDetail::find($request->id);

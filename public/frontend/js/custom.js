@@ -251,7 +251,7 @@ $(document).ready(function () {
     });
 
     //add to quote in product list
-    $('.list-add-to-quote').on('click', function () {
+    $('body').on("click", '.list-add-to-quote').on('click', function () {
         var _this = $(this);
 
         var quantity = _this.closest('tr').find("input[name='quantity'").val();
@@ -280,7 +280,7 @@ $(document).ready(function () {
     });
 
     //add to quote in product detail page
-    $('.add-to-quote-product-detail').on('click', function () {
+    $('body').on("click", '.add-to-quote-product-detail').on('click', function () {
         var _this = $(this);
 
         var quantity = $('input[name="quantity"]').val();
@@ -310,7 +310,7 @@ $(document).ready(function () {
 
     // change quote item count
     var quoteDebounceTimer;
-    $(document).on("click", ".quote-update-quantity-btn", function () {
+    $('body').on("click", ".quote-update-quantity-btn", function () {
         clearTimeout(quoteDebounceTimer);
         var _this = $(this);
 
@@ -344,7 +344,7 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on("focusout paste", ".quote-update-quantity-input", function () {
+    $('body').on("focusout paste", ".quote-update-quantity-input", function () {
         clearTimeout(quoteDebounceTimer);
         var _this = $(this);
 
@@ -363,7 +363,7 @@ $(document).ready(function () {
     });
 
     // Delete quote
-    $(document).on("click", ".quote-delete-btn", function (e) {
+    $('body').on("click", ".quote-delete-btn", function (e) {
         const quote_id = $(this).data("quote-id");
         const title = $(this).data("title");
         const uc_title = capitalizeWords(title);
