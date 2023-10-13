@@ -1,4 +1,13 @@
 <header id="Header">
+    <div class="topHeader">
+        <div class="container">
+            <div class="flxB">
+                <marquee width="100%" direction="left" class="txt">
+                    <p> {{ @$site_common_content->header_note }}</p>
+                </marquee>
+            </div>
+        </div>
+    </div>
     <div class="HrMpx">
         <div class="container">
             <div class="HrMfLx">
@@ -540,11 +549,11 @@
                                     </svg>
                                 </div>
                                 <select class="selectpicker" id="language-change">
-                                    <option selected data-content='$' value="us">
-                                        $
-                                    </option>
-                                    <option data-content='₹' value="en">₹
-                                    </option>
+                                    @foreach ($currencies as $currency)
+                                        <option data-content='{{ $currency->symbol }}' value="{{ $currency->currencyCode->title }}">
+                                            {{ $currency->symbol }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <a href="{{ route('quote') }}" class="cartBtn">
@@ -584,25 +593,21 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-body">
-                                    <!-- <button type="button" class="btnClose" data-bs-dismiss="modal"
-                                        aria-label="Close">
-                                        <span></span>
-                                        <span></span>
-                                    </button> -->
                                     <div class="accordion" id="AccordMenu">
                                         @foreach ($site_menus as $site_menu)
                                             <div class="accordion-item dropdown">
-                                                <div class="accordion-header" id="hd4">
+                                                <div class="accordion-header" id="hd{{ $loop->iteration }}">
                                                     <a href="{{ route('product-category', $site_menu->slug) }}"
                                                         class="dskLnk">{{ $site_menu->title }}</a>
-                                                    <a href="{{ route('product-category', $site_menu->slug) }}"
-                                                        class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#cd{{ $loop->iteration }}"
-                                                        aria-expanded="false"
-                                                        aria-controls="cd{{ $loop->iteration }}">
-                                                        {{ $site_menu->title }}
-                                                    </a>
+                                                    <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#{{ $loop->iteration }}"
+                                                        aria-expanded="false" aria-controls="{{ $loop->iteration }}">
+                                                        <svg viewBox="0 0 12.834 7">
+                                                            <path id="Down_Arrow_3_"
+                                                                d="M26.417,47A.582.582,0,0,1,26,46.829L20.171,41A.583.583,0,1,1,21,40.171l5.421,5.421,5.421-5.421a.583.583,0,1,1,.825.825l-5.834,5.834A.582.582,0,0,1,26.417,47Z"
+                                                                transform="translate(-20 -40)" />
+                                                        </svg>
+                                                    </button>
                                                 </div>
                                                 @if ($site_menu->children->isNotEmpty())
                                                     <div id="cd{{ $loop->iteration }}"

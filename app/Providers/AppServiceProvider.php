@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\CurrencyRate;
 use App\Models\SiteCommonContent;
 use App\Models\ProductSubCategory;
 use App\Models\ProductMainCategory;
@@ -19,7 +20,8 @@ class AppServiceProvider extends ServiceProvider
         View::composer('frontend::*', function ($view) {
             $site_common_content = SiteCommonContent::first();
             $site_menus = ProductSubCategory::whereNull('parent_id')->whereIn('id', $site_common_content->menu_category)->get();
-            $view->with(compact('site_common_content','site_menus'));
+            $currencies = CurrencyRate::active()->get();
+            $view->with(compact('site_common_content','site_menus', 'currencies'));
         });
 
         Blade::directive('currencySymbol', function ($money) {
