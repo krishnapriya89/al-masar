@@ -95,11 +95,12 @@ class CheckoutController extends Controller
                 } else {
                     return to_route('user.quotation')->with('success', 'Order Completed');
                 }
+            } else {
+                return to_route('user.quotation')->with('error', 'Something went wrong.');
             }
         } else {
             return to_route('user.quotation')->with('error', 'The requested quotation was not found.');
         }
-        return to_route('user.quotation')->with('error', 'Something went wrong.');
     }
     public function createOrder($request, $quotation)
     {
