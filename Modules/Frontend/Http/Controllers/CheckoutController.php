@@ -55,7 +55,7 @@ class CheckoutController extends Controller
         $total_tax_amount = 0;
         $site_settings = TaxManagement::first();
         $default_shipping_address = $shipping_addresses->first();
-        if ($default_shipping_address->state->free_zone == 1) {
+        if ($default_shipping_address && $default_shipping_address->state->free_zone == 1) {
             if ($site_settings->tax_percentage) {
                 $total_tax_amount += (($quotation->converted_total_bid_price * $site_settings->tax_percentage) / 100);
             }
