@@ -1,15 +1,16 @@
 <?php
 
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
 use Modules\Frontend\Http\Controllers\AuthController;
-use Modules\Frontend\Http\Controllers\CheckoutController;
 use Modules\Frontend\Http\Controllers\HomeController;
 use Modules\Frontend\Http\Controllers\UserController;
-use Modules\Frontend\Http\Controllers\ProductController;
-use Modules\Frontend\Http\Controllers\QuotationController;
 use Modules\Frontend\Http\Controllers\QuoteController;
+use Modules\Frontend\Http\Controllers\ProductController;
+use Modules\Frontend\Http\Controllers\CheckoutController;
+use Modules\Frontend\Http\Controllers\QuotationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -112,6 +113,11 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::post('/address-destroy', [UserController::class, 'destroyAddress'])->name('address-destroy');
     //profile
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('user.profile.update');
+    Route::get('/profile-otp-send', [UserController::class, 'otpSend'])->name('user.profile.otp.send');
+    Route::get('/profile-otp-resend', [UserController::class, 'otpResend'])->name('user.profile.otp.resend');
+    Route::get('/profile-otp-verification-form', [UserController::class, 'otpVerificationForm'])->name('user.profile.otp-verification.form');
+    Route::post('/profile-verify-otp', [UserController::class, 'verifyOtp'])->name('user.profile.verify-otp');
     //select state
     Route::get('select-state', [UserController::class, 'selectState'])->name('select-state');
     //orders

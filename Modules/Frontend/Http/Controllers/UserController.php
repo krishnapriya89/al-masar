@@ -2,21 +2,27 @@
 
 namespace Modules\Frontend\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\State;
 use App\Models\Country;
-use App\Models\OrderStatus;
 use App\Models\Payment;
+use App\Models\OrderStatus;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
+use App\Helpers\FrontendHelper;
+use App\Models\ProfileOtp;
+use App\Models\SiteCommonContent;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Frontend\Http\Requests\UserAddressRequest;
-
+use Modules\Frontend\Http\Requests\UserRegisterRequest;
+use Modules\Frontend\Http\Requests\UserProfileUpdateRequest;
 
 class UserController extends Controller
 {
@@ -42,6 +48,10 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Profile
+     *
+     */
     public function profile() {
         $user = Auth::guard('web')->user();
 
@@ -52,6 +62,212 @@ class UserController extends Controller
         else {
             return view('frontend::errors.500');
         }
+    }
+
+    /**
+     * Update Profile Data
+     *
+     */
+    public function updateProfile(UserProfileUpdateRequest $request) {
+        $user = User::find(Auth::guard('web')->id());
+
+        if($user) {
+            $message = 'Profile updated successfully';
+            $user->name = $request->name;
+            $user->company = $request->company;
+            $user->address = $request->address;
+            $user->country_id = $request->country;
+            $user->email = $request->email;
+            if($user->isDirty('email')) {
+                $user->email_verified = 0;
+                $message .= ' Please verify your email.';
+            }
+
+            $user->phone = $request->phone;
+            if($user->isDirty('phone')) {
+                $user->phone_verified = 0;
+                $message .= ' Please verify your phone.';
+            }
+
+            $user->office_phone = $request->office_phone;
+            if($user->isDirty('office_phone')) {
+                $user->office_phone_verified = 0;
+                $message .= ' Please verify your office phone.';
+            }
+
+            if ($request->hasFile('attachment')) {
+                $user->deleteImage('attachment');
+                $file = $request->file('attachment');
+                $user->attachment = $user->uploadImage($file, $user->getImageDirectory());
+            }
+
+            if ($user->save()) {
+                return to_route('user.profile')->with('success', $message);
+            }
+            else {
+                return to_route('user.profile')->with('error', 'Something went wrong. Please try again later.');
+            }
+        }
+        else {
+            return view('frontend::errors.500');
+        }
+    }
+
+    /**
+     * Sending otp
+     *
+     */
+    public function otpSend(Request $request) {
+        if(!$request->field)
+            return response()->json([
+                'status' => false
+            ]);
+
+        $field = $request->field;
+        $user = User::find(Auth::guard('web')->id());
+
+        if ($field == 'email') {
+            $method = 3; //email
+            $verification_code = mt_rand(1000, 9999);
+            $identifier = $user->email;
+            $user->profileOtps()->create([
+                'method' => 3, // email
+                'identifier' => $identifier,
+                'code' => $verification_code,
+            ]);
+
+            //sending otp to email
+            $siteSettings = SiteCommonContent::first();
+            Mail::send('frontend::emails.email-otp', ['code' => $verification_code,'siteSettings'=>$siteSettings,'user'=>$user], function ($message) use ($identifier) {
+                $message->to($identifier);
+                $message->subject('Al Masar Al Saree Email OTP Verification');
+            });
+        } else {
+            if($field == 'phone') {
+                $identifier = $user->phone;
+                $method = 1; // phone
+                $verification_code = $this->sendOtp($identifier);
+            }
+
+            else {
+                $identifier = $user->office_phone;
+                $method = 2; // office phone
+                $verification_code = $this->sendOtp($identifier);
+            }
+
+            $user->profileOtps()->create([
+                'method' => $method,
+                'identifier' => $identifier,
+                'code' => $verification_code,
+            ]);
+        }
+
+        Session::put('profile_field', $field);
+        Session::put('profile_method', $method);
+        Session::put('profile_identifier', $identifier);
+
+        return response()->json([
+            'status' => true,
+            'url' => route('user.profile.otp-verification.form'),
+        ]);
+    }
+    public function otpResend() {
+        
+    }
+
+    /**
+     * Show the otp verification form
+     *
+     */
+    public function otpVerificationForm()
+    {
+        $field = Session::get('profile_field');
+        $method = Session::get('profile_method');
+        $identifier = Session::get('profile_identifier');
+
+        $latest_otp = ProfileOtp::where('method', $method)->where('identifier', $identifier)
+                            ->where('user_id', Auth::guard('web')->id())->where('used', false)
+                            ->orderBy('id', 'desc')
+                            ->first();
+        if(!$latest_otp)
+            return to_route('user.profile');
+
+        $verification_code = $latest_otp->code;
+        return view('frontend::user.otp-verification', compact('field', 'method', 'identifier' ,'verification_code'));
+    }
+
+    public function verifyOtp(Request $request) {
+        $request->validate([
+            'otp1' => 'required|digits_between:1,1|integer',
+            'otp2' => 'required|digits_between:1,1|integer',
+            'otp3' => 'required|digits_between:1,1|integer',
+            'otp4' => 'required|digits_between:1,1|integer'
+        ]);
+
+        $submittedOtp = $request->otp1 . $request->otp2 . $request->otp3 . $request->otp4;
+        $submittedOtp = (int)$submittedOtp;
+        $user = User::find(Auth::guard('web')->id());
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'url' => route('user.profile'),
+            ]);
+        }
+
+        $field = Session::get('profile_field');
+        $method = Session::get('profile_method');
+        $identifier = Session::get('profile_identifier');
+
+        if (!$field || !$method || !$identifier) {
+            session()->flash('error', 'Something went wrong');
+            return response()->json([
+                'status' => false,
+                'url' => route('user.profile'),
+                'message' => ''
+            ]);
+        }
+
+        $otp = ProfileOtp::where('user_id', $user->id)
+            ->where('method', $method)
+            ->where('identifier', $identifier)
+            ->where('used', false)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if (!$otp) {
+            return response()->json([
+                'status' => false,
+                'url' => '',
+                'message' => 'Wrong OTP. If you don\' get the OTP, Please try Resend OTP.'
+            ]);
+        }
+
+        $verify_field = $field.'_verified';
+
+        if ($submittedOtp == $otp->code) {
+            $user->$verify_field = 1;
+            $user->save();
+            session()->flash('success', ucfirst($field) . ' verification completed');
+            return response()->json([
+                'status' => true,
+                'url' => route('user.profile'),
+                'message' => ''
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'url' => '',
+                'message' => 'You have entered the wrong OTP!. Please enter correct one or  Please try Resend OTP.'
+            ]);
+        }
+    }
+
+    public function sendOtp($phone)
+    {
+        $phone_verification_code = FrontendHelper::sendOtp($phone);
+
+        return $phone_verification_code;
     }
 
     /**

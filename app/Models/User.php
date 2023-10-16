@@ -64,6 +64,11 @@ class User extends Authenticatable
         return $this->hasMany(LoginOtp::class);
     }
 
+    public function profileOtps()
+    {
+        return $this->hasMany(ProfileOtp::class);
+    }
+
     public function emailVerify()
     {
         return $this->hasMany(UserEmailVerify::class);

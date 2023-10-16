@@ -386,9 +386,9 @@ $(document).ready(function () {
                     },
                     success: function (response) {
                         if (response.status) {
+                            $('.quote-count').html(response.count);
                             if (response.count > 0) {
                                 $('.quote-tr-' + quote_id).remove();
-                                $('.quote-count').html(response.count);
                             }
                             else {
                                 $('.empty-quote-div').removeClass('d-none');
