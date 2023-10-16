@@ -77,6 +77,15 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-header">Report Management</li>
+                <li class="nav-item">
+                    <a href="{{ route('report.index') }}" class="nav-link {{ Nav::isRoute('report.index') }}">
+                        <i class="nav-icon fas fa-file-excel"></i>
+                        <p>
+                            Reports
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">User Management</li>
                 <li class="nav-item">
                     <a href="{{ route('user-management.index') }}" class="nav-link {{ Nav::isRoute('user-management.index') }}">

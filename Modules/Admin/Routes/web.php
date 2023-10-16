@@ -5,31 +5,32 @@ use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AuthController;
 use Modules\Admin\Http\Controllers\UserController;
 use Modules\Admin\Http\Controllers\AdminController;
+use Modules\Admin\Http\Controllers\OrderController;
 use Modules\Admin\Http\Controllers\StateController;
+use Modules\Admin\Http\Controllers\ReportController;
 use Modules\Admin\Http\Controllers\VendorController;
 use Modules\Admin\Http\Controllers\AboutUsController;
 use Modules\Admin\Http\Controllers\ContactController;
 use Modules\Admin\Http\Controllers\CountryController;
+use Modules\Admin\Http\Controllers\PaymentController;
 use Modules\Admin\Http\Controllers\ProductController;
 use Modules\Admin\Http\Controllers\CurrencyController;
 use Modules\Admin\Http\Controllers\HowToBuyController;
+use Modules\Admin\Http\Controllers\ProviderController;
 use Modules\Admin\Http\Controllers\DashboardController;
+use Modules\Admin\Http\Controllers\QuotationController;
 use Modules\Admin\Http\Controllers\WhyChooseController;
 use Modules\Admin\Http\Controllers\HomeBannerController;
 use Modules\Admin\Http\Controllers\AdminConfigController;
 use Modules\Admin\Http\Controllers\SiteSettingsController;
 use Modules\Admin\Http\Controllers\PrivacyPolicyController;
+use Modules\Admin\Http\Controllers\TaxManagementController;
 use Modules\Admin\Http\Controllers\ContactEnquiryController;
-use Modules\Admin\Http\Controllers\PaymentController;
 use Modules\Admin\Http\Controllers\ProductGalleryController;
+use Modules\Admin\Http\Controllers\ProviderDetailController;
 use Modules\Admin\Http\Controllers\ProductSubCategoryController;
 use Modules\Admin\Http\Controllers\TermsAndConditionsController;
 use Modules\Admin\Http\Controllers\ProductMainCategoryController;
-use Modules\Admin\Http\Controllers\ProviderController;
-use Modules\Admin\Http\Controllers\ProviderDetailController;
-use Modules\Admin\Http\Controllers\TaxManagementController;
-use Modules\Admin\Http\Controllers\QuotationController;
-use Modules\Admin\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -150,6 +151,11 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         //Contact Enquiry Listing
         Route::resource('contact-enquiry-listing',ContactEnquiryController::class);
         Route::post('reply',[ContactEnquiryController::class,'addReply'])->name('contact-enquiry-listing.reply');
+
+        //Reports
+        Route::get('report', [ReportController::class,'orderReport'])->name('report.index');
+        Route::get('report/order-export', [ReportController::class, 'orderReportExport'])->name('report.export');
+
     });
 
     Route::fallback(function () {
