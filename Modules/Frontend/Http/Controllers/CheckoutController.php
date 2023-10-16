@@ -89,7 +89,7 @@ class CheckoutController extends Controller
         $order = $this->createOrder($request, $quotation);
         if ($order) {
             $order_address = $this->createOrderAddress($request, $order);
-            if ($order_address) {
+        if ($order_address) {
                 if ($order->payment_id == 1) {
                     return redirect()->route('user.bank.transfer', ['uid' => $order->uid]);
                 } else {

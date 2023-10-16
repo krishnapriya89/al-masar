@@ -93,6 +93,6 @@ class Order extends Model
                 '4' => 'clr3',
                 '5' => 'clr1',
             ];
-        return $color[$this->order_status_id];
+        return $color[$this->order_status_id] ?? 'clr2';
     }
 }
