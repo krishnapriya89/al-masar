@@ -197,11 +197,16 @@
                                 <div class="quantitySec">
                                     <div class="label">Minimum Quantity:</div>
                                     <div class="quantity buttons_added">
-                                        <input type="button" value="-" data-operation="minus" class="minus change-quantity-detail-page" data-product="{{ $product->slug }}">
+                                        <input type="button" value="-" data-operation="minus"
+                                            class="minus change-quantity-detail-page"
+                                            data-product="{{ $product->slug }}">
                                         <input type="number" step="1" min="{{ $product->min_quantity_to_buy }}"
-                                            name="quantity" value="{{ $product->min_quantity_to_buy }}" title="Qty" class="input-text qty text change-quantity-input-detail-page quantityField"
-                                            size="4" pattern="" inputmode="" data-product="{{ $product->slug }}">
-                                        <input type="button" value="+" data-operation="plus" class="plus change-quantity-detail-page" data-product="{{ $product->slug }}">
+                                            name="quantity" value="{{ $product->min_quantity_to_buy }}" title="Qty"
+                                            class="input-text qty text change-quantity-input-detail-page quantityField"
+                                            size="4" pattern="" inputmode=""
+                                            data-product="{{ $product->slug }}">
+                                        <input type="button" value="+" data-operation="plus"
+                                            class="plus change-quantity-detail-page" data-product="{{ $product->slug }}">
                                     </div>
                                 </div>
                                 {{-- <div class="deliveryInfo">
@@ -222,7 +227,8 @@
                                 </div>
                                 <div class="expectedP">
                                     <div class="lbl">Bid Price:</div>
-                                    <input type="text" name="bid_price" id="bid_price" class="form-control bid-price-detail-page amountField"
+                                    <input type="text" name="bid_price" id="bid_price"
+                                        class="form-control bid-price-detail-page amountField"
                                         data-product="{{ $product->slug }}" placeholder="Enter Amount">
 
                                 </div>
@@ -233,7 +239,8 @@
                                     </div>
                                 </div>
                                 <div class="btnBx">
-                                    <a href="javascript:void(0)" class="quote add-to-quote-product-detail" data-product="{{ $product->slug }}">
+                                    <a href="javascript:void(0)" class="quote add-to-quote-product-detail"
+                                        data-product="{{ $product->slug }}">
                                         Add to Quote
                                         <svg viewBox="0 0 19.169 19.5">
                                             <g id="cart" transform="translate(-2.46 -2.25)">
@@ -249,7 +256,8 @@
                                 </div>
                             @else
                                 <div class="btnBx">
-                                    <a href="javascript:void(0)" class="quote notify-me" id="notify" data-id={{ $product->slug }}>
+                                    <a href="javascript:void(0)" class="quote notify-me" id="notify"
+                                        data-id={{ $product->slug }}>
                                         Notify Me
                                     </a>
                                 </div>
@@ -264,122 +272,122 @@
         <section id="moreInfoSec">
             <div class="container">
                 <!-- <div class="accordion" id="ProAccord">
-                                        <div class="FlxBtn">
-                                            <div class="buttonSec">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                    Description
-                                                </button>
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                    Specifications
-                                                </button>
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                    Additional Details
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="innerBx">
-                                            <div class="accordion-item">
-                                                <div class="accordion-header" id="headingOne">
-                                                    <button class="accordion-button mobBtn collapsed" type="button" data-bs-toggle="collapse"
+                                            <div class="FlxBtn">
+                                                <div class="buttonSec">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                         data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                         Description
                                                     </button>
-                                                </div>
-                                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                                                    data-bs-parent="#ProAccord">
-                                                    <div class="accordion-body">
-                                                        <div class="details">
-                                                            <div class="specDtail">
-                                                                <p>The iPhone 11 boasts a gorgeous all-screen Liquid Retina LCD that is water
-                                                                    resistant up to 2 metres for up to 30 minutes. Moreover, the ultra-wide 13
-                                                                    mm lens has a 120-degree field of view for four times more scenes, and the
-                                                                    26 mm wide lens provides up to 100% Autofocus in low light.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <div class="accordion-header" id="headingTwo">
-                                                    <button class="accordion-button mobBtn collapsed" type="button" data-bs-toggle="collapse"
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                         data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                                         Specifications
                                                     </button>
-                                                </div>
-                                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                                    data-bs-parent="#ProAccord">
-                                                    <div class="accordion-body">
-                                                        <div class="details">
-                                                            <div class="specBx">
-                                                                <div class="cTitle">General</div>
-                                                                <ul class="spec">
-                                                                    <li><span>In The Box</span>Handset, USB-C to Lightning Cable, Documentation
-                                                                    </li>
-                                                                    <li><span>Model Number</span>MPUF3HN/A</li>
-                                                                    <li><span>Model Name</span>iPhone 14</li>
-                                                                    <li><span>Color</span>Midnight</li>
-                                                                    <li><span>Browse Type</span>Smartphones</li>
-                                                                    <li><span>SIM Type</span>Dual Sim(Nano + eSIM)</li>
-                                                                    <li><span>Hybrid Sim Slot</span>No</li>
-                                                                    <li><span>Touchscreen</span>Yes</li>
-                                                                    <li><span>OTG Compatible</span>No</li>
-                                                                    <li><span>Sound Enhancements</span>Built-in Stereo Speaker</li>
-                                                                </ul>
-                                                                <div class="cTitle">Display Features</div>
-                                                                <ul class="spec">
-                                                                    <li><span>Display Size</span>15.49 cm (6.1 inch)</li>
-                                                                    <li><span>Resolution</span>2532 x 1170 Pixels</li>
-                                                                    <li><span>Resolution Type</span>Super Retina XDR Display</li>
-                                                                    <li><span>GPU</span>5 Core</li>
-                                                                    <li><span>Display Type</span>Super Retina XDR Display</li>
-                                                                    <li><span>Other Display Features</span>HDR Display, True Tone, Wide Colour
-                                                                        (P3), Haptic Touch, Contrast Ratio: 20,00,000:1, Max Brightness: 800
-                                                                        nits, Peak Brightness: 1,200 nits, Fingerprint Resistant Oleophobic
-                                                                        Coating,
-                                                                        Support for Display of Multiple Languages and Characters Simultaneously
-                                                                    </li>
-                                                                </ul>
-                                                                <div class="cTitle">Os & Processor Features</div>
-                                                                <ul class="spec">
-                                                                    <li><span>Operating System</span>iOS 16</li>
-                                                                    <li><span>Processor Type</span>A15 Bionic Chip, 6 Core Processor</li>
-                                                                    <li><span>Processor Core</span>Hexa Core</li>
-                                                                    <li><span>Operating Frequency</span>5G NR (Bands n1, n2, n3, n5, n7, n8,
-                                                                        n12, n20, n25, n26, n28, n30, n38, n40, n41, n48, n53, n66, n70, n77,
-                                                                        n78, n79), 4G FDD-LTE (B1, B2, B3, B4, B5, B7, B8, B12, B13, B17, B18,
-                                                                        B19, B20, B25,
-                                                                        B26, B28, B30, B32, B66), 4G TD-LTE (B34, B38, B39, B40, B41, B42, B46,
-                                                                        B48, B53), 3G UMTS/HSPA+/DC-HSDPA (850, 900, 1700/2100, 1900, 2100 MHz),
-                                                                        2G GSM/EDGE (850,
-                                                                        900, 1800, 1900 MHz)</li>
-                                                                </ul>
-                                                                <button type="" class="Readmore"><span>View More Details</span></button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <div class="accordion-header" id="headingThree">
-                                                    <button class="accordion-button mobBtn collapsed" type="button" data-bs-toggle="collapse"
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                         data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                                         Additional Details
                                                     </button>
                                                 </div>
-                                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                                                    data-bs-parent="#ProAccord">
-                                                    <div class="accordion-body">
-                                                        <div class="details">
+                                            </div>
+                                            <div class="innerBx">
+                                                <div class="accordion-item">
+                                                    <div class="accordion-header" id="headingOne">
+                                                        <button class="accordion-button mobBtn collapsed" type="button" data-bs-toggle="collapse"
+                                                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                            Description
+                                                        </button>
+                                                    </div>
+                                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                                        data-bs-parent="#ProAccord">
+                                                        <div class="accordion-body">
+                                                            <div class="details">
+                                                                <div class="specDtail">
+                                                                    <p>The iPhone 11 boasts a gorgeous all-screen Liquid Retina LCD that is water
+                                                                        resistant up to 2 metres for up to 30 minutes. Moreover, the ultra-wide 13
+                                                                        mm lens has a 120-degree field of view for four times more scenes, and the
+                                                                        26 mm wide lens provides up to 100% Autofocus in low light.</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <div class="accordion-header" id="headingTwo">
+                                                        <button class="accordion-button mobBtn collapsed" type="button" data-bs-toggle="collapse"
+                                                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                            Specifications
+                                                        </button>
+                                                    </div>
+                                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                                        data-bs-parent="#ProAccord">
+                                                        <div class="accordion-body">
+                                                            <div class="details">
+                                                                <div class="specBx">
+                                                                    <div class="cTitle">General</div>
+                                                                    <ul class="spec">
+                                                                        <li><span>In The Box</span>Handset, USB-C to Lightning Cable, Documentation
+                                                                        </li>
+                                                                        <li><span>Model Number</span>MPUF3HN/A</li>
+                                                                        <li><span>Model Name</span>iPhone 14</li>
+                                                                        <li><span>Color</span>Midnight</li>
+                                                                        <li><span>Browse Type</span>Smartphones</li>
+                                                                        <li><span>SIM Type</span>Dual Sim(Nano + eSIM)</li>
+                                                                        <li><span>Hybrid Sim Slot</span>No</li>
+                                                                        <li><span>Touchscreen</span>Yes</li>
+                                                                        <li><span>OTG Compatible</span>No</li>
+                                                                        <li><span>Sound Enhancements</span>Built-in Stereo Speaker</li>
+                                                                    </ul>
+                                                                    <div class="cTitle">Display Features</div>
+                                                                    <ul class="spec">
+                                                                        <li><span>Display Size</span>15.49 cm (6.1 inch)</li>
+                                                                        <li><span>Resolution</span>2532 x 1170 Pixels</li>
+                                                                        <li><span>Resolution Type</span>Super Retina XDR Display</li>
+                                                                        <li><span>GPU</span>5 Core</li>
+                                                                        <li><span>Display Type</span>Super Retina XDR Display</li>
+                                                                        <li><span>Other Display Features</span>HDR Display, True Tone, Wide Colour
+                                                                            (P3), Haptic Touch, Contrast Ratio: 20,00,000:1, Max Brightness: 800
+                                                                            nits, Peak Brightness: 1,200 nits, Fingerprint Resistant Oleophobic
+                                                                            Coating,
+                                                                            Support for Display of Multiple Languages and Characters Simultaneously
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div class="cTitle">Os & Processor Features</div>
+                                                                    <ul class="spec">
+                                                                        <li><span>Operating System</span>iOS 16</li>
+                                                                        <li><span>Processor Type</span>A15 Bionic Chip, 6 Core Processor</li>
+                                                                        <li><span>Processor Core</span>Hexa Core</li>
+                                                                        <li><span>Operating Frequency</span>5G NR (Bands n1, n2, n3, n5, n7, n8,
+                                                                            n12, n20, n25, n26, n28, n30, n38, n40, n41, n48, n53, n66, n70, n77,
+                                                                            n78, n79), 4G FDD-LTE (B1, B2, B3, B4, B5, B7, B8, B12, B13, B17, B18,
+                                                                            B19, B20, B25,
+                                                                            B26, B28, B30, B32, B66), 4G TD-LTE (B34, B38, B39, B40, B41, B42, B46,
+                                                                            B48, B53), 3G UMTS/HSPA+/DC-HSDPA (850, 900, 1700/2100, 1900, 2100 MHz),
+                                                                            2G GSM/EDGE (850,
+                                                                            900, 1800, 1900 MHz)</li>
+                                                                    </ul>
+                                                                    <button type="" class="Readmore"><span>View More Details</span></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <div class="accordion-header" id="headingThree">
+                                                        <button class="accordion-button mobBtn collapsed" type="button" data-bs-toggle="collapse"
+                                                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                            Additional Details
+                                                        </button>
+                                                    </div>
+                                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                                        data-bs-parent="#ProAccord">
+                                                        <div class="accordion-body">
+                                                            <div class="details">
 
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div> -->
+                                        </div> -->
                 @if ($product->description)
                     <div class="title">Description</div>
                     <p>{!! $product->description !!}</p>
@@ -426,7 +434,7 @@
                     prevArrow: "<button type='button' class='slick-prev pull-left'></button>",
                     nextArrow: "<button type='button' class='slick-next pull-right'></button>",
                     responsive: [{
-                        breakpoint: 1441,
+                        breakpoint: 992,
                         settings: {
                             slidesToShow: 4,
                         }
@@ -481,7 +489,6 @@
                     var replaceText = $(this).parent().hasClass('open') ? "View Less Details" : "View More Details";
                     $(".Readmore span").text(replaceText);
                 });
-
             </script>
         @endpush
 

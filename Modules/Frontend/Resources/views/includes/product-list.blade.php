@@ -39,8 +39,10 @@
         </td>
         <td>
             @if ($product->is_instock)
-                @currencySymbol<input type="text" name="bid_price" id="bid_price" placeholder=""
-                    class="bid bid-price amountField" value="" data-product="{{ $product->slug }}">
+                <div class="iputBx">
+                    <div class="symb">@currencySymbol</div>
+                    <input type="text" name="bid_price" id="bid_price" placeholder="" class="bid bid-price amountField" value="" data-product="{{ $product->slug }}">
+                </div>
                 <div class="txt">Total
                     <div class="tmns product-total-price-div">@currencySymbolWithConvertedPrice($product->min_product_price)</div>
                 </div>
