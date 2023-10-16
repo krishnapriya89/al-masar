@@ -171,8 +171,94 @@ class UserController extends Controller
             'url' => route('user.profile.otp-verification.form'),
         ]);
     }
+
+    /**
+     * Resend otp to the requested field
+     *
+     */
     public function otpResend() {
-        
+        $user = User::find(Auth::guard('web')->id());
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'url' => route('user.profile'),
+            ]);
+        }
+
+        $field = Session::get('profile_field');
+        $method = Session::get('profile_method');
+        $identifier = Session::get('profile_identifier');
+
+        if (!$field || !$method || !$identifier) {
+            session()->flash('error', 'Something went wrong. Please try again later.');
+            return response()->json([
+                'status' => false,
+                'url' => route('user.profile'),
+                'message' => ''
+            ]);
+        }
+
+        $lastOtp = ProfileOtp::where('user_id', $user->id)
+            ->where('method', $method)
+            ->where('identifier', $identifier)
+            ->where('used', false)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if ($lastOtp && now()->diffInMinutes($lastOtp->created_at) < 1) {
+            // An OTP was sent within the last minute, show an error or handle as needed
+            return response()->json([
+                'status' => false,
+                'url' => '',
+                'message' => 'Please wait sometime before requesting a new OTP'
+            ]);
+        }
+
+        $user->profileOtps()->delete();
+
+        if ($field == 'email') {
+            $method = 3; //email
+            $verification_code = mt_rand(1000, 9999);
+            $identifier = $user->email;
+            $user->profileOtps()->create([
+                'method' => 3, // email
+                'identifier' => $identifier,
+                'code' => $verification_code,
+            ]);
+
+            //sending otp to email
+            $siteSettings = SiteCommonContent::first();
+            Mail::send('frontend::emails.email-otp', ['code' => $verification_code,'siteSettings'=>$siteSettings,'user'=>$user], function ($message) use ($identifier) {
+                $message->to($identifier);
+                $message->subject('Al Masar Al Saree Email OTP Verification');
+            });
+        } else {
+            if($field == 'phone') {
+                $identifier = $user->phone;
+                $method = 1; // phone
+                $verification_code = $this->sendOtp($identifier);
+            }
+
+            else {
+                $identifier = $user->office_phone;
+                $method = 2; // office phone
+                $verification_code = $this->sendOtp($identifier);
+            }
+
+            $user->profileOtps()->create([
+                'method' => $method,
+                'identifier' => $identifier,
+                'code' => $verification_code,
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'otp' => $verification_code,
+            'url' => '',
+            'message' => 'A new OTP has been sent to '. str_replace('_',' ',ucwords($field,'_')) . ': ' . $identifier . '.'
+        ]);
     }
 
     /**
@@ -248,7 +334,10 @@ class UserController extends Controller
         if ($submittedOtp == $otp->code) {
             $user->$verify_field = 1;
             $user->save();
-            session()->flash('success', ucfirst($field) . ' verification completed');
+            Session::forget('profile_field');
+            Session::forget('profile_method');
+            Session::forget('profile_identifier');
+            session()->flash('success', str_replace('_',' ',ucwords($field,'_')) . ' verification completed');
             return response()->json([
                 'status' => true,
                 'url' => route('user.profile'),

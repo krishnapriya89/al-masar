@@ -26,7 +26,7 @@
                 <div class="otpFLxBx">
                     <div class="otpBx">
                         <div class="title">OTP Verification</div>
-                        <div class="subT">Enter the OTP send to {{ ucfirst($field) }}: <span>{{ $identifier }}</span></div>
+                        <div class="subT">Enter the OTP send to {{ str_replace('_',' ',ucwords($field,'_')) }}: <span>{{ $identifier }}</span></div>
                         <div class="subT">Code <span class="otp-cls"> {{ $verification_code }}</span></div>
                         <form action="{{ route('user.profile.verify-otp') }}" id="ProfileOtpForm" class="optB"
                                 method="POST" autocomplete="off">
@@ -70,37 +70,37 @@
             }
         }
 
-        // var profileOtpDebounceTimer;
-        // $('.profile-resend-otp-btn').on('click', function() {
-        //     clearTimeout(profileOtpDebounceTimer);
+        var profileOtpResendDebounceTimer;
+        $('.profile-resend-otp-btn').on('click', function() {
+            clearTimeout(profileOtpResendDebounceTimer);
 
-        //     profileOtpDebounceTimer = setTimeout(function() {
-        //         $.ajax({
-        //             type: 'POST',
-        //             url: '/resend-profile-otp',
-        //             dataType: 'json',
-        //             success: function(response) {
-        //                 if (response.status) {
-        //                     if (response.message && response.message != '') {
-        //                         toastr.success(response.message);
-        //                     }
-        //                     if (response.otp && response.otp != '') {
-        //                         $('.otp-cls').html(response.otp);
-        //                     }
-        //                 } else {
-        //                     if (response.message && response.message != '') {
-        //                         toastr.error(response.message);
-        //                     }
-        //                     if (response.url != '') {
-        //                         window.location.href = response.url;
-        //                     }
-        //                 }
-        //             }
-        //         });
-        //     });
-        // });
+            profileOtpResendDebounceTimer = setTimeout(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('user.profile.otp.resend' )}}',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            if (response.message && response.message != '') {
+                                toastr.success(response.message);
+                            }
+                            if (response.otp && response.otp != '') {
+                                $('.otp-cls').html(response.otp);
+                            }
+                        } else {
+                            if (response.message && response.message != '') {
+                                toastr.error(response.message);
+                            }
+                            if (response.url != '') {
+                                window.location.href = response.url;
+                            }
+                        }
+                    }
+                });
+            });
+        });
 
-        var debounceTimer;
+        var profileOtpVerifydebounceTimer;
         $('.profile-otp-form-btn').on('click', function(e) {
             var required = 0;
             // Loop through each input field with class "otp"
@@ -110,7 +110,7 @@
             });
 
             if (required == 0) {
-                clearTimeout(debounceTimer);
+                clearTimeout(profileOtpVerifydebounceTimer);
                 e.preventDefault();
 
                 $(".profile-otp-form-btn").prop("disabled", true);
@@ -118,7 +118,7 @@
                 var _this = $(this);
                 let formData = $("#ProfileOtpForm").serialize();
 
-                debounceTimer = setTimeout(function() {
+                profileOtpVerifydebounceTimer = setTimeout(function() {
                     $.ajax({
                             type: 'POST',
                             url: '{{ route('user.profile.verify-otp') }}',

@@ -115,7 +115,7 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('user.profile.update');
     Route::get('/profile-otp-send', [UserController::class, 'otpSend'])->name('user.profile.otp.send');
-    Route::get('/profile-otp-resend', [UserController::class, 'otpResend'])->name('user.profile.otp.resend');
+    Route::post('/profile-otp-resend', [UserController::class, 'otpResend'])->name('user.profile.otp.resend');
     Route::get('/profile-otp-verification-form', [UserController::class, 'otpVerificationForm'])->name('user.profile.otp-verification.form');
     Route::post('/profile-verify-otp', [UserController::class, 'verifyOtp'])->name('user.profile.verify-otp');
     //select state
