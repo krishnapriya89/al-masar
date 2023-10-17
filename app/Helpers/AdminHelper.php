@@ -6,6 +6,7 @@ use App\Models\Provider;
 use App\Models\AdminConfig;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AdminHelper
 {
@@ -19,6 +20,31 @@ class AdminHelper
         $config = AdminConfig::where('key', $key)->first();
 
         return $config ? $config->value : null;
+    }
+
+
+    /**
+     * get email logo
+     *
+     * @author Suchtih
+     */
+    public static function getEmailLogo()
+    {
+        $config = AdminConfig::where('key', 'website_logo')->first();
+
+        if(Storage::disk('public')->exists($config->value)) {
+            return Storage::url($config->value);
+        }
+        elseif(file_exists(public_path($config->value))){
+            if (strpos($config->value, '<svg') === 0) {
+                return asset('frontend/images/email_logo.jpg');
+            } else {
+                return asset($config->value);
+            }
+        }
+        else {
+            return asset('frontend/images/email_logo.jpg');
+        }
     }
 
     /**

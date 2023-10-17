@@ -3,7 +3,6 @@
 namespace Modules\Admin\Http\Controllers;
 
 use App\Models\AdminConfig;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -33,6 +32,9 @@ class AdminConfigController extends Controller
         $config = AdminConfig::find($request->id);
 
         if ($request->hasFile('value')) {
+            $request->validate([
+                'value' => 'mimes:png,jpg,jpeg,webp'
+            ]);
             $config->deleteImage('value');
             $value          = $request->file('value');
             $config->value  = $config->uploadImage($value, $config->getImageDirectory());

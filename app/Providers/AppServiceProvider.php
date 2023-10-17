@@ -40,8 +40,12 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo \App\Helpers\AdminHelper::getFormattedPrice($price); ?>";
         });
 
-        Blade::directive('checkQuote', function ($price) {
+        Blade::directive('checkQuote', function () {
             return "<?php echo \App\Helpers\QuoteHelper::checkQuote(); ?>";
+        });
+
+        Blade::directive('getEmailLogo', function () {
+            return "<?php echo \App\Helpers\AdminHelper::getEmailLogo(); ?>";
         });
     }
 
