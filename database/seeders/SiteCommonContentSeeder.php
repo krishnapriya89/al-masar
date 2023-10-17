@@ -21,6 +21,7 @@ class SiteCommonContentSeeder extends Seeder
             'enquiry_receive_email'=>'almasar@admin.com',
             'phone' => '+971 50475320',
             'email'=>'sales@almasaralsaree.com',
+            'whatsapp_number'=>'8967453432',
             'payment_image'=>'frontend/images/pay.png',
             'copy_right' => '© 2023 All Rights Reserved Al Masar Al Saree 2023',
             'facebook_link'=>'https://www.facebook.com/',

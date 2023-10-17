@@ -56,6 +56,16 @@
                                         @endif
                                     @endforeach
                                 @endif
+                                @if (!$product->detail_page_image && $product_galleries->isEmpty())
+                                <div data-slide-id="zoom" class="zoom_gallery_slide active">
+                                    <a id="Zoom-1" class="MagicZoom" title="" href="{{ $product->detail_page_image_value }}"
+                                        data-zoom-image-8x="{{ $product->detail_page_image_value }}"
+                                        data-image-8x="{{ $product->detail_page_image_value }}">
+                                        <img src="{{ $product->detail_page_image_value }}" class="lazy" loading="lazy"
+                                            data-src="{{ $product->detail_page_image_value }}" srcset="{{ $product->detail_page_image_value }}" alt="" />
+                                    </a>
+                                </div>
+                            @endif
                             </div>
 
                             <div class="slider thumbSlide">
@@ -190,9 +200,15 @@
                     <div class="ProInfoSec">
                         <div class="ProInfoSecWrp">
                             <h1 class="name">{{ $product->title }}</h1>
+                            @if($product->product_code)
                             <div class="pcode">Product Code:<span>{{ $product->product_code }}</span></div>
+                            @endif
+                            @if($product->model_number)
                             <div class="mdlNu">Model Number:<span>{{ $product->model_number }}</span></div>
+                            @endif
+                            @if($product->sku)
                             <div class="sku">SKU:{{ $product->sku }}</div>
+                            @endif
                             @if ($product->is_instock)
                                 <div class="quantitySec">
                                     <div class="label">Minimum Quantity:</div>

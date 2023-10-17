@@ -85,12 +85,22 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="phone">Phone</label>
                                     <input type="text" class="form-control @error('phone') is-invalid @enderror"
                                         id="phone" name="phone" value="{{ old('phone', @$common_content->phone) }}">
                                     @error('phone')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="whatsapp_number">Whats App Number</label>
+                                    <input type="text" class="form-control @error('whatsapp_number') is-invalid @enderror"
+                                        id="whatsapp_number" name="whatsapp_number" value="{{ old('whatsapp_number', @$common_content->whatsapp_number) }}">
+                                    @error('whatsapp_number')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>

@@ -237,10 +237,12 @@
                         <div class="cmnBx">
                             <div class="fTitle">QUICK LINKS</div>
                             <ul>
-                                <li><a href="#!">Who We Are</a></li>
-                                <li><a href="#!">Why Us</a></li>
-                                <li><a href="#!">How to Buy?</a></li>
-                                <li><a href="#!">Clients</a></li>
+                                <li><a href="{{ Route::currentRouteName() == 'home' ?'#AboutSec':route('home').'/#AboutSec'}}" >Who We Are</a></li>
+                                <li><a href="{{ Route::currentRouteName() == 'home' ? '#WhyChooseSec':route('home').'/#WhyChooseSec'}}">Why Us</a></li>
+                                <li><a href="{{ Route::currentRouteName()=='home'? '#HowToBuy':route('home').'/#HowToBuy'}}">How to Buy?</a></li>
+                                <li><a href="{{ Route::currentRouteName()=='home' ? '#contactSec':route('home').'/#contactSec'}}">Clients</a></li>
+                                <li><a href="{{ route('privacy-policy')}}">Privacy Policy</a></li>
+                                <li><a href="{{ route('terms-and-conditions')}}">Terms & Conditions</a></li>
                             </ul>
                         </div>
                     </div>
@@ -259,7 +261,7 @@
                                     <div class="ttle">Follow Us</div>
                                     <div class="socialFlx">
                                         @if (@$site_common_content->facebook_link)
-                                            <a href="{{ @$site_common_content->facebook_link }}">
+                                            <a href="{{ @$site_common_content->facebook_link }}" target="_blank">
                                                 <svg viewBox="0 0 9.91 17.46">
                                                     <path id="facebook"
                                                         d="M7.554,4.321c.024-.027.135-.115.573-.115H9.563a.848.848,0,0,0,.847-.847V.85A.848.848,0,0,0,9.564,0L7.432,0A4.388,4.388,0,0,0,4.2,1.255a4.608,4.608,0,0,0-1.218,3.3V5.91H1.347A.848.848,0,0,0,.5,6.757v2.7a.848.848,0,0,0,.847.847H2.978v6.307a.848.848,0,0,0,.847.847h2.8a.848.848,0,0,0,.847-.847V10.306H9.462a.848.848,0,0,0,.847-.847v-2.7a.85.85,0,0,0-.436-.741.861.861,0,0,0-.419-.106H7.468V4.841c0-.348.047-.475.086-.519Zm0,0"
@@ -268,7 +270,7 @@
                                             </a>
                                         @endif
                                         @if (@$site_common_content->instagram_link)
-                                            <a href="{{ @$site_common_content->instagram_link }}">
+                                            <a href="{{ @$site_common_content->instagram_link }}" target="_blank">
                                                 <svg viewBox="0 0 17.745 17.745">
                                                     <g id="Group_183" data-name="Group 183"
                                                         transform="translate(0)">
@@ -298,7 +300,7 @@
                                             </a>
                                         @endif
                                         @if (@$site_common_content->twitter_link)
-                                            <a href="{{ @$site_common_content->twitter_link }}">
+                                            <a href="{{ @$site_common_content->twitter_link }}" target="_blank">
                                                 <svg viewBox="0 0 15.704 16.034">
                                                     <defs>
                                                         <clipPath id="clip-path">
@@ -315,7 +317,7 @@
                                             </a>
                                         @endif
                                         @if (@$site_common_content->linkedIn_link)
-                                            <a href="{{ @$site_common_content->linkedIn_link }}">
+                                            <a href="{{ @$site_common_content->linkedIn_link }}" target="_blank">
                                                 <svg viewBox="0 0 16.564 16.564">
                                                     <path id="Path_101855" data-name="Path 101855"
                                                         d="M49,46.626V40.559c0-2.982-.642-5.259-4.12-5.259a3.6,3.6,0,0,0-3.251,1.781h-.041V35.569H38.3V46.626h3.437V41.139c0-1.449.269-2.837,2.05-2.837,1.76,0,1.781,1.636,1.781,2.919V46.6H49Z"
@@ -390,7 +392,7 @@
         <div class="container">
             <div class="Row">
                 <div class="lSide">
-                    © <?= date('Y') ?> All Rights Reserved Al Masar Al Saree 2023
+                    {{@$site_common_content->copy_right}}
                 </div>
                 <div class="RSide">
                     @if (@$site_common_content->payment_image)

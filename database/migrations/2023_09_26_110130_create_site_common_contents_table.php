@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->string('enquiry_receive_email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('whatsapp_number')->nullable();
             $table->string('email')->nullable();
             $table->string('payment_image')->nullable();
             $table->string('copy_right')->nullable();

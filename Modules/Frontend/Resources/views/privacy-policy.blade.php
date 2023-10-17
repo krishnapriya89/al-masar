@@ -4,31 +4,25 @@
 @section('meta_keywords',@$privacy_policy->meta_keywords)
 @section('meta_description',@$privacy_policy->meta_description)
 @section('other_meta_tags')
-    {!! @$about->other_meta_tags !!}
+    {!! @$privacy_policy->other_meta_tags !!}
 @endsection
 
 @section('content')
 
-<div id="pageWrapper" class="privacyPage">
+<div id="pageWrapper" class="privacyPage InnerPage">
 
-    <!-- Breadcrumbs Section  -->
-    <div class="breadCrumbs">
-        <div class="container">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('home')}}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Privacy Policies</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <!-- Breadcrumbs Section  -->
 
     <!-- Common Contents Section  -->
+    <div class="headBx">
+        <div class="container">
+            <div class="mainT">{{ @$privacy_policy->title}}</div>
+        </div>
+    </div>
     <section class="cmnCntSec">
         <div class="container">
-            <div class="Head">{{@$privacy_policy->title}}</div>
-            <p>{!!@$privacy_policy->description!!} </p>
+
+            <p>{!!@$privacy_policy->description!!}</p>
+
         </div>
     </section>
     <!-- Common Contents Section  -->

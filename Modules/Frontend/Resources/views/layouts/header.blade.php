@@ -609,7 +609,7 @@
                                                         </svg>
                                                     </button>
                                                 </div>
-                                                @if ($site_menu->children->isNotEmpty())
+                                                @if ($site_menu->activeChildren->isNotEmpty())
                                                     <div id="cd{{ $loop->iteration }}"
                                                         class="accordion-collapse mgaAccord collapse"
                                                         aria-labelledby="headingOne" data-bs-parent="#menuaccord1">
@@ -622,7 +622,7 @@
                                                                     <div class="cl1"></div>
                                                                 </div>
                                                                 <ul>
-                                                                    @foreach ($site_menu->children as $children)
+                                                                    @foreach ($site_menu->activeChildren as $children)
                                                                         <li><a href="{{ route('product-category', $children->slug) }}"
                                                                                 class="lk">{{ $children->title }}</a>
                                                                         </li>

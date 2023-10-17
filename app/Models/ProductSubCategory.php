@@ -61,4 +61,10 @@ class ProductSubCategory extends Model
     {
         return $this->hasMany(Product::class, 'product_sub_category_child_id');
     }
+
+    //active children
+    public function activeChildren()
+    {
+        return $this->hasMany(ProductSubCategory::class, 'parent_id', 'id')->where('status',1);
+    }
 }
