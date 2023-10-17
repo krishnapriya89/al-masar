@@ -124,7 +124,8 @@ $(".file-preview").on('change', function (event) {
                 $("<img />", {
                     "src": e.target.result,
                     "class": 'thumb-image',
-                    "height": '80'
+                    "height": '80',
+                    "width":'200'
                 }).appendTo(file_holder);
             }
         } else if (is_video) {

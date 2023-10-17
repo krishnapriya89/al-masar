@@ -349,7 +349,7 @@
                                         class="mail">{{@$site_common_content->email}}</a>
                                 @endif
                             @endif
-                            <div class="newsLtr">
+                            {{-- <div class="newsLtr">
                                 <div class="ttle">Subscribe News LEtter</div>
                                 <div class="flB">
                                     <div class="ltB">
@@ -381,7 +381,7 @@
                                         </svg>
                                     </button>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

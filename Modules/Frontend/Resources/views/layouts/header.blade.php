@@ -13,7 +13,8 @@
             <div class="HrMfLx">
                 <div class="WsMLgo">
                     <a href="{{ route('home') }}" class="LoGo">
-                        <svg viewBox="0 0 275.731 78">
+                        <img src="{{ Storage::disk('public')->exists(\App\Helpers\AdminHelper::getValueByKey('website_logo')) ? Storage::url(\App\Helpers\AdminHelper::getValueByKey('website_logo')) : asset(\App\Helpers\AdminHelper::getValueByKey('website_logo')) }}" alt="{{ \App\Helpers\AdminHelper::getValueByKey('website_name') }}">
+                        {{-- <svg viewBox="0 0 275.731 78">
                             <g id="Group_438" data-name="Group 438" transform="translate(-109.238 315)">
                                 <g id="Group_435" data-name="Group 435" transform="translate(109.238 -315)">
                                     <g id="Group_436" data-name="Group 436" transform="translate(0)">
@@ -222,7 +223,7 @@
                                         height="2.093" transform="translate(205.632 24.727)" />
                                 </g>
                             </g>
-                        </svg>
+                        </svg> --}}
                     </a>
                 </div>
                 <div class="ritWERTbx">

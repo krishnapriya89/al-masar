@@ -65,6 +65,6 @@ class ProductSubCategory extends Model
     //active children
     public function activeChildren()
     {
-        return $this->hasMany(ProductSubCategory::class, 'parent_id', 'id')->where('status',1);
+        return $this->hasMany(ProductSubCategory::class, 'parent_id', 'id')->where('status',1)->orderBy('sort_order');
     }
 }

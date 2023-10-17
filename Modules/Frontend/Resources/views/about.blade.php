@@ -34,7 +34,7 @@
         <div class="container">
             <ul>
                 <li>
-                    <a href="javascript:void(0)">Products </a>
+                    <a href="{{ route('home')}}">Home</a>
                 </li>
                 <li>
                     <a href="javascript:void(0)">Who We Are</a>
@@ -65,11 +65,11 @@
                             <div class="ltB">
                                 <p>{!! @$about->description!!}</p>
 
-                                <a href="#!" class="vmore">{{@$about->home_page_button_name}}
+                                {{-- <a href="#!" class="vmore">{{@$about->home_page_button_name}}
                                     <div class="icon">
                                         <img src="assets/images/arwR.svg" alt="">
                                     </div>
-                                </a>
+                                </a> --}}
                             </div>
                             <div class="rtB">
                                 <div class="flxGrid">
