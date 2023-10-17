@@ -8,16 +8,13 @@
                 <div class="container">
                     <ul>
                         <li>
-                            <a href="javascript:void(0)">Home </a>
+                            <a href="{{ route('home') }}">Home </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)">My Profile</a>
+                            <a href="{{ route('user.profile') }}"> Profile Settings</a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)"> Settings</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"> Profile Settings</a>
+                            <a href="javascript:void(0)"> OTP Verification</a>
                         </li>
                     </ul>
                 </div>

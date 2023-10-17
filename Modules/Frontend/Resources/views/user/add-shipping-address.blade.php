@@ -17,16 +17,13 @@
                 <div class="container">
                     <ul>
                         <li>
-                            <a href="javascript:void(0)">Home </a>
+                            <a href="{{ route('home') }}">Home </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)">My Profile</a>
+                            <a href="{{ route('address') }}"> Address</a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)"> Settings</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"> Address</a>
+                            <a href="javascript:void(0)"> Add Shipping Address</a>
                         </li>
                     </ul>
                 </div>
@@ -130,7 +127,7 @@
                                                 <select class="select" data-select2-id="select2-Due2"
                                                     aria-label="Default select example" name="state" id="state">
                                                     <option selected  value="" disabled>State*</option>
-                                                  
+
                                                 </select>
                                             </div>
                                         </div>

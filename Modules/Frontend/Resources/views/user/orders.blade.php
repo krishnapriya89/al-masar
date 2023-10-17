@@ -8,7 +8,7 @@
                 <div class="container">
                     <ul>
                         <li>
-                            <a href="javascript:void(0)">Home </a>
+                            <a href="{{ route('home') }}">Home </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)">My Order</a>

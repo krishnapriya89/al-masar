@@ -16,6 +16,7 @@
                                 <th>Email</th>
                                 <th>Phone Number</th>
                                 <th>Office Phone Number</th>
+                                <th>Attachment</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -28,6 +29,11 @@
                                     <td>{{ $user->email }}<br>@if ($user->email_verified) <span class="badge bg-success">User Verfied</span> @else <span  class="badge bg-danger">Not Verfied</span> @endif</td>
                                     <td>{{ $user->phone }}<br>@if ($user->phone_verified) <span class="badge bg-success">User Verfied</span> @else <span  class="badge bg-danger">Not Verfied</span> @endif</td>
                                     <td>{{ $user->office_phone }}<br>@if ($user->office_phone_verified) <span class="badge bg-success">User Verfied</span> @else <span  class="badge bg-danger">Not Verfied</span> @endif</td>
+                                    <td>
+                                        @if($user->attachment && Storage::disk('public')->exists($user->attachment))
+                                            <a href="{{ Storage::url($user->attachment) }}" download=""><i class="fa fa-download"></i></a>
+                                        @endif
+                                    </td>
                                     <td id="user-status-{{ $user->id }}">
                                         <div class="form-group">
                                             <select class="custom-select form-control-border userStatus"
