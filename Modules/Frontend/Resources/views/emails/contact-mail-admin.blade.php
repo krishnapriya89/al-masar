@@ -69,7 +69,6 @@
                                         <h1
                                             style="color: #E7151F; font-size: 20px; font-weight: 600; text-align: center; padding: 0 0 10px;margin: 0;">
                                             Receive Contact Mai</h1>
-                                            @getEmailLogo()
                                     </td>
                                 </tr>
                             </tbody>
@@ -159,7 +158,7 @@
                                                                                     <tr>
                                                                                         <td
                                                                                             style="width: 26px; text-align: right; padding: 0px;">
-                                                                                            <img src="https://ux.intersmarthosting.in/Mailers/AlMasar/images/ic-01.png"
+                                                                                            <img src="{{ asset('frontend/images/ic-01.png')}}"
                                                                                                 width="26"
                                                                                                 height="26"
                                                                                                 style="object-fit: contain;">
@@ -183,7 +182,7 @@
                                                                                     <tr>
                                                                                         <td
                                                                                             style="width: 26px; padding: 0px;">
-                                                                                            <img src="https://ux.intersmarthosting.in/Mailers/AlMasar/images/ic-03.png"
+                                                                                            <img src="{{ asset('frontend/images/ic-03.png')}}"
                                                                                                 width="26"
                                                                                                 height="26"
                                                                                                 style="object-fit: contain;">

@@ -51,7 +51,7 @@
                     <td style="text-align:center;padding-top:35px; padding-bottom: 30px;">
                         <a style="display: block; width: 208px; margin: auto;" href="" target="_blank"
                             data-saferedirecturl="">
-                            <img src="{{ Storage::disk('public')->exists(\App\Helpers\AdminHelper::getValueByKey('website_logo')) ? Storage::url(\App\Helpers\AdminHelper::getValueByKey('website_logo')) : asset(\App\Helpers\AdminHelper::getValueByKey('website_logo')) }}"
+                            <img src="@getEmailLogo()"
                                 width="208" height="124">
                         </a>
                     </td>

@@ -55,7 +55,7 @@
                     <td style="text-align:center;padding-top:60px; padding-bottom: 95px;">
                         <a style="display: block; width: 208px; margin: auto;" href=""
                             target="_blank" data-saferedirecturl="">
-                            <img src="{{ Storage::disk('public')->exists(\App\Helpers\AdminHelper::getValueByKey('website_logo')) ? Storage::url(\App\Helpers\AdminHelper::getValueByKey('website_logo')) : asset(\App\Helpers\AdminHelper::getValueByKey('website_logo')) }}" width="208"
+                            <img src="@getEmailLogo()" width="208"
                                 height="124">
                         </a>
                     </td>
@@ -170,7 +170,7 @@
                                                                                     <tr>
                                                                                         <td
                                                                                             style="width: 26px; text-align: right; padding: 0px;">
-                                                                                            <img src="https://ux.intersmarthosting.in/Mailers/AlMasar/images/ic-01.png"
+                                                                                            <img src="{{ asset('frontend/images/ic-01.png')}}"
                                                                                                 width="26"
                                                                                                 height="26"
                                                                                                 style="object-fit: contain;">
@@ -194,7 +194,7 @@
                                                                                     <tr>
                                                                                         <td
                                                                                             style="width: 26px; padding: 0px;">
-                                                                                            <img src="https://ux.intersmarthosting.in/Mailers/AlMasar/images/ic-03.png"
+                                                                                            <img src="{{ asset('frontend/images/ic-03.png')}}"
                                                                                                 width="26"
                                                                                                 height="26"
                                                                                                 style="object-fit: contain;">
