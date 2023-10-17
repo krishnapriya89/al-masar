@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\ImageTrait;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -107,5 +108,9 @@ class Product extends Model
     public function subCategory()
     {
         return $this->belongsTo(ProductSubCategory::class,'product_sub_category_id');
+    }
+
+    public function userQuote() {
+        return $this->hasOne(Quote::class)->where('user_id', Auth::guard('web')->id());
     }
 }

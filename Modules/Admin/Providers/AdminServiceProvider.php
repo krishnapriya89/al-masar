@@ -50,7 +50,7 @@ class AdminServiceProvider extends ServiceProvider
             $pendingQuotationApprovalCount = Quotation::whereHas('quotationDetails', function($query) {
                 $query->where('status', 0);
             })->count();
-            $pendingOrderActionCount = Order::where('order_status_id', 1)->where('status', 3)->count();
+            $pendingOrderActionCount = Order::where('order_status_id', 1)->count();
             $pendingUserActionCount = User::where('user_type', 'User')->where('phone_verified', 1)->where('office_phone_verified', 1)
                                         ->where('email_verified', 1)->where('admin_verified', 0)->where('admin_verified', 0)->count();
             $view->with(compact('pendingQuotationApprovalCount', 'pendingOrderActionCount', 'pendingUserActionCount'));
