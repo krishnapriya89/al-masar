@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    if (localStorage.getItem('theme') === 'dark') {
+        // Set dark mode
+        document.body.classList.add('NightMode');
+    } else {
+        // Set light mode
+        document.body.classList.remove('NightMode');
+    }
+
     // CSRF token
     $.ajaxSetup({
         headers: {
