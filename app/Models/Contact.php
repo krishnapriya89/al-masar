@@ -10,7 +10,7 @@ class Contact extends Model
 {
     use HasFactory,ImageTrait;
 
-    use HasFactory, ImageTrait;
+   
 
     public function getImageDirectory()
     {

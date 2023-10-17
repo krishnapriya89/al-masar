@@ -92,7 +92,7 @@
                                         <select class="form-control @error('status') is-invalid @enderror" id="status"
                                                 name="status">
                                             <option value="1" {{ old('status',@$home_banner->status) == '1' ? 'selected' : '' }}>Active</option>
-                                            <option value="0" {{ old('status'.@$home_banner->status) == '0' ? 'selected' : '' }}>Inactive</option>
+                                            <option value="0" {{ old('status',@$home_banner->status) == '0' ? 'selected' : '' }}>Inactive</option>
                                         </select>
                                         @error('status')
                                         <span class="invalid-feedback">{{ $message }}</span>
