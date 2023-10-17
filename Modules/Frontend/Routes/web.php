@@ -10,6 +10,7 @@ use Modules\Frontend\Http\Controllers\UserController;
 use Modules\Frontend\Http\Controllers\QuoteController;
 use Modules\Frontend\Http\Controllers\ProductController;
 use Modules\Frontend\Http\Controllers\CheckoutController;
+use Modules\Frontend\Http\Controllers\FrontendController;
 use Modules\Frontend\Http\Controllers\QuotationController;
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ use Modules\Frontend\Http\Controllers\QuotationController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//set theme dark or light
+Route::post('/set-theme', [HomeController::class, 'setTheme']);
 //cms
 //home
 Route::get('/', [HomeController::class, 'index'])->name('home');

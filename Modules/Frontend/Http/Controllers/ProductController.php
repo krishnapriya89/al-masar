@@ -165,7 +165,7 @@ class ProductController extends Controller
             });
         });
         $searched_products = $query->orderBy('sort_order')->get();
-        return view('frontend::includes.modal-search-product-ist', compact('searched_products'));
+        return view('frontend::includes.modal-search-product-list', compact('searched_products'));
     }
 
     //Category listing

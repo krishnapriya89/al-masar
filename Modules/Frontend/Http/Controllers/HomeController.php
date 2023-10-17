@@ -156,4 +156,15 @@ class HomeController extends Controller
     public function error_404() {
         return view('frontend::errors.404');
     }
+
+    public function setTheme(Request $request)
+    {
+        $theme = $request->input('theme');
+
+        // Validate and sanitize $theme as needed
+
+        Session::put('theme', $theme);
+
+        return response()->json(['status' => 'success']);
+    }
 }

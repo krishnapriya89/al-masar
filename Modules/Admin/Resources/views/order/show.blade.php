@@ -112,7 +112,7 @@
                     @endif
                     <div class="row no-print">
                         <div class="col-12">
-                            <a href="javascript:void(0)" rel="noopener" target="_blank" class="btn btn-default"><i
+                            <a href="javascript:void(0)" onclick="window.print()" class="btn btn-default"><i
                                 class="fas fa-print"></i> Print</a>
                             @if ($next_order)
                                 <a href="{{ route('order.details', $next_order->uid) }}"

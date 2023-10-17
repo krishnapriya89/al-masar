@@ -1,11 +1,17 @@
 $(document).ready(function () {
-    if (localStorage.getItem('theme') === 'dark') {
-        // Set dark mode
-        document.body.classList.add('NightMode');
-    } else {
-        // Set light mode
-        document.body.classList.remove('NightMode');
-    }
+    //dark theme
+    $('.themeChange').on('click', function() {
+        const currentTheme = $('body').hasClass('NightMode') ? 'light' : 'NightMode';
+        $('body').toggleClass('NightMode');
+        // Send an Ajax request to set the theme in the session
+        $.ajax({
+            url: '/set-theme',
+            type: 'POST',
+            data: { theme: currentTheme },
+            success: function (response) {
+            }
+        });
+    });
 
     // CSRF token
     $.ajaxSetup({
