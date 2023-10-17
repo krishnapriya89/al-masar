@@ -28,9 +28,7 @@ class DashboardController extends Controller
         // users
         $users                    = User::count();
         // revenue
-        $revenue                  = Order::whereNotIn('order_status_id', [1, 5])
-            ->where('payment_received_amount', '!=', 0)
-            ->sum('grand_total');
+        $revenue                  = Order::whereNotIn('order_status_id', [1, 5])->sum('grand_total');
         // sales
         $sales_chart              = $this->getSalesChart();
         $best_selling_products    = $this->getBestSellingProducts();
