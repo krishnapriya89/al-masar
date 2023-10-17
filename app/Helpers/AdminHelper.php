@@ -33,10 +33,16 @@ class AdminHelper
         $config = AdminConfig::where('key', 'website_logo')->first();
 
         if(Storage::disk('public')->exists($config->value)) {
-            return Storage::url($config->value);
+            $fileExtension = pathinfo($config->value, PATHINFO_EXTENSION);
+            if (strtolower($fileExtension) === 'svg') {
+                return asset('frontend/images/email_logo.jpg');
+            } else {
+                return asset($config->value);
+            }
         }
-        elseif(file_exists(public_path($config->value))){
-            if (strpos($config->value, '<svg') === 0) {
+        else if(file_exists(public_path($config->value))){
+            $fileExtension = pathinfo($config->value, PATHINFO_EXTENSION);
+            if (strtolower($fileExtension) === 'svg') {
                 return asset('frontend/images/email_logo.jpg');
             } else {
                 return asset($config->value);
