@@ -63,7 +63,7 @@
                 <tr>
                     <td style="padding: 0px 110px 0px;">
                         <table width="380" style="margin: auto; text-align: center;">
-                            <tbody>
+                            <tbody class="@getEmailLogo()">
                                 <tr>
                                     <td style="padding: 0px 0 85px;">
                                         <h1
