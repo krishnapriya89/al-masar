@@ -13,7 +13,8 @@
             <div class="HrMfLx">
                 <div class="WsMLgo">
                     <a href="{{ route('home') }}" class="LoGo">
-                        <svg viewBox="0 0 275.731 78">
+                        <img src="{{ Storage::disk('public')->exists(\App\Helpers\AdminHelper::getValueByKey('website_logo')) ? Storage::url(\App\Helpers\AdminHelper::getValueByKey('website_logo')) : asset(\App\Helpers\AdminHelper::getValueByKey('website_logo')) }}" alt="{{ \App\Helpers\AdminHelper::getValueByKey('website_name') }}">
+                        {{-- <svg viewBox="0 0 275.731 78">
                             <g id="Group_438" data-name="Group 438" transform="translate(-109.238 315)">
                                 <g id="Group_435" data-name="Group 435" transform="translate(109.238 -315)">
                                     <g id="Group_436" data-name="Group 436" transform="translate(0)">
@@ -222,7 +223,7 @@
                                         height="2.093" transform="translate(205.632 24.727)" />
                                 </g>
                             </g>
-                        </svg>
+                        </svg> --}}
                     </a>
                 </div>
                 <div class="ritWERTbx">
@@ -609,7 +610,7 @@
                                                         </svg>
                                                     </button>
                                                 </div>
-                                                @if ($site_menu->children->isNotEmpty())
+                                                @if ($site_menu->activeChildren->isNotEmpty())
                                                     <div id="cd{{ $loop->iteration }}"
                                                         class="accordion-collapse mgaAccord collapse"
                                                         aria-labelledby="headingOne" data-bs-parent="#menuaccord1">
@@ -622,7 +623,7 @@
                                                                     <div class="cl1"></div>
                                                                 </div>
                                                                 <ul>
-                                                                    @foreach ($site_menu->children as $children)
+                                                                    @foreach ($site_menu->activeChildren as $children)
                                                                         <li><a href="{{ route('product-category', $children->slug) }}"
                                                                                 class="lk">{{ $children->title }}</a>
                                                                         </li>

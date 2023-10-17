@@ -71,8 +71,7 @@ class ProductController extends Controller
     public function productDetailPage($slug)
     {
         $product = Product::active()->where('slug', $slug)->first();
-
-        $product_galleries = $product->gallery;
+        $product_galleries = $product->gallery->where('status',1)->sortBy('sort_order');
         return view('frontend::product-detail', compact('product', 'product_galleries'));
     }
 
@@ -156,7 +155,7 @@ class ProductController extends Controller
         $query = Product::active();
         $query->where(function ($query) use ($keyword) {
             $query->where('title', 'LIKE', '%' . $keyword . '%')->orWhere('product_code', 'LIKE', '%' . $keyword . '%')
-                ->orWhere('model_number', 'LIKE', '%' . $keyword . '%');
+                ->orWhere('model_number', 'LIKE', '%' . $keyword . '%')->orWhere('search_keywords', 'LIKE', '%' . $keyword . '%');
             $query->orWhereHas('category', function ($sub_query) use ($keyword) {
                 $sub_query->where('title', 'LIKE', '%' . $keyword . '%');
             });

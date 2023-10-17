@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('frontend::*', function ($view) {
             $site_common_content = SiteCommonContent::first();
-            $site_menus = ProductSubCategory::whereNull('parent_id')->whereIn('id', $site_common_content->menu_category)->get();
+            $site_menus = ProductSubCategory::whereNull('parent_id')->whereIn('id', $site_common_content->menu_category)->where('status',1)->orderBy('sort_order')->get();
             $currencies = CurrencyRate::active()->get();
             $view->with(compact('site_common_content','site_menus', 'currencies'));
         });

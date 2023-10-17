@@ -48,6 +48,7 @@ class StateController extends Controller
         $state->title = $request->title;
         $state->code = $request->code;
         $state->status = $request->status;
+        $state->free_zone = $request->free_zone;
         if ($state->save()) {
             return redirect()->route('state.index', $request->country_id)->with('success', 'State created successfully');
         } else {
@@ -77,6 +78,7 @@ class StateController extends Controller
         $state->title = $request->title;
         $state->code = $request->code;
         $state->status = $request->status;
+        $state->free_zone = $request->free_zone;
         if ($state->save()) {
             return redirect()->route('state.index', base64_encode($state->country_id))->with('success', 'State updated successfully');
         } else {

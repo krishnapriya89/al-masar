@@ -52,17 +52,32 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select class="form-control @error('status') is-invalid @enderror" id="status"
-                                        name="status">
-                                    <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Active</option>
-                                    <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Inactive</option>
-                                </select>
-                                @error('status')
-                                <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select class="form-control @error('status') is-invalid @enderror" id="status"
+                                            name="status">
+                                        <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Active</option>
+                                        <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Inactive</option>
+                                    </select>
+                                    @error('status')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="free_zone">Free Zone</label>
+                                    <select class="form-control @error('free_zone') is-invalid @enderror" id="free_zone"
+                                            name="free_zone">
+                                        <option value="1" {{ old('free_zone') == '1' ? 'selected' : '' }}>Yes</option>
+                                        <option value="0" {{ old('free_zone') == '0' ? 'selected' : '' }}>No</option>
+                                    </select>
+                                    @error('free_zone')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                     </div>

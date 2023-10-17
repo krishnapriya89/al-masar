@@ -364,7 +364,7 @@
                                                    name="banner_image">
                                             <label class="custom-file-label" for="file">Choose file</label>
                                        1920 x 435
-                                        <div class="pt-3 file-holder"> </div>
+                                        <div class="pt-3 file-holder" > </div>
                                     </div>
                                     @error('banner_image')
                                     <span class="invalid-feedback">{{ $message }}</span>

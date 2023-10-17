@@ -39,6 +39,7 @@ class SiteSettingsController extends Controller
         $common_content->footer_description = $request->footer_description;
         $common_content->enquiry_receive_email = $request->enquiry_receive_email;
         $common_content->phone = $request->phone;
+        $common_content->whatsapp_number = $request->whatsapp_number;
         $common_content->email = $request->email;
         $common_content->copy_right = $request->copy_right;
         $common_content->address = $request->address;

@@ -126,8 +126,8 @@
                                                         <th>Qty</th>
                                                         <th>Price</th>
                                                         <th>Bid Price</th>
-                                                        <th>Total Price</th>
-                                                        <th>Total Bid Price</th>
+                                                        {{-- <th>Total Price</th>
+                                                        <th>Total Bid Price</th> --}}
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -143,10 +143,10 @@
                                                             <td
                                                                 class="quotation-detail-bid-price-{{ $quotation_detail->id }}">
                                                                 $@formattedPrice($quotation_detail->bid_price)</td>
-                                                            <td>$@formattedPrice($quotation_detail->total_price)</td>
-                                                            <td
+                                                            {{-- <td>$@formattedPrice($quotation_detail->total_price)</td> --}}
+                                                            {{-- <td
                                                                 class="quotation-detail-total-bid-price-{{ $quotation_detail->id }}">
-                                                                $@formattedPrice($quotation_detail->total_bid_price)</td>
+                                                                $@formattedPrice($quotation_detail->total_bid_price)</td> --}}
                                                             <td class="quotation-detail-{{ $quotation_detail->id }}">
                                                                 @if ($quotation_detail->status == 0)
                                                                     <div class="form-group">
@@ -317,7 +317,7 @@
                 if (amount <= parseInt(bid_price) || amount < 1 || amount > parseInt(price)) {
                     _this.parent().find('.amountField').addClass('is-invalid');
                     _this.parent().append(
-                        '<span class="amountFieldErrorSpan" style="color: red; font-size: 12px;">Please enter the amount between the Bid Price and Actual Price</span>'
+                        '<span class="amountFieldErrorSpan" style="color: red; font-size: 12px;">Please enter the amount between the Bid Price and Unit Price</span>'
                     );
                     fields_valid = false;
                 }
