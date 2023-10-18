@@ -62,9 +62,9 @@ class AuthController extends Controller
         $identifier = $request->login;
 
         $user = User::where('user_type', 'User')->where(function ($query) use ($identifier) {
-            $query->where('phone', $identifier)
+            $query->where(DB::raw("CONCAT(phone_code, phone)"), $identifier)
                 ->orWhere('email', $identifier);
-        })
+            })
             ->first();
 
         //check user exists or not
@@ -141,7 +141,7 @@ class AuthController extends Controller
             });
         } else {
             $method = 'phone';
-            $verification_code = $this->sendOtp($user->phone);
+            $verification_code = $this->sendMessage($user->full_phone_number, 'Al Masar Al Saree Login OTP is: ');
 
             $user->loginOtps()->create([
                 'method' => 1, // phone
@@ -155,7 +155,7 @@ class AuthController extends Controller
         Session::put('login_method', $method);
         Session::put('login_identifier', $identifier);
 
-        return view('frontend::auth.login-otp-verification', compact('method', 'identifier', 'verification_code'));
+        return view('frontend::auth.login-otp-verification', compact('method', 'identifier'));
     }
 
     //verify the login otp
@@ -233,6 +233,8 @@ class AuthController extends Controller
         }
 
         if ($submittedOtp == $otp->code) {
+            $otp->used = 1;
+            $otp->save();
             Auth::login($user);
             session()->flash('success', 'Login completed');
             return response()->json([
@@ -308,7 +310,7 @@ class AuthController extends Controller
                 $message->subject('Al Masar Al Saree Login OTP');
             });
         } else {
-            $verification_code = $this->sendOtp($user->phone);
+            $verification_code = $this->sendMessage($user->full_phone_number, 'Al Masar Al Saree Resented Login OTP is: ');
 
             $user->loginOtps()->create([
                 'method' => 1, // phone
@@ -319,7 +321,6 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => true,
-            'otp' => $verification_code,
             'url' => '',
             'message' => 'A new OTP has been sent to '. $method . ': ' . $identifier . '.'
         ]);
@@ -401,16 +402,16 @@ class AuthController extends Controller
         if ($user) {
             if ($user->phone_verified == 0) {
 
-                $phoneNumber = $user->phone;
+                $phoneNumber = $user->full_phone_number;
                 //send otp
-                $phone_verification_code = $this->sendOtp($phoneNumber);
+                $phone_verification_code = $this->sendMessage($phoneNumber, 'Al Masar Al Saree Phone Verification Code is: ');
                 $user->phoneOtps()->delete();
                 $user->phoneOtps()->create([
                     'code' => $phone_verification_code,
                     'phone' => $phoneNumber,
                 ]);
 
-                return view('frontend::auth.phone-verification', compact('phoneNumber', 'phone_verification_code'));
+                return view('frontend::auth.phone-verification', compact('phoneNumber'));
             } {
                 return to_route('user.show-office-phone-verification.form')->with('warning', 'You have already verified this ' . $user->phone . ' phone number. Please verify ' . $user->office_phone . ' this number.');
             }
@@ -504,14 +505,14 @@ class AuthController extends Controller
             if ($user->office_phone_verified != 1) {
 
                 //sending phone otp
-                $phone_verification_code = $this->sendOtp($user->office_phone);
+                $phone_verification_code = $this->sendMessage($user->full_office_phone_number, 'Al Masar Al Saree Office Phone Verification Code is: ');
                 $user->phoneOtps()->delete();
                 $user->phoneOtps()->create([
                     'code' => $phone_verification_code,
                     'phone' => $user->office_phone,
                 ]);
 
-                return view('frontend::auth.office-phone-verification', compact('user', 'phone_verification_code'));
+                return view('frontend::auth.office-phone-verification', compact('user'));
             } else {
                 return to_route('user.login.form')->with('warning', 'You have already verified this ' . $user->phone . ' phone number. Please login.');
             }
@@ -644,23 +645,23 @@ class AuthController extends Controller
         if ($user->register_status == 1) {
             //check already verified
             if ($user->phone_verified == 1) {
-                session()->flash('error', 'You have already verified ' . $user->phone . 'number');
+                session()->flash('error', 'You have already verified ' . $user->full_phone_number . 'number');
                 return response()->json([
                     'status' => false,
                     'url' => route('user.show-office-phone-verification.form')
                 ]);
             } else {
-                $phone = $user->phone;
+                $phone = $user->full_phone_number;
             }
         } elseif ($user->register_status == 2) {
             if ($user->office_phone_verified == 1) {
-                session()->flash('error', 'You have already verified ' . $user->office_phone . 'number');
+                session()->flash('error', 'You have already verified ' . $user->full_office_phone_number . 'number');
                 return response()->json([
                     'status' => false,
                     'url' => route('user.login.form')
                 ]);
             } else {
-                $phone = $user->office_phone;
+                $phone = $user->full_office_phone_number;
             }
         } else {
             return response()->json([
@@ -689,7 +690,7 @@ class AuthController extends Controller
             ]);
         }
 
-        $phone_verification_code = $this->sendOtp($phone);
+        $phone_verification_code = $this->sendMessage($phone, 'Al Masar Al Saree Phone Verification Code is: ');
         $user->phoneOtps()->delete();
         $user->phoneOtps()->create([
             'code' => $phone_verification_code,
@@ -698,18 +699,16 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => true,
-            'otp' => $phone_verification_code,
             'url' => '',
             'message' => 'A new OTP has been sent to this number: ' . $phone . '.'
         ]);
     }
 
-    public function sendOtp($phone)
+    public function sendMessage($phone, $message)
     {
-
         // $lastSentTime = PhoneOtp::where('phone', $phone)->latest()->first();
 
-        $phone_verification_code = FrontendHelper::sendOtp($phone);
+        $phone_verification_code = FrontendHelper::sendMessage($phone, $message);
 
         return $phone_verification_code;
     }

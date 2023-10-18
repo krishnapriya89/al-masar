@@ -146,13 +146,13 @@ class UserController extends Controller
             if($field == 'phone') {
                 $identifier = $user->phone;
                 $method = 1; // phone
-                $verification_code = $this->sendOtp($identifier);
+                $verification_code = $this->sendMessage($identifier, 'Al Masar Al Saree Phone Verification Code is: ');
             }
 
             else {
                 $identifier = $user->office_phone;
                 $method = 2; // office phone
-                $verification_code = $this->sendOtp($identifier);
+                $verification_code = $this->sendMessage($identifier, 'Al Masar Al Saree Office Phone Verification Code is: ');
             }
 
             $user->profileOtps()->create([
@@ -237,13 +237,13 @@ class UserController extends Controller
             if($field == 'phone') {
                 $identifier = $user->phone;
                 $method = 1; // phone
-                $verification_code = $this->sendOtp($identifier);
+                $verification_code = $this->sendMessage($identifier, 'Al Masar Al Saree Resented Phone Verification Code is: ');
             }
 
             else {
                 $identifier = $user->office_phone;
                 $method = 2; // office phone
-                $verification_code = $this->sendOtp($identifier);
+                $verification_code = $this->sendMessage($identifier, 'Al Masar Al Saree Resented Office Phone Verification Code is: ');
             }
 
             $user->profileOtps()->create([
@@ -255,7 +255,6 @@ class UserController extends Controller
 
         return response()->json([
             'status' => true,
-            'otp' => $verification_code,
             'url' => '',
             'message' => 'A new OTP has been sent to '. str_replace('_',' ',ucwords($field,'_')) . ': ' . $identifier . '.'
         ]);
@@ -278,8 +277,7 @@ class UserController extends Controller
         if(!$latest_otp)
             return to_route('user.profile');
 
-        $verification_code = $latest_otp->code;
-        return view('frontend::user.otp-verification', compact('field', 'method', 'identifier' ,'verification_code'));
+        return view('frontend::user.otp-verification', compact('field', 'method', 'identifier'));
     }
 
     public function verifyOtp(Request $request) {
@@ -352,9 +350,9 @@ class UserController extends Controller
         }
     }
 
-    public function sendOtp($phone)
+    public function sendMessage($phone, $message)
     {
-        $phone_verification_code = FrontendHelper::sendOtp($phone);
+        $phone_verification_code = FrontendHelper::sendMessage($phone, $message);
 
         return $phone_verification_code;
     }

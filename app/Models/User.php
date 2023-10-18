@@ -86,11 +86,11 @@ class User extends Authenticatable
             ->orderBy('created_at', 'desc');
     }
 
-    public function getFullPhoneAttribute() {
-        return $this->phone_code + $this->phone;
+    public function getFullPhoneNumberAttribute() {
+        return $this->phone_code . $this->phone;
     }
 
-    public function getFullOfficePhoneAttribute() {
-        return $this->office_phone_code + $this->office_phone;
+    public function getFullOfficePhoneNumberAttribute() {
+        return $this->office_phone_code . $this->office_phone;
     }
 }

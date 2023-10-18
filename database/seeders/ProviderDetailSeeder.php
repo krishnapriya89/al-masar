@@ -6,6 +6,7 @@ use App\Models\Provider;
 use App\Models\ProviderDetail;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ProviderDetailSeeder extends Seeder
@@ -15,6 +16,8 @@ class ProviderDetailSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        DB::table('provider_details')->truncate();
         $data = [
 
 
@@ -74,8 +77,44 @@ class ProviderDetailSeeder extends Seeder
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now()
             ],
+            [
+                'provider_id'       => Provider::where('name', 'SMS API')->first()->id,
+                'key'               => 'sms_send_api_url',
+                'value'             => encrypt('https://customers.smartvision.ae/sms/smsapi?api_key={api_key}&type={type}&contacts={phone_number}&senderid={sender_id}&msg={message}'),
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now()
+            ],
+            [
+                'provider_id'       => Provider::where('name', 'SMS API')->first()->id,
+                'key'               => 'sms_check_balance_api_url',
+                'value'             => encrypt('https://customers.smartvision.ae/sms/miscapi/{api_key}/getBalance'),
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now()
+            ],
+            [
+                'provider_id'       => Provider::where('name', 'SMS API')->first()->id,
+                'key'               => 'api_key',
+                'value'             => encrypt('C2004445652e510aee24e6.09074721'),
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now()
+            ],
+            [
+                'provider_id'       => Provider::where('name', 'SMS API')->first()->id,
+                'key'               => 'main_sender_id',
+                'value'             => encrypt('SmartVision'),
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now()
+            ],
+            [
+                'provider_id'       => Provider::where('name', 'SMS API')->first()->id,
+                'key'               => 'secondary_sender_id',
+                'value'             => encrypt('SmartVision'),
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now()
+            ],
         ];
 
         ProviderDetail::insert($data);
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

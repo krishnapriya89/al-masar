@@ -78,9 +78,6 @@ $(document).ready(function () {
                         if (response.message && response.message != '') {
                             toastr.success(response.message);
                         }
-                        if (response.otp && response.otp != '') {
-                            $('.otp-cls').html(response.otp);
-                        }
                     }
                     else {
                         if (response.message && response.message != '') {

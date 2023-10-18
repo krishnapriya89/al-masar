@@ -14,7 +14,6 @@
                             <div class="title">Login OTP Verification</div>
                             <div class="subT">Enter the OTP send to {{ $method }}: <span>{{ $identifier }}</span>
                             </div>
-                            <div class="subT">Code <span class="otp-cls"> {{ $verification_code }}</span></div>
                             <form action="{{ route('user.verify-login-otp') }}" id="LoginOtpForm" class="optB"
                                 method="POST" autocomplete="off">
                                 @csrf
