@@ -249,8 +249,8 @@
             <div class="RSide">
                 <ul class="QckMenu">
                     <li>
-                        <a href="#AboutSec"
-                            class="fliplink <?= basename($_SERVER["SCRIPT_FILENAME"], '.php') == 'about' ? 'active' : '' ?>">
+                        <a href="{{ Route::currentRouteName() == 'home' ?'#AboutSec':route('home').'/#AboutSec'}}"
+                            class="fliplink">
                             <div class="Link" data-after="Who We Are">
                                 <span>
                                     Who We Are
@@ -259,7 +259,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#WhyChooseSec" class="fliplink">
+                        <a href="{{ Route::currentRouteName() == 'home' ? '#WhyChooseSec':route('home').'/#WhyChooseSec'}}" class="fliplink">
                             <div class="Link" data-after="Why Us">
                                 <span>
                                     Why Us
@@ -268,7 +268,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#HowToBuy" class="fliplink">
+                        <a href="{{ Route::currentRouteName()=='home'? '#HowToBuy':route('home').'/#HowToBuy'}}" class="fliplink">
                             <div class="Link" data-after="How to Buy?">
                                 <span>
                                     How to Buy?
@@ -277,7 +277,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#contactSec" class="fliplink">
+                        <a href="{{ Route::currentRouteName()=='home' ? '#contactSec':route('home').'/#contactSec'}}" class="fliplink">
                             <div class="Link" data-after="Clients">
                                 <span>
                                     Clients
@@ -294,10 +294,10 @@
         <div class="grid">
             <div class="mainItm">
                 <ul class="MainMenuLinks">
-                    <li><a href="#AboutSec"> Who We Are</a></li>
-                    <li><a href="#WhyChooseSec">Why Us</a></li>
-                    <li><a href="#HowToBuy">How to Buy?</a></li>
-                    <li><a href="#contactSec">Clients</a></li>
+                    <li><a href="{{ Route::currentRouteName() == 'home' ?'#AboutSec':route('home').'/#AboutSec'}}"> Who We Are</a></li>
+                    <li><a href="{{ Route::currentRouteName() == 'home' ? '#WhyChooseSec':route('home').'/#WhyChooseSec'}}">Why Us</a></li>
+                    <li><a href="{{ Route::currentRouteName()=='home'? '#HowToBuy':route('home').'/#HowToBuy'}}">How to Buy?</a></li>
+                    <li><a href="{{ Route::currentRouteName()=='home' ? '#contactSec':route('home').'/#contactSec'}}">Clients</a></li>
                 </ul>
             </div>
             <div class="MenuBtn">
