@@ -79,12 +79,21 @@
                                 font-size: 14px
                                 color: #414040
                                 font-weight: 500
+                                text-overflow: ellipsis
+                                overflow: hidden
+                                width: calc( 100% - 103px )
+                                line-clamp: 1
+                                -webkit-line-clamp: 1
+                                text-overflow: ellipsis
+                                overflow: hidden
                             .fileInput
                                 opacity: 0
                                 position: absolute
                                 padding: 0
                                 height: 100%
                                 width: 100%
+                                z-index: 10
+                                cursor: pointer
                             .iconBx
                                 height: 25px
                                 width: 103px
@@ -96,6 +105,9 @@
                                 font-size: 12px
                                 color: #414040
                                 font-weight: 500
+                                position: absolute
+                                right: 0
+                                bottom: 5px
                                 svg
                                     width: 11px
                                     fill: #000
@@ -119,6 +131,7 @@
                         height: 35px
                         border-bottom: solid 1px rgba(108, 108, 108, .21)
                         padding: 8px 0
+                        padding-right: 30px
                         &::placeholder
                             font-size: 14px
                             color: #414040

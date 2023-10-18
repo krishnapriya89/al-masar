@@ -37,7 +37,7 @@ class AdminHelper
             if (strtolower($fileExtension) === 'svg') {
                 return asset('frontend/images/email_logo.jpg');
             } else {
-                return asset($config->value);
+                return Storage::url($config->value);
             }
         }
         else if(file_exists(public_path($config->value))){
@@ -47,6 +47,27 @@ class AdminHelper
             } else {
                 return asset($config->value);
             }
+        }
+        else {
+            return asset('frontend/images/email_logo.jpg');
+        }
+    }
+
+
+    /**
+     * get website logo
+     *
+     * @author Suchtih
+     */
+    public static function getWebSiteLogo()
+    {
+        $config = AdminConfig::where('key', 'website_logo')->first();
+
+        if(Storage::disk('public')->exists($config->value)) {
+            return Storage::url($config->value);
+        }
+        else if(file_exists(public_path($config->value))){
+            return asset($config->value);
         }
         else {
             return asset('frontend/images/email_logo.jpg');

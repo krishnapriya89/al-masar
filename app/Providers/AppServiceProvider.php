@@ -47,6 +47,14 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('getEmailLogo', function () {
             return "<?php echo \App\Helpers\AdminHelper::getEmailLogo(); ?>";
         });
+
+        Blade::directive('getWebSiteLogo', function () {
+            return "<?php echo \App\Helpers\AdminHelper::getWebSiteLogo(); ?>";
+        });
+
+        Blade::directive('adminConfig', function ($key) {
+            return "<?php echo \App\Helpers\AdminHelper::getValueByKey($key); ?>";
+        });
     }
 
     /**
