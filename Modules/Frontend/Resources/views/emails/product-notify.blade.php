@@ -39,7 +39,7 @@
                                                     <td style="padding: 0px;">
                                                         <h1
                                                             style="color: #ffffff; font-size: 18px; font-weight: 400; text-align: center; padding: 0 0 0px;margin: 0;">
-                                                           Product Nitification</h1>
+                                                           Product Notification</h1>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -69,10 +69,11 @@
                                     <td style="padding: 0px 0 50px;">
                                         <h1
                                             style="color: #E7151F; font-size: 20px; font-weight: 600; text-align: center; padding: 0 0 10px;margin: 0;">
-                                            This Product is InStock</h1>
+                                            This Product is Out of Stock</h1>
                                         <p
                                             style="text-align: center; font-size: 14px; font-weight: 400; color: #272525; line-height: 26px; margin-top:0px; margin-bottom: 0px;">
-                                           Hi {{$data->user->name}}
+
+                                            Hello, Admin. {{$data->user->name}} has been informed that this product is out of stock.
                                         </p>
                                     </td>
                                 </tr>
@@ -129,7 +130,7 @@
                                                                     </td>
                                                                     <td
                                                                         style="width: 20%; font-size: 14px;color: #E7151F; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
-                                                                        In Stock
+                                                                        Out of Stock
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
