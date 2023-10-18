@@ -11,9 +11,31 @@
                     </div>
                     <table id="dataTable" class="table table-bordered table-striped">
                         <tr>
+                            <th>Name:</th>
+                            <td>{{ @$contact_reply->name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>{{ @$contact_reply->email}}</td>
+                        </tr>
+                        <tr>
+                            <th>Phone Number:</th>
+                            <td>{{ @$contact_reply->phone}}</td>
+                        </tr>
+                        <tr>
+                            <th>Subject:</th>
+                            <td>{{ @$contact_reply->subject}}</td>
+                        </tr>
+                        <tr>
                             <th>Message:</th>
                             <td>{!!$contact_reply->message!!}</td>
                         </tr>
+                        @if(@$contact_reply->reply)
+                        <tr>
+                            <th>Reply:</th>
+                            <td>{!!$contact_reply->reply!!}</td>
+                        </tr>
+                        @endif
                         {{-- <tr>
                             <th>Replied On:</th>
                             <td>{{$contact_reply->date_formatted}}</td>
