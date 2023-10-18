@@ -345,7 +345,9 @@ class AuthController extends Controller
         $user->address = $request->address;
         $user->country_id = $request->country;
         $user->email = $request->email;
+        $user->phone_code = $request->phone_code;
         $user->phone = $request->phone;
+        $user->office_phone_code = $request->office_phone_code;
         $user->office_phone = $request->office_phone;
         $user->phone_verified = 0;
         $user->office_phone_verified = 0;

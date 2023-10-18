@@ -23,12 +23,12 @@ class UserRegisterRequest extends FormRequest
             'phone' => [
                 'required',
                 new UniquePhoneInUsersTable,
-                'regex:/^\+?[0-9]{1,4}[-\s]?[0-9]{6,14}$/'
+                'numeric', 'digits_between:10,15'
             ],
             'office_phone' => [
                 'required',
                 new UniquePhoneInUsersTable,
-                'regex:/^\+?[0-9]{1,4}[-\s]?[0-9]{6,14}$/'
+                'numeric', 'digits_between:10,15'
             ],
             'attachment' => 'nullable|max:2000|mimes:pdf,jpg,jpeg,png'
         ];

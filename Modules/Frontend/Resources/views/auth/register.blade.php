@@ -1,6 +1,14 @@
 @extends('frontend::layouts.app')
 @section('title', 'Registration')
-
+@push('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
+    <style>
+        .invalid-feedback {
+            display: block !important;
+        }
+    </style>
+@endpush
 @section('content')
     <div id="pageWrapper" class="registerPage InnerPage">
         <section id="UserLogin">
@@ -49,7 +57,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <select name="country" id="country"
-                                                class="select @error('country') is-invalid @enderror">
+                                                class="select2 @error('country') is-invalid @enderror">
                                                 <option value="" selected disabled>Country*</option>
                                                 @foreach ($countries as $country)
                                                     <option value="{{ $country->id }}"
@@ -82,6 +90,8 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <input type="hidden" name="phone_code" id="phone_code"
+                                        value="{{ old('phone_code') }}">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <input type="text" id="office_phone" name="office_phone"
@@ -93,13 +103,17 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <input type="hidden" name="office_phone_code" id="office_phone_code"
+                                        value="{{ old('office_phone_code') }}">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="fileUploadInput">
-                                                <label for="file-upload" class="custom-file-upload  @error('attachment') is-invalid @enderror">
+                                                <label for="file-upload"
+                                                    class="custom-file-upload  @error('attachment') is-invalid @enderror">
                                                     <i class="fa fa-cloud-upload"></i> Attachment
                                                 </label>
-                                                <input id="attachment" name='attachment' type="file" class="fileInput">
+                                                <input id="attachment" accept="image/jpeg,image/png,application/pdf"
+                                                    name='attachment' type="file" class="fileInput">
                                                 @error('attachment')
                                                     <span class="invalid-feedback">{{ $message }}</span>
                                                 @enderror
@@ -117,7 +131,8 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="btnBx">
-                                            <button type="submit" class="hoveranim btn-submit"><span>SUBMIT</span></button>
+                                            <button type="submit"
+                                                class="hoveranim btn-submit"><span>SUBMIT</span></button>
                                             <p>Do You Have an Account? <a href="{{ route('user.login.form') }}"
                                                     class="login">Login</a></p>
                                         </div>
@@ -132,14 +147,63 @@
     </div>
 @endsection
 @push('js')
-    <script>
-        $('#attachment').change(function() {
-            var i = $(this).prev('label').clone();
-            var file = $('#attachment')[0].files[0].name;
-            $(this).prev('label').text(file);
-        });
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput-jquery.min.js"></script>
 
+    <script>
         $(document).ready(function() {
+            //select2 initialization
+            $(".select2").select2({
+                minimumResultsForSearch: 3,
+                maximumSelectionLength: 3,
+                theme: "bootstrap-5",
+                containerCssClass: "select2--small",
+                selectionCssClass: "select2--small",
+                dropdownCssClass: "select2--small",
+            });
+
+            var phone_input = $("#phone");
+            var office_phone_input = $("#office_phone");
+
+            // Initialize the intlTelInput plugin
+            phone_input.intlTelInput({
+                initialCountry: "in",
+                separateDialCode: true,
+            });
+
+            office_phone_input.intlTelInput({
+                initialCountry: "in",
+                separateDialCode: true,
+            });
+
+            // Now, extract the initial country code after plugin initialization
+            var initialCountryPhoneData = phone_input.intlTelInput("getSelectedCountryData");
+            var initialCountryPhoneCode = initialCountryPhoneData.dialCode;
+            $('#phone_code').val("+" + initialCountryPhoneCode);
+
+            var initialCountryOfficePhoneData = office_phone_input.intlTelInput("getSelectedCountryData");
+            var initialCountryOfficePhoneCode = initialCountryOfficePhoneData.dialCode;
+            $('#office_phone_code').val("+" + initialCountryPhoneCode);
+
+            // Add an event listener for the "countrychange" event
+            phone_input.on("countrychange", function(e) {
+                let selectedCountryData = phone_input.intlTelInput("getSelectedCountryData");
+                let selectedCountryCode = selectedCountryData.dialCode;
+                $('#phone_code').val("+" + selectedCountryCode);
+            });
+
+            office_phone_input.on("countrychange", function(e) {
+                let selectedCountryData = office_phone_input.intlTelInput("getSelectedCountryData");
+                let selectedCountryCode = selectedCountryData.dialCode;
+                $('#office_phone_code').val("+" + selectedCountryCode);
+            });
+
+            $('#attachment').change(function() {
+                var i = $(this).prev('label').clone();
+                var file = $('#attachment')[0].files[0].name;
+                $(this).prev('label').text(file);
+            });
+
             $("#RegisterForm").validate({
                 rules: {
                     name: 'required',
@@ -152,12 +216,16 @@
                     },
                     phone: {
                         required: true,
-                        phoneDigitsOnly: true
+                        digits: true,
+                        minlength: 10,
+                        maxlength: 15
                     },
                     office_phone: {
                         required: true,
-                        phoneDigitsOnly: true,
+                        digits: true,
                         notEqual: "#phone",
+                        minlength: 10,
+                        maxlength: 15
                     },
                     attachment: {
                         extension: "pdf,jpg,jpeg,png",

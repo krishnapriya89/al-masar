@@ -85,4 +85,12 @@ class User extends Authenticatable
         return $this->hasMany(UserAddress::class)->where('type', 2)->orderBy('is_default', 'desc')
             ->orderBy('created_at', 'desc');
     }
+
+    public function getFullPhoneAttribute() {
+        return $this->phone_code + $this->phone;
+    }
+
+    public function getFullOfficePhoneAttribute() {
+        return $this->office_phone_code + $this->office_phone;
+    }
 }

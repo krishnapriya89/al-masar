@@ -34,9 +34,13 @@ $(document).ready(function () {
     //check max file size is greater then of 2MB then return error
     $.validator.addMethod('maxFileSize', function (value, element, param) {
         var maxSize = param * 1024 * 1024; // Convert MB to bytes
-        var fileSize = element.files[0].size;
-
-        return fileSize <= maxSize;
+        if(element.files.length > 0) {
+            var fileSize = element.files[0].size;
+            return fileSize <= maxSize;
+        }
+        else {
+            return true;
+        }
     }, 'File size must be less than {0} MB.');
 
     //prevent the entry of non-integer values
