@@ -103,7 +103,7 @@ class ProductController extends Controller
         if ($notify_product->save()) {
             $siteSettings = SiteCommonContent::first();
             Mail::send('frontend::emails.product-notify', ['data' => $notify_product,'siteSettings'=>$siteSettings], function ($message) use ($siteSettings) {
-                $message->to($siteSettings->email);
+                $message->to($siteSettings->enquiry_receive_email);
                 $message->subject('You Received a Product Notification');
             });
             return response()->json([
