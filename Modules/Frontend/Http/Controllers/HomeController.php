@@ -146,7 +146,7 @@ class HomeController extends Controller
             $siteSettings = SiteCommonContent::first();
             Mail::send('frontend::emails.product-notify-user', ['data' => $product,'siteSettings'=>$siteSettings], function ($message) use ($user_email) {
                 $message->to($user_email);
-                $message->subject('You send a product request to notify');
+                $message->subject('Product Notification');
             });
             $product->update(['isNotified'=>1]);
 

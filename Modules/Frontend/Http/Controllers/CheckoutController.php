@@ -293,7 +293,6 @@ class CheckoutController extends Controller
                 $quotation->save();
                 $quotation->acceptedQuotationDetails()->update(['status' => 5]);
                 $site_settings = SiteCommonContent::first();
-
                 Mail::to($order->user->email)->send(new OrderCompletedUser($order, $site_settings));
                 Mail::to($site_settings->enquiry_receive_email)->send(new OrderCompletedAdmin($order, $site_settings));
             }
