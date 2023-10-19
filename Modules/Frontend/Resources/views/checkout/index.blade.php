@@ -1,5 +1,8 @@
 @extends('frontend::layouts.app')
 @section('title', 'Checkout')
+@push('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
 @section('content')
     <div id="pageWrapper" class="DashBoard InnerPage">
         <section id="proListing">
@@ -229,7 +232,8 @@
                                         <li>
                                             <div class="rdBtn">
                                                 <input type="radio" id="p{{ $loop->iteration }}" name="payment_method"
-                                                    {{ $loop->first ? 'checked' : '' }} value="{{ $payment_method->id }}">
+                                                    {{ $loop->first ? 'checked' : '' }}
+                                                    value="{{ $payment_method->id }}">
                                                 <label for="p{{ $loop->iteration }}">
                                                     <div class="label">
                                                         <div class="icon">
@@ -292,8 +296,8 @@
                         </div> --}}
                             </li>
                         </ul>
-                            <form action="{{ route('checkout.submission') }}" id="CheckoutForm" method="POST">
-                                @csrf
+                        <form action="{{ route('checkout.submission') }}" id="CheckoutForm" method="POST">
+                            @csrf
                             <input type="hidden" name="selected_billing_address">
                             <input type="hidden" name="selected_shipping_address">
                             <input type="hidden" name="selected_billing_shipping_same">
@@ -301,7 +305,8 @@
                             <input type="hidden" name="quotation_uid" value="{{ $quotation->uid }}">
                             <div class="agree">
                                 <input type="checkbox" id="terms_and_condition" name="terms_and_condition">
-                                <label for="terms_and_condition">*I agree to the <a href="{{ route('terms-and-conditions') }}" target="_blank">Terms
+                                <label for="terms_and_condition">*I agree to the <a
+                                        href="{{ route('terms-and-conditions') }}" target="_blank">Terms
                                         and
                                         Conditions.</a>
                                 </label>
@@ -322,7 +327,9 @@
     </div>
 @endsection
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+        select2Initialization();
         //select state of billing address
         $('body').on('change', '.billing-country', function() {
             var selectedCountry = $(".billing-country option:selected").val();
@@ -463,19 +470,29 @@
         });
         //billing address create accordion
         $('.billing-address-accordion').click(function(e) {
-            var renderedContent = `@php echo addslashes(view('frontend::includes.billing-address-form', compact('countries'))->render()); @endphp`;
-            $('#BillingAddAddress .accordion-body').html(renderedContent);
-            $('#BillingAddAddress .accordion-body #BillingForm').attr('action',
-                '{{ route('store-billing-address', '') }}');
-            $('#BillingAddAddress').addClass('show');
+            if ($('#BillingAddAddress').hasClass('show')) {
+                $('#BillingAddAddress').removeClass('show');
+            } else {
+                var renderedContent = `@php echo addslashes(view('frontend::includes.billing-address-form', compact('countries'))->render()); @endphp`;
+                $('#BillingAddAddress .accordion-body').html(renderedContent);
+                $('#BillingAddAddress .accordion-body #BillingForm').attr('action',
+                    '{{ route('store-billing-address', '') }}');
+                select2Initialization();
+                $('#BillingAddAddress').addClass('show');
+            }
         });
         //shipping address create accordion
         $('.shipping-address-accordion').click(function(e) {
-            var renderedContent = `@php echo addslashes(view('frontend::includes.shipping-address-form', compact('countries'))->render()); @endphp`;
-            $('#ShippingAddAddress .accordion-body').html(renderedContent);
-            $('#ShippingAddAddress .accordion-body #ShippingForm').attr('action',
-                '{{ route('store-shipping-address', '') }}');
-            $('#ShippingAddAddress').addClass('show');
+            if ($('#ShippingAddAddress').hasClass('show')) {
+                $('#ShippingAddAddress').removeClass('show');
+            } else {
+                var renderedContent = `@php echo addslashes(view('frontend::includes.shipping-address-form', compact('countries'))->render()); @endphp`;
+                $('#ShippingAddAddress .accordion-body').html(renderedContent);
+                $('#ShippingAddAddress .accordion-body #ShippingForm').attr('action',
+                    '{{ route('store-shipping-address', '') }}');
+                select2Initialization();
+                $('#ShippingAddAddress').addClass('show');
+            }
         });
         //billing address edit get form
         var editBillingDebounceTimer;
@@ -543,12 +560,11 @@
         });
         //check tax value of a address if same as billing
         $('body').on('click', '.billing_address', function(e) {
-            if($('input[name=billing_shipping_same]:checked').val()) {
+            if ($('input[name=billing_shipping_same]:checked').val()) {
                 var address_id = $(this).data('id');
                 checkTaxApplicableForTax(address_id);
             }
         });
-
         //same as billing - functionality
         $('.billing_shipping_same').change(function() {
             if ($(this).prop('checked') == true) {
@@ -571,7 +587,6 @@
                 }
             }
         });
-
         //checking tax changing shipping address or same as billing
         function checkTaxApplicableForTax(address_id) {
             $.ajax({
@@ -593,7 +608,6 @@
                         if (response.converted_tax_value) {
                             tax_value += ' + ' + response.converted_tax_value;
                         }
-
                         $('.tax-details-li').html(`
                         <div class="lt">
                             <span>
@@ -608,7 +622,6 @@
                 }
             });
         }
-
         //checkout form submit
         var checkoutFormDebounceTimer;
         $('.checkout-form-btn').on('click', function(e) {
@@ -617,13 +630,13 @@
             var _this = $(this);
             $('input[name="selected_billing_address"]').val($('input[name="billing_address"]:checked').val());
             $('input[name="selected_shipping_address"]').val($('input[name="shipping_address"]:checked').val());
-            $('input[name="selected_billing_shipping_same"]').val($('input[name="billing_shipping_same"]:checked').val());
+            $('input[name="selected_billing_shipping_same"]').val($('input[name="billing_shipping_same"]:checked')
+                .val());
             $('input[name="selected_payment_method"]').val($('input[name="payment_method"]:checked').val());
             _this.prop('disabled', true);
             _this.html(`<span>Processing</span>`);
             var form = document.getElementById("CheckoutForm");
             let formData = new FormData(form);
-
             checkoutFormDebounceTimer = setTimeout(function() {
                 $.ajax({
                         type: 'POST',
@@ -646,11 +659,22 @@
                         _this.prop("disabled", false);
                         _this.html(`<span>Make Payment</span>`);
                         $.each(response.responseJSON.errors, function(field_name, error) {
-                            var msg = '</br><span class="error" style="color:red;">' + error + '</span>';
+                            var msg = '</br><span class="error" style="color:red;">' + error +
+                                '</span>';
                             $(".checkout-form-error-span").append(msg);
                         });
                     });
             }, 300);
         });
+        function select2Initialization() {
+            $(".select2").select2({
+                minimumResultsForSearch: 3,
+                maximumSelectionLength: 3,
+                theme: "bootstrap-5",
+                containerCssClass: "select2--small",
+                selectionCssClass: "select2--small",
+                dropdownCssClass: "select2--small",
+            });
+        }
     </script>
 @endpush

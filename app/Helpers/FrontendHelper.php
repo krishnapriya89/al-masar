@@ -40,7 +40,7 @@ class FrontendHelper
             return false;
 
         $phone_verification_code = mt_rand(1000, 9999);
-        // return $phone_verification_code;
+        return $phone_verification_code;
         $getSmsSendApiUrl = FrontendHelper::getProvider('SMS API', 'sms_send_api_url');
         $apiKey = FrontendHelper::getProvider('SMS API', 'api_key');
         $type = 'text'; //set unicode while sending arabic messages

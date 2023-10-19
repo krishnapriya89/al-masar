@@ -59,7 +59,7 @@
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <select class="select shipping-country" data-select2-id="select2-Due1"
+                <select class="select2 shipping-country" data-select2-id="select2-Due1"
                     aria-label="Default select example" name="country" id="shipping_country">
                     <option selected value="" disabled>Country*</option>
                     @foreach ($countries as $country)
@@ -82,7 +82,7 @@
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <select class="select shipping_state" data-select2-id="select2-Due2" aria-label="Default select example"
+                <select class="select2 shipping_state" data-select2-id="select2-Due2" aria-label="Default select example"
                     name="state" id="shipping_state">
                     <option selected value="" disabled>State*</option>
                     @if(@$address && $address->country)
