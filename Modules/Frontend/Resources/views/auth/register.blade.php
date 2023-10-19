@@ -217,14 +217,14 @@
                     phone: {
                         required: true,
                         digits: true,
-                        minlength: 10,
+                        minlength: 7,
                         maxlength: 15
                     },
                     office_phone: {
                         required: true,
                         digits: true,
                         notEqual: "#phone",
-                        minlength: 10,
+                        minlength: 7,
                         maxlength: 15
                     },
                     attachment: {
