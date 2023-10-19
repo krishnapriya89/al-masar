@@ -31,7 +31,7 @@ class FrontendHelper
     }
 
     /**
-     * Send OTP to phone number
+     * Send Message to provided phone number
      *
      *
      */

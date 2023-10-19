@@ -27,8 +27,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}<br>@if ($user->email_verified) <span class="badge bg-success">User Verfied</span> @else <span  class="badge bg-danger">Not Verfied</span> @endif</td>
-                                    <td>{{ $user->phone }}<br>@if ($user->phone_verified) <span class="badge bg-success">User Verfied</span> @else <span  class="badge bg-danger">Not Verfied</span> @endif</td>
-                                    <td>{{ $user->office_phone }}<br>@if ($user->office_phone_verified) <span class="badge bg-success">User Verfied</span> @else <span  class="badge bg-danger">Not Verfied</span> @endif</td>
+                                    <td>{{ $user->full_phone_number }}<br>@if ($user->phone_verified) <span class="badge bg-success">User Verfied</span> @else <span  class="badge bg-danger">Not Verfied</span> @endif</td>
+                                    <td>{{ $user->full_office_phone_number }}<br>@if ($user->office_phone_verified) <span class="badge bg-success">User Verfied</span> @else <span  class="badge bg-danger">Not Verfied</span> @endif</td>
                                     <td>
                                         @if($user->attachment && Storage::disk('public')->exists($user->attachment))
                                             <a href="{{ Storage::url($user->attachment) }}" download=""><i class="fa fa-download"></i></a>

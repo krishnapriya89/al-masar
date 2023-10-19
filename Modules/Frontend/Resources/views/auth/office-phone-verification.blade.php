@@ -12,7 +12,7 @@
                         </div>
                         <div class="ritBx">
                             <div class="title">OTP Verification</div>
-                            <div class="subT">Enter the OTP send to Phone: <span>{{ $user->office_phone }}</span></div>
+                            <div class="subT">Enter the OTP send to Phone: <span>{{ $user->full_office_phone_number }}</span></div>
                             <form action="{{ route('user.verify-office-phone') }}" id="OfficePhoneOtpForm" class="optB" method="POST" autocomplete="off">
                                 @csrf
                                 <input class="otp" name="otp1" value="{{ old('otp1') }}" type="text" oninput='digitValidate(this)' onkeyup='tabChange(1)'

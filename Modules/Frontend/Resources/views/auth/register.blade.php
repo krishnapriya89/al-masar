@@ -82,7 +82,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" id="phone" name="phone" value="{{ old('phone') }}"
+                                            <input type="text" id="phone" name="phone" value="{{ old('phone') ? old('phone_code') . old('phone') : '' }}"
                                                 class="form-control @error('phone') is-invalid @enderror"
                                                 placeholder="Phone*">
                                             @error('phone')
@@ -95,7 +95,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <input type="text" id="office_phone" name="office_phone"
-                                                value="{{ old('office_phone') }}"
+                                                value="{{ old('office_phone') ? old('office_phone_code') . old('office_phone') : '' }}"
                                                 class="form-control @error('office_phone') is-invalid @enderror"
                                                 placeholder="Procurement Office Number*">
                                             @error('office_phone')

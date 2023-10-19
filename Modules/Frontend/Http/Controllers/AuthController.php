@@ -413,7 +413,7 @@ class AuthController extends Controller
 
                 return view('frontend::auth.phone-verification', compact('phoneNumber'));
             } {
-                return to_route('user.show-office-phone-verification.form')->with('warning', 'You have already verified this ' . $user->phone . ' phone number. Please verify ' . $user->office_phone . ' this number.');
+                return to_route('user.show-office-phone-verification.form')->with('warning', 'You have already verified this ' . $user->full_phone_number . ' phone number. Please verify ' . $user->full_office_phone_number . ' this number.');
             }
         } else {
             return to_route('user.register.form')->with('error', 'You have to register your details first!');
@@ -445,16 +445,16 @@ class AuthController extends Controller
         }
 
         if ($user->phone_verified == 1) {
-            session()->flash('success', 'You have already verified this ' . $user->phone . ' phone number. Please verify ' . $user->office_phone . ' this number.');
+            session()->flash('success', 'You have already verified this ' . $user->full_phone_number . ' phone number. Please verify ' . $user->full_office_phone_number . ' this number.');
             return response()->json([
                 'status' => false,
                 'url' => route('user.show-office-phone-verification.form'),
-                // 'message' => 'You have already verified this ' . $user->phone . ' phone number. Please verify ' . $user->office_phone . ' this number.'
+                // 'message' => 'You have already verified this ' . $user->full_phone_number . ' phone number. Please verify ' . $user->full_office_phone_number . ' this number.'
             ]);
         }
 
         $otp = PhoneOtp::where('user_id', $user->id)
-            ->where('phone', $user->phone)
+            ->where('phone', $user->full_phone_number)
             ->where('used', false)
             ->latest()
             ->first();
@@ -475,12 +475,12 @@ class AuthController extends Controller
             $user->phone_verified = 1;
             $user->register_status = 2; //phone verification completed
             $user->save();
-            session()->flash('success', $user->phone . ' number verified successfully');
+            session()->flash('success', $user->full_phone_number . ' number verified successfully');
 
             return response()->json([
                 'status' => true,
                 'url' => route('user.show-office-phone-verification.form'),
-                // 'message' => $user->phone. ' number verified successfully'
+                // 'message' => $user->full_phone_number. ' number verified successfully'
             ]);
         } else {
             return response()->json([
@@ -499,7 +499,7 @@ class AuthController extends Controller
         if ($user) {
 
             if ($user->phone_verified != 1) {
-                return to_route('user.show-phone-verification.form')->with('warning', 'You have to verify this ' . $user->phone . ' number first.');
+                return to_route('user.show-phone-verification.form')->with('warning', 'You have to verify this ' . $user->full_phone_number . ' number first.');
             }
 
             if ($user->office_phone_verified != 1) {
@@ -509,12 +509,12 @@ class AuthController extends Controller
                 $user->phoneOtps()->delete();
                 $user->phoneOtps()->create([
                     'code' => $phone_verification_code,
-                    'phone' => $user->office_phone,
+                    'phone' => $user->full_office_phone_number,
                 ]);
 
                 return view('frontend::auth.office-phone-verification', compact('user'));
             } else {
-                return to_route('user.login.form')->with('warning', 'You have already verified this ' . $user->phone . ' phone number. Please login.');
+                return to_route('user.login.form')->with('warning', 'You have already verified this ' . $user->full_phone_number . ' phone number. Please login.');
             }
         } else {
             return to_route('user.register.form')->with('error', 'You have to register your details first!');
@@ -546,25 +546,25 @@ class AuthController extends Controller
         }
 
         if ($user->phone_verified == 0) {
-            session()->flash('error', 'You have to verify this ' . $user->phone . ' number first.');
+            session()->flash('error', 'You have to verify this ' . $user->full_phone_number . ' number first.');
             return response()->json([
                 'status' => false,
                 'url' => route('user.show-phone-verification.form'),
-                // 'message' => 'You have already verified this ' . $user->phone . ' phone number. Please verify ' . $user->office_phone . ' this number.'
+                // 'message' => 'You have already verified this ' . $user->full_phone_number . ' phone number. Please verify ' . $user->full_office_phone_number . ' this number.'
             ]);
         }
 
         if ($user->office_phone_verified == 1) {
-            session()->flash('error', 'You have already verified this ' . $user->office_phone . ' phone number. Please verify ' . $user->office_phone . ' this number.');
+            session()->flash('error', 'You have already verified this ' . $user->full_office_phone_number . ' phone number');
             return response()->json([
                 'status' => false,
                 'url' => route('user.login.form'),
-                // 'message' => 'You have already verified this ' . $user->phone . ' phone number. Please verify ' . $user->office_phone . ' this number.'
+                // 'message' => 'You have already verified this ' . $user->full_phone_number . ' phone number. Please verify ' . $user->full_office_phone_number . ' this number.'
             ]);
         }
 
         $otp = PhoneOtp::where('user_id', $user->id)
-            ->where('phone', $user->office_phone)
+            ->where('phone', $user->full_office_phone_number)
             ->where('used', false)
             ->latest()
             ->first();
@@ -586,8 +586,14 @@ class AuthController extends Controller
             $user->register_status = 3; //phone verification completed
             $user->save();
             session()->forget('registered_user');
-            session()->flash('success', );
-            session()->flash('success', $user->office_phone . ' number verified successfully Kindly verify the email id as well. A mail is been sent to your registered mail id. And kindly wait for the admin approval.');
+            $success_message = $user->full_office_phone_number . ' number verified successfully';
+            if($user->email_verified == 0) {
+                $success_message .= '. Kindly verify the email id as well. A mail is been sent to your registered mail id.';
+            }
+            if($user->admin_verified == 0) {
+                $success_message .= 'And kindly wait for the admin approval.';
+            }
+            session()->flash('success',  $success_message);
             return response()->json([
                 'status' => true,
                 'url' => route('user.login.form'),
