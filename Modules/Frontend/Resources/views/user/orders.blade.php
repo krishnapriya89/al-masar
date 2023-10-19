@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="tableAccordionBx DskTop">
-                    <div class="headBxFlx flx8">
+                    <div class="headBxFlx flx10">
                         <div class="item">Order ID</div>
                         <div class="item">Date</div>
                         <div class="item">No. of Items</div>
@@ -69,8 +69,10 @@
                         <div class="item">Amount Paid</div>
                         <div class="item">Amount to be Paid</div>
                         <div class="item">Payment Mode</div>
+                        <div class="item">Notifications</div>
+                        <div class="item">Files</div>
                     </div>
-                    <div class="detailFlx flx8">
+                    <div class="detailFlx flx10">
                         <div class="accordion" id="OrderaccordionWeb">
                             @include('frontend::includes.order-list')
                         </div>
@@ -324,7 +326,7 @@
             var payment_mode = $('#payment_mode_web').val();
 
             $.ajax({
-                url: "{{ route('user.order.filter' )}}",
+                url: "{{ route('user.order.filter') }}",
                 type: "GET",
                 data: {
                     status: status,
@@ -335,6 +337,66 @@
                     $('#OrderaccordionWeb').html(response);
                 }
             });
+        });
+
+        $('body').on('change', '.order-attachment', function() {
+            console.log('yes');
+            // file input data taking
+            var fileInput = this;
+            var uid = $(fileInput).data('uid');
+            var file = fileInput.files[0];
+
+            var fileSize = file.size;
+
+            // // Convert fileSize to kilobytes
+            var fileSizeKB = fileSize / 1024;
+
+            // // Check if the file size is within a certain limit (e.g., 2MB)
+            var maxSizeKB = 2048; // 2MB
+            if (fileSizeKB <= maxSizeKB) {
+
+                //setting the file name in the label
+                var i = $(fileInput).prev('label').clone();
+                var file_name = $(fileInput)[0].files[0].name;
+                $(fileInput).prev('label').text(file_name);
+
+                //form data setting
+                var formData = new FormData();
+                formData.append('attachment', file);
+                formData.append('uid', uid);
+
+                //submitting the data
+                $.ajax({
+                    url: "{{ route('user.order.upload-attachment') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.status) {
+                            toastr.success(response.message);
+                            console.log($(fileInput).parent().parent());
+                            if (response.url)
+                                $(fileInput).parent().parent().html(`<a href="` + response.url +
+                                    `" target="_blank" download=""><i class="fa fa-download">Download</i></a>`
+                                    );
+                        } else {
+                            $(fileInput).prev('label').text('Upload');
+                            if (response.message) {
+                                toastr.error(response.message)
+                            } else if (response.errors) {
+                                var errorData = '';
+                                $.each(response.errors, function(key, value) {
+                                    errorData += '<br>' + value[0];
+                                });
+                                toastr.error(errorData);
+                            }
+                        }
+                    }
+                });
+            } else {
+                toastr.error('The attachment size must not be greater than 2MB');
+            }
         });
     </script>
 @endpush

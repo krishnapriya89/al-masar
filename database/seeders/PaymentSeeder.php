@@ -29,7 +29,7 @@ class PaymentSeeder extends Seeder
                 'updated_at'    =>  Carbon::now()
             ],
             [
-                'image'         => 'USDT.264c9c29.svg',
+                'image'         => 'frontend/images/bitcoin-usdt.svg',
                 'title'         => 'Bitcoin / Tether (^BTCUSDT)',
                 'description'   => 'Bank: Bank of America, NA, 555 California St, San Francisco, CA 94104 Business Name: Lizheng Stainless Steel Tube and Coil Corp Business Address: 3902 Henderson Blvd, Suite 208-207, Tampa, Florida, 33629 Swift #: BOFAUS3N Account #: 898037918555',
                 'type'          =>  1,

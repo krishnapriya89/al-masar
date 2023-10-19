@@ -105,7 +105,12 @@
                                     <td>{{ $order->user_id ? $order->user->name : 'No User Found' }}</td>
                                     <td>$ @formattedPrice($order->sub_total)</td>
                                     <td>$ @formattedPrice($order->grand_total)</td>
-                                    <td>{{ $order->payment->title }}</td>
+                                    <td>
+                                        {{ $order->payment->title }}
+                                        @if ($order->attachment)
+                                            <a href="{{ Storage::url($order->attachment) }}" download="" target="_blank" class="btn"><i class="fa fa-download"></i></a>
+                                        @endif
+                                    </td>
                                     <td>$ @formattedPrice($order->payment_received_amount)</td>
                                     <td id="order-status-{{ $order->uid }}">
                                         @if ($order->order_status_id == 2)

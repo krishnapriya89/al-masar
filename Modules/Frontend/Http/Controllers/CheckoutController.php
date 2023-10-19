@@ -90,10 +90,11 @@ class CheckoutController extends Controller
         if ($order) {
             $order_address = $this->createOrderAddress($request, $order);
         if ($order_address) {
-                if ($order->payment_id == 1) {
-                    return redirect()->route('user.bank.transfer', ['uid' => $order->uid]);
+                if ($order->payment_id == 1 || $order->payment_id == 2) {
+                    //both bank transfer and USDT crypto currency
+                    return to_route('user.bank.transfer', ['uid' => $order->uid]);
                 } else {
-                    return to_route('user.quotation')->with('success', 'Order Completed');
+                    return to_route('user.bank.transfer', ['uid' => $order->uid]);
                 }
             } else {
                 return to_route('user.quotation')->with('error', 'Something went wrong.');
@@ -282,14 +283,14 @@ class CheckoutController extends Controller
     {
         $uid = session()->get('order_uid');
         if ($uid && $order = Order::where('uid', $uid)->first()) {
-            session()->forget('order_uid');
+            // session()->forget('order_uid');
             $order->payment_gateway_status = 1;
-            $order->order_status_id = 1;//pending approval from admin
-            $order->status = 3;
+            $order->order_status_id = 1;    //pending approval from admin
+            $order->status = 3; //order confirmed from user side
             if ($order->save()) {
                 $order->orderDetails()->update(['order_status_id' => 1]);
                 $quotation = Quotation::where('uid', $uid)->first();
-                $quotation->status = 5;
+                $quotation->status = 5; //change status as ordered
                 $quotation->save();
                 $quotation->acceptedQuotationDetails()->update(['status' => 5]);
                 $site_settings = SiteCommonContent::first();

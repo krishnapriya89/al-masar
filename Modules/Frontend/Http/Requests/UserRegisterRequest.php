@@ -49,7 +49,7 @@ class UserRegisterRequest extends FormRequest
     public function  messages()
     {
         $messages = [
-            'attachment.max' => 'The attachment field must not be greater than 2MB'
+            'attachment.max' => 'The attachment size must not be greater than 2MB'
         ];
 
         return $messages;

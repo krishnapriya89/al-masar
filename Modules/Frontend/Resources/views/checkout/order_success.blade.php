@@ -14,9 +14,12 @@
                         </div>
                         <p>Thank you!<br>
                             Your order was successfully submitted</p>
-                        <div class="title">Order Number <span>#{{ $order->uid }}</span></div>
+                        <div class="title"><a href="{{ route('user.order') }}/#{{$order->uid}}">Order Number <span>#{{ $order->uid }}</span></a></div>
                         <div class="subT">You will receive the order<br>
-                            Status Updations through Email </div>
+                            Status Updations through Email </div><br>
+                        @if ($order->payment_id == 2)
+                            <div class="subT">Please upload a file of the payment completed data against the order in the My Order page</div>
+                        @endif
                     </div>
                 </div>
             </div>

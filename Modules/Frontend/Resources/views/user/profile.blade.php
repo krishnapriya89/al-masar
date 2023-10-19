@@ -190,7 +190,7 @@
                                                         <i class="fa fa-cloud-upload"></i> Attachment
                                                     </label>
                                                     <input id="attachment" name='attachment' type="file"
-                                                        class="fileInput" value="{{ $user->attachment }}">
+                                                        class="fileInput" value="{{ $user->attachment }}" accept="image/jpeg,image/png,application/pdf">
                                                     @error('attachment')
                                                         <span class="invalid-feedback">{{ $message }}</span>
                                                     @enderror

@@ -7,11 +7,11 @@ use App\Models\Order;
 use App\Models\State;
 use App\Models\Country;
 use App\Models\Payment;
+use App\Models\ProfileOtp;
 use App\Models\OrderStatus;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use App\Helpers\FrontendHelper;
-use App\Models\ProfileOtp;
 use App\Models\SiteCommonContent;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Frontend\Http\Requests\UserAddressRequest;
 use Modules\Frontend\Http\Requests\UserRegisterRequest;
@@ -88,7 +90,7 @@ class UserController extends Controller
                 $user->phone_verified = 0;
                 $message .= ' Please verify your phone.';
             }
-            
+
             $user->office_phone_code = $request->office_phone_code;
             $user->office_phone = $request->office_phone;
             if($user->isDirty('office_phone') || $user->isDirty('office_phone_code')) {
@@ -742,5 +744,51 @@ class UserController extends Controller
             })
             ->latest()->get();
         return view('frontend::includes.order-list', compact('orders'));
+    }
+
+    public function uploadAttachment (Request $request) {
+        $rules = [
+            'attachment' => 'required|max:2000|mimes:pdf,jpg,jpeg,png',
+            'uid'=> 'required'
+        ];
+
+        $customMessages = [
+            'attachment.required' => 'Please upload a file',
+            'attachment.max' => 'The attachment size must not be greater than 2MB'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $customMessages);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false,'errors'=> $validator->errors()]);
+        }
+
+        if($request->hasFile('attachment')) {
+            $order = Order::where('uid', $request->uid)->where('user_id', Auth::guard('web')->id())->first();
+
+            if(!$order) {
+                return response()->json(['status' => false,'message'=> 'No order found']);
+            }
+
+            if($order->attachment) {
+                return response()->json(['status' => false,'message'=> 'You are already uploaded the file']);
+            }
+
+            $file = $request->file('attachment');
+            $order->attachment = $order->uploadImage($file, $order->getImageDirectory());
+            if($order->save()) {
+                return response()->json([
+                    'status' => true,
+                    'message'=> 'Attachment uploaded successfully',
+                    'url' => Storage::url($order->attachment)
+                ]);
+            }
+            else {
+                return response()->json(['status' => false,'message'=> 'Something went wrong please try again later']);
+            }
+        }
+        else {
+            return response()->json(['status' => false]);
+        }
     }
 }

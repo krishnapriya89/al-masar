@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ImageTrait;
 use App\Helpers\AdminHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -11,9 +12,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, ImageTrait;
 
     protected $appends = ['order_received_date'];
+    protected $imageDirectory = 'order';
+    public function getImageDirectory()
+    {
+        return $this->imageDirectory;
+    }
 
     public function user(): BelongsTo
     {
