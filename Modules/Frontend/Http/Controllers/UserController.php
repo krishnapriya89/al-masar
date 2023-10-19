@@ -82,15 +82,16 @@ class UserController extends Controller
                 $user->email_verified = 0;
                 $message .= ' Please verify your email.';
             }
-
+            $user->phone_code = $request->phone_code;
             $user->phone = $request->phone;
-            if($user->isDirty('phone')) {
+            if($user->isDirty('phone') || $user->isDirty('phone_code')) {
                 $user->phone_verified = 0;
                 $message .= ' Please verify your phone.';
             }
-
+            
+            $user->office_phone_code = $request->office_phone_code;
             $user->office_phone = $request->office_phone;
-            if($user->isDirty('office_phone')) {
+            if($user->isDirty('office_phone') || $user->isDirty('office_phone_code')) {
                 $user->office_phone_verified = 0;
                 $message .= ' Please verify your office phone.';
             }
@@ -144,13 +145,13 @@ class UserController extends Controller
             });
         } else {
             if($field == 'phone') {
-                $identifier = $user->phone;
+                $identifier = $user->full_phone_number;
                 $method = 1; // phone
                 $verification_code = $this->sendMessage($identifier, 'Al Masar Al Saree Phone Verification Code is: ');
             }
 
             else {
-                $identifier = $user->office_phone;
+                $identifier = $user->full_office_phone_number;
                 $method = 2; // office phone
                 $verification_code = $this->sendMessage($identifier, 'Al Masar Al Saree Office Phone Verification Code is: ');
             }
@@ -215,7 +216,7 @@ class UserController extends Controller
             ]);
         }
 
-        $user->profileOtps()->delete();
+        $user->profileOtps()->where('used', 1)->delete();
 
         if ($field == 'email') {
             $method = 3; //email
@@ -235,13 +236,13 @@ class UserController extends Controller
             });
         } else {
             if($field == 'phone') {
-                $identifier = $user->phone;
+                $identifier = $user->full_phone_number;
                 $method = 1; // phone
                 $verification_code = $this->sendMessage($identifier, 'Al Masar Al Saree Resented Phone Verification Code is: ');
             }
 
             else {
-                $identifier = $user->office_phone;
+                $identifier = $user->full_office_phone_number;
                 $method = 2; // office phone
                 $verification_code = $this->sendMessage($identifier, 'Al Masar Al Saree Resented Office Phone Verification Code is: ');
             }
@@ -332,6 +333,8 @@ class UserController extends Controller
         if ($submittedOtp == $otp->code) {
             $user->$verify_field = 1;
             $user->save();
+            $otp->used = 1;
+            $otp->save();
             Session::forget('profile_field');
             Session::forget('profile_method');
             Session::forget('profile_identifier');

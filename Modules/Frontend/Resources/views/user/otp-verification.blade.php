@@ -24,7 +24,6 @@
                     <div class="otpBx">
                         <div class="title">OTP Verification</div>
                         <div class="subT">Enter the OTP send to {{ str_replace('_',' ',ucwords($field,'_')) }}: <span>{{ $identifier }}</span></div>
-                        <div class="subT">Code <span class="otp-cls"> {{ $verification_code }}</span></div>
                         <form action="{{ route('user.profile.verify-otp') }}" id="ProfileOtpForm" class="optB"
                                 method="POST" autocomplete="off">
                                 @csrf

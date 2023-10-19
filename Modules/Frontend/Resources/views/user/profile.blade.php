@@ -1,7 +1,13 @@
 @extends('frontend::layouts.app')
 @section('title', 'Profile')
 @push('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
+    <style>
+        .invalid-feedback {
+            display: block !important;
+        }
+    </style>
 @endpush
 @section('content')
     <div id="pageWrapper" class="DashBoard InnerPage">
@@ -66,7 +72,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <select name="country" id="country"
-                                                    class="select @error('country') is-invalid @enderror">
+                                                    class="select2 @error('country') is-invalid @enderror">
                                                     <option value="" selected disabled>Country*</option>
                                                     @foreach ($countries as $country)
                                                         <option value="{{ $country->id }}"
@@ -133,7 +139,7 @@
                                                     </a>
                                                 @endif
                                                 <input type="text" id="phone" name="phone"
-                                                    value="{{ old('phone', $user->phone) }}"
+                                                    value="{{ old('phone') ? old('phone_code') . old('phone') : $user->full_phone_number }}"
                                                     class="form-control @error('phone') is-invalid @enderror"
                                                     placeholder="Phone*">
                                                 @error('phone')
@@ -141,6 +147,8 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <input type="hidden" name="phone_code" id="phone_code"
+                                            value="{{ old('phone_code', $user->phone_code) }}">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 @if ($user->office_phone_verified)
@@ -164,7 +172,7 @@
                                                     </a>
                                                 @endif
                                                 <input type="text" id="office_phone" name="office_phone"
-                                                    value="{{ old('office_phone', $user->office_phone) }}"
+                                                    value="{{ old('office_phone') ? old('office_phone_code') . old('office_phone') : $user->full_office_phone_number }}"
                                                     class="form-control @error('office_phone') is-invalid @enderror"
                                                     placeholder="Procurement Office Number*">
                                                 @error('office_phone')
@@ -172,6 +180,8 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <input type="hidden" name="office_phone_code" id="office_phone_code"
+                                            value="{{ old('office_phone_code', $user->office_phone_code) }}">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="fileUploadInput">
@@ -220,49 +230,92 @@
     </div>
 @endsection
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput-jquery.min.js"></script>
 
     <script>
-        // $("#mobile_code").intlTelInput({
-        //     initialCountry: "in",
-        //     separateDialCode: true,
-        // });
-        $('#attachment').change(function() {
-            var i = $(this).prev('label').clone();
-            var file = $('#attachment')[0].files[0].name;
-            $(this).prev('label').text(file);
-        });
+        $(document).ready(function() {
+            //select2 initialization
+            $(".select2").select2({
+                minimumResultsForSearch: 3,
+                maximumSelectionLength: 3,
+                theme: "bootstrap-5",
+                containerCssClass: "select2--small",
+                selectionCssClass: "select2--small",
+                dropdownCssClass: "select2--small",
+            });
 
-        var profileOtpVerifyDebounceTimer;
-        var ajaxCallMade = false;
-        $('.profile-field-verify-btn').on('click', function(e) {
-            e.preventDefault();
-            clearTimeout(profileOtpVerifyDebounceTimer);
-            var _this = $(this);
-            $('.profile-field-verify-btn').bind('click', false);
-            var field = _this.data('field');
-            if (!ajaxCallMade) {
-                ajaxCallMade = true;
-                profileOtpVerifyDebounceTimer = setTimeout(function() {
-                    $.ajax({
-                        url: '{{ route('user.profile.otp.send') }}',
-                        data: {
-                            field: field
-                        },
-                        type: "get",
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.status) {
-                                window.location.href = response.url;
-                            } else {
-                                $('.profile-field-verify-btn').bind('click', true);
-                                toastr.error('Something went wrong');
-                                window.location.reload();
+            var phone_input = $("#phone");
+            var office_phone_input = $("#office_phone");
+
+            phone_input.intlTelInput({
+                separateDialCode: true,
+            });
+
+            office_phone_input.intlTelInput({
+                separateDialCode: true,
+            });
+
+            // Now, extract the initial country code after plugin initialization
+            var initialCountryPhoneData = phone_input.intlTelInput("getSelectedCountryData");
+            var initialCountryPhoneCode = initialCountryPhoneData.dialCode;
+            $('#phone_code').val("+" + initialCountryPhoneCode);
+
+            var initialCountryOfficePhoneData = office_phone_input.intlTelInput("getSelectedCountryData");
+            var initialCountryOfficePhoneCode = initialCountryOfficePhoneData.dialCode;
+            $('#office_phone_code').val("+" + initialCountryOfficePhoneCode);
+
+            // Add an event listener for the "countrychange" event
+            phone_input.on("countrychange", function(e) {
+                let selectedCountryData = phone_input.intlTelInput("getSelectedCountryData");
+                let selectedCountryCode = selectedCountryData.dialCode;
+                $('#phone_code').val("+" + selectedCountryCode);
+            });
+
+            office_phone_input.on("countrychange", function(e) {
+                let selectedCountryData = office_phone_input.intlTelInput("getSelectedCountryData");
+                let selectedCountryCode = selectedCountryData.dialCode;
+                $('#office_phone_code').val("+" + selectedCountryCode);
+            });
+
+            $('#attachment').change(function() {
+                var i = $(this).prev('label').clone();
+                var file = $('#attachment')[0].files[0].name;
+                $(this).prev('label').text(file);
+            });
+
+            var profileOtpVerifyDebounceTimer;
+            var ajaxCallMade = false;
+            $('body').on('click', '.profile-field-verify-btn', function(e) {
+                console.log('yes');
+                e.preventDefault();
+                clearTimeout(profileOtpVerifyDebounceTimer);
+                var _this = $(this);
+                $('.profile-field-verify-btn').bind('click', false);
+                var field = _this.data('field');
+                if (!ajaxCallMade) {
+                    ajaxCallMade = true;
+                    profileOtpVerifyDebounceTimer = setTimeout(function() {
+                        $.ajax({
+                            url: '{{ route('user.profile.otp.send') }}',
+                            data: {
+                                field: field
+                            },
+                            type: "get",
+                            dataType: 'json',
+                            success: function(response) {
+                                if (response.status) {
+                                    window.location.href = response.url;
+                                } else {
+                                    $('.profile-field-verify-btn').bind('click', true);
+                                    toastr.error('Something went wrong');
+                                    window.location.reload();
+                                }
                             }
-                        }
+                        });
                     });
-                });
-            }
+                }
+            });
         });
     </script>
 @endpush
