@@ -104,9 +104,9 @@
                 </li>
                 <li class="nav-header">CMS</li>
                 <li
-                    class="nav-item {{ Nav::isRoute(['home-banner.index', 'home-banner.create', 'home-banner.edit', 'about-us.edit', 'why-choose.edit', 'how-to-buy.edit', 'contact.edit', 'privacy-policy.edit', 'terms-and-conditions.edit', 'site-common-cms.edit', 'contact-enquiry-listing.index', 'contact-enquiry-listing.show'], 'menu-open') }}">
+                    class="nav-item {{ Nav::isRoute(['home-banner.index', 'home-banner.create', 'home-banner.edit', 'about-us.edit', 'why-choose.edit', 'how-to-buy.edit', 'contact.edit', 'privacy-policy.edit', 'terms-and-conditions.edit', 'site-common-cms.edit', 'auth-page-management.edit', 'contact-enquiry-listing.index', 'contact-enquiry-listing.show'], 'menu-open') }}">
                     <a href="#"
-                        class="nav-link {{ Nav::isRoute(['about-us.edit', 'why-choose.edit', 'how-to-buy.edit', 'contact.edit', 'privacy-policy.edit', 'terms-and-conditions.edit', 'site-common-cms.edit']) }}  {{ Nav::isResource('home-banner') }} {{ Nav::isResource('contact-enquiry-listing') }}">
+                        class="nav-link {{ Nav::isRoute(['about-us.edit', 'why-choose.edit', 'how-to-buy.edit', 'contact.edit', 'privacy-policy.edit', 'terms-and-conditions.edit', 'site-common-cms.edit', 'auth-page-management.edit']) }}  {{ Nav::isResource('home-banner') }} {{ Nav::isResource('contact-enquiry-listing') }}">
                         <i class="nav-icon fa fa-info"></i>
                         <p>
                             Cms
@@ -170,6 +170,27 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('auth-page-management.edit', 'login-page') }}"
+                               class="nav-link {{ request()->is('al-masar-admin-auth/auth-page-management/login-page*') ? ' active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Login Page CMS</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('auth-page-management.edit', 'register-page') }}"
+                               class="nav-link {{ request()->is('al-masar-admin-auth/auth-page-management/register-page*') ? ' active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Register Page CMS</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('auth-page-management.edit', 'otp-page') }}"
+                               class="nav-link {{ request()->is('al-masar-admin-auth/auth-page-management/otp-page*') ? ' active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>OTP Page CMS</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('site-common-cms.edit') }}"
                                 class="nav-link {{ Nav::isRoute('site-common-cms.edit') }}">
                                 <i class="far fa-circle nav-icon"></i>
@@ -178,65 +199,6 @@
                         </li>
                     </ul>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="{{ route('news-letter.index') }}"
-                       class="nav-link {{ Nav::isResource('news-letter') }}">
-                        <i class="nav-icon fas fa-envelope"></i>
-                        <p>NewsLetter</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('contact-enquiry.index') }}"
-                       class="nav-link {{ Nav::isResource('contact-enquiry') }}">
-                        <i class="nav-icon fa fa-address-book"></i>
-                        <p>Contact Enquiries</p>
-                    </a>
-                </li>
-                <li class="nav-item {{ Nav::hasSegment('reports', 2, 'menu-open') }}">
-                    <a href="{{ route('reports.index')}}"
-                       class="nav-link {{ Nav::isRoute('reports.index') }}">
-                        <i class="nav-icon fas fa-file-excel"></i>
-                        <p>
-                            Reports
-                        </p>
-                    </a>
-                </li> --}}
-
-
-                {{--                <li class="nav-header">MASTERS</li> --}}
-                {{--                <li class="nav-item {{ Nav::hasSegment('master', 2, 'menu-open') }} {{ Nav::hasSegment('tax-type', 2, 'menu-open') }} {{ Nav::hasSegment('tax-slab', 2, 'menu-open') }}"> --}}
-                {{--                    <a href="#" --}}
-                {{--                       class="nav-link {{ Nav::hasSegment('master', 2) }} {{ Nav::hasSegment('tax-type', 2) }} {{ Nav::hasSegment('tax-slab', 2) }}"> --}}
-                {{--                        <i class="nav-icon  far fa-clone"></i> --}}
-                {{--                        <p> --}}
-                {{--                            Master --}}
-                {{--                            <i class="right fas fa-angle-left"></i> --}}
-                {{--                        </p> --}}
-                {{--                    </a> --}}
-                {{--                    <ul class="nav nav-treeview"> --}}
-                {{--                        <li class="nav-item"> --}}
-                {{--                            <a href="{{ route('country.index') }}" --}}
-                {{--                               class="nav-link {{ Nav::isResource('country') }} {{ Nav::isResource('state') }}"> --}}
-                {{--                                <i class="far fa-circle nav-icon"></i> --}}
-                {{--                                <p>Country</p> --}}
-                {{--                            </a> --}}
-                {{--                        </li> --}}
-                {{--                        <li class="nav-item"> --}}
-                {{--                            <a href="{{ route('return-reason.index') }}" --}}
-                {{--                               class="nav-link {{ Nav::isResource('return-reason') }}"> --}}
-                {{--                                <i class="far fa-circle nav-icon"></i> --}}
-                {{--                                <p>Return Reasons</p> --}}
-                {{--                            </a> --}}
-                {{--                        </li> --}}
-                {{--                        <li class="nav-item"> --}}
-                {{--                            <a href="{{ route('cancel-reason.index') }}" --}}
-                {{--                               class="nav-link {{ Nav::isResource('cancel-reason') }}"> --}}
-                {{--                                <i class="far fa-circle nav-icon"></i> --}}
-                {{--                                <p>Cancel Reasons</p> --}}
-                {{--                            </a> --}}
-                {{--                        </li> --}}
-                {{--                    </ul> --}}
-                {{--                </li> --}}
                 <li class="nav-header">General Settings</li>
                 <li class="nav-item">
                     <a href="#"

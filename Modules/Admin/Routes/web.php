@@ -22,6 +22,7 @@ use Modules\Admin\Http\Controllers\QuotationController;
 use Modules\Admin\Http\Controllers\WhyChooseController;
 use Modules\Admin\Http\Controllers\HomeBannerController;
 use Modules\Admin\Http\Controllers\AdminConfigController;
+use Modules\Admin\Http\Controllers\AuthPageManageController;
 use Modules\Admin\Http\Controllers\SiteSettingsController;
 use Modules\Admin\Http\Controllers\PrivacyPolicyController;
 use Modules\Admin\Http\Controllers\TaxManagementController;
@@ -88,6 +89,9 @@ Route::prefix('al-masar-admin-auth')->group(function () {
         // Site Settings
         Route::get('site-settings',[TaxManagementController::class,'edit'])->name('site-settings.edit');
         Route::post('site-settings/update/{id}',[TaxManagementController::class,'update'])->name('site-settings.update');
+        //auth pages management
+        Route::get('auth-page-management/{page}', [AuthPageManageController::class, 'form'])->name('auth-page-management.edit');
+        Route::post('auth-page-management/{page}', [AuthPageManageController::class, 'store'])->name('auth-page-management.update');
         //product and related data routes
         //main category
         Route::resource('product-main-category', ProductMainCategoryController::class);
