@@ -53,6 +53,7 @@
             </div>
         </div>
     </section>
+    @getEmailLogo
     <section id="AboutSec">
         <div class="container">
             <div class="MainHead center">
