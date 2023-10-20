@@ -17,7 +17,7 @@ class ProductGalleryController extends Controller
     public function index($product_id)
     {
         $product = Product::find(base64_decode($product_id));
-        if($product){
+        if ($product) {
             return view('admin::product-gallery.index', compact('product'));
         } else {
             abort(404);
@@ -31,7 +31,7 @@ class ProductGalleryController extends Controller
     public function create($product_id)
     {
         $product = Product::find(base64_decode($product_id));
-        if($product){
+        if ($product) {
             return view('admin::product-gallery.create', compact('product'));
         } else {
             abort(404);
@@ -41,64 +41,69 @@ class ProductGalleryController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param Request $request
-     * @return Renderable
      */
     public function store(Request $request, $product_id)
     {
-        $request->validate([
-            'file_type' => 'required|in:Image,Video',
-            'file' => [
-                'required',
-                function ($attribute, $value, $fail) use ($request) {
-                    $file_type = $request->file_type;
-                    if ($file_type == 'Image') {
-                        $request->validate([
-                                'file' => 'image|mimes:jpg,jpeg,webp,png|max:2048|dimensions:min_width:1080,min_height:1080,max_width:1080,max_height:1080'
-                            ],
-                            [
-                                'file.image' => 'The file must be an image',
-                                'file.mimes' => 'The file must be an image'
-                            ]
-                        );
-                    } else {
-                        $request->validate([
-                                'file'     => 'mimes:mp4',
-                                'thumb_image' => 'required|image|mimes:jpg,jpeg,webp,png|max:2048|dimensions:min_width:1080,min_height:1080,max_width:1080,max_height:1080'
-                            ],
-                            [
-                                'file'      => 'The file must be an video',
-                                'thumb_image.required'=>'This field is required',
-                                'thumb_image'=>'The file must be an image',
-                            ]
-                        );
-                    }
-                },
-                [
-                    'file.required' => 'This field is required'
-                ]
+        $request->validate(
+            [
+                'file_type' => 'required|in:Image,Video',
+                'image_file.*' => 'required_if:file_type,Image|image|mimes:jpg,jpeg,webp,png|max:2048',
+                'video_file'     => 'required_if:file_type,Video|mimes:mp4',
+                'thumb_image' => 'required_if:file_type,Video||image|mimes:jpg,jpeg,webp,png|max:2048'
             ],
-        ]);
+            [
+                'image_file.required_if' => 'This field is required',
+                'image_file.image' => 'The file must be an image',
+                'image_file.mimes' => 'The file must be an image',
+                'video_file.required_if' => 'This field is required',
+                'video_file'      => 'The file must be an video',
+                'thumb_image.required_if' => 'This field is required',
+                'thumb_image' => 'The file must be an image',
+            ]
+        );
 
-        $gallery = new ProductGallery();
-        $gallery->product_id = $product_id;
-        $gallery->file_type = $request->file_type;
-        $gallery->sort_order = $request->filled('sort_order') ? $request->sort_order : 0;
-        $gallery->status = $request->status;
-
-        if($request->hasFile('file')) {
-            $image = $request->file('file');
-            $gallery->file = $gallery->uploadImage($image, $gallery->getImageDirectory());
-        }
-
-        if($request->hasFile('thumb_image') && $request->file_type == 'Video') {
-            $thumb_image = $request->file('thumb_image');
-            $gallery->thumb_image = $gallery->uploadImage($thumb_image, $gallery->getImageDirectory());
-        }
-
-        if($gallery->save()) {
-            return redirect()->route('product-gallery.index', base64_encode($product_id))->with('success', 'Product Gallery created successfully.');
+        if ($request->hasFile('image_file')) {
+            $image_count = $image_saved_count = 0;
+            foreach ($request->file('image_file') as $image) {
+                $image_count++;
+                $gallery = new ProductGallery();
+                $gallery->product_id = $product_id;
+                $gallery->file_type = $request->file_type;
+                $gallery->sort_order = $request->filled('sort_order') ? $request->sort_order : 0;
+                $gallery->status = $request->status;
+                $gallery->file = $gallery->uploadImage($image, $gallery->getImageDirectory());
+                if($gallery->save())
+                    $image_saved_count++;
+            }
+            if ($image_count == $image_saved_count) {
+                return to_route('product-gallery.index', base64_encode($product_id))->with('success', 'Product Gallery created successfully.');
+            } elseif($image_saved_count = 0) {
+                return to_route('product-gallery.index', base64_encode($product_id))->with('error', 'Failed to create Product Gallery.');
+            }
+            else {
+                return to_route('product-gallery.index', base64_encode($product_id))->with('error', 'Failed to Upload some Images.');
+            }
         } else {
-            return redirect()->route('product-gallery.index', base64_encode($product_id))->with('error', 'Failed to create Product Gallery.');
+            $gallery = new ProductGallery();
+            $gallery->product_id = $product_id;
+            $gallery->file_type = $request->file_type;
+            $gallery->sort_order = $request->filled('sort_order') ? $request->sort_order : 0;
+            $gallery->status = $request->status;
+            if ($request->hasFile('video_file')) {
+                $image = $request->file('video_file');
+                $gallery->file = $gallery->uploadImage($image, $gallery->getImageDirectory());
+            }
+
+            if ($request->hasFile('thumb_image') && $request->file_type == 'Video') {
+                $thumb_image = $request->file('thumb_image');
+                $gallery->thumb_image = $gallery->uploadImage($thumb_image, $gallery->getImageDirectory());
+            }
+
+            if ($gallery->save()) {
+                return redirect()->route('product-gallery.index', base64_encode($product_id))->with('success', 'Product Gallery created successfully.');
+            } else {
+                return redirect()->route('product-gallery.index', base64_encode($product_id))->with('error', 'Failed to create Product Gallery.');
+            }
         }
     }
 
@@ -110,7 +115,7 @@ class ProductGalleryController extends Controller
     public function edit(Product $product, $id)
     {
         $gallery = ProductGallery::find(base64_decode($id));
-        if($gallery) {
+        if ($gallery) {
             return view('admin::product-gallery.edit', compact('gallery', 'product'));
         } else {
             abort(404);
@@ -130,22 +135,24 @@ class ProductGalleryController extends Controller
                 'nullable',
                 function ($attribute, $value, $fail) use ($gallery, $request) {
                     if ($gallery->file_type == 'Image') {
-                        $request->validate([
-                            'file' => 'image|mimes:jpg,jpeg,webp,png|max:2048|dimensions:min_width:1080,min_height:1080,max_width:1080,max_height:1080'
+                        $request->validate(
+                            [
+                                'file' => 'image|mimes:jpg,jpeg,webp,png|max:2048|dimensions:min_width:1080,min_height:1080,max_width:1080,max_height:1080'
                             ],
                             [
                                 'file' => 'The file must be an image'
                             ]
                         );
                     } else {
-                        $request->validate([
-                            'file'     => 'mimes:mp4',
-                            'thumb_image' => 'required|image|mimes:jpg,jpeg,webp,png|max:2048|dimensions:min_width:1080,min_height:1080,max_width:1080,max_height:1080'
+                        $request->validate(
+                            [
+                                'file'     => 'mimes:mp4',
+                                'thumb_image' => 'required|image|mimes:jpg,jpeg,webp,png|max:2048|dimensions:min_width:1080,min_height:1080,max_width:1080,max_height:1080'
                             ],
                             [
                                 'file'      => 'The file must be an video',
-                                'thumb_image.required'=>'This field is required',
-                                'thumb_image'=>'The file must be an image',
+                                'thumb_image.required' => 'This field is required',
+                                'thumb_image' => 'The file must be an image',
                             ]
                         );
                     }
@@ -156,19 +163,19 @@ class ProductGalleryController extends Controller
         $gallery->sort_order = $request->filled('sort_order') ? $request->sort_order : 0;
         $gallery->status = $request->status;
 
-        if($request->hasFile('file')) {
+        if ($request->hasFile('file')) {
             $gallery->deleteImage('file');
             $image = $request->file('file');
             $gallery->file = $gallery->uploadImage($image, $gallery->getImageDirectory());
         }
 
-        if($request->hasFile('thumb_image')) {
+        if ($request->hasFile('thumb_image')) {
             $gallery->deleteImage('thumb_image');
             $thumb_image = $request->file('thumb_image');
             $gallery->thumb_image = $gallery->uploadImage($thumb_image, $gallery->getImageDirectory());
         }
 
-        if($gallery->save()) {
+        if ($gallery->save()) {
             return redirect()->route('product-gallery.index', base64_encode($gallery->product_id))->with('success', 'Product Gallery updated successfully.');
         } else {
             return redirect()->route('product-gallery.index', base64_encode($gallery->product_id))->with('error', 'Failed to update Product Gallery.');
