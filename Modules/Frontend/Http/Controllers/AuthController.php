@@ -10,6 +10,7 @@ use App\Helpers\AdminHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Helpers\FrontendHelper;
+use App\Models\AuthPageCommonContent;
 use App\Models\LoginOtp;
 use App\Models\UserEmailVerify;
 use App\Models\SiteCommonContent;
@@ -44,7 +45,9 @@ class AuthController extends Controller
         $email              = $encryptedEmail ? Crypt::decrypt($encryptedEmail) : '';
         $password           = $encryptedPassword ? Crypt::decrypt($encryptedPassword) : '';
 
-        return view('frontend::auth.login', compact('email', 'password', 'remember'));
+        $auth_page_cms = AuthPageCommonContent::page('login-page')->first();
+
+        return view('frontend::auth.login', compact('email', 'password', 'remember', 'auth_page_cms'));
     }
 
     //login functionality
@@ -155,7 +158,8 @@ class AuthController extends Controller
         Session::put('login_method', $method);
         Session::put('login_identifier', $identifier);
 
-        return view('frontend::auth.login-otp-verification', compact('method', 'identifier'));
+        $auth_page_cms = AuthPageCommonContent::page('otp-page')->first();
+        return view('frontend::auth.login-otp-verification', compact('method', 'identifier', 'auth_page_cms'));
     }
 
     //verify the login otp
@@ -334,7 +338,8 @@ class AuthController extends Controller
         }
 
         $countries = Country::active()->get();
-        return view('frontend::auth.register', compact('countries'));
+        $auth_page_cms = AuthPageCommonContent::page('register-page')->first();
+        return view('frontend::auth.register', compact('countries', 'auth_page_cms'));
     }
 
     //store registration data redirect to phone verification form
@@ -411,7 +416,8 @@ class AuthController extends Controller
                     'phone' => $phoneNumber,
                 ]);
 
-                return view('frontend::auth.phone-verification', compact('phoneNumber'));
+                $auth_page_cms = AuthPageCommonContent::page('otp-page')->first();
+                return view('frontend::auth.phone-verification', compact('phoneNumber', 'auth_page_cms'));
             } {
                 return to_route('user.show-office-phone-verification.form')->with('warning', 'You have already verified this ' . $user->full_phone_number . ' phone number. Please verify ' . $user->full_office_phone_number . ' this number.');
             }
@@ -512,7 +518,8 @@ class AuthController extends Controller
                     'phone' => $user->full_office_phone_number,
                 ]);
 
-                return view('frontend::auth.office-phone-verification', compact('user'));
+                $auth_page_cms = AuthPageCommonContent::page('otp-page')->first();
+                return view('frontend::auth.office-phone-verification', compact('user', 'auth_page_cms'));
             } else {
                 return to_route('user.login.form')->with('warning', 'You have already verified this ' . $user->full_phone_number . ' phone number. Please login.');
             }
@@ -719,96 +726,12 @@ class AuthController extends Controller
         return $phone_verification_code;
     }
 
-    public function showForgotPasswordForm()
-    {
-        if (Auth::guard('web')->check()) {
-            return redirect()->intended('/'); // Redirect to the user dashboard or any other authenticated page
-        }
-
-        return view('frontend::auth.forgot_password');
-    }
-
-    public function forgotPassword(Request $request)
-    {
-        $request->validate(
-            [
-                'email' => 'required|email|exists:users,email,status,1,user_type,User',
-            ],
-            [
-                'email.exists' => 'The entered email is not exists in our record'
-            ]
-        );
-
-        $password_resets = DB::table('password_reset_tokens')->where('email', $request->email)->latest()->first();
-        $date = Carbon::now();
-        if ($password_resets && $date->diff(Carbon::parse($password_resets->created_at))->i <= 10) {
-            return back()->with('error', 'We have already e-mailed your password reset link. If you don\'t get it try after some time.');
-        }
-
-        $token = Str::random(64);
-
-        DB::table('password_reset_tokens')->insert([
-            'email' => $request->email,
-            'token' => $token,
-            'created_at' => Carbon::now()
-        ]);
-
-        Mail::send('frontend::emails.forgot_password', ['token' => $token], function ($message) use ($request) {
-            $message->to($request->email);
-            $message->subject('Reset Password');
-        });
-
-        return back()->with('success', 'We have e-mailed your password reset link!');
-    }
-
-    public function username()
-    {
-        $field = filter_var(request()->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        request()->merge([$field => request()->input('login')]);
-        return $field;
-    }
-
-    public function showResetPasswordForm($token)
-    {
-        return view('frontend::auth.reset_password', compact('token'));
-    }
-
-    public function resetPassword(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email|exists:users',
-            'password' => ['required', 'confirmed', Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
-        ]);
-
-        $updatePassword = DB::table('password_reset_tokens')
-            ->where([
-                'email' => $request->email,
-                'token' => $request->token
-            ])
-            ->first();
-
-        if (!$updatePassword) {
-            return back()->withInput()->with('error', 'Invalid token!');
-        }
-
-        $user = User::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
-        DB::table('password_reset_tokens')->where(['email' => $request->email])->delete();
-
-        return to_route('user.login.form')->with('success', 'Your password has been changed!');
-    }
-
     public function logout(Request $request)
     {
-        $tempUser = session()->get('temp_user'); // Store the value before clearing the session
-
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
-        if ($tempUser !== null) {
-            session(['temp_user' => $tempUser]); // Restore the value if it was previously set
-        }
 
         return redirect()->intended('/');
     }

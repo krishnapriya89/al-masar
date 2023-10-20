@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AuthPageCommonContent extends Model
@@ -17,7 +18,18 @@ class AuthPageCommonContent extends Model
         return $this->imageDirectory;
     }
 
-    public function scopePage($query, $page){
+    public function scopePage($query, $page)
+    {
         return $query->where('page', $page);
+    }
+
+    public function getImageValueAttribute()
+    {
+        if ($this->image && Storage::disk('public')->exists($this->image))
+            return Storage::url($this->image);
+        elseif (file_exists(public_path($this->image)))
+            return asset($this->image);
+        else
+            return asset('frontend/images/default-img.png');
     }
 }

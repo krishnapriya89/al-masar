@@ -1,5 +1,11 @@
 @extends('frontend::layouts.app')
 @section('title', 'Registration')
+@section('meta_title',@$auth_page_cms->meta_title)
+@section('meta_keywords',@$auth_page_cms->meta_keywords)
+@section('meta_description',@$auth_page_cms->meta_description)
+@section('other_meta_tags')
+    {!! @$auth_page_cms->other_meta_tags !!}
+@endsection
 @push('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
@@ -16,10 +22,10 @@
                 <div class="FormBx">
                     <div class="flxBx">
                         <div class="lftBx">
-                            <img src="{{ asset('frontend/images/reg.jpg') }}" alt="">
+                            <img src="{{ $auth_page_cms->image_value }}" alt="">
                         </div>
                         <div class="ritBx">
-                            <div class="title">Register</div>
+                            <div class="title">{{ $auth_page_cms->form_title ?? 'Register' }}</div>
                             <form action="{{ route('user.register.store') }}" id="RegisterForm" name="RegisterForm"
                                 enctype="multipart/form-data" method="POST">
                                 @csrf

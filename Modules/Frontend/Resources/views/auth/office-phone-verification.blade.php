@@ -1,6 +1,11 @@
 @extends('frontend::layouts.app')
 @section('title', 'Office Phone Verification')
-
+@section('meta_title',@$auth_page_cms->meta_title)
+@section('meta_keywords',@$auth_page_cms->meta_keywords)
+@section('meta_description',@$auth_page_cms->meta_description)
+@section('other_meta_tags')
+    {!! @$auth_page_cms->other_meta_tags !!}
+@endsection
 @section('content')
     <div id="pageWrapper" class="registerPage InnerPage">
         <section id="UserLogin">
@@ -8,10 +13,10 @@
                 <div class="OtpFormBx">
                     <div class="flxBx">
                         <div class="lftBx">
-                            <img src="{{ asset('frontend/images/otp.jpg') }}" alt="">
+                            <img src="{{ $auth_page_cms->image_value }}" alt="">
                         </div>
                         <div class="ritBx">
-                            <div class="title">OTP Verification</div>
+                            <div class="title">{{ $auth_page_cms->form_title ?? ' OTP Verification' }}</div>
                             <div class="subT">Enter the OTP send to Phone: <span>{{ $user->full_office_phone_number }}</span></div>
                             <form action="{{ route('user.verify-office-phone') }}" id="OfficePhoneOtpForm" class="optB" method="POST" autocomplete="off">
                                 @csrf

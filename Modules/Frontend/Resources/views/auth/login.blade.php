@@ -1,6 +1,11 @@
 @extends('frontend::layouts.app')
 @section('title', 'Login')
-
+@section('meta_title',@$auth_page_cms->meta_title)
+@section('meta_keywords',@$auth_page_cms->meta_keywords)
+@section('meta_description',@$auth_page_cms->meta_description)
+@section('other_meta_tags')
+    {!! @$auth_page_cms->other_meta_tags !!}
+@endsection
 @section('content')
     <div id="pageWrapper" class="registerPage InnerPage">
         <section id="UserLogin">
@@ -8,14 +13,14 @@
                 <div class="LoginFormBx">
                     <div class="flxBx">
                         <div class="lftBx">
-                            <img src="{{ asset('frontend/images/log.jpg') }}" alt="">
+                            <img src="{{ $auth_page_cms->image_value }}" alt="">
                         </div>
                         <div class="ritBx">
                             <div class="topB">
                                 <form action="{{ route('user.login') }}" id="UserLoginForm" name="UserLoginForm"
                                     method="POST">
                                     @csrf
-                                    <div class="title">Login</div>
+                                    <div class="title">{{ $auth_page_cms->form_title ?? 'Login' }}</div>
                                     <div class="form-group">
                                         <input type="text" name="login" id="login"
                                             placeholder="Phone Number or Email Id"
