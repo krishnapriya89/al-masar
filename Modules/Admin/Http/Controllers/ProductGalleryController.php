@@ -47,24 +47,26 @@ class ProductGalleryController extends Controller
         $request->validate(
             [
                 'file_type' => 'required|in:Image,Video',
-                'image_file.*' => 'required_if:file_type,Image|image|mimes:jpg,jpeg,webp,png|max:2048',
+                'image_files' => 'required_if:file_type,Image|array',
+                'image_files.*' => 'image|mimes:jpg,jpeg,webp,png|max:2048',
                 'video_file'     => 'required_if:file_type,Video|mimes:mp4',
                 'thumb_image' => 'required_if:file_type,Video||image|mimes:jpg,jpeg,webp,png|max:2048'
             ],
             [
-                'image_file.required_if' => 'This field is required',
-                'image_file.image' => 'The file must be an image',
-                'image_file.mimes' => 'The file must be an image',
+                'image_files.required_if' => 'This field is required',
+                'image_files.*.image' => 'The file must be an image',
+                'image_files.*.mimes' => 'The file must be an image',
+                'image_files.*.max' => 'The file  file field must not be greater than 2MB.',
                 'video_file.required_if' => 'This field is required',
-                'video_file'      => 'The file must be an video',
+                'video_file.mimes' => 'The file must be an video',
                 'thumb_image.required_if' => 'This field is required',
                 'thumb_image' => 'The file must be an image',
             ]
         );
 
-        if ($request->hasFile('image_file')) {
+        if ($request->hasFile('image_files')) {
             $image_count = $image_saved_count = 0;
-            foreach ($request->file('image_file') as $image) {
+            foreach ($request->file('image_files') as $image) {
                 $image_count++;
                 $gallery = new ProductGallery();
                 $gallery->product_id = $product_id;
@@ -83,7 +85,7 @@ class ProductGalleryController extends Controller
             else {
                 return to_route('product-gallery.index', base64_encode($product_id))->with('error', 'Failed to Upload some Images.');
             }
-        } else {
+        } elseif($request->hasFile('video_file')) {
             $gallery = new ProductGallery();
             $gallery->product_id = $product_id;
             $gallery->file_type = $request->file_type;
@@ -104,6 +106,9 @@ class ProductGalleryController extends Controller
             } else {
                 return redirect()->route('product-gallery.index', base64_encode($product_id))->with('error', 'Failed to create Product Gallery.');
             }
+        }
+        else {
+            return back()->with('error', 'Please upload files');
         }
     }
 
