@@ -69,6 +69,28 @@
                         </ul>
                     @endif --}}
                 </div>
+                <div class="mobVew">
+                    <div class="searchBx">
+                        <form action="">
+                            <div class="flxB">
+                                <input type="search" class="form-control" name="mob_listing_search" id="mob_listing_search"
+                                    placeholder="Search for Products">
+                                <button type="button">
+                                    <svg viewBox="0 0 19.993 20">
+                                        <g id="layer1" transform="translate(0 0)">
+                                            <path id="circle2017"
+                                                d="M9.481,291.161a8.971,8.971,0,1,0,5.586,15.974l3.735,3.733a1,1,0,0,0,1.413-1.411l-3.735-3.735a8.957,8.957,0,0,0-7-14.561Zm0,1.993a6.978,6.978,0,1,1-6.974,6.974,6.958,6.958,0,0,1,6.974-6.974Z"
+                                                transform="translate(-0.514 -291.161)" />
+                                        </g>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="accordion" id="Productaccordion">
+                        @include('frontend::includes.product-list-mob')
+                    </div>
+                </div>
             </div>
         </section>
     </div>
