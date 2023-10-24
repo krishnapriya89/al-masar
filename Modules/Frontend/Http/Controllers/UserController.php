@@ -11,6 +11,7 @@ use App\Models\ProfileOtp;
 use App\Models\OrderStatus;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Helpers\FrontendHelper;
 use App\Models\SiteCommonContent;
 use Illuminate\Routing\Controller;
@@ -40,13 +41,41 @@ class UserController extends Controller
         $amount_to_be_paid_order_count = $amount_to_be_paid_query->count();
         $total_amount_to_be_py = $amount_to_be_paid_query->sum(DB::raw('grand_total - payment_received_amount'));
 
+        //graph data
+        $currentYear = Carbon::now()->year;
+
+        //delivered order count
+        $graph_data = Order::select(
+                DB::raw('MONTH(created_at) as month'),
+                DB::raw('COUNT(*) as order_count')
+            )
+            ->where('user_id', Auth::guard('web')->id())->where('order_status_id', 4)
+            ->whereYear('created_at', $currentYear)
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->orderBy('month')
+            ->pluck('order_count', 'month')
+            ->toArray();
+
+        // Fill in months with no orders with a count of 0
+        for ($month = 1; $month <= 12; $month++) {
+            if (!isset($graph_data[$month])) {
+                $graph_data[$month] = 0;
+            }
+        }
+
+        ksort($graph_data); //sort by month
+
+        $graph_data = array_values($graph_data); //removing index
+        //end graph data
+
         return view('frontend::user.dashboard', compact(
             'pending_order_count',
             'accepted_order_count',
             'delivered_order_count',
             'rejected_order_count',
             'amount_to_be_paid_order_count',
-            'total_amount_to_be_py'
+            'total_amount_to_be_py',
+            'graph_data'
         ));
     }
 

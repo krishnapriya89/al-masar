@@ -89,13 +89,13 @@
                             </div>
                         </div>
 
-                        {{-- <div class="chartBox">
+                        <div class="chartBox">
                             <div class="chart">
                                 <div class="ltXt">Delivered Order Count </div>
                                 <canvas id="chart" width="600" height="300"></canvas>
                                 <div class="btXt">Months </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
 @endsection
 @push('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
-    {{-- <script>
+    <script>
         let ctx = document.getElementById("chart").getContext('2d');
 
         var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
@@ -143,7 +143,7 @@
                     label: "",
                     backgroundColor: "rgba(0, 0, 0, 0)",
                     borderColor: gradientStroke,
-                    data: [0, 10, 35, 35, 20, 20, 40, 40, 25, 30, 30, 70],
+                    data:  @json($graph_data),
                     pointBorderColor: "rgba(255,255,255,0)",
                     pointBackgroundColor: "rgba(255,255,255,0)",
                     pointBorderWidth: 0,
@@ -187,5 +187,5 @@
                 }
             }
         });
-    </script> --}}
+    </script>
 @endpush
