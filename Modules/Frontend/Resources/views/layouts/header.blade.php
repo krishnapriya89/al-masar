@@ -42,6 +42,13 @@
                             </form>
                         </div>
                         <div class="TBFLXBX">
+                            <a href="javascript:void(0)" class="themeChange" id="DarkMode">
+                                <svg viewBox="0 0 24 24">
+                                    <path clip-rule="evenodd"
+                                        d="m11.25 3.78363c-4.20487.37892-7.5 3.91284-7.5 8.21637 0 4.3035 3.29513 7.8374 7.5 8.2164zm-9 8.21637c0-5.38478 4.36522-9.75 9.75-9.75 5.3848 0 9.75 4.36522 9.75 9.75 0 5.3848-4.3652 9.75-9.75 9.75-5.38478 0-9.75-4.3652-9.75-9.75z"
+                                        fill-rule="evenodd" />
+                                </svg>
+                            </a>
                             <a data-bs-toggle="modal" data-bs-target="#SearchModal" href="javascript:void(0)"
                                 class="mobSearch">
                                 <svg viewBox="0 0 19.993 20">
@@ -76,8 +83,8 @@
                                         </div>
                                     </a>
                                 @endif
-                                <div id="MyaccountDropMenu" class="dropdown-menu"
-                                    aria-labelledby="dropdownMenuButton1" style="">
+                                <div id="MyaccountDropMenu" class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
+                                    style="">
                                     @if (Auth::guard('web')->check())
                                         <div class="boxCntnt">
                                             <a href="{{ route('user.dashboard') }}" class="active">
@@ -117,7 +124,8 @@
                                             </a>
                                         </div>
                                         <div class="boxCntnt">
-                                            <a href="{{ route('user.order') }}" class="{{ Nav::isRoute('user.order')}}">
+                                            <a href="{{ route('user.order') }}"
+                                                class="{{ Nav::isRoute('user.order') }}">
                                                 <svg viewBox="0 0 21.667 21.667">
                                                     <g id="_x33_1_x2C__order_x2C__box_x2C__delivery_x2C__logistics_x2C__receiving"
                                                         transform="translate(-16 -16)">
@@ -232,7 +240,8 @@
                                             </a>
                                         </div>
                                         <div class="boxCntnt">
-                                            <a href="{{ route('user.profile') }}" class="lnk {{ Nav::isRoute('user.profile')}}">
+                                            <a href="{{ route('user.profile') }}"
+                                                class="lnk {{ Nav::isRoute('user.profile') }}">
                                                 <svg viewBox="0 0 19.833 17.996">
                                                     <path id="setting"
                                                         d="M14.038,20.008H6.962a3.129,3.129,0,0,1-2.487-1.436L.938,12.446a3.089,3.089,0,0,1,0-2.872L4.476,3.448A3.129,3.129,0,0,1,6.963,2.012h7.075a3.129,3.129,0,0,1,2.487,1.436l3.538,6.126a3.089,3.089,0,0,1,0,2.872l-3.538,6.126A3.128,3.128,0,0,1,14.038,20.008ZM6.962,3.3A1.837,1.837,0,0,0,5.59,4.09L2.051,10.217a1.841,1.841,0,0,0,0,1.586l3.538,6.126a1.837,1.837,0,0,0,1.373.792h7.076a1.837,1.837,0,0,0,1.373-.792L18.949,11.8a1.841,1.841,0,0,0,0-1.586L15.411,4.09A1.837,1.837,0,0,0,14.038,3.3ZM10.5,14.815a3.805,3.805,0,1,1,3.806-3.805A3.81,3.81,0,0,1,10.5,14.815Zm0-6.324a2.519,2.519,0,1,0,2.52,2.519A2.522,2.522,0,0,0,10.5,8.491Z"
@@ -252,7 +261,8 @@
                                             </a>
                                         </div>
                                         <div class="boxFoot">
-                                            <form name="LogoutFom" id="LogoutFom" method="post" action="{{ route('user.logout') }}">
+                                            <form name="LogoutFom" id="LogoutFom" method="post"
+                                                action="{{ route('user.logout') }}">
                                                 @csrf
                                             </form>
                                             <button class="logOut  logout-form-btn" type="button">
@@ -325,7 +335,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="moneyDrop">
+                            <div class="moneyDrop dskFrp">
                                 <div class="icon">
                                     <svg viewBox="0 0 19.133 15.059">
                                         <path id="Path_101945" data-name="Path 101945"
@@ -341,7 +351,8 @@
                                 </div>
                                 <select class="selectpicker" id="language-change">
                                     @foreach ($currencies as $currency)
-                                        <option data-content='{{ $currency->symbol }}' value="{{ $currency->currencyCode->title }}">
+                                        <option @selected($loop->first) data-content='{{ $currency->symbol }}'
+                                            value="{{ $currency->currencyCode->title }}">
                                             {{ $currency->symbol }}
                                         </option>
                                     @endforeach
@@ -365,14 +376,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="MenuIcon">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#HeaderPOP">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="MenuIcon">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#HeaderPOP">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </div>
     <div class="HrBpx">
@@ -384,20 +396,47 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-body">
+                                    <div class="moneyDrop mobV">
+                                        <div class="icon">
+                                            <svg viewBox="0 0 19.133 15.059">
+                                                <path id="Path_101945" data-name="Path 101945"
+                                                    d="M22.791,14.732h-.847l-1.6-4.588a.316.316,0,0,0-.434-.195L6.132,14.732H4.342A.342.342,0,0,0,4,15.074v9.566a.342.342,0,0,0,.342.342h18.45a.342.342,0,0,0,.342-.342V15.074A.342.342,0,0,0,22.791,14.732Zm-2.976-4.042,1.4,4.042h-.362l-.584-1.671a.342.342,0,0,0-.434-.208A1.367,1.367,0,0,1,18.1,12a.342.342,0,0,0-.437-.2L9.244,14.732H8.219Zm.318,4.042H11.322l6.273-2.183a2.052,2.052,0,0,0,2.139,1.035ZM22.45,24.3H4.683V15.416H22.45Z"
+                                                    transform="translate(-4 -9.923)" />
+                                                <path id="Path_101946" data-name="Path 101946"
+                                                    d="M22.375,27.342A.342.342,0,0,0,22.033,27H9.05a.342.342,0,0,0-.342.342,1.367,1.367,0,0,1-1.367,1.367A.342.342,0,0,0,7,29.05v4.1a.342.342,0,0,0,.342.342,1.367,1.367,0,0,1,1.367,1.367.342.342,0,0,0,.342.342H22.033a.342.342,0,0,0,.342-.342,1.367,1.367,0,0,1,1.367-1.367.342.342,0,0,0,.342-.342v-4.1a.342.342,0,0,0-.342-.342A1.367,1.367,0,0,1,22.375,27.342ZM23.4,32.836a2.05,2.05,0,0,0-1.681,1.681H9.364a2.05,2.05,0,0,0-1.681-1.681V29.364a2.05,2.05,0,0,0,1.681-1.681H21.719A2.05,2.05,0,0,0,23.4,29.364Z"
+                                                    transform="translate(-5.975 -21.165)" />
+                                                <path id="Path_101947" data-name="Path 101947"
+                                                    d="M26.733,31a2.733,2.733,0,1,0,2.733,2.733A2.733,2.733,0,0,0,26.733,31Zm0,4.783a2.05,2.05,0,1,1,2.05-2.05A2.05,2.05,0,0,1,26.733,35.783Z"
+                                                    transform="translate(-17.167 -23.799)" />
+                                            </svg>
+                                        </div>
+                                        <select class="selectpicker" id="language-change">
+                                            @foreach ($currencies as $currency)
+                                                <option @selected($loop->first)
+                                                    data-content='{{ $currency->symbol }}'
+                                                    value="{{ $currency->currencyCode->title }}">
+                                                    {{ $currency->symbol }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <div class="accordion" id="AccordMenu">
                                         @foreach ($site_menus as $site_menu)
-                                            <div class="accordion-item dropdown">
+                                            <div class="accordion-item {{ $site_menu->activeChildren->isNotEmpty() ? 'dropdown' : '' }}">
                                                 <div class="accordion-header" id="hd{{ $loop->iteration }}">
                                                     <a href="{{ route('product-category', $site_menu->slug) }}"
                                                         class="dskLnk">{{ $site_menu->title }}</a>
                                                     <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#{{ $loop->iteration }}"
-                                                        aria-expanded="false" aria-controls="{{ $loop->iteration }}">
-                                                        <svg viewBox="0 0 12.834 7">
-                                                            <path id="Down_Arrow_3_"
-                                                                d="M26.417,47A.582.582,0,0,1,26,46.829L20.171,41A.583.583,0,1,1,21,40.171l5.421,5.421,5.421-5.421a.583.583,0,1,1,.825.825l-5.834,5.834A.582.582,0,0,1,26.417,47Z"
-                                                                transform="translate(-20 -40)" />
-                                                        </svg>
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#cd{{ $loop->iteration }}"
+                                                        aria-expanded="false" aria-controls="cd{{ $loop->iteration }}">
+                                                        @if ($site_menu->activeChildren->isNotEmpty())
+                                                            <svg viewBox="0 0 12.834 7">
+                                                                <path id="Down_Arrow_3_"
+                                                                    d="M26.417,47A.582.582,0,0,1,26,46.829L20.171,41A.583.583,0,1,1,21,40.171l5.421,5.421,5.421-5.421a.583.583,0,1,1,.825.825l-5.834,5.834A.582.582,0,0,1,26.417,47Z"
+                                                                    transform="translate(-20 -40)" />
+                                                            </svg>
+                                                        @endif
                                                     </button>
                                                 </div>
                                                 @if ($site_menu->activeChildren->isNotEmpty())
@@ -448,4 +487,3 @@
     </ul>
 </div>
 @endif
-

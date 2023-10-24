@@ -63,7 +63,7 @@
     <script type="text/javascript" src="{{ asset('frontend/js/jquery-additional-methods-1.19.5.min.js') }}"></script>
 </head>
 
-<body class="{{ Session::get('theme')}} ">
+<body class="{{ Session::get('theme') }} {{ Nav::isRoute('home', 'HomePg') }}">
     {{-- header --}}
     @if (Auth::guard('web')->check())
         @include('frontend::layouts.header')
@@ -125,39 +125,109 @@
             $('.selectpicker').selectpicker();
         });
 
-        // function wcqib_refresh_quantity_increments() {
-        //     jQuery("div.quantity:not(.buttons_added), td.quantity:not(.buttons_added)").each(function(a, b) {
-        //         var c = jQuery(b);
-        //         c.addClass("buttons_added"), c.children().first().before(
-        //             '<input type="button" value="-" class="minus" />'), c.children().last().after(
-        //             '<input type="button" value="+" class="plus" />')
-        //     })
-        // }
-        // String.prototype.getDecimals || (String.prototype.getDecimals = function() {
-        //     var a = this,
-        //         b = ("" + a).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
-        //     return b ? Math.max(0, (b[1] ? b[1].length : 0) - (b[2] ? +b[2] : 0)) : 0
-        // }), jQuery(document).ready(function() {
-        //     wcqib_refresh_quantity_increments()
-        // }), jQuery(document).on("updated_wc_div", function() {
-        //     wcqib_refresh_quantity_increments()
-        // }), jQuery(document).on("click", ".plus, .minus", function() {
-        //     var a = jQuery(this).closest(".quantity").find(".qty"),
-        //         b = parseFloat(a.val()),
-        //         c = parseFloat(a.attr("max")),
-        //         d = parseFloat(a.attr("min")),
-        //         e = a.attr("step");
-        //     b && "" !== b && "NaN" !== b || (b = 0), "" !== c && "NaN" !== c || (c = ""), "" !== d && "NaN" !== d ||
-        //         (
-        //             d = 0), "any" !== e && "" !== e && void 0 !== e && "NaN" !== parseFloat(e) || (e = 1), jQuery(
-        //             this)
-        //         .is(".plus") ? c && b >= c ? a.val(c) : a.val((b + parseFloat(e)).toFixed(e.getDecimals())) : d &&
-        //         b <=
-        //         d ? a.val(d) : b > 0 && a.val((b - parseFloat(e)).toFixed(e.getDecimals())), a.trigger("change")
-        // });
+        var isAuthenticated = @json(auth()->check());
+
+        var $hamburger = $(".MenuBtn");
+        TweenLite.set("#MainMenu .MainMenuLinks li", {
+                autoAlpha: 0,
+                x: -110
+            }),
+            TweenLite.set("#MainMenu .MenuBtn", {
+                autoAlpha: 0,
+                x: -110
+            })
+        var hamburgerMotion = new TimelineMax()
+            .from("#MainMenu", 0.4, {
+                autoAlpha: 0,
+                x: "-100%"
+            }, 0.2, 0.5)
+            .staggerTo("#MainMenu .MainMenuLinks li", 0.2, {
+                autoAlpha: 1,
+                x: 0,
+                ease: Sine.easeOut
+            }, 0.1, 0.3)
+            .to("#MainMenu .MenuBtn", 0.3, {
+                autoAlpha: 1,
+                x: 0
+            }, 1, 0.3)
+            .reverse();
+        $hamburger.on("click", function(e) {
+            hamburgerMotion.reversed(!hamburgerMotion.reversed());
+        });
+
+        if (!isAuthenticated) {
+            $(".carousel").swipe({
+                swipe: function(event, direction, distance, duration, fingerCount,
+                    fingerData) {
+                    if (direction == 'left') $(this).carousel('next');
+                    if (direction == 'right') $(this).carousel('prev');
+                },
+                allowPageScroll: "vertical"
+            })
+
+            var controller = new ScrollMagic.Controller();
+            var scene = new ScrollMagic.Scene({
+                    triggerElement: '#AboutSec',
+                    triggerHook: 0.6
+                })
+                .setClassToggle('#AboutSec', 'isVisible')
+                .on("enter", function() {
+                    $('.item .count').each(function() {
+                        var $this = $(this),
+                            countTo = $this.attr('data-count');
+
+                        $({
+                            countNum: $this.text()
+                        }).animate({
+                            countNum: countTo
+                        }, {
+
+                            duration: 2000,
+                            easing: 'linear',
+                            step: function() {
+                                $this.text(Math.floor(this.countNum));
+                            },
+                            complete: function() {
+                                $this.text(this.countNum);
+                            }
+
+                        });
+                    });
+                })
+                .addTo(controller);
+
+            $(function() {
+                var lis_count = $('#WhyChooseSec .item').length;
+                var active_li_index = 0;
+
+                setInterval(function() {
+                    if ($('#WhyChooseSec .item.active').index() == lis_count - 1)
+                        active_li_index = 0;
+                    else
+                        active_li_index++;
+
+                    $('#WhyChooseSec .item.active').removeClass('active');
+                    $('#WhyChooseSec .item').eq(active_li_index).addClass('active');
+                }, 4000);
+            });
+
+
+            $(function() {
+                var lis_count = $('#HowToBuy .cmn_bx').length;
+                var active_li_index = 0;
+
+                setInterval(function() {
+                    if ($('#HowToBuy .cmn_bx.active').index() == lis_count - 1)
+                        active_li_index = 0;
+                    else
+                        active_li_index++;
+
+                    $('#HowToBuy .cmn_bx.active').removeClass('active');
+                    $('#HowToBuy .cmn_bx').eq(active_li_index).addClass('active');
+                }, 4000);
+            });
+        }
     </script>
 </body>
 
 </html>
-
-
