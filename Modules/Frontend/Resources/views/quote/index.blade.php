@@ -162,15 +162,13 @@
                                                 </div>
                                                 <div class="flxBx">
                                                     <div class="ltbx">
+                                                        <div class="lbl">Specifications</div>
+                                                        <div class="txt"><p>{{ $quote->product->specification ?? '--' }}</p></div>
                                                     </div>
                                                     <div class="rtbx">
-                                                        <div class="txt">Total</div>
-                                                        <div class="price"><span class="product-price-{{ $quote->id }}">@currencySymbolWithConvertedPrice($quote->product_total_price)</span></div>
+                                                        <div class="lbl">Total</div>
+                                                        <div class="price txt"><span class="product-price-{{ $quote->id }}">@currencySymbolWithConvertedPrice($quote->product_total_price)</span></div>
                                                     </div>
-                                                </div>
-                                                <div class="spec">
-                                                    <div class="ttle">Specifications</div>
-                                                    <p>{{ $quote->product->specification ?? '--' }}</p>
                                                 </div>
                                                 <div class="btnBx">
                                                     <button type="button" class="dlte quote-delete-btn" data-quote-id="{{ $quote->id }}"
@@ -200,7 +198,7 @@
                                 </div>
                             @endforeach
                             <div class="btnBx">
-                                <a href="javascript:void(0)" class="vdtails hoveranim"><span>Submit
+                                <a href="{{ route('user.submit-quote') }}" class="vdtails hoveranim"><span>Submit
                                     Quotation</span></a>
                             </div>
                         </div>
