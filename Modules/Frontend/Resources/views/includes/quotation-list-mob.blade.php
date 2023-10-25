@@ -77,7 +77,10 @@
                                         <li><span>Specifications:</span>{{ $quotation_detail->product->specification }}
                                         </li>
                                         @if ($quotation_detail->remarks)
-                                            <li><span>Remarks:</span>{{ $quotation_detail->remarks }}</li>
+                                            <li><span>Remarks:</span><a href="javascript:void(0)" class="notification">
+                                                <img src="{{ asset('frontend/images/noti.svg') }}" alt="">
+                                                <abbr data-title="{{ $quotation_detail->remarks }}"></abbr>
+                                            </a></li>
                                         @endif
                                     </ul>
                                     <div class="btnBx quotation-detail-action-{{ $quotation_detail->id }}">

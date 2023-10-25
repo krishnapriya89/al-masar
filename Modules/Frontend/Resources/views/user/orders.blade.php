@@ -80,177 +80,7 @@
                 </div>
                 <div class="mobVew">
                     <div class="accordion" id="Productaccordion">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    <div class="flxBx">
-                                        <div class="ltBx">
-                                            <div class="ordrId"><span>Order ID: </span>AMAS0245794
-                                            </div>
-                                        </div>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
-                                data-bs-parent="#Productaccordion">
-                                <div class="accordion-body">
-                                    <div class="dBlock">
-                                        <ul>
-                                            <li><span>Order ID:</span>AMAS0245794</li>
-                                            <li><span>Date:</span>14.09.2023</li>
-                                            <li><span>No. of Items:</span>4</li>
-                                            <li><span>Total Price:</span> $900</li>
-                                            <li><span>Status:</span>In Progress</li>
-                                            <li><span>Payment Mode:</span>Credit Card</li>
-                                        </ul>
-                                    </div>
-                                    <div class="accordion accordion-flush" id="dtailAccord">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-headingOne">
-                                                <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
-                                                    aria-expanded="false" aria-controls="flush-collapseOne">
-                                                    View Details
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                                aria-labelledby="flush-headingOne" data-bs-parent="#dtailAccord">
-                                                <div class="accordion-body">
-                                                    <ul>
-                                                        <li><span>Product Name:</span>iPhone 14 Pro</li>
-                                                        <li><span>Product Code:</span>A2894</li>
-                                                        <li><span>Qty:</span>20</li>
-                                                        <li><span>Price:</span>$400</li>
-                                                        <li><span>Status:</span>
-                                                            <div class="sts clr1">Action from Vendor</div>
-                                                        </li>
-                                                        <li><span>Admin Approved Price:</span>$400</li>
-                                                        <li><span>Specifications:</span>Lorem ipsum dolor sit amet</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <div class="flxBx">
-                                        <div class="ltBx">
-                                            <div class="ordrId"><span>Order ID: </span>AMAS0245794
-                                            </div>
-                                        </div>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                data-bs-parent="#Productaccordion">
-                                <div class="accordion-body">
-                                    <div class="dBlock">
-                                        <ul>
-                                            <li><span>Product Name:</span>iPhone 14 Pro</li>
-                                            <li><span>Product Code:</span>A2894</li>
-                                            <li><span>Qty:</span>20</li>
-                                            <li><span>Price:</span>$400</li>
-                                            <li><span>Status:</span>
-                                                <div class="sts clr1">Action from Vendor</div>
-                                            </li>
-                                            <li><span>Admin Approved Price:</span>$400</li>
-                                            <li><span>Specifications:</span>Lorem ipsum dolor sit amet</li>
-                                        </ul>
-                                    </div>
-                                    <div class="accordion accordion-flush" id="dtailAccord">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-headingTwo">
-                                                <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
-                                                    aria-expanded="false" aria-controls="flush-collapseTwo">
-                                                    View Details
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                                                aria-labelledby="flush-headingTwo" data-bs-parent="#dtailAccord">
-                                                <div class="accordion-body">
-                                                    <ul>
-                                                        <li><span>Product Name:</span>iPhone 14 Pro</li>
-                                                        <li><span>Product Code:</span>A2894</li>
-                                                        <li><span>Qty:</span>20</li>
-                                                        <li><span>Price:</span>$400</li>
-                                                        <li><span>Status:</span>
-                                                            <div class="sts clr1">Action from Vendor</div>
-                                                        </li>
-                                                        <li><span>Admin Approved Price:</span>$400</li>
-                                                        <li><span>Specifications:</span>Lorem ipsum dolor sit amet</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    <div class="flxBx">
-                                        <div class="ltBx">
-                                            <div class="ordrId"><span>Order ID: </span>AMAS0245794
-                                            </div>
-                                        </div>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                                data-bs-parent="#Productaccordion">
-                                <div class="accordion-body">
-                                    <div class="dBlock">
-                                        <ul>
-                                            <li><span>Product Name:</span>iPhone 14 Pro</li>
-                                            <li><span>Product Code:</span>A2894</li>
-                                            <li><span>Qty:</span>20</li>
-                                            <li><span>Price:</span>$400</li>
-                                            <li><span>Status:</span>
-                                                <div class="sts clr1">Action from Vendor</div>
-                                            </li>
-                                            <li><span>Admin Approved Price:</span>$400</li>
-                                            <li><span>Specifications:</span>Lorem ipsum dolor sit amet</li>
-                                        </ul>
-                                    </div>
-                                    <div class="accordion accordion-flush" id="dtailAccord">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-headingThree">
-                                                <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
-                                                    aria-expanded="false" aria-controls="flush-collapseThree">
-                                                    View Details
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapseThree" class="accordion-collapse collapse"
-                                                aria-labelledby="flush-headingThree" data-bs-parent="#dtailAccord">
-                                                <div class="accordion-body">
-                                                    <ul>
-                                                        <li><span>Product Name:</span>iPhone 14 Pro</li>
-                                                        <li><span>Product Code:</span>A2894</li>
-                                                        <li><span>Qty:</span>20</li>
-                                                        <li><span>Price:</span>$400</li>
-                                                        <li><span>Status:</span>
-                                                            <div class="sts clr1">Action from Vendor</div>
-                                                        </li>
-                                                        <li><span>Admin Approved Price:</span>$400</li>
-                                                        <li><span>Specifications:</span>Lorem ipsum dolor sit amet</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @include('frontend::includes.order-list-mob')
                     </div>
                 </div>
             </div>
@@ -340,7 +170,6 @@
         });
 
         $('body').on('change', '.order-attachment', function() {
-            console.log('yes');
             // file input data taking
             var fileInput = this;
             var uid = $(fileInput).data('uid');
@@ -375,9 +204,8 @@
                     success: function(response) {
                         if (response.status) {
                             toastr.success(response.message);
-                            console.log($(fileInput).parent().parent());
                             if (response.url)
-                                $(fileInput).parent().parent().html(`<a href="` + response.url +
+                                $('.fileUploadInput'+uid).html(`<a href="` + response.url +
                                     `" target="_blank" download=""><i class="fa fa-download">Download</i></a>`
                                     );
                         } else {

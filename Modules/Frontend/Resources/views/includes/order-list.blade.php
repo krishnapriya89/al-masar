@@ -28,8 +28,8 @@
                 </div>
                 <div class="item">
                     @if ($order->payment_id == 2 && ($order->attachment == '' || $order->attachment == NULL))
-                        <div class="fileUploadInput">
-                            <label for="file-upload" class="custom-file-upload">
+                        <div class="fileUploadInput fileUploadInput{{ $order->uid }}">
+                            <label for="file-upload{{ $loop->iteration }}" class="custom-file-upload">
                                 Upload
                             </label>
                             <input id="file-upload{{ $loop->iteration }}" name='order_attachment' type="file"
@@ -44,7 +44,9 @@
                             </div>
                         </div>
                     @elseif ($order->attachment)
-                        <a href="{{ Storage::url($order->attachment) }}" target="_blank" download=""><i class="fa fa-download">Download</i></a>
+                        <div class="fileUploadInput">
+                            <a href="{{ Storage::url($order->attachment) }}" target="_blank" download=""><i class="fa fa-download">Download</i></a>
+                        </div>
                     @endif
                 </div>
             </button>
