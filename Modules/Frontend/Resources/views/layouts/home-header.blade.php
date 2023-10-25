@@ -101,10 +101,11 @@
         </div>
     </div>
 </header>
+@if ($site_common_content->whatsapp_number)
 <div class="fixedRit">
     <ul>
         <li>
-            <a class="whatsapp" target="_blank" href="https://wa.me/+971565378343" target="_blank">
+            <a class="whatsapp" target="_blank" href="https://wa.me/{{$site_common_content->whatsapp_number}}" target="_blank">
                 <div class="align">
                     <img src="{{ asset('frontend/images/whatsapp.svg') }}" alt="">
                 </div>
@@ -112,3 +113,4 @@
         </li>
     </ul>
 </div>
+@endif

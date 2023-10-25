@@ -364,7 +364,7 @@
                 <div class="card">
                     <div class="card-footer">
                         <span class="text-danger add-btn-error-cls"></span><br>
-                        <button type="submit" class="btn btn-primary" id="">Create</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Create</button>
                     </div>
                 </div>
             </div>
