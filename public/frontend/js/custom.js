@@ -269,9 +269,9 @@ $(document).ready(function () {
     $('body').on("click", ".list-add-to-quote", function () {
         var _this = $(this);
 
-        var quantity = _this.closest('tr').find("input[name='quantity'").val();
-        var bid_price = _this.closest('tr').find("input[name='bid_price'").val();
         var product = _this.data('product');
+        var quantity = $('.product-quantity-'+product).val();
+        var bid_price = $('.product-bid-price-'+product).val();
 
         $.ajax({
             url: '/add-to-quote',
