@@ -115,11 +115,12 @@ $(document).ready(function () {
         var _this = $(this);
         var bid_price = null;
 
-        var min_quantity_to_buy = _this.siblings('input[name="quantity"]').attr("min");
-        var quantity = _this.siblings('input[name="quantity"]');
+        var product = _this.data("product");
+        var min_quantity_to_buy = $('.product-quantity-'+product).attr("min");
+        var quantity = $('.product-quantity-'+product);
         var currentValue = parseInt(quantity.val());
         var operation = _this.data("operation");
-        bid_price = _this.closest('tr').find('input[name="bid_price"]').val();
+        bid_price = $('.product-bid-price-'+product).val();
 
         var quantityStatus = true;
 
@@ -138,7 +139,6 @@ $(document).ready(function () {
 
         var quantityValue = parseInt(quantity.val());
 
-        var product = _this.data("product");
         if (product && quantityValue && quantityStatus) {
             clearTimeout(changeQuantityDebounceTimer);
             calculatePrice(quantityValue, product, bid_price, _this);
@@ -153,8 +153,8 @@ $(document).ready(function () {
         var min_quantity_to_buy = parseInt(_this.attr("min"));
         var quantity = parseInt(_this.val());
         var product = _this.data("product");
-        bid_price = _this.closest('tr').find('input[name="bid_price"]').val();
-
+        bid_price = $('.product-bid-price-'+product).val();
+        $('.product-quantity-'+product).val(quantity);
         if (min_quantity_to_buy <= quantity) {
             clearTimeout(changeQuantityDebounceTimer);
             calculatePrice(quantity, product, bid_price, _this);
@@ -171,10 +171,10 @@ $(document).ready(function () {
         var _this = $(this);
         var bid_price = null;
 
-        var quantity = _this.closest('tr').find('input[name="quantity"]').val();
         var product = _this.data("product");
+        var quantity = $('.product-quantity-'+product).val();
         bid_price = _this.val();
-
+        $('.product-bid-price-'+product).val(bid_price);
         if (bid_price && bid_price < 1) {
             toastr.error('Please enter the bid price value min 1');
             _this.val(1);
@@ -481,8 +481,8 @@ function calculatePrice(quantity, product, bid_price, _this) {
             success: function (response) {
                 if (response.status) {
                     //product list
-                    if (_this.closest('tr').find('.product-total-price-div').length > 0)
-                        _this.closest('tr').find('.product-total-price-div').text(response.price);
+                    if ($('.product-total-price-div-'+product).length > 0)
+                        $('.product-total-price-div-'+product).text(response.price);
                     else {
                         //product detail page
                         if (bid_price != null && bid_price != '' && bid_price != undefined) {
