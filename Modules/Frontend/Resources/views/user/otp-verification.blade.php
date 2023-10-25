@@ -40,7 +40,7 @@
                         <button type="button" class="hoveranim btn-submit profile-otp-form-btn"><span>Verify</span></button>
                         <span class="error-span" style="color: red;">
                             @if ($errors->any())
-                                Please enter otp
+                                Please enter OTP
                             @endif
                         </span>
                     </div>
@@ -145,14 +145,14 @@
                         .fail(function(response) {
                             $(".profile-otp-form-btn").prop("disabled", false);
                             if (response.responseJSON.length > 0)
-                                $('.error-span').empty().html('Please enter otp');
+                                $('.error-span').empty().html('Please enter OTP');
                             setTimeout(function() {
                                 $('.error-span').empty()
                             }, 1000);
                         });
                 }, 300);
             } else
-                $('.error-span').empty().html('Please enter otp');
+                $('.error-span').empty().html('Please enter OTP');
         });
     </script>
 @endpush

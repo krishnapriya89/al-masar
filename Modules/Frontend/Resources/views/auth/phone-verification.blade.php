@@ -31,7 +31,7 @@
                             </form>
                             <p>OTP not yet received? <a href="javascript:void(0)" class="resend resend-otp-btn">RESEND OTP</a></p>
                             <button type="button" class="hoveranim btn-submit phone-otp-form-btn"><span>Register</span></button>
-                            <span class="error-span" style="color: red;">@if($errors->any()) Please enter otp @endif</span>
+                            <span class="error-span" style="color: red;">@if($errors->any()) Please enter OTP @endif</span>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                     .fail(function (response) {
                         $(".phone-otp-form-btn").prop("disabled", false);
                         if(response.responseJSON.errors.length > 0)
-                            $('.error-span').empty().html('Please enter otp');
+                            $('.error-span').empty().html('Please enter OTP');
                         setTimeout(function () {
                             $('.error-span').empty()
                         }, 1000);
@@ -111,7 +111,7 @@
                 }, 300);
             }
             else
-                $('.error-span').empty().html('Please enter otp');
+                $('.error-span').empty().html('Please enter OTP');
         });
     </script>
 @endpush
