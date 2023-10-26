@@ -82,6 +82,7 @@ Route::group(['middleware' => 'auth.user'], function () {
     //quotation functionalities
     Route::get('/quotation', [QuotationController::class, 'index'])->name('user.quotation');
     Route::get('/quotation-filter', [QuotationController::class, 'filter'])->name('user.quotation.filter');
+    Route::get('/quotation-filter-mob', [QuotationController::class, 'filterMob'])->name('user.quotation.filter.mob');
     Route::post('/vendor-action', [QuotationController::class, 'vendorAction'])->name('user.quotation.vendor-action');
     //checkout
     Route::get('/checkout/{quotation_uid}', [CheckoutController::class, 'index'])->name('checkout');

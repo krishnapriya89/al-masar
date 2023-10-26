@@ -29,6 +29,7 @@ class QuotationController extends Controller
         return view('frontend::quotation.index', compact('quotations'));
     }
 
+    //quotation list filter
     public function filter(Request $request)
     {
         $quotations = Quotation::where('user_id', Auth::guard('web')->id())->where('status', '!=', 5)
@@ -37,6 +38,16 @@ class QuotationController extends Controller
             })
             ->latest()->get();
         return view('frontend::includes.quotation-list', compact('quotations'));
+    }
+    //quotation list filter in mob responsive
+    public function filterMob(Request $request)
+    {
+        $quotations = Quotation::where('user_id', Auth::guard('web')->id())->where('status', '!=', 5)
+            ->when($request->filled('status'), function ($query) use ($request) {
+                $query->where('status', $request->input('status'));
+            })
+            ->latest()->get();
+        return view('frontend::includes.quotation-list-mob', compact('quotations'));
     }
 
     //vendor action from quotation page agree / reject the requote

@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="mobVew">
-                    <div class="accordion" id="Productaccordion">
+                    <div class="accordion" id="QuotationAccordionMob">
                         @include('frontend::includes.quotation-list-mob')
                     </div>
                 </div>
@@ -95,22 +95,20 @@
                             <div class="card">
                                 <div class="cardHeader">
                                     <button class="btn btn-link" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#Category" aria-expanded="false" aria-controls="CategoryFilter">
+                                        data-bs-target="#Category" aria-expanded="true" aria-controls="CategoryFilter">
                                         Status
                                     </button>
                                 </div>
-
-                                <div id="Category" class="collapse" aria-labelledby="headingOne"
+                                <div id="Category" class="collapse show" aria-labelledby="headingOne"
                                     data-bs-parent="#filterAccodion1">
                                     <div class="card-body">
                                         <ul>
-                                            <li><a href="javascript:void(0)" data-value="1">Action from Vendor</a>
-                                            </li>
-                                            <li><a href="javascript:void(0)" data-value="0">Waiting for Approval</a>
-                                            </li>
-                                            <li><a href="javascript:void(0)" data-value="2">Accepted</a></li>
-                                            <li><a href="javascript:void(0)" data-value="3">Rejected</a></li>
-                                            <li><a href="javascript:void(0)" data-value="">All</a></li>
+                                            <li><a href="javascript:void(0)" class="quotation-filter-mob" data-value="">All</a></li>
+                                            <li><a href="javascript:void(0)" class="quotation-filter-mob" data-value="0">Waiting for approval</a></li>
+                                            <li><a href="javascript:void(0)" class="quotation-filter-mob" data-value="1">Action From Vendor</a></li>
+                                            <li><a href="javascript:void(0)" class="quotation-filter-mob" data-value="2">Accepted</a></li>
+                                            <li><a href="javascript:void(0)" class="quotation-filter-mob" data-value="3">Rejected</a></li>
+                                            <li><a href="javascript:void(0)" class="quotation-filter-mob" data-value="4">Rejected by Vendor</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -219,6 +217,22 @@
                 dataType: 'html',
                 success: function(response) {
                     $('#QuotationAccordionWeb').html(response);
+                }
+            });
+        });
+
+        $('.quotation-filter-mob').on('click', function() {
+            var status = $(this).data('value');
+            $.ajax({
+                url: "{{ route('user.quotation.filter.mob' )}}",
+                type: "GET",
+                data: {
+                    status: status,
+                },
+                dataType: 'html',
+                success: function(response) {
+                    $('#QuotationAccordionMob').html(response);
+                    $('#filterAccodionModal').modal('hide');
                 }
             });
         });
