@@ -35,6 +35,7 @@ class SiteSettingsController extends Controller
             'email'=>'required|email'
         ]);
         $common_content = SiteCommonContent::find($id);
+        $common_content->header_note = $request->header_note;
         $common_content->header_phone_number = $request->header_phone_number;
         $common_content->footer_description = $request->footer_description;
         $common_content->enquiry_receive_email = $request->enquiry_receive_email;
@@ -64,5 +65,4 @@ class SiteSettingsController extends Controller
         }
         return redirect()->back()->with('error','Failed to Update Site Common Settings');
     }
-
 }

@@ -242,7 +242,7 @@
                                     </div>
                                 </div>
                                 <div class="expectedP">
-                                    <div class="lbl">Bid Price:</div>
+                                    <div class="lbl">Bid Price (Per Unit):</div>
                                     <input type="text" name="bid_price" id="bid_price"
                                         class="form-control bid-price-detail-page amountField"
                                         data-product="{{ $product->slug }}" placeholder="Enter Amount">
