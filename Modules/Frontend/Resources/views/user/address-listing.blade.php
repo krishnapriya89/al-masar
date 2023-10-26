@@ -99,9 +99,9 @@
                                                 <div class="item" id="address-{{ $shipping_address->id }}">
                                                     <div class="adresBox">
                                                         <input type="radio"
-                                                            id="shippingadd{{ $shipping_address->id }}"
-                                                            class="shippingaddress-{{ $shipping_address->id }} shipping-address-radio-btn"
-                                                            name="shippingaddress"
+                                                            id="shipping-add{{ $shipping_address->id }}"
+                                                            class="shipping-address-{{ $shipping_address->id }} shipping-address-radio-btn"
+                                                            name="shipping-address"
                                                             {{ $shipping_address->is_default ? 'checked' : '' }}>
                                                         <label for="add{{ $shipping_address->id }}">
                                                             <div class="topBFlx">

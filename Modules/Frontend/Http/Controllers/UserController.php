@@ -576,6 +576,7 @@ class UserController extends Controller
             $existingShippingAddress->is_default = 0;
             $existingShippingAddress->save();
         }
+        $shipping_address->is_default        = 1;
 
         if ($shipping_address->save()) {
             if ($request->ajax()) {

@@ -532,8 +532,6 @@ $(".setDefault").click(function () {
     var id = $(this).data("id");
     var type = $(this).data("type");
 
-    console.log($(this));
-
     $.ajax({
         type: "post",
         url: "/update-default",
@@ -542,7 +540,6 @@ $(".setDefault").click(function () {
             type: type,
         },
         success: function (response) {
-            console.log(response);
             if (response.status) {
 
                 toastr.success(response.message);
@@ -564,7 +561,7 @@ $(".setDefault").click(function () {
                 `);
 
                     $('.shipping-address-radio-btn').prop('checked', false);
-                    $('.address-' + id).prop('checked', true);
+                    $('.shipping-address-' + id).prop('checked', true);
                     _this.closest('.shippingAddress').html(`<div class="dfault">
                     <img src="frontend/images/dflt.svg" alt="">
                     <div class="txt">Default</div>
