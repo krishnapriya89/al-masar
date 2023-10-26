@@ -308,8 +308,8 @@ class AuthController extends Controller
             ]);
 
             //sending otp to email
-
-            Mail::send('frontend::emails.email-otp', ['code' => $verification_code], function ($message) use ($identifier) {
+            $siteSettings = SiteCommonContent::first();
+            Mail::send('frontend::emails.email-otp', ['code' => $verification_code,'siteSettings'=>$siteSettings,'user'=>$user], function ($message) use ($identifier) {
                 $message->to($identifier);
                 $message->subject('Al Masar Al Saree Login OTP');
             });

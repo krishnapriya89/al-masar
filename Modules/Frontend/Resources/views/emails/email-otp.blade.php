@@ -39,7 +39,7 @@
                                                     <td style="padding: 0px;">
                                                         <h1
                                                             style="color: #ffffff; font-size: 18px; font-weight: 400; text-align: center; padding: 0 0 0px;margin: 0;">
-                                                            welcome to Al Masar Al Saree</h1>
+                                                            Welcome to Al Masar Al Saree</h1>
                                                     </td>
                                                 </tr>
                                             </tbody>
