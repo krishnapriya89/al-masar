@@ -80,6 +80,7 @@
     </div>
     {{-- toastr --}}
     @include('frontend::layouts.toastr-message')
+    @include('frontend::modals.mob-main-search')
     <!-- BOOTSTRAP --->
 
     <script src="//cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"

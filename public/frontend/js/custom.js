@@ -659,7 +659,23 @@ $('.main-search-input').on('keyup keypress paste', function(){
         dataType: 'html',
         success:function(response)
         {
-           $('.focusBx .results').html(response);
+           $('.mainSearch .results').html(response);
+        }
+    });
+});
+//search products mob
+$('.mob-main-search-input').on('keyup keypress paste', function(){
+    var search_val = $(this).val();
+    $.ajax({
+        url : "/product-search",
+        type : "GET",
+        data : {
+            keyword: search_val
+        },
+        dataType: 'html',
+        success:function(response)
+        {
+           $('#SearchModal .results').html(response);
         }
     });
 });

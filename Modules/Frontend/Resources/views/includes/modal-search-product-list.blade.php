@@ -1,6 +1,5 @@
-
-        @if(@$searched_products)
-        @foreach($searched_products as $searched_product)
+@if (@$searched_products)
+    @foreach ($searched_products as $searched_product)
         <li>
             <a href="{{ route('product-detail', @$searched_product->slug) }}" class="flxBx">
                 <div class="imgBx">
@@ -11,11 +10,7 @@
                 </div>
             </a>
         </li>
-        @endforeach
-        @else
-        <li>No Product Found</li>
-        @endif
-
-
-
-
+    @endforeach
+@else
+    <li>No Product Found</li>
+@endif
