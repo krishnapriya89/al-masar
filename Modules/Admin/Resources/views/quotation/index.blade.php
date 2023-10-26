@@ -331,7 +331,7 @@
                     '</strong>?</br>You will not be able to recover this!';
                 if (remarks)
                     message += '</br> Remarks: <strong>' + remarks + '</strong>';
-                if (amount)
+                if (status == 1 && amount)
                     message += '</br> Amount: <strong>$' + amount + '</strong>';
 
                 Swal.fire({
