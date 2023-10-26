@@ -29,6 +29,7 @@ return new class extends Migration
             $table->foreign('state_id')->references('id')->on('states');
             $table->integer('zip_code')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

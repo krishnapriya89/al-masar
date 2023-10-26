@@ -49,6 +49,34 @@ class User extends Authenticatable
 
     protected $imageDirectory = 'user-attachment';
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            // Delete orders and their details
+            $user->pendingOrders()->each(function ($order) {
+                $order->orderDetails()->each(function ($orderDetail) {
+                    $orderDetail->orderProduct()->delete();
+                    $orderDetail->delete();
+                });
+                $order->address()->delete();
+                $order->delete();
+            });
+
+            // Delete quotations and their details
+            $user->notOrderedQuotations()->each(function ($quotation) {
+                $quotation->quotationDetails()->delete();
+                $quotation->delete();
+            });
+
+            // Delete otp tables
+            $user->phoneOtps()->delete();
+            $user->loginOtps()->delete();
+            $user->emailVerify()->delete();
+        });
+    }
+
     public function getImageDirectory()
     {
         return $this->imageDirectory;
@@ -92,5 +120,13 @@ class User extends Authenticatable
 
     public function getFullOfficePhoneNumberAttribute() {
         return $this->office_phone_code . $this->office_phone;
+    }
+
+    public function pendingOrders() {
+        return $this->hasMany(Order::class)->where('order_status_id', 1);
+    }
+
+    public function notOrderedQuotations() {
+        return $this->hasMany(Quotation::class)->where('status', '!=', 5);
     }
 }

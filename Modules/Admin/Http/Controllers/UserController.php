@@ -32,9 +32,6 @@ class UserController extends Controller
         $user = User::find($id);
         if($user)
         {
-            $user->phoneOtps()->delete();
-            $user->loginOtps()->delete();
-            $user->emailVerify()->delete();
             $user->delete();
             return redirect()->back()->with('success','User Deleted Successfully!');
         }

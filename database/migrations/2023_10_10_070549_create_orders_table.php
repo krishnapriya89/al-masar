@@ -37,6 +37,7 @@ return new class extends Migration
             $table->decimal('payment_received_amount', 10, 2)->default(0);
             $table->text('admin_remarks')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -186,7 +186,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center">No data found.</td>
+                                    <td colspan="9" class="text-center">No data found.</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -286,6 +286,7 @@
         //quotaion detail submit button
         $(document).on('click', '.quotation-detail-status-form-btn', function() {
             var _this = $(this);
+            console.log($('.amountFieldErrorSpan'));
             $('.amountFieldErrorSpan').remove();
             var quotation_detail_id = _this.data('quotation-detail-id');
             var remarks = _this.parent().find('.remarks').val();
@@ -310,7 +311,7 @@
             }
 
             //check amount is valid or not
-            if (amount != '' && amount != undefined) {
+            if (status == 1 && amount != '' && amount != undefined) {
                 var bid_price = _this.parent().find('.amountField').data('bid-price');
                 var price = _this.parent().find('.amountField').data('price');
                 amount = parseInt(amount);

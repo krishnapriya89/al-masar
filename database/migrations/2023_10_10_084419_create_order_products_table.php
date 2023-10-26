@@ -24,6 +24,7 @@ return new class extends Migration
             $table->decimal('bid_price', 10, 2)->default(0);
             $table->string('image')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('order_status_id')->nullable()->comment('1 - Pending, 2 - In Progress(Approved By Admin), 3 - Shipped, 4 - Delivered, 5 - Rejected');
             $table->foreign('order_status_id')->references('id')->on('order_statuses');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

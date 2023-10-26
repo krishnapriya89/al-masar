@@ -40,6 +40,10 @@ class Order extends Model
     {
         return $this->belongsTo(Payment::class)->withTrashed();
     }
+    public function address()
+    {
+        return $this->hasMany(OrderAddress::class);
+    }
     public function billingAddress(): HasOne
     {
         return $this->hasOne(OrderAddress::class)->where('type', 1);
