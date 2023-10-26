@@ -68,9 +68,9 @@
                             </g>
                         </svg>
                     </a>
-                    @if($product->userQuote && $product->userQuote->count() > 0)
+                    {{-- @if($product->userQuote && $product->userQuote->count() > 0)
                         <div class="count product-quote-count">{{ $product->userQuote->quantity }}</div>
-                    @endif
+                    @endif --}}
                 </div>
             @endif
         </td>

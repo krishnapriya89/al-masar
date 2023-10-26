@@ -63,7 +63,7 @@
     <script type="text/javascript" src="{{ asset('frontend/js/jquery-additional-methods-1.19.5.min.js') }}"></script>
 </head>
 
-<body class="{{ Session::get('theme') }} {{ Nav::isRoute('home', 'HomePg') }}">
+<body class="{{ Session::get('theme') }}">
     {{-- header --}}
     @if (Auth::guard('web')->check())
         @include('frontend::layouts.header')

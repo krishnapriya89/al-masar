@@ -122,9 +122,9 @@ class QuotationController extends Controller
             foreach($quotation->quotationDetails as $detail) {
                 if(!$detail->product)
                     $detail->delete();
-                else if($detail->product->status == 0 || $detail->product->stock < 0) {
-                    $detail->delete();
-                }
+                // else if($detail->product->status == 0 || $detail->product->stock < 0) {
+                //     $detail->delete();
+                // }
             }
             if($quotation->quotationDetails->count() < 1) {
                 $quotation->delete();

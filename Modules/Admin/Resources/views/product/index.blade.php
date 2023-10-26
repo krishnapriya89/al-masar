@@ -18,6 +18,7 @@
                         <tr>
                             <th>SN</th>
                             <th>Title</th>
+                            <th>Product Code</th>
                             <th>Image</th>
                             <th>Sort Order</th>
                             <th>Status</th>
@@ -29,6 +30,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $product->title }}</td>
+                                <td>{{ $product->product_code }}</td>
                                 <td>
                                     @if($product->detail_page_image && Storage::disk('public')->exists($product->detail_page_image))
                                         <img src="{{ Storage::url($product->detail_page_image) }}" class="rounded"

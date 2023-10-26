@@ -329,7 +329,18 @@
 @push('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        select2Initialization();
+        $(document).ready(function() {
+
+            select2Initialization();
+            $('.select2').select2({
+                minimumResultsForSearch: 3,
+                maximumSelectionLength: 3,
+                theme: "bootstrap-5",
+                containerCssClass: "select2--small",
+                selectionCssClass: "select2--small",
+                dropdownCssClass: "select2--small",
+            });
+        });
         //select state of billing address
         $('body').on('change', '.billing-country', function() {
             var selectedCountry = $(".billing-country option:selected").val();
