@@ -25,6 +25,7 @@ class QuotationController extends Controller
      */
     public function index()
     {
+        // $this->checkProducts();
         $quotations = Quotation::where('user_id', Auth::guard('web')->id())->where('status', '!=', 5)->latest()->get();
         return view('frontend::quotation.index', compact('quotations'));
     }
@@ -111,5 +112,24 @@ class QuotationController extends Controller
         } else {
             return response()->json(['status' => false, 'message' => 'Failed to update!']);
         }
+    }
+
+    public function checkProducts() {
+        $quotations = Quotation::where('user_id', Auth::guard('web')->id())
+                            ->whereIn('status', [0, 1, 2])->get();
+
+        foreach ($quotations as $quotation) {
+            foreach($quotation->quotationDetails as $detail) {
+                if(!$detail->product)
+                    $detail->delete();
+                else if($detail->product->status == 0 || $detail->product->stock < 0) {
+                    $detail->delete();
+                }
+            }
+            if($quotation->quotationDetails->count() < 1) {
+                $quotation->delete();
+            }
+        }
+
     }
 }
