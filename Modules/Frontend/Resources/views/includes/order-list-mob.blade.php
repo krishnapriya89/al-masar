@@ -19,10 +19,10 @@
                     <li><span>Date:</span>{{ $order->order_received_date }}</li>
                     <li><span>No. of Items:</span>{{ $order->orderDetails->count() }}</li>
                     <li><span>Total Price:</span> {{ $order->priceWithSymbol($order->converted_grand_total) }}</li>
-                    <li><span>Status:</span><div class="status {{ $order->status_class }}"></div>{{ $order->orderStatus->title }}</li>
+                    <li><span>Status:</span><div class="status {{ $order->status_class }}">{{ $order->orderStatus->title }}</div></li>
                     <li><span>Amount Paid</span> {{ $order->priceWithSymbol($order->converted_received_amount) }}</li>
                     <li><span>Amount to be Paid</span> {{ $order->priceWithSymbol($order->converted_amount_to_be_paid) }}</li>
-                    <li><span>Payment Mode:</span>{{ $order->payment->title }}</li> 
+                    <li><span>Payment Mode:</span>{{ $order->payment->title }}</li>
                     @if ($order->admin_remarks)
                         <li><span>Notifications:</span>
                             <a href="javascript:void(0)" class="notification">

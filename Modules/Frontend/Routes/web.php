@@ -128,6 +128,7 @@ Route::group(['middleware' => 'auth.user'], function () {
     //orders
     Route::get('order', [UserController::class, 'orders'])->name('user.order');
     Route::get('order-filter', [UserController::class, 'orderFilter'])->name('user.order.filter');
+    Route::get('order-filter-mob', [UserController::class, 'orderFilterMob'])->name('user.order.filter.mob');
     Route::post('order-upload-attachment', [UserController::class, 'uploadAttachment'])->name('user.order.upload-attachment');
 });
 //is invalid url show 404

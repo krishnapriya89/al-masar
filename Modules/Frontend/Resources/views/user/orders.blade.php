@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <div class="mobVew">
-                    <div class="accordion" id="Productaccordion">
+                    <div class="accordion" id="OrderaccordionMob">
                         @include('frontend::includes.order-list-mob')
                     </div>
                 </div>
@@ -115,11 +115,10 @@
                                     data-bs-parent="#filterAccodion1">
                                     <div class="card-body">
                                         <ul>
-                                            <li><a href="javascript:void(0)">Action from Vendor</a></li>
-                                            <li><a href="javascript:void(0)">Waiting for Approval</a></li>
-                                            <li><a href="javascript:void(0)">Accept</a></li>
-                                            <li><a href="javascript:void(0)">Reject</a></li>
-                                            <li><a href="javascript:void(0)">All</a></li>
+                                            <li><a href="javascript:void(0)" class="order-filter-status-mob" data-value="">ALL</a></li>
+                                            @foreach ($order_statuses as $order_status)
+                                                <li><a href="javascript:void(0)" class="order-filter-status-mob" data-value="{{ $order_status->id }}">{{ $order_status->title }}</a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -135,9 +134,10 @@
                                     data-bs-parent="#filterAccodion3">
                                     <div class="card-body">
                                         <ul>
-                                            <li><a href="javascript:void(0)">In Progress</a></li>
-                                            <li><a href="javascript:void(0)">Delivered</a></li>
-                                            <li><a href="javascript:void(0)">ALL</a></li>
+                                            <li><a href="javascript:void(0)" class="order-filter-payment-mode-mob" data-value="">All</a></li>
+                                            @foreach ($payment_modes as $payment_mode)
+                                                <li><a href="javascript:void(0)" class="order-filter-payment-mode-mob" data-value="{{ $payment_mode->id }}">{{ $payment_mode->title }}</a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -168,6 +168,37 @@
                 }
             });
         });
+
+        $('.order-filter-status-mob').on('click', function() {
+            console.log('yes');
+            $('.order-filter-status-mob').removeClass("filter-status-selected");
+            $(this).addClass('filter-status-selected');
+            orderFilterMob();
+        });
+
+        $('.order-filter-payment-mode-mob').on('click', function() {
+            $('.order-filter-payment-mode-mob').removeClass("filter-payment-mode-selected");
+            $(this).addClass('filter-payment-mode-selected');
+            orderFilterMob();
+        });
+
+        function orderFilterMob() {
+            var status = $('.filter-status-selected').data('value');
+            var payment_mode = $('.filter-payment-mode-selected').data('value');
+
+            $.ajax({
+                url: "{{ route('user.order.filter.mob') }}",
+                type: "GET",
+                data: {
+                    status: status,
+                    payment_mode: payment_mode
+                },
+                dataType: 'html',
+                success: function(response) {
+                    $('#OrderaccordionMob').html(response);
+                }
+            });
+        }
 
         $('body').on('change', '.order-attachment', function() {
             // file input data taking

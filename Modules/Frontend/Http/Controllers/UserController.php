@@ -774,6 +774,19 @@ class UserController extends Controller
             ->latest()->get();
         return view('frontend::includes.order-list', compact('orders'));
     }
+    //order filter with order status and payment method in mob
+    public function orderFilterMob(Request $request)
+    {
+        $orders = Order::where('user_id', Auth::guard('web')->id())
+            ->when($request->filled('status'), function ($query) use ($request) {
+                $query->where('order_status_id', $request->input('status'));
+            })
+            ->when($request->filled('payment_mode'), function ($query) use ($request) {
+                $query->where('payment_id', $request->input('payment_mode'));
+            })
+            ->latest()->get();
+        return view('frontend::includes.order-list-mob', compact('orders'));
+    }
 
     public function uploadAttachment (Request $request) {
         $rules = [
