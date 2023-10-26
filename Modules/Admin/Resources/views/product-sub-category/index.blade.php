@@ -20,7 +20,6 @@
                             <th>Title</th>
                             <th>Main Category</th>
                             <th>Parent Category</th>
-                            <th>Image</th>
                             <th>Sort Order</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -33,12 +32,6 @@
                                 <td>{{ $sub_category->title }}</td>
                                 <td>{{ $sub_category->category->title }}</td>
                                 <td>{{ @$sub_category->parent->title ?? '' }}</td>
-                                <td>
-                                    @if($sub_category->image)
-                                        <img src="{{ Storage::url($sub_category->image) }}" class="rounded"
-                                             alt="{{ $sub_category->title }}" height="51">
-                                    @endif
-                                </td>
                                 <td>{{ $sub_category->sort_order }}</td>
                                 <td>{!! $sub_category->status == 1
                                         ? '<span class="badge bg-success">Active</span>'
@@ -63,7 +56,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="text-center">No data found.</td>
+                                <td colspan="7" class="text-center">No data found.</td>
                             </tr>
                         @endforelse
                         </tbody>
