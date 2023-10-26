@@ -18,7 +18,7 @@
                         <div class="subT">You will receive the order<br>
                             Status Updations through Email </div><br>
                         @if ($order->payment_id == 2)
-                            <div class="subT">Please upload a file of the payment completed data against the order in the My Order page</div>
+                            <div class="subT"><strong>Please upload a file of the payment completed data against the order in the My Order page</strong></div>
                         @endif
                     </div>
                 </div>
