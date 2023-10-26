@@ -64,6 +64,19 @@ class ProductController extends Controller
         return view('frontend::includes.product-list', compact('products', 'product_code', 'product_name', 'model_number'));
     }
 
+    //product listing page mobile view search
+    public function listMobSearch(Request $request)
+    {
+        $products = Product::active()
+            ->where('title', 'like', '%'. $request->search_value . '%')
+            ->orWhere('product_code', 'like', '%'. $request->search_value . '%')
+            ->orWhere('model_number', 'like', '%'. $request->search_value . '%')
+            ->orWhere('search_keywords', 'like', '%'. $request->search_value . '%')
+            ->orderBy('sort_order')->get();
+
+        return view('frontend::includes.product-list-mob', compact('products'));
+    }
+
     /**
      * Product Detail Page
      *

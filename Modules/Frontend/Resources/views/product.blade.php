@@ -73,9 +73,9 @@
                     <div class="searchBx">
                         <form action="">
                             <div class="flxB">
-                                <input type="search" class="form-control" name="mob_listing_search" id="mob_listing_search"
+                                <input type="text" class="form-control product-list-mob-search" name="mob_listing_search" id="mob_listing_search"
                                     placeholder="Search for Products">
-                                <button type="button">
+                                <button type="button" class="product-list-mob-search-btn">
                                     <svg viewBox="0 0 19.993 20">
                                         <g id="layer1" transform="translate(0 0)">
                                             <path id="circle2017"
@@ -87,7 +87,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="accordion" id="Productaccordion">
+                    <div class="accordion productListMobDiv" id="Productaccordion">
                         @include('frontend::includes.product-list-mob')
                     </div>
                 </div>
@@ -120,6 +120,28 @@
                             if (response) {
                                 $('#productListTable tbody tr:not(:first)').empty();
                                 $('#productListTable tbody').append(response);
+                            }
+                        }
+                    });
+                }, 300);
+            });
+
+            var productMobSearchDebounceTimer;
+            $('.product-list-mob-search, .product-list-mob-search-btn').on('keypress keyup paste click', function() {
+                clearTimeout(productSearchDebounceTimer);
+                var search_value = $('.product-list-mob-search').val();
+
+                productSearchDebounceTimer = setTimeout(function() {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/product-list-mob-search',
+                        data: {
+                            'search_value': search_value,
+                        },
+                        dataType: 'html',
+                        success: function(response) {
+                            if (response) {
+                                $('.productListMobDiv').empty().html(response);
                             }
                         }
                     });

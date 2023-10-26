@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth.user'], function () {
     //product
     Route::get('/product', [ProductController::class, 'products'])->name('product');
     Route::post('/product-list-search', [ProductController::class, 'listSearch'])->name('product-list-search');
+    Route::post('/product-list-mob-search', [ProductController::class, 'listMobSearch'])->name('product-list-mob-search');
     Route::post('/calculate-price', [ProductController::class, 'calculatePrice'])->name('calculate-price');
     //product detail
     Route::get('product-detail/{slug}', [ProductController::class, 'productDetailPage'])->name('product-detail');
