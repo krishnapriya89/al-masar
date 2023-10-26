@@ -127,6 +127,7 @@
         });
 
         var isAuthenticated = @json(auth()->check());
+        var route = @json(Nav::isRoute('home'));
 
         var $hamburger = $(".MenuBtn");
         TweenLite.set("#MainMenu .MainMenuLinks li", {
@@ -156,7 +157,7 @@
             hamburgerMotion.reversed(!hamburgerMotion.reversed());
         });
 
-        if (!isAuthenticated) {
+        if (!isAuthenticated && route == 'active') {
             $(".carousel").swipe({
                 swipe: function(event, direction, distance, duration, fingerCount,
                     fingerData) {
