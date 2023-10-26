@@ -453,6 +453,7 @@ class UserController extends Controller
                 $addresses = View::make('frontend::includes.billing-address-list', compact('billing_addresses'))->render();
                 return response()->json([
                     'status' => true,
+                    'message' => 'Billing Address has been Added Successfully',
                     'address' => $addresses
                 ]);
             } else
@@ -491,6 +492,7 @@ class UserController extends Controller
     {
         $billing_address            = UserAddress::find($id);
         $existingBillingAddress     = UserAddress::where('user_id', Auth::guard('web')->id())
+            ->where('id', '!=', $id)
             ->where('type', 1)
             ->where('is_default', 1)
             ->first();
@@ -521,6 +523,7 @@ class UserController extends Controller
                 $addresses = View::make('frontend::includes.billing-address-list', compact('billing_addresses'))->render();
                 return response()->json([
                     'status' => true,
+                    'message' => 'Billing Address has been Updated Successfully',
                     'address' => $addresses
                 ]);
             } else
@@ -585,6 +588,7 @@ class UserController extends Controller
                 $addresses = View::make('frontend::includes.shipping-address-list', compact('shipping_addresses'))->render();
                 return response()->json([
                     'status' => true,
+                    'message' => 'Shipping Address has been Added Successfully',
                     'address' => $addresses
                 ]);
             } else
@@ -623,6 +627,7 @@ class UserController extends Controller
     public function updateShippingAddress(UserAddressRequest $request, $id)
     {
         $existingShippingAddress    = UserAddress::where('user_id', Auth::guard('web')->id())
+            ->where('id', '!=', $id)
             ->where('type', 2)
             ->where('is_default', 1)
             ->first();
@@ -654,6 +659,7 @@ class UserController extends Controller
                 $addresses = View::make('frontend::includes.shipping-address-list', compact('shipping_addresses'))->render();
                 return response()->json([
                     'status' => true,
+                    'message' => 'Shipping Address has been Updated Successfully',
                     'address' => $addresses
                 ]);
             } else

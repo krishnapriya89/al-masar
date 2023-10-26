@@ -330,7 +330,6 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
-
             select2Initialization();
             $('.select2').select2({
                 minimumResultsForSearch: 3,
@@ -411,7 +410,7 @@
                             _this.prop("disabled", false);
                             $('.accordion-item #BillingAddAddress').removeClass('show')
                             $('.billing-address-div').empty().html(response.address);
-                            toastr.success('Billing Address created successfully');
+                            toastr.success(response.message);
                         } else {
                             toastr.error('Something went wrong');
                         }
@@ -460,7 +459,7 @@
                             _this.prop("disabled", false);
                             $('.accordion-item #ShippingAddAddress').removeClass('show')
                             $('.shipping-address-div').empty().html(response.address);
-                            toastr.success('Shipping Address created successfully');
+                            toastr.success(response.message);
                         } else {
                             toastr.error('Something went wrong');
                         }
@@ -529,6 +528,9 @@
                             $('#BillingAddAddress .accordion-body #BillingForm').attr('action',
                                 '{{ route('update-billing-address', '') }}/' + id);
                             $('#BillingAddAddress').addClass('show');
+                            $('html, body').animate({
+                                scrollTop: $('#BillingAddAddress').offset().top
+                            }, 1000);
                         }
                     }
                 });
@@ -559,6 +561,9 @@
                                 'action', '{{ route('update-shipping-address', '') }}/' +
                                 id);
                             $('#ShippingAddAddress').addClass('show');
+                            $('html, body').animate({
+                                scrollTop: $('#ShippingAddAddress').offset().top
+                            }, 1000);
                         }
                     }
                 });

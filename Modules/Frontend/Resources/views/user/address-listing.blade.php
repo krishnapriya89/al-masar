@@ -86,6 +86,12 @@
                                                                 <div class="addres">
                                                                     {{ $billing_address->full_address }}<br>{{ $billing_address->state->title }},{{ $billing_address->country->title }}
                                                                 </div>
+                                                                <div class="tele">Mobile:
+                                                                    <span>{{ $billing_address->phone_number }}</span>
+                                                                </div>
+                                                                <div class="tele">Email:
+                                                                    <span>{{ $billing_address->email }}</span>
+                                                                </div>
                                                             </div>
                                                         </label>
                                                     </div>
@@ -137,6 +143,12 @@
                                                                 </div>
                                                                 <div class="addres">
                                                                     {{ $shipping_address->full_address }}<br>{{ $shipping_address->state->title }},{{ $shipping_address->country->title }}
+                                                                </div>
+                                                                <div class="tele">Mobile:
+                                                                    <span>{{ $billing_address->phone_number }}</span>
+                                                                </div>
+                                                                <div class="tele">Email:
+                                                                    <span>{{ $billing_address->email }}</span>
                                                                 </div>
                                                             </div>
                                                         </label>
