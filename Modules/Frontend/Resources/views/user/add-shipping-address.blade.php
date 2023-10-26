@@ -40,7 +40,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" id="" class="form-control"
+                                                <input type="text" id="" class="form-control @error('first_name') is-invalid @enderror"
                                                     placeholder="First Name*" name="first_name"
                                                     value="{{ old('first_name') }}">
                                             </div>
@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" id="" class="form-control"
+                                                <input type="text" id="" class="form-control @error('last_name') is-invalid @enderror"
                                                     placeholder="Last Name*" name="last_name"
                                                     value="{{ old('last_name') }}">
                                             </div>
@@ -60,7 +60,7 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
-                                                <input type="text" id="" class="form-control"
+                                                <input type="text" id="" class="form-control @error('address_one') is-invalid @enderror"
                                                     placeholder="Address*" name="address_one"
                                                     value="{{ old('address_one') }}">
                                             </div>
@@ -70,14 +70,14 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
-                                                <input type="text" id="" class="form-control"
+                                                <input type="text" id="" class="form-control @error('address_two') is-invalid @enderror"
                                                     placeholder="Address2" name="address_two"
                                                     value="{{ old('address_two') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="email" id="" class="form-control"
+                                                <input type="email" id="" class="form-control @error('email') is-invalid @enderror"
                                                     placeholder="Email*" name="email" value="{{ old('email') }}">
                                             </div>
                                             @error('email')
@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" id="" class="form-control"
+                                                <input type="text" id="" class="form-control @error('phone_number') is-invalid @enderror"
                                                     placeholder="Phone Number*" name="phone_number"
                                                     value="{{ old('phone_number') }}">
                                             </div>
@@ -96,7 +96,7 @@
                                         </div>
                                         <div class="col-lg-4 col-md-6">
                                             <div class="form-group">
-                                                <input type="text" id="" class="form-control"
+                                                <input type="text" id="" class="form-control @error('city') is-invalid @enderror"
                                                     placeholder="City*" name="city" value="{{ old('city') }}">
                                             </div>
                                             @error('city')
@@ -105,11 +105,11 @@
                                         </div>
                                         <div class="col-lg-4 col-md-6">
                                             <div class="form-group">
-                                                <select class="select2 country" data-select2-id="select2-Due1"
+                                                <select class="select2 country @error('country') is-invalid @enderror" data-select2-id="select2-Due1"
                                                     aria-label="Default select example" name="country">
                                                     <option selected value="" disabled>Country*</option>
                                                     @foreach ($countries as $country)
-                                                        <option value="{{ $country->id }}">{{ $country->title }}</option>
+                                                        <option value="{{ old('country', $country->id) }}">{{ $country->title }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -119,14 +119,14 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group">
-                                                <input type="text" id="" class="form-control"
+                                                <input type="text" id="" class="form-control @error('zip_code') is-invalid @enderror"
                                                     placeholder="Zip Code*" name="zip_code"
                                                     value="{{ old('zip_code') }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
-                                                <select class="select2" data-select2-id="select2-Due2"
+                                                <select class="select2 @error('state') is-invalid @enderror" data-select2-id="select2-Due2"
                                                     aria-label="Default select example" name="state" id="state">
                                                     <option selected value="" disabled>State*</option>
                                                 </select>
@@ -166,7 +166,11 @@
                 address_one: "required",
                 city: "required",
                 country: "required",
-                zip_code: "required",
+                zip_code: {
+                    required: true,
+                    digits: true,
+                    digitsRange: true
+                },
                 state: "required",
                 phone_number: {
                     required: true,

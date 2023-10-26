@@ -26,6 +26,11 @@ $(document).ready(function () {
         return digitsOnly.test(value);
     }, "Please enter a valid phone number");
 
+    $.validator.addMethod("digitsRange", function(value, element) {
+        var digitCount = value.match(/\d/g)?.length || 0;
+        return this.optional(element) || (digitCount >= 6 && digitCount <= 8);
+    }, "Please enter between 6 and 8 digits.");
+
     //check the phone and number and office phone number not equal
     jQuery.validator.addMethod("notEqual", function (value, element, param) {
         return this.optional(element) || value != $(param).val();

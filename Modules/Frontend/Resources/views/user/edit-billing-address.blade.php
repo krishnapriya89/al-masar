@@ -175,7 +175,11 @@
                 address_one: "required",
                 city: "required",
                 country: "required",
-                zip_code: "required",
+                zip_code: {
+                    required: true,
+                    digits: true,
+                    digitsRange: true
+                },
                 state: "required"
             },
             messages: {
