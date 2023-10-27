@@ -69,7 +69,7 @@
                                             style="text-align: center; margin: auto; width: 300px; font-size: 14px; font-weight: 400; color: #272525; line-height: 26px; margin-top:0px; margin-bottom: 0px;">
                                             You have received a Order
                                             <br>
-                                            Order #{{ $order->uid }}
+                                            Order #<a href="{{ route('order.index') }}">{{ $order->uid }}</a>
                                         </p>
                                     </td>
                                 </tr>

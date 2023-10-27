@@ -297,7 +297,7 @@ class CheckoutController extends Controller
                 Mail::to($order->user->email)->send(new OrderCompletedUser($order, $site_settings));
                 Mail::to($site_settings->enquiry_receive_email)->send(new OrderCompletedAdmin($order, $site_settings));
             }
-            return view('frontend::checkout.order_success', compact('order'));
+            return view('frontend::checkout.order-success', compact('order'));
         } else {
             return redirect()->route('home');
         }
@@ -316,7 +316,7 @@ class CheckoutController extends Controller
             $order->payment_gateway_status = 2;
             $order->status = 4;
             $order->save();
-            return view('frontend::checkout.order_failed');
+            return view('frontend::checkout.order-failed');
         } else {
             return redirect()->route('home');
         }

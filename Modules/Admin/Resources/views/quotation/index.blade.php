@@ -77,7 +77,7 @@
                         </thead>
                         <tbody>
                             @forelse($quotations as $quotation)
-                                <tr data-toggle="collapse" data-target="#demo{{ $loop->iteration }}" class="accordion-toggle">
+                                <tr id="{{ $quotation->uid }}" data-toggle="collapse" data-target="#demo{{ $loop->iteration }}" class="accordion-toggle">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $quotation->uid }}</td>
                                     <td>{{ $quotation->quotation_received }}</td>
