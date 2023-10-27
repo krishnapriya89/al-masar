@@ -645,43 +645,61 @@ $(document).on("click", ".address-delete-btn", function (e) {
     });
 });
 //Change the button url according to the tab
-
-
 $('.btnLink').click(function () {
     var currentURL = $(this).data('url');
     $('#addressBtn').attr('href', currentURL);
 });
+//main search input button click
+$('.mainSearchInputBtn').on('click', function () {
+    var search_val = $('.main-search-input').val().trim();
+    $('.main-search-input').val(search_val);
+    if(search_val) {
+        $('#MainSearchForm').submit();
+    }
+});
+//mob main search input button click
+$('.mobMainSearchInputBtn').on('click', function () {
+    var search_val = $('.mob-main-search-input').val().trim();
+    $('.mob-main-search-input').val(search_val);
+    if(search_val) {
+        $('#MobMainSearchForm').submit();
+    }
+});
 //search products
 $('.main-search-input').on('keyup keypress paste', function () {
-    var search_val = $(this).val();
-    $.ajax({
-        url: "/product-search",
-        type: "GET",
-        data: {
-            keyword: search_val
-        },
-        dataType: 'html',
-        success: function (response) {
-            $('.mainSearch .results').html(response);
-        }
-    });
+    $('.mainSearch .results').empty();
+    var search_val = $(this).val().trim();
+    if(search_val) {
+        $.ajax({
+            url: "/product-search",
+            type: "GET",
+            data: {
+                keyword: search_val
+            },
+            dataType: 'html',
+            success: function (response) {
+                $('.mainSearch .results').html(response);
+            }
+        });
+    }
 });
 //search products mob
 $('.mob-main-search-input').on('keyup keypress paste', function () {
-    var search_val = $(this).val();
-    $.ajax({
-        url: "/product-search",
-        type: "GET",
-        data: {
-            keyword: search_val
-        },
-        dataType: 'html',
-        success: function (response) {
-            $('#SearchModal .results').html(response);
-        }
-    });
+    var search_val = $(this).val().trim();
+    if(search_val) {
+        $.ajax({
+            url: "/product-search",
+            type: "GET",
+            data: {
+                keyword: search_val
+            },
+            dataType: 'html',
+            success: function (response) {
+                $('#SearchModal .results').html(response);
+            }
+        });
+    }
 });
-
 //logout
 $('.logout-form-btn').click(function () {
     $(this).prop('disabled', true);

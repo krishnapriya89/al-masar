@@ -12,11 +12,11 @@
                         </svg>
                     </button>
                     <div class="searchBox">
-                        <form action="{{ route('product') }}" method="get">
+                        <form action="{{ route('product') }}" id="MobMainSearchForm" method="get">
                             <div class="form-group">
                                 <input type="search" required class="form-control mob-main-search-input" name="search"
                                         id="search" placeholder="Search for Products" value="{{ @$keyword }}">
-                                <button type="submit" class="sendBtn">
+                                <button type="button" class="sendBtn mobMainSearchInputBtn">
                                     <svg viewBox="0 0 612.01 612.01">
                                         <g>
                                             <g id="_x34__4_">

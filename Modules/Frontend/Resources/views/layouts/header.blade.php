@@ -19,11 +19,11 @@
                 <div class="ritWERTbx">
                     <div class="HrMfLxRt">
                         <div class="WtSrCh">
-                            <form action="{{ route('product') }}" method="get" autocomplete="off">
+                            <form action="{{ route('product') }}" id="MainSearchForm" method="get" autocomplete="off">
                                 <div class="flxB">
                                     <input type="search" required class="form-control main-search-input" name="search"
                                         id="search" placeholder="Search for Products" value="{{ @$keyword }}">
-                                    <button type="submit">
+                                    <button type="button" class="mainSearchInputBtn">
                                         <svg viewBox="0 0 19.993 20">
                                             <g id="layer1" transform="translate(0 0)">
                                                 <path id="circle2017"
