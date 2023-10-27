@@ -129,6 +129,19 @@ $(".file-preview").on('change', function (event) {
                 }).appendTo(file_holder);
             }
         } else if (is_video) {
+            var maxFileSize = 3 * 1024 * 1024; // 3MB in bytes
+            var files = this.files;
+
+            if (files.length > 0) {
+                var fileSize = files[0].size;
+                if (fileSize > maxFileSize) {
+                    // File size exceeds the limit, clear the file input
+                    toastr.error('File size exceeds the limit (3MB). Please choose a smaller file.');
+                    $(this).parent('div').find('file-holder').empty();
+                    $(this).val('');
+                    return false;
+                }
+            }
             reader.onload = function (e) {
                 $("<video />", {
                     "src": e.target.result,
