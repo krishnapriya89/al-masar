@@ -129,7 +129,7 @@ Product Name    : {{$data->product->title}} <br> --}}
                                                                     </td>
                                                                     <td
                                                                         style="width: 20%; font-size: 12px;color: #000000; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: left;">
-                                                                        {{$data->product->title}}
+                                                                        <a href="{{ route('product-detail', $data->product->slug) }}">{{$data->product->title}}</a>
                                                                     </td>
                                                                     <td
                                                                         style="width: 20%; font-size: 14px;color: #E7151F; font-weight: 500; margin-bottom: 0px; margin-top: 0px; line-height: 22px; text-align: right;">
