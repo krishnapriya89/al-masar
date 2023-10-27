@@ -28,26 +28,27 @@
                                 </div>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active btnLink" id="home-tab" data-bs-toggle="tab"
+                                        <button class="nav-link {{ Session::get('address_tab') != 'shipping' ? 'active' : '' }} btnLink" id="home-tab" data-bs-toggle="tab"
                                             data-bs-target="#home" type="button" role="tab" aria-controls="home"
                                             aria-selected="true" data-url="{{ route('add-billing-address') }}">Billing
                                             Address</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link  btnLink" id="profile-tab" data-bs-toggle="tab"
+                                        <button class="nav-link {{ Session::get('address_tab') == 'shipping' ? 'active' : '' }} btnLink" id="profile-tab" data-bs-toggle="tab"
                                             data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
                                             aria-selected="false" data-url="{{ route('add-shipping-address') }}">Shipping
                                             Address</button>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="home" role="tabpanel"
-                                        aria-labelledby="home-tab">
+                                    <div class="tab-pane fade {{ Session::get('address_tab') != 'shipping' ? 'show active' : '' }}"
+                                        id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="savedAddBx billing-address-div">
                                             @include('frontend::includes.billing-address-list-dashboard')
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                    <div class="tab-pane fade {{ Session::get('address_tab') == 'shipping' ? 'show active' : '' }}"
+                                        id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="savedAddBx shipping-address-div">
                                             @include('frontend::includes.shipping-address-list-dashboard')
                                         </div>

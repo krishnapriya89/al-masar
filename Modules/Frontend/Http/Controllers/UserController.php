@@ -32,6 +32,7 @@ class UserController extends Controller
     //user dashboard
     public function dashboard()
     {
+        Session::put('address_tab', 'billing');
         $pending_order_count = Order::where('user_id', Auth::guard('web')->id())->where('order_status_id', 1)->count();
         $accepted_order_count = Order::where('user_id', Auth::guard('web')->id())->where('order_status_id', 2)->count();
         $delivered_order_count = Order::where('user_id', Auth::guard('web')->id())->where('order_status_id', 4)->count();
@@ -84,6 +85,7 @@ class UserController extends Controller
      *
      */
     public function profile() {
+        Session::put('address_tab', 'billing');
         $user = Auth::guard('web')->user();
 
         if($user) {
@@ -100,6 +102,7 @@ class UserController extends Controller
      *
      */
     public function updateProfile(UserProfileUpdateRequest $request) {
+        Session::put('address_tab', 'billing');
         $user = User::find(Auth::guard('web')->id());
 
         if($user) {
@@ -150,6 +153,7 @@ class UserController extends Controller
      *
      */
     public function otpSend(Request $request) {
+        Session::put('address_tab', 'billing');
         if(!$request->field)
             return response()->json([
                 'status' => false
@@ -209,6 +213,7 @@ class UserController extends Controller
      *
      */
     public function otpResend() {
+        Session::put('address_tab', 'billing');
         $user = User::find(Auth::guard('web')->id());
 
         if (!$user) {
@@ -298,6 +303,7 @@ class UserController extends Controller
      */
     public function otpVerificationForm()
     {
+        Session::put('address_tab', 'billing');
         $field = Session::get('profile_field');
         $method = Session::get('profile_method');
         $identifier = Session::get('profile_identifier');
@@ -313,6 +319,7 @@ class UserController extends Controller
     }
 
     public function verifyOtp(Request $request) {
+        Session::put('address_tab', 'billing');
         $request->validate([
             'otp1' => 'required|digits_between:1,1|integer',
             'otp2' => 'required|digits_between:1,1|integer',
@@ -410,6 +417,7 @@ class UserController extends Controller
      */
     public function addBillingAddress()
     {
+        Session::put('address_tab', 'billing');
         $countries = Country::active()->get();
         return view('frontend::user.add-billing-address', compact('countries'));
     }
@@ -420,6 +428,7 @@ class UserController extends Controller
      */
     public function storeBillingAddress(UserAddressRequest $request, UserAddress $billing_address)
     {
+        Session::put('address_tab', 'billing');
         $existingBillingAddress     = UserAddress::where('user_id', Auth::guard('web')->id())
             ->where('type', 1)
             ->where('is_default', 1)
@@ -474,6 +483,7 @@ class UserController extends Controller
      */
     public function editBillingAddress($id)
     {
+        Session::put('address_tab', 'billing');
         try {
             $billing_address    = UserAddress::find(decrypt($id));
             $countries         = Country::active()->get();
@@ -490,6 +500,7 @@ class UserController extends Controller
      */
     public function updateBillingAddress(UserAddressRequest $request, $id)
     {
+        Session::put('address_tab', 'billing');
         $billing_address            = UserAddress::find($id);
         $existingBillingAddress     = UserAddress::where('user_id', Auth::guard('web')->id())
             ->where('id', '!=', $id)
@@ -544,6 +555,7 @@ class UserController extends Controller
      */
     public function addShippingAddress()
     {
+        Session::put('address_tab', 'shipping');
         $countries = Country::active()->get();
         return view('frontend::user.add-shipping-address', compact('countries'));
     }
@@ -554,6 +566,7 @@ class UserController extends Controller
      */
     public function storeShippingAddress(UserAddressRequest $request)
     {
+        Session::put('address_tab', 'shipping');
         $existingShippingAddress = UserAddress::where('user_id', auth()->id())
             ->where('type', 2)
             ->where('is_default', 1)
@@ -609,6 +622,7 @@ class UserController extends Controller
      */
     public function editShippingAddress($id)
     {
+        Session::put('address_tab', 'shipping');
         try {
             $shipping_address   = UserAddress::find(decrypt($id));
             $countries         = Country::active()->get();
@@ -626,6 +640,7 @@ class UserController extends Controller
      */
     public function updateShippingAddress(UserAddressRequest $request, $id)
     {
+        Session::put('address_tab', 'shipping');
         $existingShippingAddress    = UserAddress::where('user_id', Auth::guard('web')->id())
             ->where('id', '!=', $id)
             ->where('type', 2)
@@ -798,6 +813,7 @@ class UserController extends Controller
 
     public function orders()
     {
+        Session::put('address_tab', 'billing');
         $orders = Order::where('user_id', Auth::guard('web')->id())->latest()->get();
         $order_statuses = OrderStatus::all();
         $payment_modes = Payment::all();
