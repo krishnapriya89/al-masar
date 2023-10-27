@@ -1,6 +1,6 @@
 $(document).ready(function () {
     //dark theme
-    $('.themeChange').on('click', function() {
+    $('.themeChange').on('click', function () {
         const currentTheme = $('body').hasClass('NightMode') ? 'light' : 'NightMode';
         $('body').toggleClass('NightMode');
         // Send an Ajax request to set the theme in the session
@@ -26,7 +26,7 @@ $(document).ready(function () {
         return digitsOnly.test(value);
     }, "Please enter a valid phone number");
 
-    $.validator.addMethod("digitsRange", function(value, element) {
+    $.validator.addMethod("digitsRange", function (value, element) {
         var digitCount = value.match(/\d/g)?.length || 0;
         return this.optional(element) || (digitCount >= 6 && digitCount <= 8);
     }, "Please enter between 6 and 8 digits.");
@@ -39,7 +39,7 @@ $(document).ready(function () {
     //check max file size is greater then of 2MB then return error
     $.validator.addMethod('maxFileSize', function (value, element, param) {
         var maxSize = param * 1024 * 1024; // Convert MB to bytes
-        if(element.files.length > 0) {
+        if (element.files.length > 0) {
             var fileSize = element.files[0].size;
             return fileSize <= maxSize;
         }
@@ -121,11 +121,11 @@ $(document).ready(function () {
         var bid_price = null;
 
         var product = _this.data("product");
-        var min_quantity_to_buy = $('.product-quantity-'+product).attr("min");
-        var quantity = $('.product-quantity-'+product);
+        var min_quantity_to_buy = $('.product-quantity-' + product).attr("min");
+        var quantity = $('.product-quantity-' + product);
         var currentValue = parseInt(quantity.val());
         var operation = _this.data("operation");
-        bid_price = $('.product-bid-price-'+product).val();
+        bid_price = $('.product-bid-price-' + product).val();
 
         var quantityStatus = true;
 
@@ -158,8 +158,8 @@ $(document).ready(function () {
         var min_quantity_to_buy = parseInt(_this.attr("min"));
         var quantity = parseInt(_this.val());
         var product = _this.data("product");
-        bid_price = $('.product-bid-price-'+product).val();
-        $('.product-quantity-'+product).val(quantity);
+        bid_price = $('.product-bid-price-' + product).val();
+        $('.product-quantity-' + product).val(quantity);
         if (min_quantity_to_buy <= quantity) {
             clearTimeout(changeQuantityDebounceTimer);
             calculatePrice(quantity, product, bid_price, _this);
@@ -177,9 +177,9 @@ $(document).ready(function () {
         var bid_price = null;
 
         var product = _this.data("product");
-        var quantity = $('.product-quantity-'+product).val();
+        var quantity = $('.product-quantity-' + product).val();
         bid_price = _this.val();
-        $('.product-bid-price-'+product).val(bid_price);
+        $('.product-bid-price-' + product).val(bid_price);
         if (bid_price && bid_price < 1) {
             toastr.error('Please enter the bid price value min 1');
             _this.val(1);
@@ -275,8 +275,8 @@ $(document).ready(function () {
         var _this = $(this);
 
         var product = _this.data('product');
-        var quantity = $('.product-quantity-'+product).val();
-        var bid_price = $('.product-bid-price-'+product).val();
+        var quantity = $('.product-quantity-' + product).val();
+        var bid_price = $('.product-bid-price-' + product).val();
 
         $.ajax({
             url: '/add-to-quote',
@@ -486,8 +486,8 @@ function calculatePrice(quantity, product, bid_price, _this) {
             success: function (response) {
                 if (response.status) {
                     //product list
-                    if ($('.product-total-price-div-'+product).length > 0)
-                        $('.product-total-price-div-'+product).text(response.price);
+                    if ($('.product-total-price-div-' + product).length > 0)
+                        $('.product-total-price-div-' + product).text(response.price);
                     else {
                         //product detail page
                         if (bid_price != null && bid_price != '' && bid_price != undefined) {
@@ -599,7 +599,7 @@ $(document).on("click", ".address-delete-btn", function (e) {
                     id: address_id,
                 },
                 success: function (response) {
-                    const { success, flag, message, defaultId } = response;
+                    const { success, flag, message, defaultId, type } = response;
                     if (success) {
                         Swal.fire({
                             icon: "success",
@@ -608,13 +608,14 @@ $(document).on("click", ".address-delete-btn", function (e) {
                             timer: 3000,
                             willClose: function () {
                                 if (flag === 1) {
+                                    $("#address-" + address_id).remove();
                                     if (defaultId) {
-                                        $("#address-" + address_id).remove();
-                                        $(
-                                            "#selectAddress" + defaultId
-                                        ).prop("checked", true);
-                                    } else {
-                                        $("#address-" + address_id).remove();
+                                        if (type == 1) {
+                                            $('.billingAddressBx').html(response.address_content)
+                                        }
+                                        if (type == 2) {
+                                            $('.shippingAddressBx').html(response.address_content)
+                                        }
                                     }
                                 } else if (flag === 2) {
                                     location.reload();
@@ -645,45 +646,43 @@ $(document).on("click", ".address-delete-btn", function (e) {
 //Change the button url according to the tab
 
 
-$('.btnLink').click(function(){
+$('.btnLink').click(function () {
     var currentURL = $(this).data('url');
     $('#addressBtn').attr('href', currentURL);
 });
 //search products
-$('.main-search-input').on('keyup keypress paste', function(){
+$('.main-search-input').on('keyup keypress paste', function () {
     var search_val = $(this).val();
     $.ajax({
-        url : "/product-search",
-        type : "GET",
-        data : {
+        url: "/product-search",
+        type: "GET",
+        data: {
             keyword: search_val
         },
         dataType: 'html',
-        success:function(response)
-        {
-           $('.mainSearch .results').html(response);
+        success: function (response) {
+            $('.mainSearch .results').html(response);
         }
     });
 });
 //search products mob
-$('.mob-main-search-input').on('keyup keypress paste', function(){
+$('.mob-main-search-input').on('keyup keypress paste', function () {
     var search_val = $(this).val();
     $.ajax({
-        url : "/product-search",
-        type : "GET",
-        data : {
+        url: "/product-search",
+        type: "GET",
+        data: {
             keyword: search_val
         },
         dataType: 'html',
-        success:function(response)
-        {
-           $('#SearchModal .results').html(response);
+        success: function (response) {
+            $('#SearchModal .results').html(response);
         }
     });
 });
 
 //logout
-$('.logout-form-btn').click(function() {
+$('.logout-form-btn').click(function () {
     $(this).prop('disabled', true);
     $('#LogoutFom').submit();
     $(this).prop('disabled', false);

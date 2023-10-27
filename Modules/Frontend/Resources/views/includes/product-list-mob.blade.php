@@ -1,5 +1,5 @@
 @forelse ($products as $product)
-    <div class="accordion-item">
+    <div class="accordion-item {{ !$product->is_instock ? 'unavailable' : '' }}">
         <h2 class="accordion-header" id="heading{{ $loop->iteration }}">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapse{{ $loop->iteration }}" aria-expanded="false"
@@ -19,6 +19,9 @@
                         <div class="price">@currencySymbolWithConvertedPrice($product->price)</div>
                     </div>
                 </div>
+                @if (!$product->is_instock)
+                    <a href="javascript:void(0)" data-id={{ $product->slug }} class="notify-me notify hoveranim"><span>Notify Me</span></a>
+                @endif
             </button>
         </h2>
         <div id="collapse{{ $loop->iteration }}" class="accordion-collapse collapse "
@@ -60,9 +63,6 @@
                         <div class="ttle">Specifications</div>
                         {!! $product->specification !!}
                     </div>
-                    @if (!$product->is_instock)
-                        <a href="javascript:void(0)" data-id={{ $product->slug }} class="notify-me notify hoveranim"><span>Notify Me</span></a>
-                    @endif
                     <div class="btnBx">
                         <a href="{{ route('product-detail', $product->slug) }}" target="_blank" class="vdtails hoveranim"><span>VIEW
                                 DETAILS</span></a>

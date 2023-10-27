@@ -723,29 +723,58 @@ class UserController extends Controller
     public function destroyAddress(Request $request)
     {
         $address = UserAddress::findOrFail($request->input('id'));
-
-        if ($address && $address->delete()) {
-            $defaultAddress = UserAddress::where('user_id', auth()->id())
-                ->where('is_default', 1)
-                ->first();
-            if (!$defaultAddress) {
-                $existingAddress = UserAddress::where('user_id', auth()->id())
-                    ->where('is_default', 0)
-                    ->latest()
+        if(!$address)  {
+            return response()->json(['success' => false, 'message' => 'No address found.']);
+        }
+        $type = $address->type;
+        $isDefault = $address->is_default;
+        $address->is_default = 0;
+        $address->save();
+        if ($address->delete()) {
+            if($isDefault) {
+                $defaultAddress = UserAddress::where('user_id', auth()->id())
+                    ->where('type', $type)
+                    ->where('is_default', 1)
                     ->first();
+                if (!$defaultAddress) {
+                    $existingAddress = UserAddress::where('user_id', auth()->id())
+                        ->where('type', $type)
+                        ->where('is_default', 0)
+                        ->latest()
+                        ->first();
 
-                if ($existingAddress) {
-                    $existingAddress->is_default = 1;
-                    if ($existingAddress->save()) {
-                        $defaultId =  $existingAddress->id;
+                    if ($existingAddress) {
+                        $existingAddress->is_default = 1;
+                        if ($existingAddress->save()) {
+                            $defaultId =  $existingAddress->id;
+                        }
+                    } else {
+                        return response()->json(['success' => true, 'flag' => 1, 'message' => 'Address deleted successfully.']);
                     }
                 } else {
-                    return response()->json(['success' => true, 'flag' => 2, 'message' => 'Address deleted successfully.']);
+                    $defaultId = $defaultAddress->id;
                 }
-            } else {
-                $defaultId = $defaultAddress->id;
+
+                if($type == 1) {
+                    $billing_addresses = $address->user->billingAddresses;
+                    $address_view = View::make('frontend::includes.billing-address-list-dashboard', compact('billing_addresses'))->render();
+                }
+
+                else {
+                    $shipping_addresses = $address->user->shippingAddresses;
+                    $address_view = View::make('frontend::includes.shipping-address-list-dashboard', compact('shipping_addresses'))->render();
+                }
+
+                return response()->json([
+                    'success' => true,
+                    'type' => $type,
+                    'defaultId' => $defaultId,
+                    'flag' => 1,
+                    'address_content' => $address_view,
+                    'message' => 'Address deleted successfully.'
+                ]);
             }
-            return response()->json(['success' => true, 'flag' => 1, 'defaultId' => $defaultId, 'message' => 'Address deleted successfully.']);
+            return response()->json(['success' => true, 'flag' => 1, 'message' => 'Address deleted successfully.']);
         }
         return response()->json(['success' => false, 'message' => 'An error occurred while deleting the address.']);
     }

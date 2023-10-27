@@ -223,6 +223,8 @@
 
         $('.quotation-filter-mob').on('click', function() {
             var status = $(this).data('value');
+            $('.quotation-filter-mob').removeClass('active');
+            $(this).addClass('active');
             $.ajax({
                 url: "{{ route('user.quotation.filter.mob' )}}",
                 type: "GET",
