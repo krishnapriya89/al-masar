@@ -43,12 +43,12 @@
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="home" role="tabpanel"
                                         aria-labelledby="home-tab">
-                                        <div class="savedAddBx billingAddressBx">
+                                        <div class="savedAddBx billing-address-div">
                                             @include('frontend::includes.billing-address-list-dashboard')
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="savedAddBx shippingAddressBx">
+                                        <div class="savedAddBx shipping-address-div">
                                             @include('frontend::includes.shipping-address-list-dashboard')
                                         </div>
                                     </div>

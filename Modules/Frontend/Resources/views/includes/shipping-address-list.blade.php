@@ -15,7 +15,7 @@
                             <img src="{{ asset('frontend/images/edit.svg') }}" alt="">
                         </a>
                         <a href="javascript:void(0)" class="dlt address-delete-btn"
-                            data-id="{{ $shipping_address->id }}">
+                            data-id="{{ $shipping_address->id }}" data-page="checkout">
                             <img src="{{ asset('frontend/images/delete.svg') }}" alt="">
                         </a>
                     </div>

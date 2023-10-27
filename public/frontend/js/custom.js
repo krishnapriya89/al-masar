@@ -527,7 +527,7 @@ function updateQuoteQuantity(quantity, quote_id) {
 }
 //update isDefault in billing and shipping address
 
-$(".setDefault").click(function () {
+$('body').on("click", ".setDefault", function () {
     var _this = $(this);
     var id = $(this).data("id");
     var type = $(this).data("type");
@@ -579,7 +579,7 @@ $(".setDefault").click(function () {
 // delete address
 $(document).on("click", ".address-delete-btn", function (e) {
     var address_id = $(this).data("id");
-
+    var page = $(this).data("page");
 
     Swal.fire({
         title: `Remove Address`,
@@ -597,6 +597,7 @@ $(document).on("click", ".address-delete-btn", function (e) {
                 type: "POST",
                 data: {
                     id: address_id,
+                    page: page,
                 },
                 success: function (response) {
                     const { success, flag, message, defaultId, type } = response;
@@ -611,10 +612,10 @@ $(document).on("click", ".address-delete-btn", function (e) {
                                     $("#address-" + address_id).remove();
                                     if (defaultId) {
                                         if (type == 1) {
-                                            $('.billingAddressBx').html(response.address_content)
+                                            $('.billing-address-div').html(response.address_content)
                                         }
                                         if (type == 2) {
-                                            $('.shippingAddressBx').html(response.address_content)
+                                            $('.shipping-address-div').html(response.address_content)
                                         }
                                     }
                                 } else if (flag === 2) {

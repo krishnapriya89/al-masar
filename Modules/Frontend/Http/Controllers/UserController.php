@@ -723,6 +723,7 @@ class UserController extends Controller
     public function destroyAddress(Request $request)
     {
         $address = UserAddress::findOrFail($request->input('id'));
+        $page = $request->input('page');
         if(!$address)  {
             return response()->json(['success' => false, 'message' => 'No address found.']);
         }
@@ -757,12 +758,18 @@ class UserController extends Controller
 
                 if($type == 1) {
                     $billing_addresses = $address->user->billingAddresses;
-                    $address_view = View::make('frontend::includes.billing-address-list-dashboard', compact('billing_addresses'))->render();
+                    if($page == 'checkout')
+                        $address_view = View::make('frontend::includes.billing-address-list', compact('billing_addresses'))->render();
+                    else
+                        $address_view = View::make('frontend::includes.billing-address-list-dashboard', compact('billing_addresses'))->render();
                 }
 
                 else {
                     $shipping_addresses = $address->user->shippingAddresses;
-                    $address_view = View::make('frontend::includes.shipping-address-list-dashboard', compact('shipping_addresses'))->render();
+                    if($page == 'checkout')
+                        $address_view = View::make('frontend::includes.shipping-address-list', compact('shipping_addresses'))->render();
+                    else
+                        $address_view = View::make('frontend::includes.shipping-address-list-dashboard', compact('shipping_addresses'))->render();
                 }
 
                 return response()->json([
