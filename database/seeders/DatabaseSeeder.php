@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminConfigSeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(AboutUsSeeder::class);
-        $this->call(BankTransferSeeder::class);
+        // $this->call(BankTransferSeeder::class);
         $this->call(ContactSeeder::class);
         $this->call(CurrencyCodeMasterSeeder::class);
         $this->call(CurrencyRateSeeder::class);

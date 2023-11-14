@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder
             'name'      => 'Admin',
             'user_type' => 'Admin',
             'email'     => 'admin@almasar.com',
-            'password'  => Hash::make('gQCT(gInr0kS'),
+            'password'  => Hash::make('123456'),
         ]);
     }
 }
